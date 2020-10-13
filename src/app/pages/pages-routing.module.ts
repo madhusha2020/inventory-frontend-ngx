@@ -19,6 +19,11 @@ const routes: Routes = [{
       component: DashboardComponent,
     },
     {
+      path: 'customer',
+      loadChildren: () => import('./customer/customer.module')
+        .then(m => m.CustomerModule),
+    },
+    {
       path: 'layout',
       loadChildren: () => import('./layout/layout.module')
         .then(m => m.LayoutModule),
