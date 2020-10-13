@@ -5,15 +5,8 @@
 
   <nb-card-body>
     <div class="row" style="margin-bottom: 15px; margin-left: 0px;">
-      <div class="col-md-11">
-        <nb-search type="rotate-layout" tag="rotate-layout"></nb-search>
-      </div>
-      <div class="col-md-1">
-        <button nbButton status="info" size="medium" (click)="onRefresh()"
-                [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="small" nbSpinnerMessage="">
-          Refresh
-        </button>
-      </div>
+      <nb-search type="rotate-layout" tag="rotate-layout"></nb-search>
+      <span style="margin-left: 10px;"><button nbButton (click)="resetFilter()" style="color: #3366ff">Clear Search</button></span>
     </div>
     <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (createConfirm)="onCreateConfirm($event)" (editConfirm)="onEditConfirm($event)">
     </ng2-smart-table>

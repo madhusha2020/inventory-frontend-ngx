@@ -168,7 +168,7 @@ export class CustomerMainComponent implements OnInit {
     }
   }
 
-  onRefresh(): void {
+  resetFilter(): void {
     this.source.setFilter([]);
   }
 }
