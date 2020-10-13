@@ -13,7 +13,6 @@ export class CustomerMainComponent implements OnInit {
   offset = 0;
   limit = 100;
   loading = true;
-  title = 'Customer';
 
   customers: Array<Customer> = [];
 
@@ -72,9 +71,9 @@ export class CustomerMainComponent implements OnInit {
           config: {
             selectText: 'Select',
             list: [
-              {value: '1', title: 'New'},
-              {value: '2', title: 'Regular'},
-              {value: '3', title: 'Loyalty'},
+              {value: 'New', title: 'New'},
+              {value: 'Regular', title: 'Regular'},
+              {value: 'Loyalty', title: 'Loyalty'},
             ],
           },
         },
@@ -93,6 +92,12 @@ export class CustomerMainComponent implements OnInit {
           },
         },
         type: 'string',
+      },
+      orderCount: {
+        title: '#Orders',
+        type: 'number',
+        addable: false,
+        editable: false,
       },
     },
   };
@@ -124,17 +129,7 @@ export class CustomerMainComponent implements OnInit {
       console.log('Data :', response);
       response.customers.forEach(customer => {
         this.loading = false;
-        switch (customer.type) {
-          case '1':
-            customer.type = 'New';
-            break;
-          case '2':
-            customer.type = 'Regular';
-            break;
-          case '3':
-            customer.type = 'Loyalty';
-            break;
-        }
+        customer.orderCount = customer.orders.length;
         this.customers.push(customer);
       });
       this.source.load(this.customers);
@@ -166,6 +161,10 @@ export class CustomerMainComponent implements OnInit {
     } else {
       event.confirm.reject();
     }
+  }
+
+  onUserRowSelect(event): void {
+    console.log(event);
   }
 
   resetFilter(): void {

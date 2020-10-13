@@ -31,4 +31,5 @@ export interface Customer {
     status?: number;
     type?: string;
     userId?: string;
+    orderCount?: number;
 }

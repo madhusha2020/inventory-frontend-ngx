@@ -13,7 +13,7 @@ import {
   NbListModule,
   NbRouteTabsetModule, NbSearchModule, NbSpinnerModule,
   NbStepperModule,
-  NbTabsetModule,
+  NbTabsetModule, NbTooltipModule,
   NbUserModule,
 } from '@nebular/theme';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
@@ -23,24 +23,25 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
   declarations: [
     CustomerMainComponent,
     CustomerComponent],
-    imports: [
-        CommonModule,
-        CustomerRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        ThemeModule,
-        NbTabsetModule,
-        NbRouteTabsetModule,
-        NbStepperModule,
-        NbCardModule,
-        NbButtonModule,
-        NbListModule,
-        NbAccordionModule,
-        NbUserModule,
-        Ng2SmartTableModule,
-        NbSearchModule,
-        NbSpinnerModule,
-    ],
+  imports: [
+    CommonModule,
+    CustomerRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ThemeModule,
+    NbTabsetModule,
+    NbRouteTabsetModule,
+    NbStepperModule,
+    NbCardModule,
+    NbButtonModule,
+    NbListModule,
+    NbAccordionModule,
+    NbUserModule,
+    Ng2SmartTableModule,
+    NbSearchModule,
+    NbSpinnerModule,
+    NbTooltipModule,
+  ],
 })
 export class CustomerModule {
 }
