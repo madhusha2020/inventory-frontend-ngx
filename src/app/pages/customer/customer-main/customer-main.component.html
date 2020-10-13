@@ -1,9 +1,20 @@
 <nb-card>
   <nb-card-header>
-    Smart Table
+    Customer Table
   </nb-card-header>
 
   <nb-card-body>
+    <div class="row" style="margin-bottom: 15px; margin-left: 0px;">
+      <div class="col-md-11">
+        <nb-search type="rotate-layout" tag="rotate-layout"></nb-search>
+      </div>
+      <div class="col-md-1">
+        <button nbButton status="info" size="medium" (click)="onRefresh()"
+                [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="small" nbSpinnerMessage="">
+          Refresh
+        </button>
+      </div>
+    </div>
     <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (createConfirm)="onCreateConfirm($event)" (editConfirm)="onEditConfirm($event)">
     </ng2-smart-table>
   </nb-card-body>

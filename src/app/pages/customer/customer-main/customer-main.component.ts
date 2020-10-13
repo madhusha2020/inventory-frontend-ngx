@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {Customer, CustomerControllerService} from '../../../service/rest';
+import {NbSearchService} from '@nebular/theme';
 
 @Component({
   selector: 'ngx-customer-main',
@@ -11,6 +12,8 @@ export class CustomerMainComponent implements OnInit {
 
   offset = 0;
   limit = 100;
+  loading = true;
+  title = 'Customer';
 
   customers: Array<Customer> = [];
 
@@ -96,7 +99,19 @@ export class CustomerMainComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private customerControllerService: CustomerControllerService) {
+  constructor(private customerControllerService: CustomerControllerService,
+              private searchService: NbSearchService) {
+
+    this.searchService.onSearchSubmit()
+      .subscribe((data: any) => {
+        console.log('Search', data.term);
+        this.source.setFilter([
+          {
+            field: 'name',
+            search: data.term
+          }
+        ], false);
+      });
   }
 
   ngOnInit(): void {
@@ -104,13 +119,21 @@ export class CustomerMainComponent implements OnInit {
   }
 
   fetchData() {
+    this.loading = true;
     this.customerControllerService.getAllCustomersUsingGET(this.offset, this.limit).subscribe(response => {
       console.log('Data :', response);
       response.customers.forEach(customer => {
+        this.loading = false;
         switch (customer.type) {
-          case '1': customer.type = 'New'; break;
-          case '2': customer.type = 'Regular'; break;
-          case '3': customer.type = 'Loyalty'; break;
+          case '1':
+            customer.type = 'New';
+            break;
+          case '2':
+            customer.type = 'Regular';
+            break;
+          case '3':
+            customer.type = 'Loyalty';
+            break;
         }
         this.customers.push(customer);
       });
@@ -143,5 +166,9 @@ export class CustomerMainComponent implements OnInit {
     } else {
       event.confirm.reject();
     }
+  }
+
+  onRefresh(): void {
+    this.source.setFilter([]);
   }
 }
