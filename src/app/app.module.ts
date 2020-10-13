@@ -20,10 +20,20 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import {ApiModule, Configuration, ConfigurationParameters} from './service/rest';
+import {environment} from '../environments/environment';
+
+export function apiConfiguration(): Configuration {
+  const params: ConfigurationParameters = {
+    basePath: environment.basePath,
+  };
+  return new Configuration(params);
+}
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    ApiModule.forRoot(apiConfiguration),
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,

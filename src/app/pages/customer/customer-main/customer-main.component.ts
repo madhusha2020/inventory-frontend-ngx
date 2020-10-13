@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {LocalDataSource} from 'ng2-smart-table';
+import {Customer, CustomerControllerService} from '../../../service/rest';
 
 @Component({
   selector: 'ngx-customer-main',
@@ -7,9 +9,139 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerMainComponent implements OnInit {
 
-  constructor() { }
+  offset = 0;
+  limit = 100;
 
-  ngOnInit(): void {
+  customers: Array<Customer> = [];
+
+  settings = {
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmCreate: true,
+    },
+    edit: {
+      editButtonContent: '<i class="nb-edit"></i>',
+      saveButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true,
+    },
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
+    },
+    columns: {
+      id: {
+        title: 'ID',
+        type: 'number',
+        addable: false,
+        editable: false,
+      },
+      name: {
+        title: 'Name',
+        type: 'string',
+      },
+      address: {
+        title: 'Address',
+        type: 'string',
+      },
+      contact1: {
+        title: 'Contact 01',
+        type: 'string',
+      },
+      contact2: {
+        title: 'Contact 02',
+        type: 'string',
+      },
+      email: {
+        title: 'E-mail',
+        type: 'string',
+      },
+      fax: {
+        title: 'Fax',
+        type: 'string',
+      },
+      type: {
+        title: 'Type',
+        editor: {
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: [
+              {value: '1', title: 'New'},
+              {value: '2', title: 'Regular'},
+              {value: '3', title: 'Loyalty'},
+            ],
+          },
+        },
+        type: 'string',
+      },
+      status: {
+        title: 'Status',
+        editor: {
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: [
+              {value: '1', title: 'Active'},
+              {value: '10', title: 'Suspend'},
+            ],
+          },
+        },
+        type: 'string',
+      },
+    },
+  };
+
+  source: LocalDataSource = new LocalDataSource();
+
+  constructor(private customerControllerService: CustomerControllerService) {
   }
 
+  ngOnInit(): void {
+    this.fetchData();
+  }
+
+  fetchData() {
+    this.customerControllerService.getAllCustomersUsingGET(this.offset, this.limit).subscribe(response => {
+      console.log('Data :', response);
+      response.customers.forEach(customer => {
+        switch (customer.type) {
+          case '1': customer.type = 'New'; break;
+          case '2': customer.type = 'Regular'; break;
+          case '3': customer.type = 'Loyalty'; break;
+        }
+        this.customers.push(customer);
+      });
+      this.source.load(this.customers);
+    });
+  }
+
+  onCreateConfirm(event): void {
+    console.log('Create', event);
+    if (window.confirm('Are you sure you want to delete?')) {
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
+  }
+
+  onEditConfirm(event): void {
+    console.log('Edit', event);
+    if (window.confirm('Are you sure you want to delete?')) {
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
+  }
+
+  onDeleteConfirm(event): void {
+    console.log('Delete', event);
+    if (window.confirm('Are you sure you want to delete?')) {
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
+  }
 }
