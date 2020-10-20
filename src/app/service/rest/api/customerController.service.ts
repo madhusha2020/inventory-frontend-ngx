@@ -11,227 +11,220 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import {Inject, Injectable, Optional} from '@angular/core';
-import {HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
-import {CustomHttpUrlEncodingCodec} from '../encoder';
+import { Inject, Injectable, Optional }                      from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams,
+         HttpResponse, HttpEvent }                           from '@angular/common/http';
+import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
-import {Observable} from 'rxjs/Observable';
+import { Observable }                                        from 'rxjs/Observable';
 
-import {Customer} from '../model/customer';
-import {CustomerList} from '../model/customerList';
-import {SearchFilter} from '../model/searchFilter';
+import { Customer } from '../model/customer';
+import { CustomerList } from '../model/customerList';
+import { SearchFilter } from '../model/searchFilter';
 
-import {BASE_PATH} from '../variables';
-import {Configuration} from '../configuration';
+import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
+import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
 export class CustomerControllerService {
 
-  public defaultHeaders = new HttpHeaders();
-  public configuration = new Configuration();
-  protected basePath = 'https://localhost:8080';
+    protected basePath = 'https://localhost:8080';
+    public defaultHeaders = new HttpHeaders();
+    public configuration = new Configuration();
 
-  constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
-    if (basePath) {
-      this.basePath = basePath;
-    }
-    if (configuration) {
-      this.configuration = configuration;
-      this.basePath = basePath || configuration.basePath || this.basePath;
-    }
-  }
-
-  /**
-   * View a list of available customers
-   *
-   * @param offset The number of items to skip before starting to collect the result set.
-   * @param limit The numbers of items to return.
-   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-   * @param reportProgress flag to report request and response progress.
-   */
-  public getAllCustomersUsingGET(offset: number, limit: number, observe?: 'body', reportProgress?: boolean): Observable<CustomerList>;
-
-  public getAllCustomersUsingGET(offset: number, limit: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerList>>;
-
-  public getAllCustomersUsingGET(offset: number, limit: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerList>>;
-
-  public getAllCustomersUsingGET(offset: number, limit: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-
-    if (offset === null || offset === undefined) {
-      throw new Error('Required parameter offset was null or undefined when calling getAllCustomersUsingGET.');
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+        if (basePath) {
+            this.basePath = basePath;
+        }
+        if (configuration) {
+            this.configuration = configuration;
+            this.basePath = basePath || configuration.basePath || this.basePath;
+        }
     }
 
-    if (limit === null || limit === undefined) {
-      throw new Error('Required parameter limit was null or undefined when calling getAllCustomersUsingGET.');
+    /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (const consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-    if (offset !== undefined && offset !== null) {
-      queryParameters = queryParameters.set('offset', <any>offset);
-    }
-    if (limit !== undefined && limit !== null) {
-      queryParameters = queryParameters.set('limit', <any>limit);
-    }
 
-    let headers = this.defaultHeaders;
+    /**
+     * View a list of available customers
+     * 
+     * @param offset The number of items to skip before starting to collect the result set.
+     * @param limit The numbers of items to return.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllCustomersUsingGET(offset: number, limit: number, observe?: 'body', reportProgress?: boolean): Observable<CustomerList>;
+    public getAllCustomersUsingGET(offset: number, limit: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerList>>;
+    public getAllCustomersUsingGET(offset: number, limit: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerList>>;
+    public getAllCustomersUsingGET(offset: number, limit: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-    // to determine the Accept header
-    let httpHeaderAccepts: string[] = [
-      'application/json'
-    ];
-    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-    if (httpHeaderAcceptSelected != undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
-    }
+        if (offset === null || offset === undefined) {
+            throw new Error('Required parameter offset was null or undefined when calling getAllCustomersUsingGET.');
+        }
 
-    // to determine the Content-Type header
-    const consumes: string[] = [
-      'application/json'
-    ];
+        if (limit === null || limit === undefined) {
+            throw new Error('Required parameter limit was null or undefined when calling getAllCustomersUsingGET.');
+        }
 
-    return this.httpClient.get<CustomerList>(`${this.basePath}/customer`,
-      {
-        params: queryParameters,
-        withCredentials: this.configuration.withCredentials,
-        headers: headers,
-        observe: observe,
-        reportProgress: reportProgress
-      }
-    );
-  }
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (offset !== undefined && offset !== null) {
+            queryParameters = queryParameters.set('offset', <any>offset);
+        }
+        if (limit !== undefined && limit !== null) {
+            queryParameters = queryParameters.set('limit', <any>limit);
+        }
 
-  /**
-   * Save customer
-   *
-   * @param customer customer
-   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-   * @param reportProgress flag to report request and response progress.
-   */
-  public saveCustomerUsingPOST(customer: Customer, observe?: 'body', reportProgress?: boolean): Observable<Customer>;
+        let headers = this.defaultHeaders;
 
-  public saveCustomerUsingPOST(customer: Customer, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Customer>>;
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
 
-  public saveCustomerUsingPOST(customer: Customer, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Customer>>;
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
 
-  public saveCustomerUsingPOST(customer: Customer, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-
-    if (customer === null || customer === undefined) {
-      throw new Error('Required parameter customer was null or undefined when calling saveCustomerUsingPOST.');
-    }
-
-    let headers = this.defaultHeaders;
-
-    // to determine the Accept header
-    let httpHeaderAccepts: string[] = [
-      'application/json'
-    ];
-    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-    if (httpHeaderAcceptSelected != undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+        return this.httpClient.get<CustomerList>(`${this.basePath}/customer`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
-    // to determine the Content-Type header
-    const consumes: string[] = [
-      'application/json'
-    ];
-    const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-    if (httpContentTypeSelected != undefined) {
-      headers = headers.set('Content-Type', httpContentTypeSelected);
+    /**
+     * Save customer
+     * 
+     * @param customer customer
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public saveCustomerUsingPOST(customer: Customer, observe?: 'body', reportProgress?: boolean): Observable<Customer>;
+    public saveCustomerUsingPOST(customer: Customer, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Customer>>;
+    public saveCustomerUsingPOST(customer: Customer, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Customer>>;
+    public saveCustomerUsingPOST(customer: Customer, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (customer === null || customer === undefined) {
+            throw new Error('Required parameter customer was null or undefined when calling saveCustomerUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<Customer>(`${this.basePath}/customer`,
+            customer,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
-    return this.httpClient.post<Customer>(`${this.basePath}/customer`,
-      customer,
-      {
-        withCredentials: this.configuration.withCredentials,
-        headers: headers,
-        observe: observe,
-        reportProgress: reportProgress
-      }
-    );
-  }
+    /**
+     * Search customers
+     * 
+     * @param searchFilter searchFilter
+     * @param offset The number of items to skip before starting to collect the result set.
+     * @param limit The numbers of items to return.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public searchCustomersUsingPOST(searchFilter: SearchFilter, offset: number, limit: number, observe?: 'body', reportProgress?: boolean): Observable<CustomerList>;
+    public searchCustomersUsingPOST(searchFilter: SearchFilter, offset: number, limit: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerList>>;
+    public searchCustomersUsingPOST(searchFilter: SearchFilter, offset: number, limit: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerList>>;
+    public searchCustomersUsingPOST(searchFilter: SearchFilter, offset: number, limit: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-  /**
-   * Search customers
-   *
-   * @param searchFilter searchFilter
-   * @param offset The number of items to skip before starting to collect the result set.
-   * @param limit The numbers of items to return.
-   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-   * @param reportProgress flag to report request and response progress.
-   */
-  public searchCustomersUsingPOST(searchFilter: SearchFilter, offset: number, limit: number, observe?: 'body', reportProgress?: boolean): Observable<CustomerList>;
+        if (searchFilter === null || searchFilter === undefined) {
+            throw new Error('Required parameter searchFilter was null or undefined when calling searchCustomersUsingPOST.');
+        }
 
-  public searchCustomersUsingPOST(searchFilter: SearchFilter, offset: number, limit: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerList>>;
+        if (offset === null || offset === undefined) {
+            throw new Error('Required parameter offset was null or undefined when calling searchCustomersUsingPOST.');
+        }
 
-  public searchCustomersUsingPOST(searchFilter: SearchFilter, offset: number, limit: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerList>>;
+        if (limit === null || limit === undefined) {
+            throw new Error('Required parameter limit was null or undefined when calling searchCustomersUsingPOST.');
+        }
 
-  public searchCustomersUsingPOST(searchFilter: SearchFilter, offset: number, limit: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (offset !== undefined && offset !== null) {
+            queryParameters = queryParameters.set('offset', <any>offset);
+        }
+        if (limit !== undefined && limit !== null) {
+            queryParameters = queryParameters.set('limit', <any>limit);
+        }
 
-    if (searchFilter === null || searchFilter === undefined) {
-      throw new Error('Required parameter searchFilter was null or undefined when calling searchCustomersUsingPOST.');
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<CustomerList>(`${this.basePath}/customer/search`,
+            searchFilter,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
-
-    if (offset === null || offset === undefined) {
-      throw new Error('Required parameter offset was null or undefined when calling searchCustomersUsingPOST.');
-    }
-
-    if (limit === null || limit === undefined) {
-      throw new Error('Required parameter limit was null or undefined when calling searchCustomersUsingPOST.');
-    }
-
-    let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-    if (offset !== undefined && offset !== null) {
-      queryParameters = queryParameters.set('offset', <any>offset);
-    }
-    if (limit !== undefined && limit !== null) {
-      queryParameters = queryParameters.set('limit', <any>limit);
-    }
-
-    let headers = this.defaultHeaders;
-
-    // to determine the Accept header
-    let httpHeaderAccepts: string[] = [
-      'application/json'
-    ];
-    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-    if (httpHeaderAcceptSelected != undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
-    }
-
-    // to determine the Content-Type header
-    const consumes: string[] = [
-      'application/json'
-    ];
-    const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-    if (httpContentTypeSelected != undefined) {
-      headers = headers.set('Content-Type', httpContentTypeSelected);
-    }
-
-    return this.httpClient.post<CustomerList>(`${this.basePath}/customer/search`,
-      searchFilter,
-      {
-        params: queryParameters,
-        withCredentials: this.configuration.withCredentials,
-        headers: headers,
-        observe: observe,
-        reportProgress: reportProgress
-      }
-    );
-  }
-
-  /**
-   * @param consumes string[] mime-types
-   * @return true: consumes contains 'multipart/form-data', false: otherwise
-   */
-  private canConsumeForm(consumes: string[]): boolean {
-    const form = 'multipart/form-data';
-    for (const consume of consumes) {
-      if (form === consume) {
-        return true;
-      }
-    }
-    return false;
-  }
 
 }

@@ -18,16 +18,14 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
-import { Order } from '../model/order';
-import { OrderItemsList } from '../model/orderItemsList';
-import { OrderList } from '../model/orderList';
+import { User } from '../model/user';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
-export class OrderControllerService {
+export class AuthenticationControllerService {
 
     protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
@@ -59,103 +57,19 @@ export class OrderControllerService {
 
 
     /**
-     * Get orders by orderId
+     * Login
      * 
-     * @param orderId orderId
+     * @param user user
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOrderByIdUsingGET(orderId: number, observe?: 'body', reportProgress?: boolean): Observable<Order>;
-    public getOrderByIdUsingGET(orderId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
-    public getOrderByIdUsingGET(orderId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
-    public getOrderByIdUsingGET(orderId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public loginUsingPOST(user: User, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public loginUsingPOST(user: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public loginUsingPOST(user: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public loginUsingPOST(user: User, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (orderId === null || orderId === undefined) {
-            throw new Error('Required parameter orderId was null or undefined when calling getOrderByIdUsingGET.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-
-        return this.httpClient.get<Order>(`${this.basePath}/order/${encodeURIComponent(String(orderId))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Get orders by customerId
-     * 
-     * @param customerId customerId
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getOrdersByCustomerUsingGET(customerId: number, observe?: 'body', reportProgress?: boolean): Observable<OrderList>;
-    public getOrdersByCustomerUsingGET(customerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OrderList>>;
-    public getOrdersByCustomerUsingGET(customerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OrderList>>;
-    public getOrdersByCustomerUsingGET(customerId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (customerId === null || customerId === undefined) {
-            throw new Error('Required parameter customerId was null or undefined when calling getOrdersByCustomerUsingGET.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-
-        return this.httpClient.get<OrderList>(`${this.basePath}/order/customer/${encodeURIComponent(String(customerId))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Place customer order
-     * 
-     * @param orderItemsList orderItemsList
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public saveCustomerUsingPOST2(orderItemsList: OrderItemsList, observe?: 'body', reportProgress?: boolean): Observable<OrderItemsList>;
-    public saveCustomerUsingPOST2(orderItemsList: OrderItemsList, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OrderItemsList>>;
-    public saveCustomerUsingPOST2(orderItemsList: OrderItemsList, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OrderItemsList>>;
-    public saveCustomerUsingPOST2(orderItemsList: OrderItemsList, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (orderItemsList === null || orderItemsList === undefined) {
-            throw new Error('Required parameter orderItemsList was null or undefined when calling saveCustomerUsingPOST2.');
+        if (user === null || user === undefined) {
+            throw new Error('Required parameter user was null or undefined when calling loginUsingPOST.');
         }
 
         let headers = this.defaultHeaders;
@@ -178,8 +92,55 @@ export class OrderControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<OrderItemsList>(`${this.basePath}/order`,
-            orderItemsList,
+        return this.httpClient.post<User>(`${this.basePath}/authentication/login`,
+            user,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Register
+     * 
+     * @param user user
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public registerUserUsingPOST(user: User, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public registerUserUsingPOST(user: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public registerUserUsingPOST(user: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public registerUserUsingPOST(user: User, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (user === null || user === undefined) {
+            throw new Error('Required parameter user was null or undefined when calling registerUserUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<User>(`${this.basePath}/authentication/register`,
+            user,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

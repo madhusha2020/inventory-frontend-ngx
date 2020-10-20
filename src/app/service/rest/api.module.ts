@@ -6,15 +6,21 @@ import { HttpClient } from '@angular/common/http';
 import { CustomerControllerService } from './api/customerController.service';
 import { ItemControllerService } from './api/itemController.service';
 import { OrderControllerService } from './api/orderController.service';
+import {AuthenticationControllerService} from './api/authenticationController.service';
+import {RoleControllerService} from './api/roleController.service';
+import {UserControllerService} from './api/userController.service';
 
 @NgModule({
   imports:      [],
   declarations: [],
   exports:      [],
   providers: [
+    AuthenticationControllerService,
     CustomerControllerService,
     ItemControllerService,
-    OrderControllerService ],
+    OrderControllerService,
+    RoleControllerService,
+    UserControllerService ],
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration) {

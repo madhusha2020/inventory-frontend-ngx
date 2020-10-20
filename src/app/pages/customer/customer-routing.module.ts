@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {CustomerMainComponent} from './customer-main/customer-main.component';
 import {CustomerComponent} from './customer.component';
+import {AuthGuardService} from '../../service/auth/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -10,6 +11,8 @@ const routes: Routes = [
     children: [
       {
         path: 'main',
+        data: {roles: ['INV']},
+        canActivate: [AuthGuardService],
         component: CustomerMainComponent,
       }],
   },

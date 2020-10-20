@@ -9,15 +9,25 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Order } from './order';
-import { OrderItems } from './orderItems';
+import { Privilege } from './privilege';
 
 
-export interface OrderItemsList { 
+export interface Module { 
+    add?: string;
+    createdby?: string;
+    createddate?: Date;
+    _delete?: string;
     description?: string;
-    order?: Order;
-    orderItems?: Array<OrderItems>;
+    getAll?: string;
+    getBasic?: string;
+    id?: number;
+    modifiedby?: string;
+    modifieddate?: Date;
+    permissionCode?: string;
+    privileges?: Array<Privilege>;
     responseCode?: string;
     responseValues?: Array<string>;
+    status?: number;
+    update?: string;
     userId?: string;
 }

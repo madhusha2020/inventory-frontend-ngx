@@ -18,16 +18,15 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
-import { Order } from '../model/order';
-import { OrderItemsList } from '../model/orderItemsList';
-import { OrderList } from '../model/orderList';
+import { PrivilegeList } from '../model/privilegeList';
+import { Role } from '../model/role';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
-export class OrderControllerService {
+export class RoleControllerService {
 
     protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
@@ -59,19 +58,32 @@ export class OrderControllerService {
 
 
     /**
-     * Get orders by orderId
+     * View a list of available privileges
      * 
-     * @param orderId orderId
+     * @param offset The number of items to skip before starting to collect the result set.
+     * @param limit The numbers of items to return.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOrderByIdUsingGET(orderId: number, observe?: 'body', reportProgress?: boolean): Observable<Order>;
-    public getOrderByIdUsingGET(orderId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
-    public getOrderByIdUsingGET(orderId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
-    public getOrderByIdUsingGET(orderId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAllPrivilegesUsingGET(offset: number, limit: number, observe?: 'body', reportProgress?: boolean): Observable<PrivilegeList>;
+    public getAllPrivilegesUsingGET(offset: number, limit: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PrivilegeList>>;
+    public getAllPrivilegesUsingGET(offset: number, limit: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PrivilegeList>>;
+    public getAllPrivilegesUsingGET(offset: number, limit: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (orderId === null || orderId === undefined) {
-            throw new Error('Required parameter orderId was null or undefined when calling getOrderByIdUsingGET.');
+        if (offset === null || offset === undefined) {
+            throw new Error('Required parameter offset was null or undefined when calling getAllPrivilegesUsingGET.');
+        }
+
+        if (limit === null || limit === undefined) {
+            throw new Error('Required parameter limit was null or undefined when calling getAllPrivilegesUsingGET.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (offset !== undefined && offset !== null) {
+            queryParameters = queryParameters.set('offset', <any>offset);
+        }
+        if (limit !== undefined && limit !== null) {
+            queryParameters = queryParameters.set('limit', <any>limit);
         }
 
         let headers = this.defaultHeaders;
@@ -90,8 +102,9 @@ export class OrderControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<Order>(`${this.basePath}/order/${encodeURIComponent(String(orderId))}`,
+        return this.httpClient.get<PrivilegeList>(`${this.basePath}/role/privilege`,
             {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -101,61 +114,19 @@ export class OrderControllerService {
     }
 
     /**
-     * Get orders by customerId
+     * Save role
      * 
-     * @param customerId customerId
+     * @param role role
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOrdersByCustomerUsingGET(customerId: number, observe?: 'body', reportProgress?: boolean): Observable<OrderList>;
-    public getOrdersByCustomerUsingGET(customerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OrderList>>;
-    public getOrdersByCustomerUsingGET(customerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OrderList>>;
-    public getOrdersByCustomerUsingGET(customerId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveUserUsingPOST(role: Role, observe?: 'body', reportProgress?: boolean): Observable<Role>;
+    public saveUserUsingPOST(role: Role, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Role>>;
+    public saveUserUsingPOST(role: Role, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Role>>;
+    public saveUserUsingPOST(role: Role, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (customerId === null || customerId === undefined) {
-            throw new Error('Required parameter customerId was null or undefined when calling getOrdersByCustomerUsingGET.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-
-        return this.httpClient.get<OrderList>(`${this.basePath}/order/customer/${encodeURIComponent(String(customerId))}`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Place customer order
-     * 
-     * @param orderItemsList orderItemsList
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public saveCustomerUsingPOST2(orderItemsList: OrderItemsList, observe?: 'body', reportProgress?: boolean): Observable<OrderItemsList>;
-    public saveCustomerUsingPOST2(orderItemsList: OrderItemsList, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OrderItemsList>>;
-    public saveCustomerUsingPOST2(orderItemsList: OrderItemsList, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OrderItemsList>>;
-    public saveCustomerUsingPOST2(orderItemsList: OrderItemsList, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (orderItemsList === null || orderItemsList === undefined) {
-            throw new Error('Required parameter orderItemsList was null or undefined when calling saveCustomerUsingPOST2.');
+        if (role === null || role === undefined) {
+            throw new Error('Required parameter role was null or undefined when calling saveUserUsingPOST.');
         }
 
         let headers = this.defaultHeaders;
@@ -178,8 +149,8 @@ export class OrderControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<OrderItemsList>(`${this.basePath}/order`,
-            orderItemsList,
+        return this.httpClient.post<Role>(`${this.basePath}/role`,
+            role,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

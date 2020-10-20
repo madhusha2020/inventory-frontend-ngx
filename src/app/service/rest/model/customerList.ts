@@ -14,5 +14,8 @@ import { Customer } from './customer';
 
 export interface CustomerList { 
     customers?: Array<Customer>;
+    description?: string;
+    responseCode?: string;
+    responseValues?: Array<string>;
     totalPages?: number;
 }

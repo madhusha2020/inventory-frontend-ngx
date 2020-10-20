@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
-
-import { UserData } from '../../../@core/data/users';
-import { LayoutService } from '../../../@core/utils';
-import { map, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {NbMediaBreakpointsService, NbMenuBag, NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
+import {LayoutService} from '../../../@core/utils';
+import {map, takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {TokenService} from '../../../service/auth/token.service';
+import {Router} from '@angular/router';
+import {User} from '../../../service/rest';
 
 @Component({
   selector: 'ngx-header',
@@ -13,10 +14,8 @@ import { Subject } from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  private destroy$: Subject<void> = new Subject<void>();
-  userPictureOnly: boolean = false;
-  user: any;
-
+  userPictureOnly = false;
+  user: User = {};
   themes = [
     {
       value: 'default',
@@ -35,27 +34,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
       name: 'Corporate',
     },
   ];
-
   currentTheme = 'default';
-
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [{title: 'Log out'}];
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
-              private userService: UserData,
               private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private breakpointService: NbMediaBreakpointsService,
+              private tokenService: TokenService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
+    this.user.userName = this.tokenService.getUserName();
 
-    this.userService.getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
-
-    const { xl } = this.breakpointService.getBreakpointsMap();
+    const {xl} = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
       .pipe(
         map(([, currentBreakpoint]) => currentBreakpoint.width < xl),
@@ -65,10 +61,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.themeService.onThemeChange()
       .pipe(
-        map(({ name }) => name),
+        map(({name}) => name),
         takeUntil(this.destroy$),
       )
       .subscribe(themeName => this.currentTheme = themeName);
+
+    this.menuService.onItemClick().subscribe((menu: NbMenuBag) => {
+      if (menu.item.title == 'Log out') {
+        this.tokenService.logout();
+        this.router.navigate(['/auth/login']);
+        console.log('Logout clicked ', menu);
+      }
+    });
   }
 
   ngOnDestroy() {

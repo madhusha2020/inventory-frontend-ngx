@@ -9,27 +9,27 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Order } from './order';
+import { Module } from './module';
+import { PrivilegeId } from './privilegeId';
+import { Role } from './role';
 
 
-export interface Customer { 
-    address?: string;
-    contact1?: string;
-    contact2?: string;
+export interface Privilege { 
+    add?: string;
     createdby?: string;
     createddate?: Date;
+    _delete?: string;
     description?: string;
-    email?: string;
-    fax?: string;
-    id?: number;
+    getAll?: string;
+    getBasic?: string;
     modifiedby?: string;
     modifieddate?: Date;
-    name?: string;
-    orderCount?: number;
-    orders?: Array<Order>;
+    module?: Module;
+    privilegeId?: PrivilegeId;
     responseCode?: string;
     responseValues?: Array<string>;
+    role?: Role;
     status?: number;
-    type?: string;
+    update?: string;
     userId?: string;
 }

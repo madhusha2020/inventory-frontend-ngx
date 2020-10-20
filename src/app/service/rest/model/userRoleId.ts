@@ -9,15 +9,9 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Order } from './order';
-import { OrderItems } from './orderItems';
 
 
-export interface OrderItemsList { 
-    description?: string;
-    order?: Order;
-    orderItems?: Array<OrderItems>;
-    responseCode?: string;
-    responseValues?: Array<string>;
-    userId?: string;
+export interface UserRoleId { 
+    roleName?: string;
+    userName?: string;
 }

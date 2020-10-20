@@ -126,7 +126,7 @@ export class CustomerMainComponent implements OnInit {
   fetchData() {
     this.loading = true;
     this.customerControllerService.getAllCustomersUsingGET(this.offset, this.limit).subscribe(response => {
-      console.log('Data :', response);
+      console.log('Customer Data :', response);
       response.customers.forEach(customer => {
         this.loading = false;
         customer.orderCount = customer.orders.length;
