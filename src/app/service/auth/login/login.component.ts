@@ -9,8 +9,6 @@ import {User} from '../../rest';
 })
 export class LoginComponent implements OnInit {
 
-  private user: User = {};
-
   constructor(private tokenService: TokenService) {
   }
 
@@ -18,8 +16,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.user.userName = 'admin@wsolution.com';
-    this.user.password = 'admin';
-    this.tokenService.login(this.user);
+    let user: User = {};
+    user.userName = 'admin@wsolution.com';
+    user.password = 'admin';
+    this.tokenService.login(user);
   }
+
 }

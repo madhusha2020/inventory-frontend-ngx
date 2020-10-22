@@ -4,23 +4,26 @@ import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 
 import {AuthRoutingModule} from './auth-routing.module';
-import {LoginComponent} from './login/login.component';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthGuardService} from './auth-guard.service';
 import {TokenService} from './token.service';
-import {NbCardModule} from '@nebular/theme';
+import {NbAlertModule, NbCardModule, NbCheckboxModule, NbInputModule} from '@nebular/theme';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        RouterModule,
-        AuthRoutingModule,
-        HttpClientModule,
-        NbCardModule,
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    AuthRoutingModule,
+    HttpClientModule,
+    NbCardModule,
+    NbAlertModule,
+    NbInputModule,
+    NbCheckboxModule,
+  ],
   declarations: [
-    LoginComponent
+  LoginComponent
   ],
   providers: [
     AuthGuardService,
