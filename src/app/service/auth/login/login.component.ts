@@ -1,25 +1,45 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenService} from '../token.service';
 import {User} from '../../rest';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'ngx-login',
+  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private tokenService: TokenService) {
+  loginForm: FormGroup;
+  user: User = {};
+  loading: boolean;
+
+  constructor(private router: Router,
+              private formBuilder: FormBuilder,
+              private tokenService: TokenService) {
   }
 
-  ngOnInit(): void {
+  get userName() {
+    return this.loginForm.get('userName');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
+
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      userName: [null, [Validators.required]],
+      password: [null, [Validators.required]]
+    });
   }
 
   login() {
-    let user: User = {};
-    user.userName = 'admin@wsolution.com';
-    user.password = 'admin';
-    this.tokenService.login(user);
+    this.loading = true;
+    this.user = this.loginForm.value;
+    console.log('User : ', this.user);
+    this.tokenService.login(this.user);
   }
-
 }
+

@@ -1,0 +1,3 @@
+<div class="error-list" *ngIf="!field.valid && field.touched">
+  <div *ngFor="let error of errorList">{{error}}</div>
+</div>

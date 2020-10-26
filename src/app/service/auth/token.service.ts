@@ -18,7 +18,7 @@ export class TokenService {
   }
 
   login(user: User) {
-    return this.authenticationControllerService.loginUsingPOST(user).subscribe(response => {
+    this.authenticationControllerService.loginUsingPOST(user).subscribe(response => {
 
         if (response && response.token) {
           let decodedToken = helper.decodeToken(response.token);

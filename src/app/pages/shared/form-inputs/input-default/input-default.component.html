@@ -1,0 +1,10 @@
+<label class="form-label" *ngIf="title">{{title}}</label>
+<div class="form-group">
+  <div [ngClass]="{'form-line':true, 'error': !field.valid && field.touched }">
+    <input class="form-control"
+           [formControl]="field"
+           [type]="type"
+           [placeholder]="placeholder">
+  </div>
+  <app-error-list [field]="field"></app-error-list>
+</div>

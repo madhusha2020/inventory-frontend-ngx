@@ -125,7 +125,7 @@
     "component-selector": [
       true,
       "element",
-      "ngx",
+      "app",
       "kebab-case"
     ],
     "no-inputs-metadata-property": true,
