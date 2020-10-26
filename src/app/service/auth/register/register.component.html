@@ -16,13 +16,33 @@
       [field]="password" placeholder="Enter password"
       title="Password" type="password"></app-input-default>
 
-    <button nbButton [disabled]="!registerForm.valid" [nbSpinner]="loading" class="btn btn-block btn-hero-success"
+    <app-input-comparator-default
+      [comparableField]="password" [field]="confirmPassword" placeholder="Enter confirm password"
+      title="Confirm Password" type="password"></app-input-comparator-default>
+
+    <app-input-default
+      [field]="address" placeholder="Enter address"
+      title="Address"></app-input-default>
+
+    <app-input-default
+      [field]="contact1" placeholder="Enter mobile no"
+      title="Mobile No"></app-input-default>
+
+    <app-input-default
+      [field]="contact2" placeholder="Enter telephone no"
+      title="Telephone No"></app-input-default>
+
+    <app-input-default
+      [field]="fax" placeholder="Enter fax no"
+      title="Fax No"></app-input-default>
+
+    <button [disabled]="!registerForm.valid" [nbSpinner]="loading" class="btn btn-block btn-hero-success" nbButton
             nbSpinnerStatus="info">
       Sign Up
     </button>
   </form>
 
-  <section class="another-action" aria-label="Sign in">
+  <section aria-label="Sign in" class="another-action">
     Already have an account? <a class="text-link" routerLink="../login">Log in</a>
   </section>
 

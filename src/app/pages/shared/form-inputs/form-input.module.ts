@@ -5,16 +5,19 @@ import { InputDefaultComponent } from './input-default/input-default.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormValidationModule} from '../form-validations/form-validation.module';
 import {NbInputModule} from '@nebular/theme';
+import { InputComparatorDefaultComponent } from './input-comparator-default/input-comparator-default.component';
 
 
 
 @NgModule({
   declarations: [
     InputSelectDefaultComponent,
-    InputDefaultComponent
+    InputDefaultComponent,
+    InputComparatorDefaultComponent
   ],
   exports: [
-    InputDefaultComponent
+    InputDefaultComponent,
+    InputComparatorDefaultComponent
   ],
   imports: [
     CommonModule,
