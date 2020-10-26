@@ -12,7 +12,7 @@
       [field]="password" placeholder="Enter password"
       title="Password" type="password"></app-input-default>
 
-    <button [disabled]="!loginForm.valid" [nbSpinner]="loading" class="btn btn-block btn-hero-success"
+    <button nbButton [disabled]="!loginForm.valid" [nbSpinner]="loading" class="btn btn-block btn-hero-success"
             nbSpinnerStatus="info">
       Sign In
     </button>
