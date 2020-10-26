@@ -18,6 +18,7 @@ import {
 import { LoginComponent } from './login/login.component';
 import {NbAuthModule} from '@nebular/auth';
 import {FormInputModule} from '../../pages/shared/form-inputs/form-input.module';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import {FormInputModule} from '../../pages/shared/form-inputs/form-input.module'
     NbButtonModule,
   ],
   declarations: [
-  LoginComponent
+  LoginComponent,
+  RegisterComponent
   ],
   providers: [
     AuthGuardService,

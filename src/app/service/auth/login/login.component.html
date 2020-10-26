@@ -12,14 +12,14 @@
       [field]="password" placeholder="Enter password"
       title="Password" type="password"></app-input-default>
 
-    <button nbButton [disabled]="!loginForm.valid" [nbSpinner]="loading" class="btn btn-block btn-hero-success"
+    <button nbButton fullWidth [disabled]="!loginForm.valid" [nbSpinner]="loading" class="btn btn-block btn-hero-success"
             nbSpinnerStatus="info">
       Sign In
     </button>
   </form>
 
-  <small class="form-text">
-    Don't have an account? <a routerLink="../register"><strong>Sign Up</strong></a>
-  </small>
+  <section class="another-action" aria-label="Sign up">
+    Don't have an account? <a class="text-link" routerLink="../register">Sign Up</a>
+  </section>
 
 </nb-auth-block>

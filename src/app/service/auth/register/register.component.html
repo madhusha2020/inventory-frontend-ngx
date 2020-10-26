@@ -1,0 +1,30 @@
+<nb-auth-block>
+  <h2 class="title">Register</h2>
+  <small class="form-text sub-title">Hello! Sign up with your details</small>
+
+  <form (ngSubmit)="register()" [formGroup]="registerForm" autocomplete="nope">
+
+    <app-input-default
+      [field]="name" placeholder="Enter full name"
+      title="Full Name"></app-input-default>
+
+    <app-input-default
+      [field]="userName" placeholder="Enter email"
+      title="Email"></app-input-default>
+
+    <app-input-default
+      [field]="password" placeholder="Enter password"
+      title="Password" type="password"></app-input-default>
+
+    <button nbButton [disabled]="!registerForm.valid" [nbSpinner]="loading" class="btn btn-block btn-hero-success"
+            nbSpinnerStatus="info">
+      Sign Up
+    </button>
+  </form>
+
+  <section class="another-action" aria-label="Sign in">
+    Already have an account? <a class="text-link" routerLink="../login">Log in</a>
+  </section>
+
+</nb-auth-block>
+
