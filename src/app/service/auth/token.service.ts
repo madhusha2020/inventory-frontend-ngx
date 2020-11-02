@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {AuthenticationControllerService, User} from '../rest';
+import {AuthenticationControllerService, CustomerUser, User} from '../rest';
 import {Router} from '@angular/router';
 import {Constant} from './constant';
 
@@ -19,24 +19,36 @@ export class TokenService {
 
   login(user: User) {
     this.authenticationControllerService.loginUsingPOST(user).subscribe(response => {
-
         if (response && response.token) {
-          let decodedToken = helper.decodeToken(response.token);
-
-          console.log('Response : ', response);
-          console.log('Response Uname : ', response.userName);
-          console.log('Response Subject : ', decodedToken.sub);
-          console.log('Response Decoded Token : ', decodedToken);
-          console.log('Response Decoded Token Authorities : ', decodedToken.authorities);
-
-          localStorage.setItem(Constant.TOKEN, response.token);
-          localStorage.setItem(Constant.USER_NAME, response.userName);
-          localStorage.setItem(Constant.AUTHORITIES, decodedToken.authorities);
-
-          this.router.navigate(['/pages/dashboard']);
+          this.saveTokenData(response);
         }
       }
     );
+  }
+
+  register(customerUser: CustomerUser) {
+    this.authenticationControllerService.registerUserUsingPOST(customerUser).subscribe(response => {
+        if (response && response.user.token) {
+          this.saveTokenData(response.user);
+        }
+      }
+    );
+  }
+
+  saveTokenData(response) {
+    let decodedToken = helper.decodeToken(response.token);
+
+    console.log('Response : ', response);
+    console.log('Response Uname : ', response.userName);
+    console.log('Response Subject : ', decodedToken.sub);
+    console.log('Response Decoded Token : ', decodedToken);
+    console.log('Response Decoded Token Authorities : ', decodedToken.authorities);
+
+    localStorage.setItem(Constant.TOKEN, response.token);
+    localStorage.setItem(Constant.USER_NAME, response.userName);
+    localStorage.setItem(Constant.AUTHORITIES, decodedToken.authorities);
+
+    this.router.navigate(['/pages/dashboard']);
   }
 
   getAuthorities(): Map<string, number> {

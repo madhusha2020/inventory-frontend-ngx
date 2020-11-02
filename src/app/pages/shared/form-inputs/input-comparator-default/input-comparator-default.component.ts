@@ -15,7 +15,7 @@ export class InputComparatorDefaultComponent implements OnInit, OnDestroy {
   @Input() field: AbstractControl;
   @Input() comparableField: AbstractControl;
 
-  private misMatch: boolean;
+  misMatch: boolean;
   valSub: Subscription;
 
   constructor() {

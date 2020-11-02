@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {User} from '../../rest';
+import {Customer, CustomerUser, User} from '../../rest';
 import {Router} from '@angular/router';
 import {TokenService} from '../token.service';
+import {ServiceUtil} from '../../util/service-util';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,9 @@ import {TokenService} from '../token.service';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
+  customerUser: CustomerUser = {};
   user: User = {};
+  customer: Customer = {};
   loading: boolean;
 
   constructor(private router: Router,
@@ -68,7 +71,25 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.loading = true;
-    this.user = this.registerForm.value;
-    console.log('User : ', this.user);
+
+    this.user.userName = this.userName.value;
+    this.user.password = this.password.value;
+    this.user.userId = ServiceUtil.getSystemUser();
+
+    this.customer.name = this.name.value;
+    this.customer.email = this.userName.value;
+    this.customer.address = this.address.value;
+    this.customer.contact1 = this.contact1.value;
+    this.customer.contact2 = this.contact2.value;
+    this.customer.fax = this.fax.value;
+    this.customer.description = ServiceUtil.getRegisteredCustomerDescription();
+    this.customer.type = ServiceUtil.getNewCustomerType();
+    this.customer.userId = ServiceUtil.getSystemUser();
+
+    this.customerUser.user = this.user;
+    this.customerUser.customer = this.customer;
+
+    console.log('Customer User : ', this.customerUser);
+    this.tokenService.register(this.customerUser);
   }
 }
