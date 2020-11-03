@@ -6,7 +6,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
@@ -22,6 +22,8 @@ import {
 } from '@nebular/theme';
 import {ApiModule, Configuration, ConfigurationParameters} from './service/rest';
 import {environment} from '../environments/environment';
+import {JwtInterceptor} from './interceptor/jwt.interceptor';
+import {ErrorInterceptor} from './interceptor/error.interceptor';
 
 export function apiConfiguration(): Configuration {
   const params: ConfigurationParameters = {
@@ -50,6 +52,10 @@ export function apiConfiguration(): Configuration {
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
   ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

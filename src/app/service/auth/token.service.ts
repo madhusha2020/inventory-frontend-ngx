@@ -35,7 +35,7 @@ export class TokenService {
     );
   }
 
-  saveTokenData(response) {
+  private saveTokenData(response) {
     let decodedToken = helper.decodeToken(response.token);
 
     console.log('Response : ', response);
@@ -73,5 +73,9 @@ export class TokenService {
 
   getUserName(): string {
     return localStorage.getItem(Constant.USER_NAME);
+  }
+
+  getToken(): string {
+    return localStorage.getItem(Constant.TOKEN);
   }
 }
