@@ -24,6 +24,7 @@ export interface Module {
     modifiedby?: string;
     modifieddate?: Date;
     permissionCode?: string;
+    permissionDescription?: string;
     privileges?: Array<Privilege>;
     responseCode?: string;
     responseValues?: Array<string>;

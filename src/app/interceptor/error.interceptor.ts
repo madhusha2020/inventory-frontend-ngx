@@ -17,7 +17,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       if (err.status >= 400) {
         console.log('intercepted an error');
         console.log(err);
-        Swal.fire('Oops...', 'Something went wrong!', 'error');
+        Swal.fire('Oops...', err.error.description, 'error');
       }
       const error = err.error.message || err.statusText;
       return throwError(error);

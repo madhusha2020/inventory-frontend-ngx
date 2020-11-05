@@ -9,20 +9,23 @@ import {ThemeModule} from '../../@theme/theme.module';
 import {
   NbAccordionModule,
   NbButtonModule,
-  NbCardModule,
+  NbCardModule, NbIconModule,
   NbListModule,
-  NbRouteTabsetModule, NbSearchModule, NbSpinnerModule,
+  NbRouteTabsetModule, NbSearchModule, NbSelectModule, NbSpinnerModule,
   NbStepperModule,
   NbTabsetModule, NbTooltipModule,
   NbUserModule,
 } from '@nebular/theme';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
+import { CustomerCreateComponent } from './customer-create/customer-create.component';
+import {FormInputModule} from '../shared/form-inputs/form-input.module';
 
 
 @NgModule({
   declarations: [
     CustomerMainComponent,
-    CustomerComponent],
+    CustomerComponent,
+    CustomerCreateComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,
@@ -41,6 +44,9 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
     NbSearchModule,
     NbSpinnerModule,
     NbTooltipModule,
+    FormInputModule,
+    NbIconModule,
+    NbSelectModule,
   ],
 })
 export class CustomerModule {

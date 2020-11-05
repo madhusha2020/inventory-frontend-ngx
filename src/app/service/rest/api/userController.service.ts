@@ -18,7 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
-import { User } from '../model/user';
+import { CustomerUser } from '../model/customerUser';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -57,19 +57,19 @@ export class UserControllerService {
 
 
     /**
-     * Save user
+     * Save customer
      * 
-     * @param user user
+     * @param customerUser customerUser
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public saveUserUsingPOST1(user: User, observe?: 'body', reportProgress?: boolean): Observable<User>;
-    public saveUserUsingPOST1(user: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
-    public saveUserUsingPOST1(user: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
-    public saveUserUsingPOST1(user: User, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveCustomerUsingPOST3(customerUser: CustomerUser, observe?: 'body', reportProgress?: boolean): Observable<CustomerUser>;
+    public saveCustomerUsingPOST3(customerUser: CustomerUser, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerUser>>;
+    public saveCustomerUsingPOST3(customerUser: CustomerUser, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerUser>>;
+    public saveCustomerUsingPOST3(customerUser: CustomerUser, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (user === null || user === undefined) {
-            throw new Error('Required parameter user was null or undefined when calling saveUserUsingPOST1.');
+        if (customerUser === null || customerUser === undefined) {
+            throw new Error('Required parameter customerUser was null or undefined when calling saveCustomerUsingPOST3.');
         }
 
         let headers = this.defaultHeaders;
@@ -92,8 +92,8 @@ export class UserControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<User>(`${this.basePath}/user`,
-            user,
+        return this.httpClient.post<CustomerUser>(`${this.basePath}/user/customer`,
+            customerUser,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

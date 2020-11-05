@@ -13,7 +13,6 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   user: User = {};
-  loading: boolean;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
@@ -36,7 +35,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loading = true;
     this.user = this.loginForm.value;
     console.log('User : ', this.user);
     this.tokenService.login(this.user);

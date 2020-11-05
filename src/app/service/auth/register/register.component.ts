@@ -16,7 +16,6 @@ export class RegisterComponent implements OnInit {
   customerUser: CustomerUser = {};
   user: User = {};
   customer: Customer = {};
-  loading: boolean;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
@@ -70,8 +69,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.loading = true;
-
     this.user.userName = this.userName.value;
     this.user.password = this.password.value;
     this.user.userId = ServiceUtil.getSystemUser();

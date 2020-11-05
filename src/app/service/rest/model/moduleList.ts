@@ -9,13 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Privilege } from './privilege';
+import { Module } from './module';
 
 
-export interface PrivilegeList { 
+export interface ModuleList { 
     description?: string;
-    privileges?: Array<Privilege>;
+    modules?: Array<Module>;
     responseCode?: string;
     responseValues?: Array<string>;
-    totalPages?: number;
 }

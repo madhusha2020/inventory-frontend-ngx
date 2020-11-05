@@ -9,15 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Customer } from './customer';
-import { User } from './user';
+import { Role } from './role';
 
 
-export interface CustomerUser { 
-    customer?: Customer;
+export interface RoleList { 
     description?: string;
     responseCode?: string;
     responseValues?: Array<string>;
-    roleNameList?: Array<string>;
-    user?: User;
+    roles?: Array<Role>;
 }

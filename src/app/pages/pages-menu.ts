@@ -17,9 +17,42 @@ export const MENU_ITEMS: NbMenuItem[] = [
     group: true,
   },
   {
-    title: 'Customer',
+    title: 'User Management',
+    icon: 'person-outline',
+    children: [
+      {
+        title: 'Users',
+        link: '/pages/user/main',
+      }
+    ]
+  },
+  {
+    title: 'Role Management',
+    icon: 'person-done-outline',
+    children: [
+      {
+        title: 'Roles',
+        link: '/pages/user/role-main',
+      },
+      {
+        title: 'Create Role',
+        link: '/pages/user/role',
+      },
+    ]
+  },
+  {
+    title: 'Customer Management',
     icon: 'people-outline',
-    link: '/pages/customer/main',
+    children: [
+      {
+        title: 'Customers',
+        link: '/pages/customer/main',
+      },
+      {
+        title: 'Create Customer',
+        link: '/pages/customer/create',
+      }
+    ]
   },
   {
     title: 'FEATURES',

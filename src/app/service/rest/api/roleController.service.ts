@@ -18,8 +18,9 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
-import { PrivilegeList } from '../model/privilegeList';
+import { ModuleList } from '../model/moduleList';
 import { Role } from '../model/role';
+import { RoleList } from '../model/roleList';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -58,33 +59,15 @@ export class RoleControllerService {
 
 
     /**
-     * View a list of available privileges
+     * View a list of available modules
      * 
-     * @param offset The number of items to skip before starting to collect the result set.
-     * @param limit The numbers of items to return.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllPrivilegesUsingGET(offset: number, limit: number, observe?: 'body', reportProgress?: boolean): Observable<PrivilegeList>;
-    public getAllPrivilegesUsingGET(offset: number, limit: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PrivilegeList>>;
-    public getAllPrivilegesUsingGET(offset: number, limit: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PrivilegeList>>;
-    public getAllPrivilegesUsingGET(offset: number, limit: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (offset === null || offset === undefined) {
-            throw new Error('Required parameter offset was null or undefined when calling getAllPrivilegesUsingGET.');
-        }
-
-        if (limit === null || limit === undefined) {
-            throw new Error('Required parameter limit was null or undefined when calling getAllPrivilegesUsingGET.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (offset !== undefined && offset !== null) {
-            queryParameters = queryParameters.set('offset', <any>offset);
-        }
-        if (limit !== undefined && limit !== null) {
-            queryParameters = queryParameters.set('limit', <any>limit);
-        }
+    public getAllModulesUsingGET(observe?: 'body', reportProgress?: boolean): Observable<ModuleList>;
+    public getAllModulesUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ModuleList>>;
+    public getAllModulesUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ModuleList>>;
+    public getAllModulesUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -102,9 +85,45 @@ export class RoleControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<PrivilegeList>(`${this.basePath}/role/privilege`,
+        return this.httpClient.get<ModuleList>(`${this.basePath}/role/module`,
             {
-                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * View a list of available privileges
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllRolesUsingGET(observe?: 'body', reportProgress?: boolean): Observable<RoleList>;
+    public getAllRolesUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<RoleList>>;
+    public getAllRolesUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<RoleList>>;
+    public getAllRolesUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<RoleList>(`${this.basePath}/role`,
+            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -120,13 +139,13 @@ export class RoleControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public saveUserUsingPOST(role: Role, observe?: 'body', reportProgress?: boolean): Observable<Role>;
-    public saveUserUsingPOST(role: Role, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Role>>;
-    public saveUserUsingPOST(role: Role, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Role>>;
-    public saveUserUsingPOST(role: Role, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveUserRoleUsingPOST(role: Role, observe?: 'body', reportProgress?: boolean): Observable<Role>;
+    public saveUserRoleUsingPOST(role: Role, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Role>>;
+    public saveUserRoleUsingPOST(role: Role, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Role>>;
+    public saveUserRoleUsingPOST(role: Role, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (role === null || role === undefined) {
-            throw new Error('Required parameter role was null or undefined when calling saveUserUsingPOST.');
+            throw new Error('Required parameter role was null or undefined when calling saveUserRoleUsingPOST.');
         }
 
         let headers = this.defaultHeaders;

@@ -12,8 +12,7 @@
   "scripts": {
     "ng": "ng",
     "conventional-changelog": "conventional-changelog",
-    "start": "ng serve --proxy-config proxy.conf.json",
-    "start-prod": "ng serve --proxy-config proxy.conf.json --prod",
+    "start": "ng serve",
     "test:coverage": "rimraf coverage && npm run test -- --code-coverage",
     "lint": "ng lint",
     "lint:fix": "ng lint ngx-admin-demo --fix",

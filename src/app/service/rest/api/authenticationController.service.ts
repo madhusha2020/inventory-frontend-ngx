@@ -11,147 +11,144 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import {Inject, Injectable, Optional} from '@angular/core';
-import {HttpClient, HttpEvent, HttpHeaders, HttpResponse} from '@angular/common/http';
+import { Inject, Injectable, Optional }                      from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams,
+         HttpResponse, HttpEvent }                           from '@angular/common/http';
+import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
-import {Observable} from 'rxjs/Observable';
+import { Observable }                                        from 'rxjs/Observable';
 
-import {CustomerUser} from '../model/customerUser';
-import {User} from '../model/user';
+import { CustomerUser } from '../model/customerUser';
+import { User } from '../model/user';
 
-import {BASE_PATH} from '../variables';
-import {Configuration} from '../configuration';
+import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
+import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
 export class AuthenticationControllerService {
 
-  public defaultHeaders = new HttpHeaders();
-  public configuration = new Configuration();
-  protected basePath = 'https://localhost:8080';
+    protected basePath = 'https://localhost:8080';
+    public defaultHeaders = new HttpHeaders();
+    public configuration = new Configuration();
 
-  constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
-    if (basePath) {
-      this.basePath = basePath;
-    }
-    if (configuration) {
-      this.configuration = configuration;
-      this.basePath = basePath || configuration.basePath || this.basePath;
-    }
-  }
-
-  /**
-   * Login
-   *
-   * @param user user
-   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-   * @param reportProgress flag to report request and response progress.
-   */
-  public loginUsingPOST(user: User, observe?: 'body', reportProgress?: boolean): Observable<User>;
-
-  public loginUsingPOST(user: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
-
-  public loginUsingPOST(user: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
-
-  public loginUsingPOST(user: User, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-
-    if (user === null || user === undefined) {
-      throw new Error('Required parameter user was null or undefined when calling loginUsingPOST.');
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+        if (basePath) {
+            this.basePath = basePath;
+        }
+        if (configuration) {
+            this.configuration = configuration;
+            this.basePath = basePath || configuration.basePath || this.basePath;
+        }
     }
 
-    let headers = this.defaultHeaders;
-
-    // to determine the Accept header
-    let httpHeaderAccepts: string[] = [
-      'application/json'
-    ];
-    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-    if (httpHeaderAcceptSelected != undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+    /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (const consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    // to determine the Content-Type header
-    const consumes: string[] = [
-      'application/json'
-    ];
-    const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-    if (httpContentTypeSelected != undefined) {
-      headers = headers.set('Content-Type', httpContentTypeSelected);
+
+    /**
+     * Login
+     * 
+     * @param user user
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public loginUsingPOST(user: User, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public loginUsingPOST(user: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public loginUsingPOST(user: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public loginUsingPOST(user: User, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (user === null || user === undefined) {
+            throw new Error('Required parameter user was null or undefined when calling loginUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<User>(`${this.basePath}/authentication/login`,
+            user,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
-    return this.httpClient.post<User>(`${this.basePath}/authentication/login`,
-      user,
-      {
-        withCredentials: this.configuration.withCredentials,
-        headers: headers,
-        observe: observe,
-        reportProgress: reportProgress
-      }
-    );
-  }
+    /**
+     * Register
+     * 
+     * @param customerUser customerUser
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public registerUserUsingPOST(customerUser: CustomerUser, observe?: 'body', reportProgress?: boolean): Observable<CustomerUser>;
+    public registerUserUsingPOST(customerUser: CustomerUser, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerUser>>;
+    public registerUserUsingPOST(customerUser: CustomerUser, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerUser>>;
+    public registerUserUsingPOST(customerUser: CustomerUser, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-  /**
-   * Register
-   *
-   * @param customerUser customerUser
-   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-   * @param reportProgress flag to report request and response progress.
-   */
-  public registerUserUsingPOST(customerUser: CustomerUser, observe?: 'body', reportProgress?: boolean): Observable<CustomerUser>;
+        if (customerUser === null || customerUser === undefined) {
+            throw new Error('Required parameter customerUser was null or undefined when calling registerUserUsingPOST.');
+        }
 
-  public registerUserUsingPOST(customerUser: CustomerUser, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerUser>>;
+        let headers = this.defaultHeaders;
 
-  public registerUserUsingPOST(customerUser: CustomerUser, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerUser>>;
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
 
-  public registerUserUsingPOST(customerUser: CustomerUser, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
 
-    if (customerUser === null || customerUser === undefined) {
-      throw new Error('Required parameter customerUser was null or undefined when calling registerUserUsingPOST.');
+        return this.httpClient.post<CustomerUser>(`${this.basePath}/authentication/register`,
+            customerUser,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
-
-    let headers = this.defaultHeaders;
-
-    // to determine the Accept header
-    let httpHeaderAccepts: string[] = [
-      'application/json'
-    ];
-    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-    if (httpHeaderAcceptSelected != undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
-    }
-
-    // to determine the Content-Type header
-    const consumes: string[] = [
-      'application/json'
-    ];
-    const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-    if (httpContentTypeSelected != undefined) {
-      headers = headers.set('Content-Type', httpContentTypeSelected);
-    }
-
-    return this.httpClient.post<CustomerUser>(`${this.basePath}/authentication/register`,
-      customerUser,
-      {
-        withCredentials: this.configuration.withCredentials,
-        headers: headers,
-        observe: observe,
-        reportProgress: reportProgress
-      }
-    );
-  }
-
-  /**
-   * @param consumes string[] mime-types
-   * @return true: consumes contains 'multipart/form-data', false: otherwise
-   */
-  private canConsumeForm(consumes: string[]): boolean {
-    const form = 'multipart/form-data';
-    for (const consume of consumes) {
-      if (form === consume) {
-        return true;
-      }
-    }
-    return false;
-  }
 
 }

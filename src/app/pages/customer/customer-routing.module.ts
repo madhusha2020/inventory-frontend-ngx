@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {CustomerMainComponent} from './customer-main/customer-main.component';
 import {CustomerComponent} from './customer.component';
 import {AuthGuardService} from '../../service/auth/auth-guard.service';
+import {CustomerCreateComponent} from './customer-create/customer-create.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,14 @@ const routes: Routes = [
         data: {roles: ['INV']},
         canActivate: [AuthGuardService],
         component: CustomerMainComponent,
-      }],
+      },
+      {
+        path: 'create',
+        data: {roles: ['INV']},
+        canActivate: [AuthGuardService],
+        component: CustomerCreateComponent,
+      }
+    ],
   },
 ];
 

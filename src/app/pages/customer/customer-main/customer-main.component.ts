@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {Customer, CustomerControllerService} from '../../../service/rest';
 import {NbSearchService} from '@nebular/theme';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-customer-main',
@@ -12,7 +13,6 @@ export class CustomerMainComponent implements OnInit {
 
   offset = 0;
   limit = 100;
-  loading = true;
 
   customers: Array<Customer> = [];
 
@@ -120,15 +120,13 @@ export class CustomerMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchData();
+    this.fetchCustomers();
   }
 
-  fetchData() {
-    this.loading = true;
+  fetchCustomers() {
     this.customerControllerService.getAllCustomersUsingGET(this.offset, this.limit).subscribe(response => {
       console.log('Customer Data :', response);
       response.customers.forEach(customer => {
-        this.loading = false;
         customer.orderCount = customer.orders.length;
         this.customers.push(customer);
       });
@@ -137,12 +135,21 @@ export class CustomerMainComponent implements OnInit {
   }
 
   onCreateConfirm(event): void {
-    console.log('Create', event);
-    if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
+    console.log('Create :', event);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Create customer {0}'.replace('{0}', event.newData.name),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+
+      }
+    });
   }
 
   onEditConfirm(event): void {
