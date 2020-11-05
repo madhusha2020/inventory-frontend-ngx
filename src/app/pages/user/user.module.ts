@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { UserMainComponent } from './user-main/user-main.component';
 import { UserComponent } from './user.component';
-import {NbButtonModule, NbCardModule, NbIconModule, NbStepperModule} from '@nebular/theme';
+import {NbButtonModule, NbCardModule, NbIconModule, NbSearchModule, NbStepperModule} from '@nebular/theme';
 import {DashboardModule} from '../dashboard/dashboard.module';
 import { UserRoleComponent } from './user-role/user-role.component';
 import {FormInputModule} from '../shared/form-inputs/form-input.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import { UserRoleMainComponent } from './user-role-main/user-role-main.component';
+import {Ng2SmartTableModule} from 'ng2-smart-table';
 
 
 @NgModule({
@@ -23,7 +24,9 @@ import { UserRoleMainComponent } from './user-role-main/user-role-main.component
     NbButtonModule,
     NbStepperModule,
     FormInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NbSearchModule,
+    Ng2SmartTableModule
   ]
 })
 export class UserModule { }

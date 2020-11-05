@@ -17,5 +17,6 @@ export * from './role';
 export * from './roleList';
 export * from './searchFilter';
 export * from './user';
+export * from './userList';
 export * from './userRole';
 export * from './userRoleId';
