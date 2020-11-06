@@ -9,23 +9,24 @@ import {UserRoleMainComponent} from './user-role-main/user-role-main.component';
 const routes: Routes = [
   {
     path: '',
+    data: {roles: ['INV-USR,INV-ROL']},
     component: UserComponent,
     children: [
       {
         path: 'main',
-        data: {roles: ['INV']},
+        data: {roles: ['INV-USR-VW']},
         canActivate: [AuthGuardService],
         component: UserMainComponent,
       },
       {
         path: 'role-main',
-        data: {roles: ['INV']},
+        data: {roles: ['INV-ROL-VW']},
         canActivate: [AuthGuardService],
         component: UserRoleMainComponent,
       },
       {
         path: 'role',
-        data: {roles: ['INV']},
+        data: {roles: ['INV-ROL-CR']},
         canActivate: [AuthGuardService],
         component: UserRoleComponent,
       }

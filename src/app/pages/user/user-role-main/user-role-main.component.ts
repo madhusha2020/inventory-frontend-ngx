@@ -69,6 +69,7 @@ export class UserRoleMainComponent implements OnInit {
     this.roleControllerService.getAllRolesUsingGET().subscribe(response => {
       console.log('Role Data :', response);
       response.roles.forEach(role => {
+        role.name = role.name.replace('_', ' ').toUpperCase();
         this.roles.push(role);
       });
       this.source.load(this.roles);

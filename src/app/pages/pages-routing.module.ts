@@ -19,10 +19,24 @@ const routes: Routes = [{
       component: ECommerceComponent,
     },
     {
-      path: 'iot-dashboard',
-      data: {roles: ['INV']},
-      canActivate: [AuthGuardService],
-      component: DashboardComponent,
+      path: 'customer',
+      loadChildren: () => import('./customer/customer.module')
+        .then(m => m.CustomerModule),
+    },
+    {
+      path: 'employee',
+      loadChildren: () => import('./employee/employee.module')
+        .then(m => m.EmployeeModule),
+    },
+    {
+      path: 'supplier',
+      loadChildren: () => import('./supplier/supplier.module')
+        .then(m => m.SupplierModule),
+    },
+    {
+      path: 'transport',
+      loadChildren: () => import('./transport/transport.module')
+        .then(m => m.TransportModule),
     },
     {
       path: 'user',
@@ -30,9 +44,40 @@ const routes: Routes = [{
         .then(m => m.UserModule),
     },
     {
-      path: 'customer',
-      loadChildren: () => import('./customer/customer.module')
-        .then(m => m.CustomerModule),
+      path: 'item',
+      loadChildren: () => import('./item/item.module')
+        .then(m => m.ItemModule),
+    },
+    {
+      path: 'order',
+      loadChildren: () => import('./order/order.module')
+        .then(m => m.OrderModule),
+    },
+    {
+      path: 'purchase-order',
+      loadChildren: () => import('./purchase-order/purchase-order.module')
+        .then(m => m.PurchaseOrderModule),
+    },
+    {
+      path: 'grn',
+      loadChildren: () => import('./grn/grn.module')
+        .then(m => m.GrnModule),
+    },
+    {
+      path: 'payment',
+      loadChildren: () => import('./payment/payment.module')
+        .then(m => m.PaymentModule),
+    },
+    {
+      path: 'notification',
+      loadChildren: () => import('./notification/notification.module')
+        .then(m => m.NotificationModule),
+    },
+    {
+      path: 'iot-dashboard',
+      data: {roles: ['INV']},
+      canActivate: [AuthGuardService],
+      component: DashboardComponent,
     },
     {
       path: 'layout',

@@ -8,17 +8,18 @@ import {CustomerCreateComponent} from './customer-create/customer-create.compone
 const routes: Routes = [
   {
     path: '',
+    data: {roles: ['INV-CUS']},
     component: CustomerComponent,
     children: [
       {
         path: 'main',
-        data: {roles: ['INV']},
+        data: {roles: ['INV-CUS-VW']},
         canActivate: [AuthGuardService],
         component: CustomerMainComponent,
       },
       {
         path: 'create',
-        data: {roles: ['INV']},
+        data: {roles: ['INV-CUS-CR']},
         canActivate: [AuthGuardService],
         component: CustomerCreateComponent,
       }
