@@ -11,7 +11,7 @@ const routes: Routes = [
     component: SaleComponent,
     children: [
       {
-        path: 'customer-main',
+        path: 'main',
         data: {roles: ['INV-SLE-VW']},
         canActivate: [AuthGuardService],
         component: SaleMainComponent,
