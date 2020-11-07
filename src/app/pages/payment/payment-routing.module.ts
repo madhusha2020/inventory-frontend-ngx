@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {AuthGuardService} from '../../service/auth/auth-guard.service';
-import {PaymentMainComponent} from './payment-main/payment-main.component';
 import {PaymentComponent} from './payment.component';
+import {PaymentSupplierMainComponent} from './payment-supplier-main/payment-supplier-main.component';
+import {PaymentCustomerMainComponent} from './payment-customer-main/payment-customer-main.component';
 
 const routes: Routes = [
   {
@@ -11,10 +12,16 @@ const routes: Routes = [
     component: PaymentComponent,
     children: [
       {
-        path: 'main',
-        data: {roles: ['INV-PAY-VW']},
+        path: 'customer-main',
+        data: {roles: ['INV-PAY-CUS-VW']},
         canActivate: [AuthGuardService],
-        component: PaymentMainComponent,
+        component: PaymentCustomerMainComponent,
+      },
+      {
+        path: 'supplier-main',
+        data: {roles: ['INV-PAY-SUP-VW']},
+        canActivate: [AuthGuardService],
+        component: PaymentSupplierMainComponent,
       }
     ],
   },

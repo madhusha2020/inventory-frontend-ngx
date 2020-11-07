@@ -9,7 +9,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    data: 'INV-USR,INV-ROL,INV-CUS,INV-SUP,INV-EMP,INV-TRS',
+    data: 'INV-CUS,INV-EMP,INV-SUP,INV-TRS,INV-USR,INV-ROL',
     title: 'PEOPLE',
     group: true,
   },
@@ -111,14 +111,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
-    data: 'INV-ITM',
+    data: 'INV-ITM,INV-INV',
     title: 'INVENTORY',
     group: true,
   },
   {
     data: 'INV-ITM',
     title: 'Chemical',
-    icon: 'cube-outline',
+    icon: 'trash-outline',
     children: [
       {
         data: 'INV-ITM-VW',
@@ -133,9 +133,48 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
-    data: 'INV-ORD,INV-PO,INV-GRN,INV-GRN-RET,INV-GRN-REF',
+    data: 'INV-INV',
+    title: 'Inventory',
+    icon: 'cube-outline',
+    children: [
+      {
+        data: 'INV-INV-VW',
+        title: 'Product Inventory',
+        link: '/pages/inventory/main',
+      },
+      {
+        data: 'INV-INV-IN-VW',
+        title: 'Product Inbounds',
+        link: '/pages/inventory/inbound-main',
+      },
+      {
+        data: 'INV-INV-OUT-VW',
+        title: 'Product Outbounds',
+        link: '/pages/inventory/outbound-main',
+      },
+      {
+        data: 'INV-INV-DIS-VW',
+        title: 'Disposal Products',
+        link: '/pages/inventory/disposal-main',
+      },
+    ]
+  },
+  {
+    data: 'INV-SLE,INV-ORD,INV-PO,INV-GRN,INV-GRN-RET,INV-GRN-REF,INV-PAY',
     title: 'TRANSACTION',
     group: true,
+  },
+  {
+    data: 'INV-SLE',
+    title: 'Sale',
+    icon: 'layers-outline',
+    children: [
+      {
+        data: 'INV-SLE-VW',
+        title: 'Sales',
+        link: '/pages/sale/main',
+      },
+    ]
   },
   {
     data: 'INV-ORD',
@@ -195,7 +234,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         data: 'INV-GRN-RET-VW',
-        title: 'Suppler Returns',
+        title: 'Supplier Returns',
         link: '/pages/grn/return',
       },
       {
@@ -212,7 +251,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         data: 'INV-GRN-REF-VW',
-        title: 'Suppler Refunds',
+        title: 'Supplier Refunds',
         link: '/pages/grn/refund',
       },
       {
@@ -229,13 +268,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         data: 'INV-PAY-VW',
-        title: 'Payments',
-        link: '/pages/payment/main',
+        title: 'Customer Payments',
+        link: '/pages/payment/customer-main',
+      },
+      {
+        data: 'INV-PAY-VW',
+        title: 'Supplier Payments',
+        link: '/pages/payment/supplier-main',
       },
     ]
   },
   {
-    data: 'INV-TEST,INV-NTFY',
+    data: 'INV-TEST,INV-NTFY,INV-COM',
     title: 'MISCELLANEOUS',
     group: true,
   },
@@ -265,6 +309,23 @@ export const MENU_ITEMS: NbMenuItem[] = [
         data: 'INV-NTFY-VW',
         title: 'Notifications',
         link: '/pages/notification/main',
+      },
+    ],
+  },
+  {
+    data: 'INV-COM',
+    title: 'Complain',
+    icon: 'person-remove-outline',
+    children: [
+      {
+        data: 'INV-COM-VW',
+        title: 'Complains',
+        link: '/pages/complain/main',
+      },
+      {
+        data: 'INV-COM-CR',
+        title: 'Create Complain',
+        link: '/pages/complain/create',
       },
     ],
   },

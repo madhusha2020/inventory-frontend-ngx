@@ -49,6 +49,11 @@ const routes: Routes = [{
         .then(m => m.ItemModule),
     },
     {
+      path: 'sale',
+      loadChildren: () => import('./sale/sale.module')
+        .then(m => m.SaleModule),
+    },
+    {
       path: 'order',
       loadChildren: () => import('./order/order.module')
         .then(m => m.OrderModule),
@@ -77,6 +82,11 @@ const routes: Routes = [{
       path: 'notification',
       loadChildren: () => import('./notification/notification.module')
         .then(m => m.NotificationModule),
+    },
+    {
+      path: 'complain',
+      loadChildren: () => import('./complain/complain.module')
+        .then(m => m.ComplainModule),
     },
     {
       path: 'iot-dashboard',
