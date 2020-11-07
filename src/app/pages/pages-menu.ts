@@ -330,6 +330,23 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    data: 'INV-RPT',
+    title: 'REPORTS',
+    group: true,
+  },
+  {
+    data: 'INV-RPT',
+    title: 'Chemical Test',
+    icon: 'file-text-outline',
+    children: [
+      {
+        data: 'INV-RPT-SLE',
+        title: 'Sales Report',
+        link: '/pages/report/sales-report',
+      }
+    ],
+  },
+  {
     data: 'INV',
     title: 'FEATURES',
     group: true,

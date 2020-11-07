@@ -94,6 +94,11 @@ const routes: Routes = [{
         .then(m => m.ComplainModule),
     },
     {
+      path: 'report',
+      loadChildren: () => import('./report/report.module')
+        .then(m => m.ReportModule),
+    },
+    {
       path: 'iot-dashboard',
       data: {roles: ['INV']},
       canActivate: [AuthGuardService],
