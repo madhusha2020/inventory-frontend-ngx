@@ -1,10 +1,10 @@
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
 
-import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ECommerceComponent } from './e-commerce/e-commerce.component';
-import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
+import {PagesComponent} from './pages.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {ECommerceComponent} from './e-commerce/e-commerce.component';
+import {NotFoundComponent} from './miscellaneous/not-found/not-found.component';
 import {AuthGuardService} from '../service/auth/auth-guard.service';
 import {UnauthorizedComponent} from './miscellaneous/unauthorized/unauthorized.component';
 
@@ -67,6 +67,11 @@ const routes: Routes = [{
       path: 'payment',
       loadChildren: () => import('./payment/payment.module')
         .then(m => m.PaymentModule),
+    },
+    {
+      path: 'test',
+      loadChildren: () => import('./chemical-test/chemical-test.module')
+        .then(m => m.ChemicalTestModule),
     },
     {
       path: 'notification',
