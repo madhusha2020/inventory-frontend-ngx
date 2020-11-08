@@ -24,6 +24,7 @@ export interface Item {
     responseCode?: string;
     responseValues?: Array<string>;
     status?: number;
+    statusDescription?: string;
     type?: string;
     userId?: string;
 }

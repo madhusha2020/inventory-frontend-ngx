@@ -4,6 +4,7 @@ import {AuthGuardService} from '../../service/auth/auth-guard.service';
 import {ComplainComponent} from './complain.component';
 import {ComplainMainComponent} from './complain-main/complain-main.component';
 import {ComplainCreateComponent} from './complain-create/complain-create.component';
+import {ComplainViewComponent} from './complain-view/complain-view.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,12 @@ const routes: Routes = [
         data: {roles: ['INV-COM-CR']},
         canActivate: [AuthGuardService],
         component: ComplainCreateComponent,
+      },
+      {
+        path: 'view',
+        data: {roles: ['INV-COM-VW']},
+        canActivate: [AuthGuardService],
+        component: ComplainViewComponent,
       }
     ],
   },

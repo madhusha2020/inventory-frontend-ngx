@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {Customer, CustomerControllerService} from '../../../service/rest';
 import {NbSearchService} from '@nebular/theme';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-customer-main',
@@ -17,22 +16,8 @@ export class CustomerMainComponent implements OnInit {
   customers: Array<Customer> = [];
 
   settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: true,
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
+    hideSubHeader: true,
+    actions: false,
     columns: {
       id: {
         title: 'ID',
@@ -66,31 +51,10 @@ export class CustomerMainComponent implements OnInit {
       },
       type: {
         title: 'Type',
-        editor: {
-          type: 'list',
-          config: {
-            selectText: 'Select',
-            list: [
-              {value: 'New', title: 'New'},
-              {value: 'Regular', title: 'Regular'},
-              {value: 'Loyalty', title: 'Loyalty'},
-            ],
-          },
-        },
         type: 'string',
       },
-      status: {
+      statusDescription: {
         title: 'Status',
-        editor: {
-          type: 'list',
-          config: {
-            selectText: 'Select',
-            list: [
-              {value: '1', title: 'Active'},
-              {value: '10', title: 'Suspend'},
-            ],
-          },
-        },
         type: 'string',
       },
       orderCount: {
@@ -127,47 +91,16 @@ export class CustomerMainComponent implements OnInit {
     this.customerControllerService.getAllCustomersUsingGET(this.offset, this.limit).subscribe(response => {
       console.log('Customer Data :', response);
       response.customers.forEach(customer => {
+        if (customer.status == 1) {
+          customer.statusDescription = 'Active';
+        } else {
+          customer.statusDescription = 'Inactive';
+        }
         customer.orderCount = customer.orders.length;
         this.customers.push(customer);
       });
       this.source.load(this.customers);
     });
-  }
-
-  onCreateConfirm(event): void {
-    console.log('Create :', event);
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Create customer {0}'.replace('{0}', event.newData.name),
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes',
-      cancelButtonText: 'No'
-    }).then((result) => {
-      if (result.value) {
-
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-
-      }
-    });
-  }
-
-  onEditConfirm(event): void {
-    console.log('Edit', event);
-    if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
-  }
-
-  onDeleteConfirm(event): void {
-    console.log('Delete', event);
-    if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
   }
 
   onUserRowSelect(event): void {

@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthGuardService} from '../../service/auth/auth-guard.service';
 import {SaleComponent} from './sale.component';
 import {SaleMainComponent} from './sale-main/sale-main.component';
+import {SaleViewComponent} from './sale-view/sale-view.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,12 @@ const routes: Routes = [
         data: {roles: ['INV-SLE-VW']},
         canActivate: [AuthGuardService],
         component: SaleMainComponent,
+      },
+      {
+        path: 'view',
+        data: {roles: ['INV-SLE-VW']},
+        canActivate: [AuthGuardService],
+        component: SaleViewComponent,
       }
     ],
   },

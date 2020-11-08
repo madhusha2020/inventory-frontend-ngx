@@ -1,18 +1,3 @@
-<!--<div class="row">-->
-<!--  <div class="col-md-3">-->
-<!--    <nb-card>-->
-<!--      <nb-card-body class="button-card">-->
-<!--        <div class="buttons-row">-->
-<!--          <button nbButton size="giant" routerLink="/pages/user/role">-->
-<!--            <nb-icon icon="person-done-outline"></nb-icon>-->
-<!--            Create Role-->
-<!--          </button>-->
-<!--        </div>-->
-<!--      </nb-card-body>-->
-<!--    </nb-card>-->
-<!--  </div>-->
-<!--</div>-->
-
 <nb-card>
   <nb-card-header>
     Role Table
@@ -26,9 +11,7 @@
       <span style="margin-left: 10px;"><button (click)="resetFilter()" nbButton nbTooltip="Clear your search filter"
                                                nbTooltipPlacement="right" nbTooltipStatus="basic" status="basic">Clear Search</button></span>
     </div>
-    <ng2-smart-table (createConfirm)="onCreateConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)"
-                     (editConfirm)="onEditConfirm($event)"
-                     (userRowSelect)="onUserRowSelect($event)" [settings]="settings"
+    <ng2-smart-table (userRowSelect)="onUserRowSelect($event)" [settings]="settings"
                      [source]="source">
     </ng2-smart-table>
   </nb-card-body>

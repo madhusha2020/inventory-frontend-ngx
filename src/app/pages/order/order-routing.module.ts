@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {AuthGuardService} from '../../service/auth/auth-guard.service';
 import {OrderComponent} from './order.component';
 import {OrderMainComponent} from './order-main/order-main.component';
 import {OrderCreateComponent} from './order-create/order-create.component';
+import {OrderViewComponent} from './order-view/order-view.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,13 @@ const routes: Routes = [
         data: {roles: ['INV-ORD-CR']},
         canActivate: [AuthGuardService],
         component: OrderCreateComponent,
-      }
+      },
+      {
+        path: 'view',
+        data: {roles: ['INV-ORD-VW']},
+        canActivate: [AuthGuardService],
+        component: OrderViewComponent,
+      },
     ],
   },
 ];
@@ -31,4 +38,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class OrderRoutingModule { }
+export class OrderRoutingModule {
+}

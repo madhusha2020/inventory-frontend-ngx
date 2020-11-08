@@ -24,6 +24,7 @@ export interface User {
     responseCode?: string;
     responseValues?: Array<string>;
     status?: number;
+    statusDescription?: string;
     token?: string;
     userId?: string;
     userName?: string;

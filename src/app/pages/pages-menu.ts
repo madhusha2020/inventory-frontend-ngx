@@ -186,11 +186,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Orders',
         link: '/pages/order/main',
       },
-      {
-        data: 'INV-ORD-CR',
-        title: 'Place Order',
-        link: '/pages/order/create',
-      },
     ]
   },
   {

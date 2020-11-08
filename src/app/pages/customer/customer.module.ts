@@ -19,13 +19,15 @@ import {
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import { CustomerCreateComponent } from './customer-create/customer-create.component';
 import {FormInputModule} from '../shared/form-inputs/form-input.module';
+import { CustomerViewComponent } from './customer-view/customer-view.component';
 
 
 @NgModule({
   declarations: [
     CustomerMainComponent,
     CustomerComponent,
-    CustomerCreateComponent],
+    CustomerCreateComponent,
+    CustomerViewComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,

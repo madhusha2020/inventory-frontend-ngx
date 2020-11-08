@@ -8,6 +8,9 @@ import {GrnReturnComponent} from './grn-return/grn-return.component';
 import {GrnReturnCreateComponent} from './grn-return-create/grn-return-create.component';
 import {GrnRefundComponent} from './grn-refund/grn-refund.component';
 import {GrnRefundCreateComponent} from './grn-refund-create/grn-refund-create.component';
+import {GrnViewComponent} from './grn-view/grn-view.component';
+import {GrnReturnViewComponent} from './grn-return-view/grn-return-view.component';
+import {GrnRefundViewComponent} from './grn-refund-view/grn-refund-view.component';
 
 const routes: Routes = [
   {
@@ -28,6 +31,12 @@ const routes: Routes = [
         component: GrnCreateComponent,
       },
       {
+        path: 'view',
+        data: {roles: ['INV-GRN-VW']},
+        canActivate: [AuthGuardService],
+        component: GrnViewComponent,
+      },
+      {
         path: 'return',
         data: {roles: ['INV-GRN-RET-VW']},
         canActivate: [AuthGuardService],
@@ -40,6 +49,12 @@ const routes: Routes = [
         component: GrnReturnCreateComponent,
       },
       {
+        path: 'return-view',
+        data: {roles: ['INV-GRN-RET-VW']},
+        canActivate: [AuthGuardService],
+        component: GrnReturnViewComponent,
+      },
+      {
         path: 'refund',
         data: {roles: ['INV-GRN-REF-VW']},
         canActivate: [AuthGuardService],
@@ -50,7 +65,13 @@ const routes: Routes = [
         data: {roles: ['INV-GRN-REF-CR']},
         canActivate: [AuthGuardService],
         component: GrnRefundCreateComponent,
-      }
+      },
+      {
+        path: 'refund-view',
+        data: {roles: ['INV-GRN-REF-VW']},
+        canActivate: [AuthGuardService],
+        component: GrnRefundViewComponent,
+      },
     ],
   },
 ];

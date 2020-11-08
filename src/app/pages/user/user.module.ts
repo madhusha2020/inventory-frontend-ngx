@@ -11,10 +11,12 @@ import {FormInputModule} from '../shared/form-inputs/form-input.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import { UserRoleMainComponent } from './user-role-main/user-role-main.component';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
+import { UserViewComponent } from './user-view/user-view.component';
+import { UserRoleViewComponent } from './user-role-view/user-role-view.component';
 
 
 @NgModule({
-  declarations: [UserMainComponent, UserComponent, UserRoleComponent, UserRoleMainComponent],
+  declarations: [UserMainComponent, UserComponent, UserRoleComponent, UserRoleMainComponent, UserViewComponent, UserRoleViewComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

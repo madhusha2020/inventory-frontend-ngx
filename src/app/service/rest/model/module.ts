@@ -29,6 +29,7 @@ export interface Module {
     responseCode?: string;
     responseValues?: Array<string>;
     status?: number;
+    statusDescription?: string;
     update?: string;
     userId?: string;
 }

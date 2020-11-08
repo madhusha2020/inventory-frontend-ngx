@@ -5,6 +5,7 @@ import {ItemComponent} from './item.component';
 import {ItemMainComponent} from './item-main/item-main.component';
 import {ItemCreateComponent} from './item-create/item-create.component';
 import {ItemDisposeComponent} from './item-dispose/item-dispose.component';
+import {ItemViewComponent} from './item-view/item-view.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,12 @@ const routes: Routes = [
         data: {roles: ['INV-ITM-CR']},
         canActivate: [AuthGuardService],
         component: ItemCreateComponent,
+      },
+      {
+        path: 'view',
+        data: {roles: ['INV-ITM-VW']},
+        canActivate: [AuthGuardService],
+        component: ItemViewComponent,
       },
       {
         path: 'dispose',

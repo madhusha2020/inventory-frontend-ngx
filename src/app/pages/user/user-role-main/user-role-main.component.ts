@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Role, RoleControllerService} from '../../../service/rest';
 import {LocalDataSource} from 'ng2-smart-table';
 import {NbSearchService} from '@nebular/theme';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-user-role-main',
@@ -14,32 +13,16 @@ export class UserRoleMainComponent implements OnInit {
   roles: Array<Role> = [];
 
   settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: true,
-    },
-    edit: {
-      editButtonContent: '<i class="nb-edit"></i>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmSave: true,
-    },
-    delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
-    },
+    hideSubHeader: true,
+    actions: false,
     columns: {
       name: {
         title: 'Name',
         type: 'string',
       },
-      status: {
+      statusDescription: {
         title: 'Status',
         type: 'string',
-        addable: false,
-        editable: false,
       }
     },
   };
@@ -69,47 +52,16 @@ export class UserRoleMainComponent implements OnInit {
     this.roleControllerService.getAllRolesUsingGET().subscribe(response => {
       console.log('Role Data :', response);
       response.roles.forEach(role => {
+        if (role.status == 1) {
+          role.statusDescription = 'Active';
+        } else {
+          role.statusDescription = 'Inactive';
+        }
         role.name = role.name.replace('_', ' ').toUpperCase();
         this.roles.push(role);
       });
       this.source.load(this.roles);
     });
-  }
-
-  onCreateConfirm(event): void {
-    console.log('Create :', event);
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Create role {0}'.replace('{0}', event.newData.name),
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes',
-      cancelButtonText: 'No'
-    }).then((result) => {
-      if (result.value) {
-
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-
-      }
-    });
-  }
-
-  onEditConfirm(event): void {
-    console.log('Edit', event);
-    if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
-  }
-
-  onDeleteConfirm(event): void {
-    console.log('Delete', event);
-    if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
   }
 
   onUserRowSelect(event): void {

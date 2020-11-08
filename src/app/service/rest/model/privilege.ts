@@ -30,6 +30,7 @@ export interface Privilege {
     responseValues?: Array<string>;
     role?: Role;
     status?: number;
+    statusDescription?: string;
     update?: string;
     userId?: string;
 }

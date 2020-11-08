@@ -4,6 +4,7 @@ import {CustomerMainComponent} from './customer-main/customer-main.component';
 import {CustomerComponent} from './customer.component';
 import {AuthGuardService} from '../../service/auth/auth-guard.service';
 import {CustomerCreateComponent} from './customer-create/customer-create.component';
+import {CustomerViewComponent} from './customer-view/customer-view.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,13 @@ const routes: Routes = [
         data: {roles: ['INV-CUS-CR']},
         canActivate: [AuthGuardService],
         component: CustomerCreateComponent,
-      }
+      },
+      {
+        path: 'view',
+        data: {roles: ['INV-CUS-VW']},
+        canActivate: [AuthGuardService],
+        component: CustomerViewComponent,
+      },
     ],
   },
 ];

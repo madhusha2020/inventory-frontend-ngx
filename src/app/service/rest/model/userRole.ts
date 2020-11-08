@@ -24,6 +24,7 @@ export interface UserRole {
     responseValues?: Array<string>;
     role?: Role;
     status?: number;
+    statusDescription?: string;
     user?: User;
     userId?: string;
     userRoleId?: UserRoleId;

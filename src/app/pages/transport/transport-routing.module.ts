@@ -4,6 +4,7 @@ import {AuthGuardService} from '../../service/auth/auth-guard.service';
 import {TransportComponent} from './transport.component';
 import {TransportMainComponent} from './transport-main/transport-main.component';
 import {TransportCreateComponent} from './transport-create/transport-create.component';
+import {TransportViewComponent} from './transport-view/transport-view.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,12 @@ const routes: Routes = [
         data: {roles: ['INV-TRS-CR']},
         canActivate: [AuthGuardService],
         component: TransportCreateComponent,
+      },
+      {
+        path: 'view',
+        data: {roles: ['INV-TRS-VW']},
+        canActivate: [AuthGuardService],
+        component: TransportViewComponent,
       }
     ],
   },

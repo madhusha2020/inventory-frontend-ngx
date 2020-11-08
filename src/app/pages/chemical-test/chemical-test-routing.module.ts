@@ -4,6 +4,7 @@ import {AuthGuardService} from '../../service/auth/auth-guard.service';
 import {ChemicalTestComponent} from './chemical-test.component';
 import {ChemicalTestMainComponent} from './chemical-test-main/chemical-test-main.component';
 import {ChemicalTestCreateComponent} from './chemical-test-create/chemical-test-create.component';
+import {ChemicalTestViewComponent} from './chemical-test-view/chemical-test-view.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,12 @@ const routes: Routes = [
         data: {roles: ['INV-TEST-CR']},
         canActivate: [AuthGuardService],
         component: ChemicalTestCreateComponent,
+      },
+      {
+        path: 'view',
+        data: {roles: ['INV-TEST-VW']},
+        canActivate: [AuthGuardService],
+        component: ChemicalTestViewComponent,
       }
     ],
   },

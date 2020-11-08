@@ -11,9 +11,7 @@
       <span style="margin-left: 10px;"><button (click)="resetFilter()" nbButton nbTooltip="Clear your search filter"
                                                nbTooltipPlacement="right" nbTooltipStatus="basic" status="basic">Clear Search</button></span>
     </div>
-    <ng2-smart-table (createConfirm)="onCreateConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)"
-                     (editConfirm)="onEditConfirm($event)"
-                     (userRowSelect)="onUserRowSelect($event)" [settings]="settings"
+    <ng2-smart-table (userRowSelect)="onUserRowSelect($event)" [settings]="settings"
                      [source]="source">
     </ng2-smart-table>
   </nb-card-body>

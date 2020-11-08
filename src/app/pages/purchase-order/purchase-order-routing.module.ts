@@ -4,6 +4,7 @@ import {AuthGuardService} from '../../service/auth/auth-guard.service';
 import {PurchaseOrderComponent} from './purchase-order.component';
 import {PurchaseOrderMainComponent} from './purchase-order-main/purchase-order-main.component';
 import {PurchaseOrderCreateComponent} from './purchase-order-create/purchase-order-create.component';
+import {PurchaseOrderViewComponent} from './purchase-order-view/purchase-order-view.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,12 @@ const routes: Routes = [
         data: {roles: ['INV-PO-CR']},
         canActivate: [AuthGuardService],
         component: PurchaseOrderCreateComponent,
+      },
+      {
+        path: 'view',
+        data: {roles: ['INV-PO-VW']},
+        canActivate: [AuthGuardService],
+        component: PurchaseOrderViewComponent,
       }
     ],
   },

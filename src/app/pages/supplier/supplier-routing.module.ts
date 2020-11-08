@@ -4,6 +4,7 @@ import {AuthGuardService} from '../../service/auth/auth-guard.service';
 import {SupplierComponent} from './suppler.component';
 import {SupplierMainComponent} from './supplier-main/supplier-main.component';
 import {SupplierCreateComponent} from './supplier-create/supplier-create.component';
+import {SupplierViewComponent} from './supplier-view/supplier-view.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,12 @@ const routes: Routes = [
         data: {roles: ['INV-SUP-CR']},
         canActivate: [AuthGuardService],
         component: SupplierCreateComponent,
+      },
+      {
+        path: 'view',
+        data: {roles: ['INV-SUP-VW']},
+        canActivate: [AuthGuardService],
+        component: SupplierViewComponent,
       }
     ],
   },

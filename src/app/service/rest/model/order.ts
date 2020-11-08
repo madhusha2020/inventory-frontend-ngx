@@ -25,5 +25,6 @@ export interface Order {
     responseCode?: string;
     responseValues?: Array<string>;
     status?: number;
+    statusDescription?: string;
     userId?: string;
 }
