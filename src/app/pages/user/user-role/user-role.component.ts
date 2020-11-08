@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Module, Privilege, Role, RoleControllerService} from '../../../service/rest';
 import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-user-role',
@@ -57,9 +58,23 @@ export class UserRoleComponent implements OnInit {
     this.role.name.replace(' ', '_').toUpperCase();
     console.log('Submit Data :', this.role);
 
-    this.roleControllerService.saveUserRoleUsingPOST(this.role).subscribe(response => {
-      console.log('Saved Role :', response);
-      this.router.navigate(['/pages/user/role-main']);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Create role : {0}'.replace('{0}', this.role.name),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.role.name = this.role.name.replace(' ', '_').toUpperCase();
+        this.roleControllerService.saveUserRoleUsingPOST(this.role).subscribe(response => {
+          console.log('Saved Role :', response);
+          this.router.navigate(['/pages/user/role-main']);
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // Canceled
+      }
     });
   }
 

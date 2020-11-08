@@ -4,6 +4,7 @@ import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
 import {Customer, CustomerUser, Role, RoleControllerService, User, UserControllerService} from '../../../service/rest';
 import {ServiceUtil} from '../../../service/util/service-util';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-customer-create',
@@ -120,9 +121,23 @@ export class CustomerCreateComponent implements OnInit {
     this.customerUser.customer = this.customer;
 
     console.log('Customer User : ', this.customerUser);
-    this.userControllerService.saveCustomerUsingPOST3(this.customerUser).subscribe(response => {
-      console.log('Saved Customer :', response);
-      this.router.navigate(['/pages/customer/main']);
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Create customer : {0}'.replace('{0}', this.customer.name),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.userControllerService.saveCustomerUsingPOST3(this.customerUser).subscribe(response => {
+          console.log('Saved Customer :', response);
+          this.router.navigate(['/pages/customer/main']);
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Canceled
+      }
     });
   }
 }

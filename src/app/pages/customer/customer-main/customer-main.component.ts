@@ -19,12 +19,6 @@ export class CustomerMainComponent implements OnInit {
     hideSubHeader: true,
     actions: false,
     columns: {
-      id: {
-        title: 'ID',
-        type: 'number',
-        addable: false,
-        editable: false,
-      },
       name: {
         title: 'Name',
         type: 'string',
