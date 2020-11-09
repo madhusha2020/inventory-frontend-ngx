@@ -115,53 +115,6 @@ export class CustomerControllerService {
     }
 
     /**
-     * Save customer
-     * 
-     * @param customer customer
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public saveCustomerUsingPOST(customer: Customer, observe?: 'body', reportProgress?: boolean): Observable<Customer>;
-    public saveCustomerUsingPOST(customer: Customer, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Customer>>;
-    public saveCustomerUsingPOST(customer: Customer, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Customer>>;
-    public saveCustomerUsingPOST(customer: Customer, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (customer === null || customer === undefined) {
-            throw new Error('Required parameter customer was null or undefined when calling saveCustomerUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<Customer>(`${this.basePath}/customer`,
-            customer,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Search customers
      * 
      * @param searchFilter searchFilter

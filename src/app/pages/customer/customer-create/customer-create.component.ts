@@ -131,7 +131,7 @@ export class CustomerCreateComponent implements OnInit {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
-        this.userControllerService.saveCustomerUsingPOST3(this.customerUser).subscribe(response => {
+        this.userControllerService.saveCustomerUsingPOST2(this.customerUser).subscribe(response => {
           console.log('Saved Customer :', response);
           this.router.navigate(['/pages/customer/main']);
         });

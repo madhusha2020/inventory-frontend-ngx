@@ -121,13 +121,13 @@ export class ItemControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public saveCustomerUsingPOST1(item: Item, observe?: 'body', reportProgress?: boolean): Observable<Item>;
-    public saveCustomerUsingPOST1(item: Item, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Item>>;
-    public saveCustomerUsingPOST1(item: Item, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Item>>;
-    public saveCustomerUsingPOST1(item: Item, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveCustomerUsingPOST(item: Item, observe?: 'body', reportProgress?: boolean): Observable<Item>;
+    public saveCustomerUsingPOST(item: Item, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Item>>;
+    public saveCustomerUsingPOST(item: Item, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Item>>;
+    public saveCustomerUsingPOST(item: Item, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (item === null || item === undefined) {
-            throw new Error('Required parameter item was null or undefined when calling saveCustomerUsingPOST1.');
+            throw new Error('Required parameter item was null or undefined when calling saveCustomerUsingPOST.');
         }
 
         let headers = this.defaultHeaders;

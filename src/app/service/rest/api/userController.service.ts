@@ -19,6 +19,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs/Observable';
 
 import { CustomerUser } from '../model/customerUser';
+import { EmployeeUser } from '../model/employeeUser';
 import { UserList } from '../model/userList';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -101,13 +102,13 @@ export class UserControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public saveCustomerUsingPOST3(customerUser: CustomerUser, observe?: 'body', reportProgress?: boolean): Observable<CustomerUser>;
-    public saveCustomerUsingPOST3(customerUser: CustomerUser, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerUser>>;
-    public saveCustomerUsingPOST3(customerUser: CustomerUser, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerUser>>;
-    public saveCustomerUsingPOST3(customerUser: CustomerUser, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveCustomerUsingPOST2(customerUser: CustomerUser, observe?: 'body', reportProgress?: boolean): Observable<CustomerUser>;
+    public saveCustomerUsingPOST2(customerUser: CustomerUser, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerUser>>;
+    public saveCustomerUsingPOST2(customerUser: CustomerUser, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerUser>>;
+    public saveCustomerUsingPOST2(customerUser: CustomerUser, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (customerUser === null || customerUser === undefined) {
-            throw new Error('Required parameter customerUser was null or undefined when calling saveCustomerUsingPOST3.');
+            throw new Error('Required parameter customerUser was null or undefined when calling saveCustomerUsingPOST2.');
         }
 
         let headers = this.defaultHeaders;
@@ -132,6 +133,53 @@ export class UserControllerService {
 
         return this.httpClient.post<CustomerUser>(`${this.basePath}/user/customer`,
             customerUser,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Save employee
+     * 
+     * @param employeeUser employeeUser
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public saveEmployeeUsingPOST(employeeUser: EmployeeUser, observe?: 'body', reportProgress?: boolean): Observable<EmployeeUser>;
+    public saveEmployeeUsingPOST(employeeUser: EmployeeUser, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<EmployeeUser>>;
+    public saveEmployeeUsingPOST(employeeUser: EmployeeUser, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<EmployeeUser>>;
+    public saveEmployeeUsingPOST(employeeUser: EmployeeUser, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (employeeUser === null || employeeUser === undefined) {
+            throw new Error('Required parameter employeeUser was null or undefined when calling saveEmployeeUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<EmployeeUser>(`${this.basePath}/user/employee`,
+            employeeUser,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

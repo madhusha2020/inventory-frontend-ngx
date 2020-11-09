@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
 import {CustomerRoutingModule} from './customer-routing.module';
 import {CustomerMainComponent} from './customer-main/customer-main.component';
 import {CustomerComponent} from './customer.component';
@@ -17,10 +16,9 @@ import {
   NbUserModule,
 } from '@nebular/theme';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
-import { CustomerCreateComponent } from './customer-create/customer-create.component';
 import {FormInputModule} from '../shared/form-inputs/form-input.module';
-import { CustomerViewComponent } from './customer-view/customer-view.component';
-
+import {CustomerCreateComponent} from './customer-create/customer-create.component';
+import {CustomerViewComponent} from './customer-view/customer-view.component';
 
 @NgModule({
   declarations: [
