@@ -1,17 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Customer, CustomerUser, Role, RoleControllerService, User, UserControllerService} from '../../../service/rest';
 import {ServiceUtil} from '../../../service/util/service-util';
 import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
-import Swal from 'sweetalert2';
+import {ImageUploadDefaultComponent} from '../../shared/form-inputs/image-upload-default/image-upload-default.component';
 
 @Component({
   selector: 'ngx-employee-create',
   templateUrl: './employee-create.component.html',
-  styleUrls: ['./employee-create.component.scss']
+  styleUrls: ['./employee-create.component.scss'],
 })
-export class EmployeeCreateComponent implements OnInit {
+export class EmployeeCreateComponent implements OnInit, AfterViewInit {
 
   id: string;
   customerForm: FormGroup;
@@ -28,6 +28,10 @@ export class EmployeeCreateComponent implements OnInit {
               private userControllerService: UserControllerService,
               private tokenService: TokenService,
               private router: Router) {
+  }
+
+  ngAfterViewInit(): void {
+    console.log('View Child :', this.imageUploadDefaultComponent);
   }
 
   get name() {
@@ -118,12 +122,14 @@ export class EmployeeCreateComponent implements OnInit {
 
     console.log('Customer User : ', this.customerUser);
 
-    this.userControllerService.saveCustomerUsingPOST2(this.customerUser).subscribe(response => {
-      console.log('Saved Customer :', response);
-      // Swal.fire('Success', 'Customer successfully created', 'success').then(value => {
-      //   this.router.navigate(['/pages/employee/main']);
-      // });
-    });
+    this.imageUploadDefaultComponent.onUpload('Employee', '1', 'created', '/pages/employee/main');
+
+    // this.userControllerService.saveCustomerUsingPOST2(this.customerUser).subscribe(response => {
+    //   console.log('Saved Customer :', response);
+    // Swal.fire('Success', 'Customer successfully created', 'success').then(value => {
+    //   this.router.navigate(['/pages/employee/main']);
+    // });
+    // });
 
     // Swal.fire({
     //   title: 'Are you sure?',

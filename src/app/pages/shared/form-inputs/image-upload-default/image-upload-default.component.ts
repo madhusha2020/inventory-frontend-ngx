@@ -10,11 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class ImageUploadDefaultComponent implements OnInit {
 
-  @Input() id: string;
-  @Input() category: string;
   @Input() image: string;
-  @Input() link: string;
-
   retrievedImage: any;
   selectedFile: any;
   uploadImage: Blob;
@@ -29,18 +25,32 @@ export class ImageUploadDefaultComponent implements OnInit {
     }
   }
 
-  onFileChanged(event) {
+  public onFileChanged(event) {
     this.selectedFile = event.target.files[0];
+    if (event.target.files[0]) {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+
+      reader.onload = onload => {
+        this.retrievedImage = reader.result;
+      };
+    }
   }
 
-  onUpload() {
+  onUpload(category: string, id: string, eventName: string, link: string) {
+
     console.log(this.selectedFile);
     this.uploadImage = this.selectedFile;
-    this.imageUploadControllerService.uploadImageUsingPOST(this.uploadImage, this.category, this.id).subscribe(response => {
+
+    message = '{0} successfully {1}';
+    message.replace('{0}', category);
+    message.replace('{1}', eventName);
+
+    this.imageUploadControllerService.uploadImageUsingPOST(this.uploadImage, category, id).subscribe(response => {
       console.log('Image uploaded :', response);
       this.retrievedImage = 'data:image/jpeg;base64,' + response.photo;
-      Swal.fire('Success', 'Employee successfully created', 'success').then(value => {
-        this.router.navigate([this.link]);
+      Swal.fire('Success', message, 'success').then(value => {
+        this.router.navigate([link]);
       });
     });
   }

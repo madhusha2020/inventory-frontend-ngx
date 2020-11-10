@@ -3,12 +3,13 @@
     <nb-card-body>
       <div class="row">
         <div class="col-lg-12">
-          <form [formGroup]="customerForm" autocomplete="nope">
+          <form (ngSubmit)="submit()" [formGroup]="customerForm" autocomplete="nope" [changing]="changingValue" >
             <nb-stepper orientation="horizontal">
               <nb-step label="Employee details">
                 <h3>Employee Details</h3>
-                <div class="margin">
+                <div class="margin row">
 
+                  <div class="col-md-6">
                     <app-input-default
                       [field]="name" placeholder="Enter full name"
                       title="Full Name"></app-input-default>
@@ -21,6 +22,11 @@
                       [field]="password" [userName]="userName" placeholder="Generated password"
                       prefix="employee"
                       title="Password"></app-input-generated-password-default>
+                  </div>
+
+                  <div class="col-md-6">
+                    <app-image-upload-default></app-image-upload-default>
+                  </div>
 
                 </div>
                 <button disabled nbButton nbStepperNext>prev</button>
@@ -68,23 +74,8 @@
                 </div>
 
                 <button nbButton nbStepperPrevious>prev</button>
-<!--                <button [disabled]="!customerForm.valid" (click)="submit()" nbButton nbStepperNext>next</button>-->
-                <button nbButton nbStepperNext>next</button>
-              </nb-step>
-              <nb-step label="Profile Picture">
-                <h3>Profile Picture</h3>
-
-                <div class="row">
-                  <div class="col-lg-12" style="margin-left: -15px">
-                    <app-image-upload-default
-                      category="employee"
-                      id="253"
-                      link="/pages/employee/main"
-                    ></app-image-upload-default>
-                  </div>
-                </div>
-
-                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>submit</button>
+<!--                [disabled]="!customerForm.valid"-->
               </nb-step>
             </nb-stepper>
           </form>
