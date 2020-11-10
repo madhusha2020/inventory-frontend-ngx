@@ -1,1 +1,95 @@
-<p>employee-create works!</p>
+<div class="steppers-container row">
+  <nb-card class="stepper-card" size="medium">
+    <nb-card-body>
+      <div class="row">
+        <div class="col-lg-12">
+          <form [formGroup]="customerForm" autocomplete="nope">
+            <nb-stepper orientation="horizontal">
+              <nb-step label="Employee details">
+                <h3>Employee Details</h3>
+                <div class="margin">
+
+                    <app-input-default
+                      [field]="name" placeholder="Enter full name"
+                      title="Full Name"></app-input-default>
+
+                    <app-input-default
+                      [field]="userName" placeholder="Enter email"
+                      title="Email"></app-input-default>
+
+                    <app-input-generated-password-default
+                      [field]="password" [userName]="userName" placeholder="Generated password"
+                      prefix="employee"
+                      title="Password"></app-input-generated-password-default>
+
+                </div>
+                <button disabled nbButton nbStepperNext>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </nb-step>
+              <nb-step label="Contact details">
+                <h3>Contact Details</h3>
+                <div class="margin">
+
+                  <app-input-default
+                    [field]="address" placeholder="Enter address"
+                    title="Address"></app-input-default>
+
+                  <app-input-default
+                    [field]="contact1" placeholder="Enter mobile no"
+                    title="Mobile No"></app-input-default>
+
+                  <app-input-default
+                    [field]="contact2" placeholder="Enter telephone no"
+                    title="Telephone No"></app-input-default>
+
+                  <app-input-default
+                    [field]="fax" placeholder="Enter fax no"
+                    title="Fax No"></app-input-default>
+
+                </div>
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </nb-step>
+              <nb-step label="Assign Roles">
+                <h3>Assign Roles</h3>
+
+                <div class="row scroll">
+                  <div *ngFor="let role of roles" class="col-md-12"
+                       style="margin-bottom: 0px; text-align: left;">
+                    <label style="margin-left: 15px">
+                      <input (change)="roleStateChange($event, role)"
+                             [id]="role.name"
+                             [name]="role.name"
+                             type="checkbox">
+                      <span class="box search-check"
+                            style="margin-left: 10px">{{role.name.replace('_', ' ').toUpperCase()}}</span>
+                    </label>
+                  </div>
+                </div>
+
+                <button nbButton nbStepperPrevious>prev</button>
+<!--                <button [disabled]="!customerForm.valid" (click)="submit()" nbButton nbStepperNext>next</button>-->
+                <button nbButton nbStepperNext>next</button>
+              </nb-step>
+              <nb-step label="Profile Picture">
+                <h3>Profile Picture</h3>
+
+                <div class="row">
+                  <div class="col-lg-12" style="margin-left: -15px">
+                    <app-image-upload-default
+                      category="employee"
+                      id="253"
+                      link="/pages/employee/main"
+                    ></app-image-upload-default>
+                  </div>
+                </div>
+
+                <button nbButton nbStepperPrevious>prev</button>
+              </nb-step>
+            </nb-stepper>
+          </form>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

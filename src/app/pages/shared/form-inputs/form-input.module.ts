@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { InputDefaultComponent } from './input-default/input-default.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormValidationModule} from '../form-validations/form-validation.module';
-import {NbInputModule, NbSelectModule} from '@nebular/theme';
+import {NbButtonModule, NbInputModule, NbSelectModule} from '@nebular/theme';
 import { InputComparatorDefaultComponent } from './input-comparator-default/input-comparator-default.component';
 import { InputGeneratedPasswordDefaultComponent } from './input-generated-password-default/input-generated-password-default.component';
+import { ImageUploadDefaultComponent } from './image-upload-default/image-upload-default.component';
 
 
 
@@ -13,19 +14,22 @@ import { InputGeneratedPasswordDefaultComponent } from './input-generated-passwo
   declarations: [
     InputDefaultComponent,
     InputComparatorDefaultComponent,
-    InputGeneratedPasswordDefaultComponent
+    InputGeneratedPasswordDefaultComponent,
+    ImageUploadDefaultComponent
   ],
   exports: [
     InputDefaultComponent,
     InputComparatorDefaultComponent,
-    InputGeneratedPasswordDefaultComponent
+    InputGeneratedPasswordDefaultComponent,
+    ImageUploadDefaultComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormValidationModule,
     NbInputModule,
-    NbSelectModule
+    NbSelectModule,
+    NbButtonModule
   ]
 })
 export class FormInputModule { }
