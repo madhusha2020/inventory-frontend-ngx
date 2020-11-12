@@ -18,7 +18,6 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
-import { Customer } from '../model/customer';
 import { CustomerList } from '../model/customerList';
 import { SearchFilter } from '../model/searchFilter';
 
@@ -172,53 +171,6 @@ export class CustomerControllerService {
             searchFilter,
             {
                 params: queryParameters,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Update customer
-     * 
-     * @param customer customer
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public updateCustomerUsingPUT(customer: Customer, observe?: 'body', reportProgress?: boolean): Observable<Customer>;
-    public updateCustomerUsingPUT(customer: Customer, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Customer>>;
-    public updateCustomerUsingPUT(customer: Customer, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Customer>>;
-    public updateCustomerUsingPUT(customer: Customer, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (customer === null || customer === undefined) {
-            throw new Error('Required parameter customer was null or undefined when calling updateCustomerUsingPUT.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.put<Customer>(`${this.basePath}/customer`,
-            customer,
-            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

@@ -1,13 +1,16 @@
 <div class="container row">
   <div class="col-md-12">
     <div *ngIf=!retrievedImage>
-      <img src="../../../../../assets/images/avatar.jpeg" style="width: 300px; height: 300px">
+      <img [src]="defaultImage" style="width: 300px; height: 300px">
     </div>
     <div *ngIf=retrievedImage>
       <img [src]="retrievedImage" style="width: 300px; height: 300px">
     </div>
   </div>
-  <div class="col-md-12" style="margin-top: 10px">
+  <div class="col-md-12" style="margin-top: 10px" *ngIf="showButton">
     <input (change)="onFileChanged($event)" nbButton type="file">
+  </div>
+  <div class="error-list col-md-12">
+    <div>{{error}}</div>
   </div>
 </div>

@@ -73,7 +73,7 @@ export class UserControllerService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            '*/*'
+            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -86,6 +86,90 @@ export class UserControllerService {
         ];
 
         return this.httpClient.get<UserList>(`${this.basePath}/user`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get customer by id
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getCustomerByIdUsingGET(id: string, observe?: 'body', reportProgress?: boolean): Observable<CustomerUser>;
+    public getCustomerByIdUsingGET(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerUser>>;
+    public getCustomerByIdUsingGET(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerUser>>;
+    public getCustomerByIdUsingGET(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getCustomerByIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<CustomerUser>(`${this.basePath}/user/customer/${encodeURIComponent(String(id))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get employee by id
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getEmployeeByIdUsingGET(id: string, observe?: 'body', reportProgress?: boolean): Observable<CustomerUser>;
+    public getEmployeeByIdUsingGET(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerUser>>;
+    public getEmployeeByIdUsingGET(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerUser>>;
+    public getEmployeeByIdUsingGET(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getEmployeeByIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<CustomerUser>(`${this.basePath}/user/employee/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -179,6 +263,100 @@ export class UserControllerService {
         }
 
         return this.httpClient.post<EmployeeUser>(`${this.basePath}/user/employee`,
+            employeeUser,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update customer
+     * 
+     * @param customerUser customerUser
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateCustomerUsingPUT(customerUser: CustomerUser, observe?: 'body', reportProgress?: boolean): Observable<CustomerUser>;
+    public updateCustomerUsingPUT(customerUser: CustomerUser, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerUser>>;
+    public updateCustomerUsingPUT(customerUser: CustomerUser, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerUser>>;
+    public updateCustomerUsingPUT(customerUser: CustomerUser, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (customerUser === null || customerUser === undefined) {
+            throw new Error('Required parameter customerUser was null or undefined when calling updateCustomerUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<CustomerUser>(`${this.basePath}/user/customer`,
+            customerUser,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update employee
+     * 
+     * @param employeeUser employeeUser
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateEmployeeUsingPUT(employeeUser: EmployeeUser, observe?: 'body', reportProgress?: boolean): Observable<EmployeeUser>;
+    public updateEmployeeUsingPUT(employeeUser: EmployeeUser, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<EmployeeUser>>;
+    public updateEmployeeUsingPUT(employeeUser: EmployeeUser, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<EmployeeUser>>;
+    public updateEmployeeUsingPUT(employeeUser: EmployeeUser, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (employeeUser === null || employeeUser === undefined) {
+            throw new Error('Required parameter employeeUser was null or undefined when calling updateEmployeeUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<EmployeeUser>(`${this.basePath}/user/employee`,
             employeeUser,
             {
                 withCredentials: this.configuration.withCredentials,

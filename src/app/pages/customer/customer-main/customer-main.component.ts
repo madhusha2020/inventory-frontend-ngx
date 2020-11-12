@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import {Customer, CustomerControllerService} from '../../../service/rest';
 import {NbSearchService} from '@nebular/theme';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-customer-main',
@@ -63,7 +64,8 @@ export class CustomerMainComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private customerControllerService: CustomerControllerService,
-              private searchService: NbSearchService) {
+              private searchService: NbSearchService,
+              private router: Router) {
 
     this.searchService.onSearchSubmit()
       .subscribe((data: any) => {
@@ -99,6 +101,7 @@ export class CustomerMainComponent implements OnInit {
 
   onUserRowSelect(event): void {
     console.log(event);
+    this.router.navigate(['/pages/customer/view'], {queryParams: {id: event.data.id}});
   }
 
   resetFilter(): void {

@@ -1,23 +1,31 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Customer, CustomerUser, Role, RoleControllerService, User, UserControllerService} from '../../../service/rest';
+import {
+  Customer,
+  CustomerUser,
+  Employee,
+  Role,
+  RoleControllerService,
+  User,
+  UserControllerService
+} from '../../../service/rest';
 import {ServiceUtil} from '../../../service/util/service-util';
 import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
-import {ImageUploadDefaultComponent} from '../../shared/form-inputs/image-upload-default/image-upload-default.component';
 
 @Component({
   selector: 'ngx-employee-create',
   templateUrl: './employee-create.component.html',
   styleUrls: ['./employee-create.component.scss'],
 })
-export class EmployeeCreateComponent implements OnInit, AfterViewInit {
+export class EmployeeCreateComponent implements OnInit {
 
   id: string;
   customerForm: FormGroup;
   customerUser: CustomerUser = {};
   user: User = {};
   customer: Customer = {};
+  employee: Employee = {};
 
   customerTypes: Array<string> = ServiceUtil.getCustomerTypes();
   roles: Array<Role> = [];
@@ -28,10 +36,6 @@ export class EmployeeCreateComponent implements OnInit, AfterViewInit {
               private userControllerService: UserControllerService,
               private tokenService: TokenService,
               private router: Router) {
-  }
-
-  ngAfterViewInit(): void {
-    console.log('View Child :', this.imageUploadDefaultComponent);
   }
 
   get name() {
@@ -97,6 +101,11 @@ export class EmployeeCreateComponent implements OnInit, AfterViewInit {
     console.log('Assigned Roles :', this.assignedRoles);
   }
 
+  imageUploadEvent(event) {
+    console.log('Employee photo :', event);
+    this.employee.photo = event;
+  }
+
   submit() {
     this.user.userName = this.userName.value;
     this.user.password = this.password.value;
@@ -120,9 +129,7 @@ export class EmployeeCreateComponent implements OnInit, AfterViewInit {
     this.customerUser.user = this.user;
     this.customerUser.customer = this.customer;
 
-    console.log('Customer User : ', this.customerUser);
-
-    this.imageUploadDefaultComponent.onUpload('Employee', '1', 'created', '/pages/employee/main');
+    console.log('Employee User : ', this.employee);
 
     // this.userControllerService.saveCustomerUsingPOST2(this.customerUser).subscribe(response => {
     //   console.log('Saved Customer :', response);

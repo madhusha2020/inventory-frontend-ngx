@@ -1,7 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ImageUploadControllerService} from '../../../../service/rest';
-import {Router} from '@angular/router';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-image-upload-default',
@@ -11,47 +9,52 @@ import Swal from 'sweetalert2';
 export class ImageUploadDefaultComponent implements OnInit {
 
   @Input() image: string;
-  retrievedImage: any;
-  selectedFile: any;
-  uploadImage: Blob;
+  @Input() defaultImage: string;
+  @Input() showButton: boolean;
+  @Output() changeEvent = new EventEmitter<any>();
 
-  constructor(private imageUploadControllerService: ImageUploadControllerService,
-              private router: Router) {
+  retrievedImage: any;
+  uploadImage: Blob;
+  error: string;
+
+  constructor(private imageUploadControllerService: ImageUploadControllerService) {
   }
 
   ngOnInit(): void {
+    this.showButton = true;
     if (this.image) {
       this.retrievedImage = 'data:image/jpeg;base64,' + this.image;
     }
   }
 
-  public onFileChanged(event) {
-    this.selectedFile = event.target.files[0];
-    if (event.target.files[0]) {
+  onFileChanged(event) {
+    this.uploadImage = event.target.files[0];
+
+    if (this.uploadImage && this.validateSize(event)) {
+
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
-
       reader.onload = onload => {
         this.retrievedImage = reader.result;
       };
+
+      this.imageUploadControllerService.convertImageToBase64UsingPOST(this.uploadImage).subscribe(response => {
+        console.log('Converted image :', response);
+        this.changeEvent.emit(response.photo);
+      });
     }
   }
 
-  onUpload(category: string, id: string, eventName: string, link: string) {
-
-    console.log(this.selectedFile);
-    this.uploadImage = this.selectedFile;
-
-    message = '{0} successfully {1}';
-    message.replace('{0}', category);
-    message.replace('{1}', eventName);
-
-    this.imageUploadControllerService.uploadImageUsingPOST(this.uploadImage, category, id).subscribe(response => {
-      console.log('Image uploaded :', response);
-      this.retrievedImage = 'data:image/jpeg;base64,' + response.photo;
-      Swal.fire('Success', message, 'success').then(value => {
-        this.router.navigate([link]);
-      });
-    });
+  validateSize(event): boolean {
+    console.log('File size', event.target.files[0].size);
+    if (event.target.files[0].size <= 1000000) {
+      this.error = null;
+      return true;
+    } else {
+      console.log('File size exceeded');
+      this.retrievedImage = null;
+      this.error = 'File size exceeded';
+      return false;
+    }
   }
 }

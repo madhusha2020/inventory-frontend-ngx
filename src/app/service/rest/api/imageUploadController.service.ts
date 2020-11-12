@@ -11,180 +11,237 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import {Inject, Injectable, Optional} from '@angular/core';
-import {HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
-import {CustomHttpUrlEncodingCodec} from '../encoder';
+import { Inject, Injectable, Optional }                      from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams,
+         HttpResponse, HttpEvent }                           from '@angular/common/http';
+import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
-import {Observable} from 'rxjs/Observable';
+import { Observable }                                        from 'rxjs/Observable';
 
-import {ImageModel} from '../model/imageModel';
+import { ImageModel } from '../model/imageModel';
 
-import {BASE_PATH} from '../variables';
-import {Configuration} from '../configuration';
+import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
+import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
 export class ImageUploadControllerService {
 
-  public defaultHeaders = new HttpHeaders();
-  public configuration = new Configuration();
-  protected basePath = 'https://localhost:8080';
+    protected basePath = 'https://localhost:8080';
+    public defaultHeaders = new HttpHeaders();
+    public configuration = new Configuration();
 
-  constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
-    if (basePath) {
-      this.basePath = basePath;
-    }
-    if (configuration) {
-      this.configuration = configuration;
-      this.basePath = basePath || configuration.basePath || this.basePath;
-    }
-  }
-
-  /**
-   * Get Image
-   *
-   * @param category category
-   * @param id id
-   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-   * @param reportProgress flag to report request and response progress.
-   */
-  public getImageUsingGET(category: string, id: string, observe?: 'body', reportProgress?: boolean): Observable<ImageModel>;
-
-  public getImageUsingGET(category: string, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ImageModel>>;
-
-  public getImageUsingGET(category: string, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ImageModel>>;
-
-  public getImageUsingGET(category: string, id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-
-    if (category === null || category === undefined) {
-      throw new Error('Required parameter category was null or undefined when calling getImageUsingGET.');
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+        if (basePath) {
+            this.basePath = basePath;
+        }
+        if (configuration) {
+            this.configuration = configuration;
+            this.basePath = basePath || configuration.basePath || this.basePath;
+        }
     }
 
-    if (id === null || id === undefined) {
-      throw new Error('Required parameter id was null or undefined when calling getImageUsingGET.');
+    /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (const consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    let headers = this.defaultHeaders;
 
-    // to determine the Accept header
-    let httpHeaderAccepts: string[] = [
-      '*/*'
-    ];
-    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-    if (httpHeaderAcceptSelected != undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
+    /**
+     * Upload Image
+     * 
+     * @param imageFile imageFile
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public convertImageToBase64UsingPOST(imageFile: Blob, observe?: 'body', reportProgress?: boolean): Observable<ImageModel>;
+    public convertImageToBase64UsingPOST(imageFile: Blob, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ImageModel>>;
+    public convertImageToBase64UsingPOST(imageFile: Blob, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ImageModel>>;
+    public convertImageToBase64UsingPOST(imageFile: Blob, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (imageFile === null || imageFile === undefined) {
+            throw new Error('Required parameter imageFile was null or undefined when calling convertImageToBase64UsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'multipart/form-data'
+        ];
+
+        const canConsumeForm = this.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): void | HttpParams; };
+        let useForm = false;
+        let convertFormParamsToString = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        // see https://stackoverflow.com/questions/4007969/application-x-www-form-urlencoded-or-multipart-form-data
+        useForm = canConsumeForm;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        }
+
+        if (imageFile !== undefined) {
+            formParams = formParams.append('imageFile', <any>imageFile) || formParams;
+        }
+
+        return this.httpClient.post<ImageModel>(`${this.basePath}/image/convert`,
+            convertFormParamsToString ? formParams.toString() : formParams,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
-    // to determine the Content-Type header
-    const consumes: string[] = [
-      'application/json'
-    ];
+    /**
+     * Get Image
+     * 
+     * @param category category
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getImageUsingGET(category: string, id: string, observe?: 'body', reportProgress?: boolean): Observable<ImageModel>;
+    public getImageUsingGET(category: string, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ImageModel>>;
+    public getImageUsingGET(category: string, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ImageModel>>;
+    public getImageUsingGET(category: string, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-    return this.httpClient.get<ImageModel>(`${this.basePath}/image/get/${encodeURIComponent(String(category))}/${encodeURIComponent(String(id))}`,
-      {
-        withCredentials: this.configuration.withCredentials,
-        headers: headers,
-        observe: observe,
-        reportProgress: reportProgress
-      }
-    );
-  }
+        if (category === null || category === undefined) {
+            throw new Error('Required parameter category was null or undefined when calling getImageUsingGET.');
+        }
 
-  /**
-   * Upload Image
-   *
-   * @param imageFile imageFile
-   * @param category category
-   * @param id id
-   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-   * @param reportProgress flag to report request and response progress.
-   */
-  public uploadImageUsingPOST(imageFile: Blob, category: string, id: string, observe?: 'body', reportProgress?: boolean): Observable<ImageModel>;
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getImageUsingGET.');
+        }
 
-  public uploadImageUsingPOST(imageFile: Blob, category: string, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ImageModel>>;
+        let headers = this.defaultHeaders;
 
-  public uploadImageUsingPOST(imageFile: Blob, category: string, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ImageModel>>;
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
 
-  public uploadImageUsingPOST(imageFile: Blob, category: string, id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
 
-    if (imageFile === null || imageFile === undefined) {
-      throw new Error('Required parameter imageFile was null or undefined when calling uploadImageUsingPOST.');
+        return this.httpClient.get<ImageModel>(`${this.basePath}/image/get/${encodeURIComponent(String(category))}/${encodeURIComponent(String(id))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
-    if (category === null || category === undefined) {
-      throw new Error('Required parameter category was null or undefined when calling uploadImageUsingPOST.');
+    /**
+     * Upload Image
+     * 
+     * @param imageFile imageFile
+     * @param category category
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public uploadImageUsingPOST(imageFile: Blob, category: string, id: string, observe?: 'body', reportProgress?: boolean): Observable<ImageModel>;
+    public uploadImageUsingPOST(imageFile: Blob, category: string, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ImageModel>>;
+    public uploadImageUsingPOST(imageFile: Blob, category: string, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ImageModel>>;
+    public uploadImageUsingPOST(imageFile: Blob, category: string, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (imageFile === null || imageFile === undefined) {
+            throw new Error('Required parameter imageFile was null or undefined when calling uploadImageUsingPOST.');
+        }
+
+        if (category === null || category === undefined) {
+            throw new Error('Required parameter category was null or undefined when calling uploadImageUsingPOST.');
+        }
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling uploadImageUsingPOST.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (category !== undefined && category !== null) {
+            queryParameters = queryParameters.set('category', <any>category);
+        }
+        if (id !== undefined && id !== null) {
+            queryParameters = queryParameters.set('id', <any>id);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'multipart/form-data'
+        ];
+
+        const canConsumeForm = this.canConsumeForm(consumes);
+
+        let formParams: { append(param: string, value: any): void | HttpParams; };
+        let useForm = false;
+        let convertFormParamsToString = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        // see https://stackoverflow.com/questions/4007969/application-x-www-form-urlencoded-or-multipart-form-data
+        useForm = canConsumeForm;
+        if (useForm) {
+            formParams = new FormData();
+        } else {
+            formParams = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        }
+
+        if (imageFile !== undefined) {
+            formParams = formParams.append('imageFile', <any>imageFile) || formParams;
+        }
+
+        return this.httpClient.post<ImageModel>(`${this.basePath}/image/upload`,
+            convertFormParamsToString ? formParams.toString() : formParams,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
-
-    if (id === null || id === undefined) {
-      throw new Error('Required parameter id was null or undefined when calling uploadImageUsingPOST.');
-    }
-
-    let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-    if (category !== undefined && category !== null) {
-      queryParameters = queryParameters.set('category', <any>category);
-    }
-    if (id !== undefined && id !== null) {
-      queryParameters = queryParameters.set('id', <any>id);
-    }
-
-    let headers = this.defaultHeaders;
-
-    // to determine the Accept header
-    let httpHeaderAccepts: string[] = [
-      '*/*'
-    ];
-    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-    if (httpHeaderAcceptSelected != undefined) {
-      headers = headers.set('Accept', httpHeaderAcceptSelected);
-    }
-
-    // to determine the Content-Type header
-    const consumes: string[] = [
-      'multipart/form-data'
-    ];
-
-    const canConsumeForm = this.canConsumeForm(consumes);
-
-    let formParams: { append(param: string, value: any): void | HttpParams; };
-    let useForm = false;
-    let convertFormParamsToString = false;
-    // use FormData to transmit files using content-type "multipart/form-data"
-    // see https://stackoverflow.com/questions/4007969/application-x-www-form-urlencoded-or-multipart-form-data
-    useForm = canConsumeForm;
-    if (useForm) {
-      formParams = new FormData();
-    } else {
-      formParams = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-    }
-
-    if (imageFile !== undefined) {
-      formParams = formParams.append('imageFile', <any>imageFile) || formParams;
-    }
-
-    return this.httpClient.post<ImageModel>(`${this.basePath}/image/upload`,
-      convertFormParamsToString ? formParams.toString() : formParams,
-      {
-        params: queryParameters,
-        withCredentials: this.configuration.withCredentials,
-        headers: headers,
-        observe: observe,
-        reportProgress: reportProgress
-      }
-    );
-  }
-
-  /**
-   * @param consumes string[] mime-types
-   * @return true: consumes contains 'multipart/form-data', false: otherwise
-   */
-  private canConsumeForm(consumes: string[]): boolean {
-    const form = 'multipart/form-data';
-    for (const consume of consumes) {
-      if (form === consume) {
-        return true;
-      }
-    }
-    return false;
-  }
 
 }

@@ -3,7 +3,7 @@
     <nb-card-body>
       <div class="row">
         <div class="col-lg-12">
-          <form (ngSubmit)="submit()" [formGroup]="customerForm" autocomplete="nope" [changing]="changingValue" >
+          <form (ngSubmit)="submit()" [formGroup]="customerForm">
             <nb-stepper orientation="horizontal">
               <nb-step label="Employee details">
                 <h3>Employee Details</h3>
@@ -25,7 +25,9 @@
                   </div>
 
                   <div class="col-md-6">
-                    <app-image-upload-default></app-image-upload-default>
+                    <app-image-upload-default (changeEvent)="imageUploadEvent($event)"
+                                              defaultImage="../../../../../assets/images/avatar.jpeg">
+                    </app-image-upload-default>
                   </div>
 
                 </div>
@@ -75,7 +77,7 @@
 
                 <button nbButton nbStepperPrevious>prev</button>
                 <button nbButton nbStepperNext>submit</button>
-<!--                [disabled]="!customerForm.valid"-->
+                <!--                [disabled]="!customerForm.valid"-->
               </nb-step>
             </nb-stepper>
           </form>
