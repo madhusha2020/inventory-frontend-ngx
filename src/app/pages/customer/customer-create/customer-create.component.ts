@@ -128,23 +128,5 @@ export class CustomerCreateComponent implements OnInit {
         this.router.navigate(['/pages/customer/main']);
       });
     });
-
-    // Swal.fire({
-    //   title: 'Are you sure?',
-    //   text: 'Create customer : {0}'.replace('{0}', this.customer.name),
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonText: 'Yes',
-    //   cancelButtonText: 'No'
-    // }).then((result) => {
-    //   if (result.value) {
-    //     this.userControllerService.saveCustomerUsingPOST2(this.customerUser).subscribe(response => {
-    //       console.log('Saved Customer :', response);
-    //       this.router.navigate(['/pages/customer/main']);
-    //     });
-    //   } else if (result.dismiss === Swal.DismissReason.cancel) {
-    //     // Canceled
-    //   }
-    // });
   }
 }

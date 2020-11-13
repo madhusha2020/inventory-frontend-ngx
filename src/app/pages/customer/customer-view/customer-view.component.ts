@@ -18,11 +18,14 @@ export class CustomerViewComponent implements OnInit {
   title: string;
 
   customerForm: FormGroup;
+  customerPasswordForm: FormGroup;
+
   customerUser: CustomerUser = {};
   user: User = {};
   customer: Customer = {};
 
   customerTypes: Array<string> = ServiceUtil.getCustomerTypes();
+
   roles: Array<Role> = [];
   roleNameList: Array<string> = [];
   assignedRoles: Map<string, Role> = new Map<string, Role>();
@@ -31,7 +34,8 @@ export class CustomerViewComponent implements OnInit {
               private roleControllerService: RoleControllerService,
               private userControllerService: UserControllerService,
               private tokenService: TokenService,
-              private router: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   get name() {
@@ -43,15 +47,15 @@ export class CustomerViewComponent implements OnInit {
   }
 
   get oldPassword() {
-    return this.customerForm.get('oldPassword');
+    return this.customerPasswordForm.get('oldPassword');
   }
 
   get password() {
-    return this.customerForm.get('password');
+    return this.customerPasswordForm.get('password');
   }
 
   get confirmPassword() {
-    return this.customerForm.get('confirmPassword');
+    return this.customerPasswordForm.get('confirmPassword');
   }
 
   get type() {
@@ -76,7 +80,7 @@ export class CustomerViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.editMode = false;
-    this.router.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
         if (params.id) {
           this.fetchCustomer(params.id);
         } else {
@@ -89,14 +93,17 @@ export class CustomerViewComponent implements OnInit {
     this.customerForm = this.formBuilder.group({
       name: [null, [Validators.required]],
       userName: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      oldPassword: [null, [Validators.required, Validators.minLength(8)]],
-      password: [null, [Validators.required, Validators.minLength(8)]],
-      confirmPassword: [null, [Validators.required, Validators.minLength(8)]],
       type: [ServiceUtil.getExternalCustomerType(), [Validators.required]],
       address: [null, [Validators.required]],
       contact1: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
       contact2: [null, [Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
       fax: [null, [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
+    });
+
+    this.customerPasswordForm = this.formBuilder.group({
+      password: [null, [Validators.required, Validators.minLength(8)]],
+      confirmPassword: [null, [Validators.required, Validators.minLength(8)]],
+      oldPassword: [null, [Validators.required, Validators.minLength(8)]],
     });
   }
 
@@ -162,15 +169,63 @@ export class CustomerViewComponent implements OnInit {
     this.setData();
   }
 
-  submit() {
-    console.log('Submit updated customer :');
+  updateCustomerDetails() {
+    this.updateCustomer();
+  }
+
+  updateCustomerPassword() {
+    this.user.password = this.password.value;
+    this.user.oldPassword = this.oldPassword.value;
+    this.updateCustomer();
+  }
+
+  private updateCustomer() {
+    this.user.userId = this.tokenService.getUserName();
+
+    this.customer.name = this.name.value;
+    this.customer.email = this.userName.value;
+    this.customer.address = this.address.value;
+    this.customer.contact1 = this.contact1.value;
+    this.customer.contact2 = this.contact2.value;
+    this.customer.fax = this.fax.value;
+    this.customer.description = ServiceUtil.getUpdateCustomerDescription();
+    this.customer.type = this.type.value;
+    this.customer.userId = this.tokenService.getUserName();
+
+    this.customerUser.roleNameList = new Array<string>();
+    this.assignedRoles.forEach((value, key) => {
+      this.customerUser.roleNameList.push(key);
+    });
+
+    this.customerUser.user = this.user;
+    this.customerUser.customer = this.customer;
+
+    console.log('Customer User : ', this.customerUser);
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Update customer : {0}'.replace('{0}', this.customer.name),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.userControllerService.updateCustomerUsingPUT(this.customerUser).subscribe(response => {
+          console.log('Updated Customer :', response);
+          this.router.navigate(['/pages/customer/main']);
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Canceled
+      }
+    });
   }
 
   suspend() {
-
+    console.log('Suspend customer :');
   }
 
   activate() {
-
+    console.log('Activate customer :');
   }
 }

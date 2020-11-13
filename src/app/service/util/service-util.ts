@@ -12,6 +12,10 @@ export class ServiceUtil {
     return 'Created customer of the system';
   }
 
+  public static getUpdateCustomerDescription(): string {
+    return 'Updated customer of the system';
+  }
+
   public static getExternalCustomerType(): string {
     return 'External';
   }

@@ -7,9 +7,14 @@
 
           <div class="margin">
             <app-input-default
-              [disableProperty]="disabledProperty"
+              [disableProperty]="true"
               [field]="userName" placeholder="Enter email"
               title="Email"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="name" placeholder="Enter full name"
+              title="Full Name"></app-input-default>
 
             <div *ngIf="!editMode">
               <app-input-default
@@ -29,33 +34,21 @@
               </div>
             </div>
 
-            <div *ngIf="editMode">
-              <app-input-default
-                [field]="oldPassword" placeholder="Enter old password" title="Old Password"
-                type="password"></app-input-default>
-            </div>
-
-            <div *ngIf="editMode">
-              <app-input-default
-                [field]="password" placeholder="Enter new password" title="New Password"
-                type="password"></app-input-default>
-            </div>
-
-            <div *ngIf="editMode">
-              <app-input-comparator-default
-                [comparableField]="password" [field]="confirmPassword" placeholder="Enter confirm password"
-                title="Confirm Password" type="password"></app-input-comparator-default>
-            </div>
           </div>
 
           <div class="row" style="margin-left: 0px">
             <div class="col-md-6">
               <button (click)="enableEditMode()" nbButton>Edit</button>
-              <span class="margin"><button (click)="disabledEditMode()" [disabled]="!editMode"
+              <span class="margin"><button (click)="disabledEditMode()"
+                                           [disabled]="!editMode"
                                            nbButton>Cancel</button></span>
             </div>
             <div class="col-md-6">
-              <button (click)="suspend()" [hidden]="customer.status != 1" nbButton style="float: right">Suspend</button>
+              <span (click)="updateCustomerDetails()" *ngIf="editMode"
+                    style="float: right; margin-left: 10px"><button [disabled]="!customerForm.valid"
+                                                                    nbButton>Save</button></span>
+              <span style="float: right"><button (click)="suspend()"
+                                                 [hidden]="customer.status != 1" nbButton>Suspend</button></span>
               <span style="float: right"><button (click)="activate()"
                                                  [hidden]="customer.status == 1" nbButton>Activate</button></span>
             </div>
@@ -66,10 +59,6 @@
           <h3>{{title}} Contact Details</h3>
 
           <div class="margin">
-            <app-input-default
-              [disableProperty]="disabledProperty"
-              [field]="name" placeholder="Enter full name"
-              title="Full Name"></app-input-default>
 
             <app-input-default
               [disableProperty]="disabledProperty"
@@ -90,6 +79,15 @@
               [disableProperty]="disabledProperty"
               [field]="fax" placeholder="Enter fax no"
               title="Fax No"></app-input-default>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <span (click)="updateCustomerDetails()" *ngIf="editMode"
+                    style="float: right"><button [disabled]="!customerForm.valid"
+                                                 nbButton>Save</button></span>
+            </div>
           </div>
 
         </nb-tab>
@@ -112,8 +110,40 @@
             </div>
           </div>
 
-          <div class="margin row">
-            <button (click)="submit()" [disabled]="!editMode || !customerForm.valid" nbButton>Save</button>
+          <div class="row" style="margin-top: 15px">
+            <div class="col-md-12">
+              <span (click)="updateCustomerDetails()" *ngIf="editMode"
+                    style="float: right"><button [disabled]="!customerForm.valid"
+                                                 nbButton>Save</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+        <nb-tab tabTitle="Change Password">
+          <h3>Change Password</h3>
+
+          <div class="margin">
+
+            <app-input-default
+              [field]="password" placeholder="Enter new password" title="New Password"
+              type="password"></app-input-default>
+
+            <app-input-comparator-default
+              [comparableField]="password" [field]="confirmPassword" placeholder="Enter confirm new password"
+              title="Confirm New Password" type="password"></app-input-comparator-default>
+
+            <app-input-default
+              [field]="oldPassword" placeholder="Enter old password" title="Old Password"
+              type="password"></app-input-default>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <span (click)="updateCustomerPassword()" style="float: right"><button
+                [disabled]="!customerPasswordForm.valid"
+                nbButton>Save</button></span>
+            </div>
           </div>
 
         </nb-tab>
