@@ -1,0 +1,11 @@
+<label *ngIf="title" class="form-label">{{title}}</label>
+<div class="form-group">
+  <div [ngClass]="{'form-line':true, 'error': !field.valid && field.touched }">
+    <input [formControl]="field" [placeholder]="placeholder" [type]="type" [attr.disabled]="disableProperty"
+           class="form-control"
+           fullWidth
+           nbInput [nbDatepicker]="picker">
+    <nb-datepicker #picker [min]="minDate" [max]="maxDate"></nb-datepicker>
+  </div>
+  <app-error-list [field]="field"></app-error-list>
+</div>

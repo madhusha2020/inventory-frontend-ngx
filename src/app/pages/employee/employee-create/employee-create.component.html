@@ -3,7 +3,7 @@
     <nb-card-body>
       <div class="row">
         <div class="col-lg-12">
-          <form (ngSubmit)="submit()" [formGroup]="customerForm">
+          <form (ngSubmit)="submit()" [formGroup]="employeeForm">
             <nb-stepper orientation="horizontal">
               <nb-step label="Employee details">
                 <h3>Employee Details</h3>
@@ -11,8 +11,8 @@
 
                   <div class="col-md-6">
                     <app-input-default
-                      [field]="name" placeholder="Enter full name"
-                      title="Full Name"></app-input-default>
+                      [field]="code" placeholder="Enter employee code"
+                      title="Employee Code"></app-input-default>
 
                     <app-input-default
                       [field]="userName" placeholder="Enter email"
@@ -22,6 +22,10 @@
                       [field]="password" [userName]="userName" placeholder="Generated password"
                       prefix="employee"
                       title="Password"></app-input-generated-password-default>
+
+                    <app-input-default
+                      [field]="nic" placeholder="Enter NIC"
+                      title="NIC"></app-input-default>
                   </div>
 
                   <div class="col-md-6">
@@ -34,25 +38,91 @@
                 <button disabled nbButton nbStepperNext>prev</button>
                 <button nbButton nbStepperNext>next</button>
               </nb-step>
+              <nb-step label="Other details">
+                <h3>Other Details</h3>
+                <div class="margin row" style="margin-left: 0px">
+
+                  <div class="col-md-5">
+
+                    <label class="form-label">Title</label>
+                    <div class="form-group">
+                      <nb-select (selectedChange)="nameTitleStateChange($event)" fullWidth placeholder="Select Type"
+                                 selected="Mr">
+                        <nb-option *ngFor="let item of nameTitleTypes" title="{{item}}" value="{{item}}">
+                          {{item}}
+                        </nb-option>
+                      </nb-select>
+                    </div>
+
+                    <app-input-default
+                      [field]="name" placeholder="Enter full name"
+                      title="Full Name"></app-input-default>
+
+                    <label class="form-label">Gender</label>
+                    <div class="form-group">
+                      <nb-select (selectedChange)="genderStateChange($event)" fullWidth placeholder="Select Type"
+                                 selected="Male">
+                        <nb-option *ngFor="let item of genderTypes" title="{{item}}" value="{{item}}">
+                          {{item}}
+                        </nb-option>
+                      </nb-select>
+                    </div>
+
+                  </div>
+                  <div class="col-md-1"></div>
+                  <div class="col-md-5">
+
+                    <label class="form-label">Civil Status</label>
+                    <div class="form-group">
+                      <nb-select (selectedChange)="civilStateChange($event)" fullWidth placeholder="Select Type"
+                                 selected="Single">
+                        <nb-option *ngFor="let item of civilStatusTypes" title="{{item}}" value="{{item}}">
+                          {{item}}
+                        </nb-option>
+                      </nb-select>
+                    </div>
+
+                    <app-input-default
+                      [field]="callingname" placeholder="Enter calling name"
+                      title="Calling Name"></app-input-default>
+
+                    <app-input-date-picker-max-default
+                      [field]="dobirth" placeholder="Select date of birth"
+                      title="Date of birth"></app-input-date-picker-max-default>
+
+                  </div>
+
+                </div>
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </nb-step>
               <nb-step label="Contact details">
                 <h3>Contact Details</h3>
-                <div class="margin">
+                <div class="margin row" style="margin-left: 0px">
 
-                  <app-input-default
-                    [field]="address" placeholder="Enter address"
-                    title="Address"></app-input-default>
+                  <div class="col-md-5">
 
-                  <app-input-default
-                    [field]="contact1" placeholder="Enter mobile no"
-                    title="Mobile No"></app-input-default>
+                    <app-input-default
+                      [field]="address" placeholder="Enter address"
+                      title="Address"></app-input-default>
 
-                  <app-input-default
-                    [field]="contact2" placeholder="Enter telephone no"
-                    title="Telephone No"></app-input-default>
+                    <app-input-default
+                      [field]="mobile" placeholder="Enter mobile no"
+                      title="Mobile No"></app-input-default>
 
-                  <app-input-default
-                    [field]="fax" placeholder="Enter fax no"
-                    title="Fax No"></app-input-default>
+                    <app-input-default
+                      [field]="land" placeholder="Enter telephone no"
+                      title="Telephone No"></app-input-default>
+
+                  </div>
+                  <div class="col-md-1"></div>
+                  <div class="col-md-5">
+
+                    <app-input-date-picker-max-default
+                      [field]="dorecruite" placeholder="Select date of recruited"
+                      title="Date of recruited"></app-input-date-picker-max-default>
+
+                  </div>
 
                 </div>
                 <button nbButton nbStepperPrevious>prev</button>
@@ -76,8 +146,7 @@
                 </div>
 
                 <button nbButton nbStepperPrevious>prev</button>
-                <button nbButton nbStepperNext>submit</button>
-                <!--                [disabled]="!customerForm.valid"-->
+                <button [disabled]="!employeeForm.valid" nbButton nbStepperNext status="success">submit</button>
               </nb-step>
             </nb-stepper>
           </form>

@@ -1,17 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {
-  Customer,
-  CustomerUser,
-  Employee,
-  Role,
-  RoleControllerService,
-  User,
-  UserControllerService
-} from '../../../service/rest';
+import {Employee, EmployeeUser, Role, RoleControllerService, User, UserControllerService} from '../../../service/rest';
 import {ServiceUtil} from '../../../service/util/service-util';
 import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-employee-create',
@@ -20,16 +13,17 @@ import {Router} from '@angular/router';
 })
 export class EmployeeCreateComponent implements OnInit {
 
-  id: string;
-  customerForm: FormGroup;
-  customerUser: CustomerUser = {};
+  employeeForm: FormGroup;
+  employeeUser: EmployeeUser = {};
   user: User = {};
-  customer: Customer = {};
   employee: Employee = {};
 
-  customerTypes: Array<string> = ServiceUtil.getCustomerTypes();
   roles: Array<Role> = [];
   assignedRoles: Map<string, Role> = new Map<string, Role>();
+
+  nameTitleTypes = ServiceUtil.getNameTitlesTypes();
+  genderTypes = ServiceUtil.getGenderTypes();
+  civilStatusTypes = ServiceUtil.getCivilStatusTypes();
 
   constructor(private formBuilder: FormBuilder,
               private roleControllerService: RoleControllerService,
@@ -38,48 +32,78 @@ export class EmployeeCreateComponent implements OnInit {
               private router: Router) {
   }
 
-  get name() {
-    return this.customerForm.get('name');
-  }
-
   get userName() {
-    return this.customerForm.get('userName');
+    return this.employeeForm.get('userName');
   }
 
   get password() {
-    return this.customerForm.get('password');
+    return this.employeeForm.get('password');
   }
 
-  get type() {
-    return this.customerForm.get('type');
+  get code() {
+    return this.employeeForm.get('code');
+  }
+
+  get name() {
+    return this.employeeForm.get('name');
+  }
+
+  get nametitle() {
+    return this.employeeForm.get('nametitle');
+  }
+
+  get gender() {
+    return this.employeeForm.get('gender');
+  }
+
+  get nic() {
+    return this.employeeForm.get('nic');
   }
 
   get address() {
-    return this.customerForm.get('address');
+    return this.employeeForm.get('address');
   }
 
-  get contact1() {
-    return this.customerForm.get('contact1');
+  get mobile() {
+    return this.employeeForm.get('mobile');
   }
 
-  get contact2() {
-    return this.customerForm.get('contact2');
+  get land() {
+    return this.employeeForm.get('land');
   }
 
-  get fax() {
-    return this.customerForm.get('fax');
+  get dobirth() {
+    return this.employeeForm.get('dobirth');
+  }
+
+  get dorecruite() {
+    return this.employeeForm.get('dorecruite');
+  }
+
+  get callingname() {
+    return this.employeeForm.get('callingname');
+  }
+
+  get civilstatus() {
+    return this.employeeForm.get('civilstatus');
   }
 
   ngOnInit(): void {
-    this.customerForm = this.formBuilder.group({
-      name: [null, [Validators.required]],
+    this.employeeForm = this.formBuilder.group({
+      code: [null, [Validators.required]],
       userName: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [null, [Validators.required, Validators.minLength(8)]],
-      type: [ServiceUtil.getExternalCustomerType(), [Validators.required]],
+      nic: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(12)]],
+      nametitle: [ServiceUtil.getMrTitleType(), [Validators.required]],
+      name: [null, [Validators.required]],
+      gender: [ServiceUtil.getMaleGenderType(), [Validators.required]],
       address: [null, [Validators.required]],
-      contact1: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
-      contact2: [null, [Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
-      fax: [null, [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
+      mobile: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
+      land: [null, [Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
+      dobirth: [null, [Validators.required]],
+      dorecruite: [null, [Validators.required]],
+      callingname: [null],
+      civilstatus: [ServiceUtil.getSingleCivilStatusType(), [Validators.required]],
     });
 
     this.fetchRoles();
@@ -90,6 +114,21 @@ export class EmployeeCreateComponent implements OnInit {
       console.log('Roles :', response);
       this.roles = response.roles;
     });
+  }
+
+  nameTitleStateChange(event) {
+    console.log('Employee Title : ', event);
+    this.nametitle.setValue(event);
+  }
+
+  genderStateChange(event) {
+    console.log('Employee Gender : ', event);
+    this.gender.setValue(event);
+  }
+
+  civilStateChange(event) {
+    console.log('Employee Civil Status : ', event);
+    this.civilstatus.setValue(event);
   }
 
   roleStateChange(event, role: Role) {
@@ -111,49 +150,36 @@ export class EmployeeCreateComponent implements OnInit {
     this.user.password = this.password.value;
     this.user.userId = this.tokenService.getUserName();
 
-    this.customer.name = this.name.value;
-    this.customer.email = this.userName.value;
-    this.customer.address = this.address.value;
-    this.customer.contact1 = this.contact1.value;
-    this.customer.contact2 = this.contact2.value;
-    this.customer.fax = this.fax.value;
-    this.customer.description = ServiceUtil.getCreateCustomerDescription();
-    this.customer.type = this.type.value;
-    this.customer.userId = this.tokenService.getUserName();
+    this.employee.code = this.code.value;
+    this.employee.name = this.name.value;
+    this.employee.nametitle = this.nametitle.value;
+    this.employee.gender = this.gender.value;
+    this.employee.nic = this.nic.value;
+    this.employee.address = this.address.value;
+    this.employee.mobile = this.mobile.value;
+    this.employee.land = this.land.value;
+    this.employee.dobirth = this.dobirth.value;
+    this.employee.dorecruite = this.dorecruite.value;
+    this.employee.callingname = this.callingname.value;
+    this.employee.civilstatus = this.civilstatus.value;
+    this.employee.description = ServiceUtil.getCreateEmployeeDescription();
+    this.employee.userId = this.tokenService.getUserName();
 
-    this.customerUser.roleNameList = new Array<string>();
+    this.employeeUser.roleNameList = new Array<string>();
     this.assignedRoles.forEach((value, key) => {
-      this.customerUser.roleNameList.push(key);
+      this.employeeUser.roleNameList.push(key);
     });
 
-    this.customerUser.user = this.user;
-    this.customerUser.customer = this.customer;
+    this.employeeUser.user = this.user;
+    this.employeeUser.employee = this.employee;
 
-    console.log('Employee User : ', this.employee);
+    console.log('Employee User : ', this.employeeUser);
 
-    // this.userControllerService.saveCustomerUsingPOST2(this.customerUser).subscribe(response => {
-    //   console.log('Saved Customer :', response);
-    // Swal.fire('Success', 'Customer successfully created', 'success').then(value => {
-    //   this.router.navigate(['/pages/employee/main']);
-    // });
-    // });
-
-    // Swal.fire({
-    //   title: 'Are you sure?',
-    //   text: 'Create customer : {0}'.replace('{0}', this.customer.name),
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonText: 'Yes',
-    //   cancelButtonText: 'No'
-    // }).then((result) => {
-    //   if (result.value) {
-    //     this.userControllerService.saveCustomerUsingPOST2(this.customerUser).subscribe(response => {
-    //       console.log('Saved Customer :', response);
-    //       this.router.navigate(['/pages/employee/main']);
-    //     });
-    //   } else if (result.dismiss === Swal.DismissReason.cancel) {
-    //     // Canceled
-    //   }
-    // });
+    this.userControllerService.saveEmployeeUsingPOST(this.employeeUser).subscribe(response => {
+      console.log('Saved Employee :', response);
+      Swal.fire('Success', 'Employee successfully created', 'success').then(value => {
+        this.router.navigate(['/pages/employee/main']);
+      });
+    });
   }
 }

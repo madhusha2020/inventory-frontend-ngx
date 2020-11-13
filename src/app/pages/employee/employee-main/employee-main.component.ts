@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Employee, EmployeeControllerService} from '../../../service/rest';
 import {LocalDataSource} from 'ng2-smart-table';
 import {NbSearchService} from '@nebular/theme';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-employee-main',
@@ -73,7 +74,8 @@ export class EmployeeMainComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private employeeControllerService: EmployeeControllerService,
-              private searchService: NbSearchService) {
+              private searchService: NbSearchService,
+              private router: Router) {
 
     this.searchService.onSearchSubmit()
       .subscribe((data: any) => {
@@ -108,6 +110,7 @@ export class EmployeeMainComponent implements OnInit {
 
   onUserRowSelect(event): void {
     console.log(event);
+    this.router.navigate(['/pages/employee/view'], {queryParams: {id: event.data.id}});
   }
 
   resetFilter(): void {
