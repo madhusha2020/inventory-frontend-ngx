@@ -24,7 +24,7 @@
 
                   <label class="form-label">Type</label>
                   <div class="form-group">
-                    <nb-select (selectedChange)="typeStateChange($event)" fullWidth placeholder="Select Type" selected="New">
+                    <nb-select (selectedChange)="typeStateChange($event)" fullWidth placeholder="Select Type" selected="External">
                       <nb-option *ngFor="let item of customerTypes" title="{{item}}" value="{{item}}">
                         {{item}}
                       </nb-option>

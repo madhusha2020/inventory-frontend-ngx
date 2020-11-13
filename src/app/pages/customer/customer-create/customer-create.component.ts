@@ -66,7 +66,7 @@ export class CustomerCreateComponent implements OnInit {
       name: [null, [Validators.required]],
       userName: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [null, [Validators.required, Validators.minLength(8)]],
-      type: [ServiceUtil.getNewCustomerType(), [Validators.required]],
+      type: [ServiceUtil.getExternalCustomerType(), [Validators.required]],
       address: [null, [Validators.required]],
       contact1: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
       contact2: [null, [Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
@@ -122,7 +122,7 @@ export class CustomerCreateComponent implements OnInit {
 
     console.log('Customer User : ', this.customerUser);
 
-    this.userControllerService.saveCustomerUsingPOST2(this.customerUser).subscribe(response => {
+    this.userControllerService.saveCustomerUsingPOST1(this.customerUser).subscribe(response => {
       console.log('Saved Customer :', response);
       Swal.fire('Success', 'Customer successfully created', 'success').then(value => {
         this.router.navigate(['/pages/customer/main']);

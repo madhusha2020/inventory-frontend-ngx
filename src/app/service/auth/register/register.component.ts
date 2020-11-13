@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit {
     this.customer.contact2 = this.contact2.value;
     this.customer.fax = this.fax.value;
     this.customer.description = ServiceUtil.getRegisteredCustomerDescription();
-    this.customer.type = ServiceUtil.getNewCustomerType();
+    this.customer.type = ServiceUtil.getExternalCustomerType();
     this.customer.userId = ServiceUtil.getSystemUser();
 
     this.customerUser.user = this.user;

@@ -3,13 +3,119 @@
     <nb-card size="small">
       <nb-tabset fullWidth>
         <nb-tab tabTitle="Customer Details">
-          <span>Content #1</span>
+          <h3>{{title}} Customer Details</h3>
+
+          <div class="margin">
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="userName" placeholder="Enter email"
+              title="Email"></app-input-default>
+
+            <div *ngIf="!editMode">
+              <app-input-default
+                [disableProperty]="disabledProperty"
+                [field]="type" placeholder="Select Type"
+                title="Type"></app-input-default>
+            </div>
+
+            <div *ngIf="editMode">
+              <label class="form-label">Type</label>
+              <div class="form-group">
+                <nb-select (selectedChange)="typeStateChange($event)" fullWidth placeholder="Select Type">
+                  <nb-option *ngFor="let item of customerTypes" title="{{item}}" value="{{item}}">
+                    {{item}}
+                  </nb-option>
+                </nb-select>
+              </div>
+            </div>
+
+            <div *ngIf="editMode">
+              <app-input-default
+                [field]="oldPassword" placeholder="Enter old password" title="Old Password"
+                type="password"></app-input-default>
+            </div>
+
+            <div *ngIf="editMode">
+              <app-input-default
+                [field]="password" placeholder="Enter new password" title="New Password"
+                type="password"></app-input-default>
+            </div>
+
+            <div *ngIf="editMode">
+              <app-input-comparator-default
+                [comparableField]="password" [field]="confirmPassword" placeholder="Enter confirm password"
+                title="Confirm Password" type="password"></app-input-comparator-default>
+            </div>
+          </div>
+
+          <div class="row" style="margin-left: 0px">
+            <div class="col-md-6">
+              <button (click)="enableEditMode()" nbButton>Edit</button>
+              <span class="margin"><button (click)="disabledEditMode()" [disabled]="!editMode"
+                                           nbButton>Cancel</button></span>
+            </div>
+            <div class="col-md-6">
+              <button (click)="suspend()" [hidden]="customer.status != 1" nbButton style="float: right">Suspend</button>
+              <span style="float: right"><button (click)="activate()"
+                                                 [hidden]="customer.status == 1" nbButton>Activate</button></span>
+            </div>
+          </div>
+
         </nb-tab>
         <nb-tab tabTitle="Contact Details">
-          <span>Content #2</span>
+          <h3>{{title}} Contact Details</h3>
+
+          <div class="margin">
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="name" placeholder="Enter full name"
+              title="Full Name"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="address" placeholder="Enter address"
+              title="Address"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="contact1" placeholder="Enter mobile no"
+              title="Mobile No"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="contact2" placeholder="Enter telephone no"
+              title="Telephone No"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="fax" placeholder="Enter fax no"
+              title="Fax No"></app-input-default>
+          </div>
+
         </nb-tab>
         <nb-tab tabTitle="Assigned Roles">
-          <span>Content #3</span>
+          <h3>{{title}} Assigned Roles</h3>
+
+          <div class="row scroll">
+            <div *ngFor="let role of roles" class="col-md-12"
+                 style="margin-bottom: 0px; text-align: left;">
+              <label style="margin-left: 15px">
+                <input (change)="roleStateChange($event, role)"
+                       [checked]="assignedRoles.has(role.name)"
+                       [disabled]="!editMode"
+                       [id]="role.name"
+                       [name]="role.name"
+                       type="checkbox">
+                <span class="box search-check"
+                      style="margin-left: 10px">{{role.name.replace('_', ' ').toUpperCase()}}</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="margin row">
+            <button (click)="submit()" [disabled]="!editMode || !customerForm.valid" nbButton>Save</button>
+          </div>
+
         </nb-tab>
       </nb-tabset>
     </nb-card>

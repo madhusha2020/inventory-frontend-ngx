@@ -75,7 +75,7 @@ export class EmployeeCreateComponent implements OnInit {
       name: [null, [Validators.required]],
       userName: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [null, [Validators.required, Validators.minLength(8)]],
-      type: [ServiceUtil.getNewCustomerType(), [Validators.required]],
+      type: [ServiceUtil.getExternalCustomerType(), [Validators.required]],
       address: [null, [Validators.required]],
       contact1: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
       contact2: [null, [Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],

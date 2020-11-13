@@ -12,15 +12,14 @@ export class ServiceUtil {
     return 'Created customer of the system';
   }
 
-  public static getNewCustomerType(): string {
-    return 'New';
+  public static getExternalCustomerType(): string {
+    return 'External';
   }
 
   public static getCustomerTypes(): Array<string> {
     const customerTypes: Array<string> = [];
-    customerTypes.push('New');
+    customerTypes.push('External');
     customerTypes.push('Regular');
-    customerTypes.push('Loyalty');
     console.debug('Customer Types: ', customerTypes);
     return customerTypes;
   }

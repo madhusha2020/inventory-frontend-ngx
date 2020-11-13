@@ -58,6 +58,62 @@ export class EmployeeControllerService {
 
 
     /**
+     * View a list of available active employees
+     * 
+     * @param offset The number of items to skip before starting to collect the result set.
+     * @param limit The numbers of items to return.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllActiveEmployeesUsingGET(offset: number, limit: number, observe?: 'body', reportProgress?: boolean): Observable<EmployeeList>;
+    public getAllActiveEmployeesUsingGET(offset: number, limit: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<EmployeeList>>;
+    public getAllActiveEmployeesUsingGET(offset: number, limit: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<EmployeeList>>;
+    public getAllActiveEmployeesUsingGET(offset: number, limit: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (offset === null || offset === undefined) {
+            throw new Error('Required parameter offset was null or undefined when calling getAllActiveEmployeesUsingGET.');
+        }
+
+        if (limit === null || limit === undefined) {
+            throw new Error('Required parameter limit was null or undefined when calling getAllActiveEmployeesUsingGET.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (offset !== undefined && offset !== null) {
+            queryParameters = queryParameters.set('offset', <any>offset);
+        }
+        if (limit !== undefined && limit !== null) {
+            queryParameters = queryParameters.set('limit', <any>limit);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<EmployeeList>(`${this.basePath}/employee/active`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * View a list of available employees
      * 
      * @param offset The number of items to skip before starting to collect the result set.

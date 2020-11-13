@@ -59,7 +59,44 @@ export class UserControllerService {
 
 
     /**
-     * Get All Users
+     * Get all active users
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllActiveUsersUsingGET(observe?: 'body', reportProgress?: boolean): Observable<UserList>;
+    public getAllActiveUsersUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserList>>;
+    public getAllActiveUsersUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserList>>;
+    public getAllActiveUsersUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<UserList>(`${this.basePath}/user/active`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get all users
      * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -186,13 +223,13 @@ export class UserControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public saveCustomerUsingPOST2(customerUser: CustomerUser, observe?: 'body', reportProgress?: boolean): Observable<CustomerUser>;
-    public saveCustomerUsingPOST2(customerUser: CustomerUser, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerUser>>;
-    public saveCustomerUsingPOST2(customerUser: CustomerUser, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerUser>>;
-    public saveCustomerUsingPOST2(customerUser: CustomerUser, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveCustomerUsingPOST1(customerUser: CustomerUser, observe?: 'body', reportProgress?: boolean): Observable<CustomerUser>;
+    public saveCustomerUsingPOST1(customerUser: CustomerUser, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerUser>>;
+    public saveCustomerUsingPOST1(customerUser: CustomerUser, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerUser>>;
+    public saveCustomerUsingPOST1(customerUser: CustomerUser, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (customerUser === null || customerUser === undefined) {
-            throw new Error('Required parameter customerUser was null or undefined when calling saveCustomerUsingPOST2.');
+            throw new Error('Required parameter customerUser was null or undefined when calling saveCustomerUsingPOST1.');
         }
 
         let headers = this.defaultHeaders;

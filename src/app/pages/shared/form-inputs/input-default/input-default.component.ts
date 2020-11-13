@@ -12,6 +12,7 @@ export class InputDefaultComponent implements OnInit {
   @Input() title: string;
   @Input() placeholder: string;
   @Input() field: AbstractControl;
+  @Input() disableProperty: string = null;
 
   constructor() {
   }

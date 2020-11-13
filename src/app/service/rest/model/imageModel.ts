@@ -11,7 +11,7 @@
  */
 
 
-export interface ImageModel {
+export interface ImageModel { 
     description?: string;
     name?: string;
     photo?: Array<string>;

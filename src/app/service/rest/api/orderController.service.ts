@@ -149,13 +149,13 @@ export class OrderControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public saveCustomerUsingPOST1(orderItemsList: OrderItemsList, observe?: 'body', reportProgress?: boolean): Observable<OrderItemsList>;
-    public saveCustomerUsingPOST1(orderItemsList: OrderItemsList, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OrderItemsList>>;
-    public saveCustomerUsingPOST1(orderItemsList: OrderItemsList, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OrderItemsList>>;
-    public saveCustomerUsingPOST1(orderItemsList: OrderItemsList, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public placeOrderUsingPOST(orderItemsList: OrderItemsList, observe?: 'body', reportProgress?: boolean): Observable<OrderItemsList>;
+    public placeOrderUsingPOST(orderItemsList: OrderItemsList, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OrderItemsList>>;
+    public placeOrderUsingPOST(orderItemsList: OrderItemsList, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OrderItemsList>>;
+    public placeOrderUsingPOST(orderItemsList: OrderItemsList, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (orderItemsList === null || orderItemsList === undefined) {
-            throw new Error('Required parameter orderItemsList was null or undefined when calling saveCustomerUsingPOST1.');
+            throw new Error('Required parameter orderItemsList was null or undefined when calling placeOrderUsingPOST.');
         }
 
         let headers = this.defaultHeaders;
