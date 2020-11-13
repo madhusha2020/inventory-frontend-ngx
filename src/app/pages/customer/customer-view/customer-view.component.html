@@ -38,19 +38,19 @@
 
           <div class="row" style="margin-left: 0px">
             <div class="col-md-6">
-              <button (click)="enableEditMode()" nbButton>Edit</button>
+              <button (click)="enableEditMode()" nbButton status="warning">Edit</button>
               <span class="margin"><button (click)="disabledEditMode()"
                                            [disabled]="!editMode"
                                            nbButton>Cancel</button></span>
             </div>
             <div class="col-md-6">
               <span (click)="updateCustomerDetails()" *ngIf="editMode"
-                    style="float: right; margin-left: 10px"><button [disabled]="!customerForm.valid"
-                                                                    nbButton>Save</button></span>
-              <span style="float: right"><button (click)="suspend()"
-                                                 [hidden]="customer.status != 1" nbButton>Suspend</button></span>
-              <span style="float: right"><button (click)="activate()"
-                                                 [hidden]="customer.status == 1" nbButton>Activate</button></span>
+                    style="float: right; margin-left: 10px"><button [disabled]="!customerForm.valid" nbButton
+                                                                    status="info">Save</button></span>
+              <span style="float: right"><button (click)="suspend()" [hidden]="customer.status != 1"
+                                                 nbButton status="danger">Suspend</button></span>
+              <span style="float: right"><button (click)="activate()" [hidden]="customer.status == 1"
+                                                 nbButton status="success">Activate</button></span>
             </div>
           </div>
 
@@ -85,8 +85,8 @@
           <div class="row">
             <div class="col-md-12">
               <span (click)="updateCustomerDetails()" *ngIf="editMode"
-                    style="float: right"><button [disabled]="!customerForm.valid"
-                                                 nbButton>Save</button></span>
+                    style="float: right"><button [disabled]="!customerForm.valid" nbButton
+                                                 status="info">Save</button></span>
             </div>
           </div>
 
@@ -113,8 +113,8 @@
           <div class="row" style="margin-top: 15px">
             <div class="col-md-12">
               <span (click)="updateCustomerDetails()" *ngIf="editMode"
-                    style="float: right"><button [disabled]="!customerForm.valid"
-                                                 nbButton>Save</button></span>
+                    style="float: right"><button [disabled]="!customerForm.valid" nbButton
+                                                 status="info">Save</button></span>
             </div>
           </div>
 
@@ -140,9 +140,9 @@
 
           <div class="row">
             <div class="col-md-12">
-              <span (click)="updateCustomerPassword()" style="float: right"><button
-                [disabled]="!customerPasswordForm.valid"
-                nbButton>Save</button></span>
+              <span (click)="updateCustomerPassword()" style="float: right"><button [disabled]="!customerPasswordForm.valid"
+                                                                                    nbButton
+                                                                                    status="info">Save</button></span>
             </div>
           </div>
 
