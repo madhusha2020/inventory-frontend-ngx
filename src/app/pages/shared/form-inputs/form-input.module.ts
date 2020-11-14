@@ -9,6 +9,7 @@ import { InputGeneratedPasswordDefaultComponent } from './input-generated-passwo
 import { ImageUploadDefaultComponent } from './image-upload-default/image-upload-default.component';
 import { InputDatePickerDefaultComponent } from './input-date-picker-default/input-date-picker-default.component';
 import { InputDatePickerMaxDefaultComponent } from './input-date-picker-max-default/input-date-picker-max-default.component';
+import { InputDatePickerMaxExceptTodayDefaultComponent } from './input-date-picker-max-except-today-default/input-date-picker-max-except-today-default.component';
 
 
 
@@ -19,16 +20,18 @@ import { InputDatePickerMaxDefaultComponent } from './input-date-picker-max-defa
     InputGeneratedPasswordDefaultComponent,
     ImageUploadDefaultComponent,
     InputDatePickerDefaultComponent,
-    InputDatePickerMaxDefaultComponent
+    InputDatePickerMaxDefaultComponent,
+    InputDatePickerMaxExceptTodayDefaultComponent
   ],
-  exports: [
-    InputDefaultComponent,
-    InputComparatorDefaultComponent,
-    InputGeneratedPasswordDefaultComponent,
-    ImageUploadDefaultComponent,
-    InputDatePickerDefaultComponent,
-    InputDatePickerMaxDefaultComponent
-  ],
+    exports: [
+        InputDefaultComponent,
+        InputComparatorDefaultComponent,
+        InputGeneratedPasswordDefaultComponent,
+        ImageUploadDefaultComponent,
+        InputDatePickerDefaultComponent,
+        InputDatePickerMaxDefaultComponent,
+        InputDatePickerMaxExceptTodayDefaultComponent
+    ],
     imports: [
         CommonModule,
         ReactiveFormsModule,

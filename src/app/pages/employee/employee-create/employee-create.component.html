@@ -9,7 +9,7 @@
                 <h3>Employee Details</h3>
                 <div class="margin row">
 
-                  <div class="col-md-6">
+                  <div class="col-md-5">
                     <app-input-default
                       [field]="code" placeholder="Enter employee code"
                       title="Employee Code"></app-input-default>
@@ -28,7 +28,7 @@
                       title="NIC"></app-input-default>
                   </div>
 
-                  <div class="col-md-6">
+                  <div class="col-md-5">
                     <app-image-upload-default (changeEvent)="imageUploadEvent($event)"
                                               defaultImage="../../../../../assets/images/avatar.jpeg">
                     </app-image-upload-default>
@@ -86,9 +86,9 @@
                       [field]="callingname" placeholder="Enter calling name"
                       title="Calling Name"></app-input-default>
 
-                    <app-input-date-picker-max-default
+                    <app-input-date-picker-max-except-today-default
                       [field]="dobirth" placeholder="Select date of birth"
-                      title="Date of birth"></app-input-date-picker-max-default>
+                      title="Date of birth"></app-input-date-picker-max-except-today-default>
 
                   </div>
 
