@@ -14,6 +14,7 @@ import {User} from '../../../service/rest';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
+  isLoggedIn: boolean;
   userPictureOnly = false;
   user: User = {};
   themes = [
@@ -48,6 +49,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.isLoggedIn = this.tokenService.isLoggedIn();
     this.currentTheme = this.themeService.currentTheme;
     this.user.userName = this.tokenService.getUserName();
 

@@ -7,11 +7,16 @@ import {ECommerceComponent} from './e-commerce/e-commerce.component';
 import {NotFoundComponent} from './miscellaneous/not-found/not-found.component';
 import {AuthGuardService} from '../service/auth/auth-guard.service';
 import {UnauthorizedComponent} from './miscellaneous/unauthorized/unauthorized.component';
+import {ShopComponent} from './shop/shop.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+    {
+      path: 'shop',
+      component: ShopComponent,
+    },
     {
       path: 'dashboard',
       data: {roles: ['INV']},
@@ -156,7 +161,7 @@ const routes: Routes = [{
     },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'shop',
       pathMatch: 'full',
     },
     {

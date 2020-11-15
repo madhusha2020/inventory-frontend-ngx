@@ -9,6 +9,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
+    data: 'INV',
+    title: 'Shop',
+    icon: 'compass-outline',
+    link: '/pages/shop',
+  },
+  {
     data: 'INV-CUS,INV-EMP,INV-SUP,INV-TRS,INV-USR,INV-ROL',
     title: 'PEOPLE',
     group: true,
