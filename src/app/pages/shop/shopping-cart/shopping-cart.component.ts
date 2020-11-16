@@ -12,4 +12,19 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  removeItem() {
+
+  }
+
+  plusQty() {
+
+  }
+
+  minusQty() {
+
+  }
+
+  pay() {
+
+  }
 }

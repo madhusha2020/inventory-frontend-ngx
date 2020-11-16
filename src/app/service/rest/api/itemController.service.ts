@@ -59,6 +59,62 @@ export class ItemControllerService {
 
 
     /**
+     * View a list of available active items
+     * 
+     * @param offset The number of items to skip before starting to collect the result set.
+     * @param limit The numbers of items to return.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllActiveItemsUsingGET(offset: number, limit: number, observe?: 'body', reportProgress?: boolean): Observable<ItemList>;
+    public getAllActiveItemsUsingGET(offset: number, limit: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ItemList>>;
+    public getAllActiveItemsUsingGET(offset: number, limit: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ItemList>>;
+    public getAllActiveItemsUsingGET(offset: number, limit: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (offset === null || offset === undefined) {
+            throw new Error('Required parameter offset was null or undefined when calling getAllActiveItemsUsingGET.');
+        }
+
+        if (limit === null || limit === undefined) {
+            throw new Error('Required parameter limit was null or undefined when calling getAllActiveItemsUsingGET.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (offset !== undefined && offset !== null) {
+            queryParameters = queryParameters.set('offset', <any>offset);
+        }
+        if (limit !== undefined && limit !== null) {
+            queryParameters = queryParameters.set('limit', <any>limit);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<ItemList>(`${this.basePath}/item/active`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * View a list of available items
      * 
      * @param offset The number of items to skip before starting to collect the result set.
@@ -121,13 +177,13 @@ export class ItemControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public saveCustomerUsingPOST(item: Item, observe?: 'body', reportProgress?: boolean): Observable<Item>;
-    public saveCustomerUsingPOST(item: Item, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Item>>;
-    public saveCustomerUsingPOST(item: Item, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Item>>;
-    public saveCustomerUsingPOST(item: Item, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveItemUsingPOST(item: Item, observe?: 'body', reportProgress?: boolean): Observable<Item>;
+    public saveItemUsingPOST(item: Item, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Item>>;
+    public saveItemUsingPOST(item: Item, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Item>>;
+    public saveItemUsingPOST(item: Item, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (item === null || item === undefined) {
-            throw new Error('Required parameter item was null or undefined when calling saveCustomerUsingPOST.');
+            throw new Error('Required parameter item was null or undefined when calling saveItemUsingPOST.');
         }
 
         let headers = this.defaultHeaders;

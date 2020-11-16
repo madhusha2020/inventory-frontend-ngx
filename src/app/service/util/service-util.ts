@@ -73,4 +73,17 @@ export class ServiceUtil {
     console.debug('Civil Status Types: ', civilStatusTypes);
     return civilStatusTypes;
   }
+
+  public static getLowDangerLevel(): string {
+    return 'Low';
+  }
+
+  public static getDangerLevels(): Array<string> {
+    const dangerLevels: Array<string> = [];
+    dangerLevels.push('Low');
+    dangerLevels.push('Medium');
+    dangerLevels.push('High');
+    console.debug('Danger Levels: ', dangerLevels);
+    return dangerLevels;
+  }
 }

@@ -223,13 +223,13 @@ export class UserControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public saveCustomerUsingPOST1(customerUser: CustomerUser, observe?: 'body', reportProgress?: boolean): Observable<CustomerUser>;
-    public saveCustomerUsingPOST1(customerUser: CustomerUser, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerUser>>;
-    public saveCustomerUsingPOST1(customerUser: CustomerUser, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerUser>>;
-    public saveCustomerUsingPOST1(customerUser: CustomerUser, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveCustomerUsingPOST(customerUser: CustomerUser, observe?: 'body', reportProgress?: boolean): Observable<CustomerUser>;
+    public saveCustomerUsingPOST(customerUser: CustomerUser, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerUser>>;
+    public saveCustomerUsingPOST(customerUser: CustomerUser, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerUser>>;
+    public saveCustomerUsingPOST(customerUser: CustomerUser, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (customerUser === null || customerUser === undefined) {
-            throw new Error('Required parameter customerUser was null or undefined when calling saveCustomerUsingPOST1.');
+            throw new Error('Required parameter customerUser was null or undefined when calling saveCustomerUsingPOST.');
         }
 
         let headers = this.defaultHeaders;

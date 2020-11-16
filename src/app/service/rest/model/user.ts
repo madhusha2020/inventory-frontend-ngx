@@ -12,7 +12,7 @@
 import { UserRole } from './userRole';
 
 
-export interface User {
+export interface User { 
     createdby?: string;
     createddate?: Date;
     description?: string;
@@ -20,8 +20,8 @@ export interface User {
     id?: string;
     modifiedby?: string;
     modifieddate?: Date;
-    password?: string;
     oldPassword?: string;
+    password?: string;
     responseCode?: string;
     responseValues?: Array<string>;
     status?: number;

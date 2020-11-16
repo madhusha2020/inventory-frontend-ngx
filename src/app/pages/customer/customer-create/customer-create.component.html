@@ -3,7 +3,7 @@
     <nb-card-body>
       <div class="row">
         <div class="col-lg-12">
-          <form (ngSubmit)="submit()" [formGroup]="customerForm" autocomplete="nope">
+          <form (ngSubmit)="submit()" [formGroup]="customerForm">
             <nb-stepper orientation="horizontal">
               <nb-step label="Customer details">
                 <h3>Customer Details</h3>
@@ -77,7 +77,7 @@
                 </div>
 
                 <button nbButton nbStepperPrevious>prev</button>
-                <button status="success" [disabled]="!customerForm.valid" nbButton>Submit</button>
+                <button style="float: right" status="success" [disabled]="!customerForm.valid" nbButton>Submit</button>
               </nb-step>
             </nb-stepper>
           </form>

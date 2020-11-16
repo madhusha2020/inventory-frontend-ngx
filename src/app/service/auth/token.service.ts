@@ -11,10 +11,7 @@ const helper = new JwtHelperService();
 })
 export class TokenService {
 
-  constructor(
-    private authenticationControllerService: AuthenticationControllerService,
-    private router: Router
-  ) {
+  constructor(private authenticationControllerService: AuthenticationControllerService, private router: Router) {
   }
 
   login(user: User) {
@@ -33,22 +30,6 @@ export class TokenService {
         }
       }
     );
-  }
-
-  private saveTokenData(response) {
-    let decodedToken = helper.decodeToken(response.token);
-
-    console.log('Response : ', response);
-    console.log('Response Uname : ', response.userName);
-    console.log('Response Subject : ', decodedToken.sub);
-    console.log('Response Decoded Token : ', decodedToken);
-    console.log('Response Decoded Token Authorities : ', decodedToken.authorities);
-
-    localStorage.setItem(Constant.TOKEN, response.token);
-    localStorage.setItem(Constant.USER_NAME, response.userName);
-    localStorage.setItem(Constant.AUTHORITIES, decodedToken.authorities);
-
-    this.router.navigate(['/pages/dashboard']);
   }
 
   getAuthorities(): Map<string, number> {
@@ -77,5 +58,21 @@ export class TokenService {
 
   getToken(): string {
     return localStorage.getItem(Constant.TOKEN);
+  }
+
+  private saveTokenData(response) {
+    let decodedToken = helper.decodeToken(response.token);
+
+    console.log('Response : ', response);
+    console.log('Response Uname : ', response.userName);
+    console.log('Response Subject : ', decodedToken.sub);
+    console.log('Response Decoded Token : ', decodedToken);
+    console.log('Response Decoded Token Authorities : ', decodedToken.authorities);
+
+    localStorage.setItem(Constant.TOKEN, response.token);
+    localStorage.setItem(Constant.USER_NAME, response.userName);
+    localStorage.setItem(Constant.AUTHORITIES, decodedToken.authorities);
+
+    this.router.navigate(['/pages/dashboard']);
   }
 }

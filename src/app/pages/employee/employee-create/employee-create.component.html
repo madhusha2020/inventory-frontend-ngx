@@ -28,9 +28,9 @@
                       title="NIC"></app-input-default>
                   </div>
 
-                  <div class="col-md-5">
+                  <div class="col-md-5" style="margin-top: 40px">
                     <app-image-upload-default (changeEvent)="imageUploadEvent($event)"
-                                              defaultImage="../../../../../assets/images/avatar.jpeg">
+                                              defaultImage="../../../../../assets/images/image-placeholder.png">
                     </app-image-upload-default>
                   </div>
 
@@ -146,7 +146,7 @@
                 </div>
 
                 <button nbButton nbStepperPrevious>prev</button>
-                <button [disabled]="!employeeForm.valid" nbButton nbStepperNext status="success">submit</button>
+                <button style="float: right" [disabled]="!employeeForm.valid" nbButton nbStepperNext status="success">submit</button>
               </nb-step>
             </nb-stepper>
           </form>

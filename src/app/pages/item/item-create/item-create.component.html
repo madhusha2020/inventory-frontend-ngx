@@ -1,1 +1,76 @@
-<p>item-create works!</p>
+<div class="steppers-container row">
+  <nb-card class="stepper-card" size="medium">
+    <nb-card-body>
+      <div class="row">
+        <div class="col-lg-12">
+          <form (ngSubmit)="submit()" [formGroup]="itemForm">
+            <nb-stepper orientation="horizontal">
+              <nb-step label="Chemical details">
+                <h3>Chemical Details</h3>
+                <div class="margin row">
+
+                  <div class="col-md-5">
+                    <app-input-default
+                      [field]="code" placeholder="Enter item code"
+                      title="Item Code"></app-input-default>
+
+                    <app-input-default
+                      [field]="name" placeholder="Enter chemical name"
+                      title="Chemical Name"></app-input-default>
+
+                    <app-input-default
+                      [field]="description" placeholder="Enter description"
+                      title="Description"></app-input-default>
+                  </div>
+
+                  <div class="col-md-5" style="margin-top: 40px">
+                    <app-image-upload-default (changeEvent)="imageUploadEvent($event)"
+                                              defaultImage="../../../../../assets/images/image-placeholder.png">
+                    </app-image-upload-default>
+                  </div>
+
+                </div>
+                <button disabled nbButton nbStepperNext>prev</button>
+                <button nbButton nbStepperNext>next</button>
+              </nb-step>
+              <nb-step label="Price details">
+                <h3>Price Details</h3>
+                <div class="margin row">
+
+                  <div class="col-md-5">
+                    <app-input-amount-default
+                      [field]="sprice" placeholder="Enter price"
+                      title="Price"></app-input-amount-default>
+
+                    <app-input-amount-default
+                      [field]="lastprice" placeholder="Enter last price"
+                      title="Last Price"></app-input-amount-default>
+
+                    <label class="form-label">Danger Level</label>
+                    <div class="form-group">
+                      <nb-select (selectedChange)="dangerLevelStateChange($event)" fullWidth placeholder="Select Level"
+                                 selected="Low">
+                        <nb-option *ngFor="let item of dangerLevels" title="{{item}}" value="{{item}}">
+                          {{item}}
+                        </nb-option>
+                      </nb-select>
+                    </div>
+                  </div>
+                  <div class="col-md-1"></div>
+                  <div class="col-md-5">
+                    <app-input-default
+                      [field]="testperiod" placeholder="Enter test periods"
+                      title="Test Periods"></app-input-default>
+                  </div>
+
+                </div>
+                <button nbButton nbStepperPrevious>prev</button>
+                <button style="float: right" [disabled]="!itemForm.valid" nbButton nbStepperNext status="success">submit</button>
+              </nb-step>
+            </nb-stepper>
+          </form>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

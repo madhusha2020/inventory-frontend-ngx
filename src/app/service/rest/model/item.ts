@@ -12,19 +12,26 @@
 import { OrderItems } from './orderItems';
 
 
-export interface Item { 
+export interface Item {
+    code?: string;
     createdby?: string;
     createddate?: Date;
+    dangerlevel?: string;
     description?: string;
     id?: number;
+    lastprice?: number;
     modifiedby?: string;
     modifieddate?: Date;
     name?: string;
     orderItems?: Array<OrderItems>;
+    photo?: Array<string>;
     responseCode?: string;
     responseValues?: Array<string>;
+    sprice?: number;
     status?: number;
     statusDescription?: string;
-    type?: string;
+    testperiod?: number;
     userId?: string;
+    spriceValue?: string;
+    lastpriceValue?: string;
 }

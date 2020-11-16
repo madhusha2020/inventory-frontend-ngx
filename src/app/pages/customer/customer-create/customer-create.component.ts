@@ -122,7 +122,7 @@ export class CustomerCreateComponent implements OnInit {
 
     console.log('Customer User : ', this.customerUser);
 
-    this.userControllerService.saveCustomerUsingPOST1(this.customerUser).subscribe(response => {
+    this.userControllerService.saveCustomerUsingPOST(this.customerUser).subscribe(response => {
       console.log('Saved Customer :', response);
       Swal.fire('Success', 'Customer successfully created', 'success').then(value => {
         this.router.navigate(['/pages/customer/main']);
