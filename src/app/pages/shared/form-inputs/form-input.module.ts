@@ -12,6 +12,7 @@ import {InputDatePickerMaxDefaultComponent} from './input-date-picker-max-defaul
 import {InputDatePickerMaxExceptTodayDefaultComponent} from './input-date-picker-max-except-today-default/input-date-picker-max-except-today-default.component';
 import {InputAmountDefaultComponent} from './input-amount-default/input-amount-default.component';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
+import { InputDatePickerFutureDefaultComponent } from './input-date-picker-future-default/input-date-picker-future-default.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {CurrencyMaskModule} from 'ng2-currency-mask';
     InputDatePickerDefaultComponent,
     InputDatePickerMaxDefaultComponent,
     InputDatePickerMaxExceptTodayDefaultComponent,
-    InputAmountDefaultComponent
+    InputAmountDefaultComponent,
+    InputDatePickerFutureDefaultComponent
   ],
   exports: [
     InputDefaultComponent,
@@ -33,7 +35,8 @@ import {CurrencyMaskModule} from 'ng2-currency-mask';
     InputDatePickerDefaultComponent,
     InputDatePickerMaxDefaultComponent,
     InputDatePickerMaxExceptTodayDefaultComponent,
-    InputAmountDefaultComponent
+    InputAmountDefaultComponent,
+    InputDatePickerFutureDefaultComponent
   ],
   imports: [
     CommonModule,

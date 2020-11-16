@@ -35,37 +35,56 @@
               </nb-step>
               <nb-step label="Price details">
                 <h3>Price Details</h3>
-                <div class="margin row">
+                <div class="margin">
 
-                  <div class="col-md-5">
-                    <app-input-amount-default
-                      [field]="sprice" placeholder="Enter price"
-                      title="Price"></app-input-amount-default>
+                  <app-input-amount-default
+                    [field]="sprice" placeholder="Enter price"
+                    title="Price"></app-input-amount-default>
 
-                    <app-input-amount-default
-                      [field]="lastprice" placeholder="Enter last price"
-                      title="Last Price"></app-input-amount-default>
+                  <app-input-amount-default
+                    [field]="lastprice" placeholder="Enter last price"
+                    title="Last Price"></app-input-amount-default>
 
-                    <label class="form-label">Danger Level</label>
-                    <div class="form-group">
-                      <nb-select (selectedChange)="dangerLevelStateChange($event)" fullWidth placeholder="Select Level"
-                                 selected="Low">
-                        <nb-option *ngFor="let item of dangerLevels" title="{{item}}" value="{{item}}">
-                          {{item}}
-                        </nb-option>
-                      </nb-select>
-                    </div>
+                  <label class="form-label">Danger Level</label>
+                  <div class="form-group">
+                    <nb-select (selectedChange)="dangerLevelStateChange($event)" fullWidth placeholder="Select Level"
+                               selected="Low">
+                      <nb-option *ngFor="let item of dangerLevels" title="{{item}}" value="{{item}}">
+                        {{item}}
+                      </nb-option>
+                    </nb-select>
                   </div>
-                  <div class="col-md-1"></div>
-                  <div class="col-md-5">
-                    <app-input-default
-                      [field]="testperiod" placeholder="Enter test periods"
-                      title="Test Periods"></app-input-default>
-                  </div>
+
+                  <app-input-default
+                    [field]="testperiod" placeholder="Enter test periods"
+                    title="Test Periods"></app-input-default>
 
                 </div>
                 <button nbButton nbStepperPrevious>prev</button>
-                <button style="float: right" [disabled]="!itemForm.valid" nbButton nbStepperNext status="success">submit</button>
+                <button nbButton nbStepperNext>next</button>
+              </nb-step>
+              <nb-step label="Inventory details">
+                <h3>Inventory Details</h3>
+                <div class="margin">
+
+                  <app-input-default
+                    [field]="initqty" placeholder="Enter initial quantity"
+                    title="Initial Quantity"></app-input-default>
+
+                  <app-input-default
+                    [field]="qty" placeholder="Enter quantity"
+                    title="Quantity"></app-input-default>
+
+                  <app-input-date-picker-future-default
+                    [field]="doexpire" placeholder="Select expire date"
+                    title="Expire Date"
+                  ></app-input-date-picker-future-default>
+
+                </div>
+                <button nbButton nbStepperPrevious>prev</button>
+                <button [disabled]="!itemForm.valid" nbButton nbStepperNext status="success" style="float: right">
+                  submit
+                </button>
               </nb-step>
             </nb-stepper>
           </form>

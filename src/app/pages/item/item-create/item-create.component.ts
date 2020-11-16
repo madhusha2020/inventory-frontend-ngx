@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Item, ItemControllerService} from '../../../service/rest';
+import {Inventory, InventoryItem, Item, ItemControllerService} from '../../../service/rest';
 import {ServiceUtil} from '../../../service/util/service-util';
 import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
@@ -14,8 +14,11 @@ import Swal from 'sweetalert2';
 export class ItemCreateComponent implements OnInit {
 
   itemForm: FormGroup;
+
+  inventoryItem: InventoryItem = {};
   item: Item = {};
-  itemPhoto: Array<string>;
+  inventory: Inventory = {};
+
   dangerLevels = ServiceUtil.getDangerLevels();
 
   constructor(private formBuilder: FormBuilder,
@@ -52,6 +55,18 @@ export class ItemCreateComponent implements OnInit {
     return this.itemForm.get('testperiod');
   }
 
+  get initqty() {
+    return this.itemForm.get('initqty');
+  }
+
+  get qty() {
+    return this.itemForm.get('qty');
+  }
+
+  get doexpire() {
+    return this.itemForm.get('doexpire');
+  }
+
   ngOnInit(): void {
     this.itemForm = this.formBuilder.group({
       code: [null, [Validators.required]],
@@ -61,6 +76,9 @@ export class ItemCreateComponent implements OnInit {
       lastprice: [null, [Validators.required]],
       dangerlevel: [ServiceUtil.getLowDangerLevel(), [Validators.required]],
       testperiod: [null],
+      initqty: [null, [Validators.required]],
+      qty: [null, [Validators.required]],
+      doexpire: [null, [Validators.required]],
     });
   }
 
@@ -71,16 +89,33 @@ export class ItemCreateComponent implements OnInit {
 
   imageUploadEvent(event) {
     console.log('Item photo :', event);
-    this.itemPhoto = event;
+    this.item.photo = event;
   }
 
   submit() {
-    this.item = this.itemForm.value;
-    this.item.photo = this.itemPhoto;
-    console.log('Item : ', this.item);
+    this.item.code = this.code.value;
+    this.item.name = this.name.value;
+    this.item.description = this.description.value;
+    this.item.sprice = this.sprice.value;
+    this.item.lastprice = this.lastprice.value;
+    this.item.dangerlevel = this.dangerlevel.value;
+    this.item.testperiod = this.testperiod.value;
+    this.item.userId = this.tokenService.getUserName();
 
-    this.itemControllerService.saveItemUsingPOST(this.item).subscribe(response => {
-      console.log('Saved Item :', response);
+    this.inventory.code = this.code.value;
+    this.inventory.description = this.description.value;
+    this.inventory.initqty = this.initqty.value;
+    this.inventory.qty = this.qty.value;
+    this.inventory.doexpire = this.doexpire.value;
+    this.inventory.userId = this.tokenService.getUserName();
+
+    this.inventoryItem.item = this.item;
+    this.inventoryItem.inventory = this.inventory;
+
+    console.log('InventoryItem : ', this.inventoryItem);
+
+    this.itemControllerService.saveItemUsingPOST(this.inventoryItem).subscribe(response => {
+      console.log('Saved InventoryItem :', response);
       Swal.fire('Success', 'Item successfully created', 'success').then(value => {
         this.router.navigate(['/pages/item/main']);
       });

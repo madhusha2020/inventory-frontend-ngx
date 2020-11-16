@@ -18,7 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
-import { Item } from '../model/item';
+import { InventoryItem } from '../model/inventoryItem';
 import { ItemList } from '../model/itemList';
 import { SearchFilter } from '../model/searchFilter';
 
@@ -173,17 +173,17 @@ export class ItemControllerService {
     /**
      * Save item
      * 
-     * @param item item
+     * @param inventoryItem inventoryItem
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public saveItemUsingPOST(item: Item, observe?: 'body', reportProgress?: boolean): Observable<Item>;
-    public saveItemUsingPOST(item: Item, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Item>>;
-    public saveItemUsingPOST(item: Item, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Item>>;
-    public saveItemUsingPOST(item: Item, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveItemUsingPOST(inventoryItem: InventoryItem, observe?: 'body', reportProgress?: boolean): Observable<InventoryItem>;
+    public saveItemUsingPOST(inventoryItem: InventoryItem, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InventoryItem>>;
+    public saveItemUsingPOST(inventoryItem: InventoryItem, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InventoryItem>>;
+    public saveItemUsingPOST(inventoryItem: InventoryItem, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (item === null || item === undefined) {
-            throw new Error('Required parameter item was null or undefined when calling saveItemUsingPOST.');
+        if (inventoryItem === null || inventoryItem === undefined) {
+            throw new Error('Required parameter inventoryItem was null or undefined when calling saveItemUsingPOST.');
         }
 
         let headers = this.defaultHeaders;
@@ -206,8 +206,8 @@ export class ItemControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<Item>(`${this.basePath}/item`,
-            item,
+        return this.httpClient.post<InventoryItem>(`${this.basePath}/item`,
+            inventoryItem,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
