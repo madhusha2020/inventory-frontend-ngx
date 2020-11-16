@@ -7,7 +7,8 @@ import {ECommerceComponent} from './e-commerce/e-commerce.component';
 import {NotFoundComponent} from './miscellaneous/not-found/not-found.component';
 import {AuthGuardService} from '../service/auth/auth-guard.service';
 import {UnauthorizedComponent} from './miscellaneous/unauthorized/unauthorized.component';
-import {ShopComponent} from './shop/shop.component';
+import {ShopComponent} from './shop/shop-main/shop.component';
+import {ShoppingCartComponent} from './shop/shopping-cart/shopping-cart.component';
 
 const routes: Routes = [{
   path: '',
@@ -16,6 +17,10 @@ const routes: Routes = [{
     {
       path: 'shop',
       component: ShopComponent,
+    },
+    {
+      path: 'cart',
+      component: ShoppingCartComponent,
     },
     {
       path: 'dashboard',
