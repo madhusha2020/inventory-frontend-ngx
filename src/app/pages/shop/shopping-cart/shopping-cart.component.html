@@ -1,1 +1,27 @@
-<p>shopping-cart works!</p>
+<div>
+  <nb-card>
+    <nb-card-header>
+      <h5 class="text-info">Shopping Cart</h5>
+    </nb-card-header>
+    <nb-card-body>
+
+      <div *ngIf="orderedItems.length != 0" class="row scroll">
+        <div *ngFor="let item of orderedItems" style="margin-left: 50px">
+          <ngx-cart-item
+            (refreshCart)="onRefreshCart($event)"
+            [item]="item"
+          ></ngx-cart-item>
+        </div>
+      </div>
+      <div *ngIf="orderedItems.length == 0">
+        <h5 class="text-warning">Your shopping cart is empty!</h5>
+      </div>
+
+    </nb-card-body>
+    <nb-card-footer *ngIf="orderedItems.length != 0">
+      <div>Sub Total </div>
+    </nb-card-footer>
+    <nb-card-footer *ngIf="orderedItems.length == 0">
+    </nb-card-footer>
+  </nb-card>
+</div>

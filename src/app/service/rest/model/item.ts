@@ -13,8 +13,9 @@ import { Inventory } from './inventory';
 import { OrderItems } from './orderItems';
 
 
-export interface Item { 
+export interface Item {
     avalableQty?: number;
+    orderedQty?: number;
     code?: string;
     createdby?: string;
     createddate?: Date;

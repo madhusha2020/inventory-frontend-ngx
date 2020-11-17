@@ -11,6 +11,7 @@ import { ShopComponent } from './shop/shop-main/shop.component';
 import { ShopItemComponent } from './shop/shop-item/shop-item.component';
 import { ShoppingCartComponent } from './shop/shopping-cart/shopping-cart.component';
 import {FormInputModule} from './shared/form-inputs/form-input.module';
+import { CartItemComponent } from './shop/cart-item/cart-item.component';
 
 @NgModule({
     imports: [
@@ -30,6 +31,7 @@ import {FormInputModule} from './shared/form-inputs/form-input.module';
     ShopComponent,
     ShopItemComponent,
     ShoppingCartComponent,
+    CartItemComponent,
   ],
 })
 export class PagesModule {

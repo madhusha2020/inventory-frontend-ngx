@@ -1,7 +1,7 @@
 <div>
   <nb-card>
     <nb-card-header>
-      <nb-badge *ngIf="item.avalableQty == 0" text="Sold-Out" status="danger" position="top right"></nb-badge>
+      <nb-badge *ngIf="item.avalableQty == 0" position="top right" status="danger" text="Sold-Out"></nb-badge>
       <div class="row">
         <div class="col-md-12">
           <h5 class="text-success">{{item.name}}</h5>
@@ -50,7 +50,7 @@
 
       <div class="row" style="margin-top: 5px">
         <div class="col-md-4">
-          <button [disabled]="item.avalableQty == 0" (click)="buyNow(item)" nbButton>BUY NOW</button>
+          <button (click)="buyNow(item)" [disabled]="item.avalableQty == 0" nbButton>BUY NOW</button>
         </div>
         <div class="col-md-4">
           <app-input-spinner-default
@@ -58,7 +58,9 @@
           ></app-input-spinner-default>
         </div>
         <div class="col-md-4">
-          <button [disabled]="item.avalableQty == 0" (click)="addToCart(item)" nbButton style="float: right">ADD TO CART</button>
+          <button (click)="addToCart(item)" [disabled]="item.avalableQty == 0" nbButton style="float: right">ADD TO
+            CART
+          </button>
         </div>
       </div>
 

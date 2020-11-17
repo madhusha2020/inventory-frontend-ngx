@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ShoppingCartService} from '../../../service/shopping-cart/shopping-cart.service';
+import {Item, ItemControllerService} from '../../../service/rest';
 
 @Component({
   selector: 'ngx-shopping-cart',
@@ -7,21 +9,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  constructor() { }
+  itemList: Array<Item> = [];
+  orderedItems: Array<Item> = [];
+
+  constructor(private itemControllerService: ItemControllerService,
+              private shoppingCartService: ShoppingCartService) {
+  }
 
   ngOnInit(): void {
+    this.itemControllerService.getAllItemsUsingGET(0, 100).subscribe(response => {
+      this.itemList = response.itemList;
+      this.shoppingCartService.getItemMap().forEach((qty, itemId) => {
+        this.itemList.forEach(item => {
+          if (item.id == itemId) {
+            item.orderedQty = qty;
+            this.orderedItems.push(item);
+          }
+        });
+      });
+    });
   }
 
-  removeItem() {
+  onRefreshCart(event) {
+    console.log(event);
+    this.shoppingCartService.deleteFromItemMap(event.id);
 
-  }
-
-  plusQty() {
-
-  }
-
-  minusQty() {
-
+    let updatedOrderItems: Array<Item> = [];
+    this.orderedItems.forEach(item => {
+      if (item.id != event.id) {
+        updatedOrderItems.push(item);
+      }
+    });
+    this.orderedItems = updatedOrderItems;
   }
 
   pay() {

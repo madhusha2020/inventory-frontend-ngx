@@ -46,6 +46,7 @@ export class TokenService {
     localStorage.removeItem(Constant.USER_NAME);
     localStorage.removeItem(Constant.TOKEN);
     localStorage.removeItem(Constant.AUTHORITIES);
+    localStorage.removeItem(Constant.CART);
   }
 
   isLoggedIn(): boolean {

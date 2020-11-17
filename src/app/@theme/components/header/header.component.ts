@@ -6,6 +6,7 @@ import {Subject} from 'rxjs';
 import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
 import {User} from '../../../service/rest';
+import {ShoppingCartService} from '../../../service/shopping-cart/shopping-cart.service';
 
 @Component({
   selector: 'ngx-header',
@@ -45,6 +46,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService,
               private tokenService: TokenService,
+              private shoppingCartService: ShoppingCartService,
               private router: Router) {
   }
 

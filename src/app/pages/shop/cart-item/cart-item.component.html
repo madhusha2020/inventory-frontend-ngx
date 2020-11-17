@@ -1,0 +1,41 @@
+<div>
+  <nb-card>
+    <nb-card-header>
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="text-success">{{item.name}}</h5>
+        </div>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+
+      <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+          <app-image-upload-default
+            [image]="item.photo" [showButton]="showUploadButton"
+          ></app-image-upload-default>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 10px">
+        <div class="col-md-12">
+          <h3 class="text-success">{{item.lastprice.toLocaleString('en-US', {style: 'currency', currency: 'LKR'})}}</h3>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 5px">
+        <div class="col-md-6">
+          <app-input-spinner-default
+            title="Quantity"
+            (changeEvent)="qtyOnChange($event)"
+            [field]="qty" placeholder="Quantity"
+          ></app-input-spinner-default>
+        </div>
+        <div class="col-md-6" style="margin-top: 40px">
+          <button (click)="removeFromCart()"  nbButton>REMOVE</button>
+        </div>
+      </div>
+
+    </nb-card-body>
+  </nb-card>
+</div>
