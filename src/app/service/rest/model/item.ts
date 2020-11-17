@@ -13,9 +13,8 @@ import { Inventory } from './inventory';
 import { OrderItems } from './orderItems';
 
 
-export interface Item {
+export interface Item { 
     avalableQty?: number;
-    orderedQty?: number;
     code?: string;
     createdby?: string;
     createddate?: Date;
@@ -29,13 +28,16 @@ export interface Item {
     modifieddate?: Date;
     name?: string;
     orderItems?: Array<OrderItems>;
+    orderedQty?: number;
     photo?: Array<string>;
     responseCode?: string;
     responseValues?: Array<string>;
+    rop?: number;
     sprice?: number;
     spriceValue?: string;
     status?: number;
     statusDescription?: string;
     testperiod?: number;
+    unit?: string;
     userId?: string;
 }

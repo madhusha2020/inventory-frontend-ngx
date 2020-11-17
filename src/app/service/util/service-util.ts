@@ -86,4 +86,18 @@ export class ServiceUtil {
     console.debug('Danger Levels: ', dangerLevels);
     return dangerLevels;
   }
+
+  public static getKgUnitType(): string {
+    return 'Kilogram';
+  }
+
+  public static getUnitTypes(): Array<string> {
+    const unitTypes: Array<string> = [];
+    unitTypes.push('Kilogram');
+    unitTypes.push('Gram');
+    unitTypes.push('Liter');
+    unitTypes.push('Milliliter');
+    console.debug('Unit Types: ', unitTypes);
+    return unitTypes;
+  }
 }

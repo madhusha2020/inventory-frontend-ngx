@@ -20,6 +20,7 @@ export class ItemCreateComponent implements OnInit {
   inventory: Inventory = {};
 
   dangerLevels = ServiceUtil.getDangerLevels();
+  units = ServiceUtil.getUnitTypes();
 
   constructor(private formBuilder: FormBuilder,
               private itemControllerService: ItemControllerService,
@@ -63,6 +64,14 @@ export class ItemCreateComponent implements OnInit {
     return this.itemForm.get('qty');
   }
 
+  get rop() {
+    return this.itemForm.get('rop');
+  }
+
+  get unit() {
+    return this.itemForm.get('unit');
+  }
+
   get doexpire() {
     return this.itemForm.get('doexpire');
   }
@@ -78,6 +87,8 @@ export class ItemCreateComponent implements OnInit {
       testperiod: [null, Validators.pattern('^[0-9]*$')],
       initqty: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
       qty: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      rop: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      unit: [ServiceUtil.getKgUnitType(), [Validators.required]],
       doexpire: [null, [Validators.required]],
     });
   }
@@ -85,6 +96,11 @@ export class ItemCreateComponent implements OnInit {
   dangerLevelStateChange(event) {
     console.log('Item danger level :', event);
     this.dangerlevel.setValue(event);
+  }
+
+  unitStateChange(event) {
+    console.log('Item unit :', event);
+    this.unit.setValue(event);
   }
 
   imageUploadEvent(event) {
@@ -100,6 +116,8 @@ export class ItemCreateComponent implements OnInit {
     this.item.lastprice = this.lastprice.value;
     this.item.dangerlevel = this.dangerlevel.value;
     this.item.testperiod = this.testperiod.value;
+    this.item.rop = this.rop.value;
+    this.item.unit = this.unit.value;
     this.item.userId = this.tokenService.getUserName();
 
     this.inventory.code = this.code.value;

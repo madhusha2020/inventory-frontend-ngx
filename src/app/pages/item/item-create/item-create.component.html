@@ -35,29 +35,52 @@
               </nb-step>
               <nb-step label="Price details">
                 <h3>Price Details</h3>
-                <div class="margin">
+                <div class="margin row">
 
-                  <app-input-amount-default
-                    [field]="sprice" placeholder="Enter price"
-                    title="Price"></app-input-amount-default>
+                  <div class="col-md-5">
 
-                  <app-input-amount-default
-                    [field]="lastprice" placeholder="Enter last price"
-                    title="Last Price"></app-input-amount-default>
+                    <app-input-amount-default
+                      [field]="sprice" placeholder="Enter price"
+                      title="Price"></app-input-amount-default>
 
-                  <label class="form-label">Danger Level</label>
-                  <div class="form-group">
-                    <nb-select (selectedChange)="dangerLevelStateChange($event)" fullWidth placeholder="Select Level"
-                               selected="Low">
-                      <nb-option *ngFor="let item of dangerLevels" title="{{item}}" value="{{item}}">
-                        {{item}}
-                      </nb-option>
-                    </nb-select>
+                    <app-input-amount-default
+                      [field]="lastprice" placeholder="Enter last price"
+                      title="Last Price"></app-input-amount-default>
+
+                    <label class="form-label">Danger Level</label>
+                    <div class="form-group">
+                      <nb-select (selectedChange)="dangerLevelStateChange($event)" fullWidth placeholder="Select Level"
+                                 selected="Low">
+                        <nb-option *ngFor="let item of dangerLevels" title="{{item}}" value="{{item}}">
+                          {{item}}
+                        </nb-option>
+                      </nb-select>
+                    </div>
+
                   </div>
+                  <div class="col-md-1"></div>
+                  <div class="col-md-5">
 
-                  <app-input-default
-                    [field]="testperiod" placeholder="Enter test periods"
-                    title="Test Periods"></app-input-default>
+                    <app-input-default
+                      [field]="testperiod" placeholder="Enter test periods"
+                      title="Test Periods"></app-input-default>
+
+                    <app-input-date-picker-future-default
+                      [field]="doexpire" placeholder="Select expire date"
+                      title="Expire Date"
+                    ></app-input-date-picker-future-default>
+
+                    <label class="form-label">Unit</label>
+                    <div class="form-group">
+                      <nb-select (selectedChange)="unitStateChange($event)" fullWidth placeholder="Select Unit"
+                                 selected="Kilogram">
+                        <nb-option *ngFor="let item of units" title="{{item}}" value="{{item}}">
+                          {{item}}
+                        </nb-option>
+                      </nb-select>
+                    </div>
+
+                  </div>
 
                 </div>
                 <button nbButton nbStepperPrevious>prev</button>
@@ -75,10 +98,9 @@
                     [field]="qty" placeholder="Enter available quantity"
                     title="Available Quantity"></app-input-default>
 
-                  <app-input-date-picker-future-default
-                    [field]="doexpire" placeholder="Select expire date"
-                    title="Expire Date"
-                  ></app-input-date-picker-future-default>
+                  <app-input-default
+                    [field]="rop" placeholder="Enter reorder quantity"
+                    title="Reorder Quantity"></app-input-default>
 
                 </div>
                 <button nbButton nbStepperPrevious>prev</button>
