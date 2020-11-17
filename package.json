@@ -57,6 +57,7 @@
     "ionicons": "2.0.1",
     "leaflet": "1.2.0",
     "nebular-icons": "1.1.0",
+    "ng-spin-box": "^0.2.3",
     "ng2-ckeditor": "^1.2.9",
     "ng2-currency-mask": "^9.0.2",
     "ng2-smart-table": "^1.6.0",

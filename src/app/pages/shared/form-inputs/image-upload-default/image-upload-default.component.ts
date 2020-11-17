@@ -10,7 +10,7 @@ export class ImageUploadDefaultComponent implements OnInit {
 
   @Input() image: string;
   @Input() defaultImage: string;
-  @Input() showButton: boolean;
+  @Input() showButton = true;
   @Output() changeEvent = new EventEmitter<any>();
 
   retrievedImage: any;
@@ -21,7 +21,6 @@ export class ImageUploadDefaultComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.showButton = true;
     if (this.image) {
       this.retrievedImage = 'data:image/jpeg;base64,' + this.image;
     }

@@ -14,6 +14,7 @@ import { OrderItems } from './orderItems';
 
 
 export interface Item { 
+    avalableQty?: number;
     code?: string;
     createdby?: string;
     createddate?: Date;

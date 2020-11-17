@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule } from '@nebular/theme';
+import {NbBadgeModule, NbButtonModule, NbCardModule, NbMenuModule} from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -10,16 +10,21 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { ShopComponent } from './shop/shop-main/shop.component';
 import { ShopItemComponent } from './shop/shop-item/shop-item.component';
 import { ShoppingCartComponent } from './shop/shopping-cart/shopping-cart.component';
+import {FormInputModule} from './shared/form-inputs/form-input.module';
 
 @NgModule({
-  imports: [
-    PagesRoutingModule,
-    ThemeModule,
-    NbMenuModule,
-    DashboardModule,
-    ECommerceModule,
-    MiscellaneousModule,
-  ],
+    imports: [
+        PagesRoutingModule,
+        ThemeModule,
+        NbMenuModule,
+        DashboardModule,
+        ECommerceModule,
+        MiscellaneousModule,
+        NbCardModule,
+        FormInputModule,
+        NbButtonModule,
+        NbBadgeModule,
+    ],
   declarations: [
     PagesComponent,
     ShopComponent,

@@ -7,7 +7,6 @@ export * from './employeeUser';
 export * from './imageModel';
 export * from './inventory';
 export * from './inventoryItem';
-export * from './inventoryItemList';
 export * from './item';
 export * from './itemList';
 export * from './module';

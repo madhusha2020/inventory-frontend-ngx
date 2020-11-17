@@ -13,6 +13,9 @@ import {InputDatePickerMaxExceptTodayDefaultComponent} from './input-date-picker
 import {InputAmountDefaultComponent} from './input-amount-default/input-amount-default.component';
 import {CurrencyMaskModule} from 'ng2-currency-mask';
 import { InputDatePickerFutureDefaultComponent } from './input-date-picker-future-default/input-date-picker-future-default.component';
+import { InputTextareaDefaultComponent } from './input-textarea-default/input-textarea-default.component';
+import { InputSpinnerDefaultComponent } from './input-spinner-default/input-spinner-default.component';
+import {NgSpinBoxModule} from 'ng-spin-box';
 
 
 @NgModule({
@@ -25,19 +28,23 @@ import { InputDatePickerFutureDefaultComponent } from './input-date-picker-futur
     InputDatePickerMaxDefaultComponent,
     InputDatePickerMaxExceptTodayDefaultComponent,
     InputAmountDefaultComponent,
-    InputDatePickerFutureDefaultComponent
+    InputDatePickerFutureDefaultComponent,
+    InputTextareaDefaultComponent,
+    InputSpinnerDefaultComponent
   ],
-  exports: [
-    InputDefaultComponent,
-    InputComparatorDefaultComponent,
-    InputGeneratedPasswordDefaultComponent,
-    ImageUploadDefaultComponent,
-    InputDatePickerDefaultComponent,
-    InputDatePickerMaxDefaultComponent,
-    InputDatePickerMaxExceptTodayDefaultComponent,
-    InputAmountDefaultComponent,
-    InputDatePickerFutureDefaultComponent
-  ],
+    exports: [
+        InputDefaultComponent,
+        InputComparatorDefaultComponent,
+        InputGeneratedPasswordDefaultComponent,
+        ImageUploadDefaultComponent,
+        InputDatePickerDefaultComponent,
+        InputDatePickerMaxDefaultComponent,
+        InputDatePickerMaxExceptTodayDefaultComponent,
+        InputAmountDefaultComponent,
+        InputDatePickerFutureDefaultComponent,
+        InputTextareaDefaultComponent,
+        InputSpinnerDefaultComponent
+    ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -46,7 +53,8 @@ import { InputDatePickerFutureDefaultComponent } from './input-date-picker-futur
     NbSelectModule,
     NbButtonModule,
     NbDatepickerModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    NgSpinBoxModule
   ]
 })
 export class FormInputModule {

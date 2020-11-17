@@ -1,1 +1,7 @@
-<p>shop works!</p>
+<div class="row">
+  <div *ngFor="let itemArrayListObject of itemArrayList" class="row col-md-12">
+      <div class="col-md-4" *ngFor="let item of itemArrayListObject">
+        <ngx-shop-item [item]="item"></ngx-shop-item>
+      </div>
+  </div>
+</div>

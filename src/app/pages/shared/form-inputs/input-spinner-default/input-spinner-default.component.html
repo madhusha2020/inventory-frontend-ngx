@@ -1,0 +1,11 @@
+<label *ngIf="title" class="form-label">{{title}}</label>
+<div class="form-group">
+  <div [ngClass]="{'form-line':true, 'error': !field.valid && field.touched }">
+    <input [defaultValue]="1" fullWidth [formControl]="field" [placeholder]="placeholder" [type]="type" [attr.disabled]="disableProperty"
+           min='1' nbInput ngSpinBox
+           snapToStep='true'
+           step='1'
+           type='tel'>
+  </div>
+  <app-error-list [field]="field"></app-error-list>
+</div>

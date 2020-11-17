@@ -1,0 +1,10 @@
+<label *ngIf="title" class="form-label">{{title}}</label>
+<div class="form-group">
+  <div [ngClass]="{'form-line':true, 'error': !field.valid && field.touched }">
+    <textarea [attr.disabled]="disableProperty" [formControl]="field" [placeholder]="placeholder"
+              class="form-control"
+              fullWidth
+              nbInput></textarea>
+  </div>
+  <app-error-list [field]="field"></app-error-list>
+</div>
