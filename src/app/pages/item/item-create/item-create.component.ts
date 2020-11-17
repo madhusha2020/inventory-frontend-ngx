@@ -75,9 +75,9 @@ export class ItemCreateComponent implements OnInit {
       sprice: [null, [Validators.required]],
       lastprice: [null, [Validators.required]],
       dangerlevel: [ServiceUtil.getLowDangerLevel(), [Validators.required]],
-      testperiod: [null],
-      initqty: [null, [Validators.required]],
-      qty: [null, [Validators.required]],
+      testperiod: [null, Validators.pattern('^[0-9]*$')],
+      initqty: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
+      qty: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
       doexpire: [null, [Validators.required]],
     });
   }

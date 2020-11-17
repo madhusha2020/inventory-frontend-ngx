@@ -9,6 +9,7 @@ import {Item, ItemControllerService} from '../../../service/rest';
 })
 export class ShoppingCartComponent implements OnInit {
 
+  subTotal: number;
   itemList: Array<Item> = [];
   orderedItems: Array<Item> = [];
 
@@ -27,10 +28,27 @@ export class ShoppingCartComponent implements OnInit {
           }
         });
       });
+      this.calculateSubTotal();
     });
   }
 
-  onRefreshCart(event) {
+  onQtyChange(event) {
+    console.log('Shopping Cart onQtyChange ', event);
+
+    let updatedOrderItems: Array<Item> = [];
+    this.orderedItems.forEach(item => {
+      if (item.id == event) {
+        item.orderedQty = this.shoppingCartService.getItemMap().get(item.id);
+        updatedOrderItems.push(item);
+      } else {
+        updatedOrderItems.push(item);
+      }
+    });
+    this.orderedItems = updatedOrderItems;
+    this.calculateSubTotal();
+  }
+
+  onRemoveFromCart(event) {
     console.log(event);
     this.shoppingCartService.deleteFromItemMap(event.id);
 
@@ -41,9 +59,19 @@ export class ShoppingCartComponent implements OnInit {
       }
     });
     this.orderedItems = updatedOrderItems;
+    this.calculateSubTotal();
   }
 
-  pay() {
+  payNow() {
+    console.log(this.orderedItems);
+  }
 
+  private calculateSubTotal() {
+    console.log('Calculating sub total start ', this.subTotal);
+    this.subTotal = 0;
+    this.orderedItems.forEach(item => {
+      this.subTotal = this.subTotal + item.lastprice * item.orderedQty;
+    });
+    console.log('Calculating sub total end', this.subTotal);
   }
 }

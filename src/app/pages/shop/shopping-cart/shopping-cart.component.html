@@ -8,7 +8,8 @@
       <div *ngIf="orderedItems.length != 0" class="row scroll">
         <div *ngFor="let item of orderedItems" style="margin-left: 50px">
           <ngx-cart-item
-            (refreshCart)="onRefreshCart($event)"
+            (onQtyChange)="onQtyChange($event)"
+            (onRemoveFromCart)="onRemoveFromCart($event)"
             [item]="item"
           ></ngx-cart-item>
         </div>
@@ -19,7 +20,12 @@
 
     </nb-card-body>
     <nb-card-footer *ngIf="orderedItems.length != 0">
-      <div>Sub Total </div>
+     <div class="row">
+       <h6 class="col-md-6 text-info">Sub Total: <span class="text-dark">{{subTotal.toLocaleString('en-US', {style: 'currency', currency: 'LKR'})}}</span></h6>
+       <div class="col-md-6">
+         <button style="float: right" nbButton status="info" (click)="payNow()">PAY NOW</button>
+       </div>
+     </div>
     </nb-card-footer>
     <nb-card-footer *ngIf="orderedItems.length == 0">
     </nb-card-footer>

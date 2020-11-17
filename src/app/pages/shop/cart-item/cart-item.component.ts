@@ -11,7 +11,8 @@ import {ShoppingCartService} from '../../../service/shopping-cart/shopping-cart.
 export class CartItemComponent implements OnInit {
 
   @Input() item: Item;
-  @Output() refreshCart = new EventEmitter<any>();
+  @Output() onRemoveFromCart = new EventEmitter<any>();
+  @Output() onQtyChange = new EventEmitter<any>();
 
   showUploadButton = false;
   itemUpdateForm: FormGroup;
@@ -31,10 +32,12 @@ export class CartItemComponent implements OnInit {
   }
 
   qtyOnChange(event) {
+    console.log('Cart Item qtyOnChange ', event);
     this.shoppingCartService.savedToItemMap(this.item.id, this.qty.value);
+    this.onQtyChange.emit(this.item.id);
   }
 
   removeFromCart() {
-    this.refreshCart.emit(this.item);
+    this.onRemoveFromCart.emit(this.item);
   }
 }
