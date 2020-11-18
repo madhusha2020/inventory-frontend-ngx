@@ -21,6 +21,7 @@ import { Observable }                                        from 'rxjs/Observab
 import { Order } from '../model/order';
 import { OrderItemsList } from '../model/orderItemsList';
 import { OrderList } from '../model/orderList';
+import { TransactionRequest } from '../model/transactionRequest';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -57,6 +58,127 @@ export class OrderControllerService {
         return false;
     }
 
+
+    /**
+     * Get active orders by customerId
+     * 
+     * @param transactionRequest transactionRequest
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getActiveOrdersByCustomerUsingPOST(transactionRequest: TransactionRequest, observe?: 'body', reportProgress?: boolean): Observable<OrderList>;
+    public getActiveOrdersByCustomerUsingPOST(transactionRequest: TransactionRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OrderList>>;
+    public getActiveOrdersByCustomerUsingPOST(transactionRequest: TransactionRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OrderList>>;
+    public getActiveOrdersByCustomerUsingPOST(transactionRequest: TransactionRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (transactionRequest === null || transactionRequest === undefined) {
+            throw new Error('Required parameter transactionRequest was null or undefined when calling getActiveOrdersByCustomerUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<OrderList>(`${this.basePath}/order/customer/active`,
+            transactionRequest,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get all active orders
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllActiveOrdersUsingGET(observe?: 'body', reportProgress?: boolean): Observable<OrderList>;
+    public getAllActiveOrdersUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OrderList>>;
+    public getAllActiveOrdersUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OrderList>>;
+    public getAllActiveOrdersUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<OrderList>(`${this.basePath}/order/all/active`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get all orders
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllOrdersUsingGET(observe?: 'body', reportProgress?: boolean): Observable<OrderList>;
+    public getAllOrdersUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OrderList>>;
+    public getAllOrdersUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OrderList>>;
+    public getAllOrdersUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<OrderList>(`${this.basePath}/order/all`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
 
     /**
      * Get orders by orderId
@@ -101,19 +223,19 @@ export class OrderControllerService {
     }
 
     /**
-     * Get orders by customerId
+     * Get all orders by customerId
      * 
-     * @param customerId customerId
+     * @param transactionRequest transactionRequest
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOrdersByCustomerUsingGET(customerId: number, observe?: 'body', reportProgress?: boolean): Observable<OrderList>;
-    public getOrdersByCustomerUsingGET(customerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OrderList>>;
-    public getOrdersByCustomerUsingGET(customerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OrderList>>;
-    public getOrdersByCustomerUsingGET(customerId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getOrdersByCustomerUsingPOST(transactionRequest: TransactionRequest, observe?: 'body', reportProgress?: boolean): Observable<OrderList>;
+    public getOrdersByCustomerUsingPOST(transactionRequest: TransactionRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<OrderList>>;
+    public getOrdersByCustomerUsingPOST(transactionRequest: TransactionRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<OrderList>>;
+    public getOrdersByCustomerUsingPOST(transactionRequest: TransactionRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (customerId === null || customerId === undefined) {
-            throw new Error('Required parameter customerId was null or undefined when calling getOrdersByCustomerUsingGET.');
+        if (transactionRequest === null || transactionRequest === undefined) {
+            throw new Error('Required parameter transactionRequest was null or undefined when calling getOrdersByCustomerUsingPOST.');
         }
 
         let headers = this.defaultHeaders;
@@ -131,8 +253,13 @@ export class OrderControllerService {
         const consumes: string[] = [
             'application/json'
         ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
 
-        return this.httpClient.get<OrderList>(`${this.basePath}/order/customer/${encodeURIComponent(String(customerId))}`,
+        return this.httpClient.post<OrderList>(`${this.basePath}/order/customer`,
+            transactionRequest,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

@@ -179,6 +179,52 @@ export class CustomerViewComponent implements OnInit {
     this.updateCustomer();
   }
 
+  suspend() {
+    console.log('Suspend customer :');
+    if (this.customer.email != this.tokenService.getUserName()) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Suspend customer : {0}'.replace('{0}', this.customer.name),
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.value) {
+          // API
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // Canceled
+        }
+      });
+
+    } else {
+      Swal.fire('Error', 'You cannot suspend your own customer record', 'error');
+    }
+  }
+
+  activate() {
+    console.log('Activate customer :');
+    if (this.customer.email != this.tokenService.getUserName()) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Activate customer : {0}'.replace('{0}', this.customer.name),
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.value) {
+          // API
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // Canceled
+        }
+      });
+
+    } else {
+      Swal.fire('Error', 'You cannot activte your own customer record', 'error');
+    }
+  }
+
   private updateCustomer() {
     this.user.userId = this.tokenService.getUserName();
 
@@ -219,13 +265,5 @@ export class CustomerViewComponent implements OnInit {
         // Canceled
       }
     });
-  }
-
-  suspend() {
-    console.log('Suspend customer :');
-  }
-
-  activate() {
-    console.log('Activate customer :');
   }
 }

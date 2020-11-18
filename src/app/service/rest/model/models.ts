@@ -22,6 +22,7 @@ export * from './responseEntity';
 export * from './role';
 export * from './roleList';
 export * from './searchFilter';
+export * from './transactionRequest';
 export * from './user';
 export * from './userList';
 export * from './userRole';

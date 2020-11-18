@@ -9,6 +9,10 @@ export class ShoppingCartService {
   constructor() {
   }
 
+  clearCart(): void {
+    localStorage.removeItem(Constant.CART);
+  }
+
   savedToItemMap(itemId: number, qty: number): void {
     let itemMap = this.getItemMap();
     if (itemMap) {
