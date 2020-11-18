@@ -48,6 +48,10 @@ export class ItemMainComponent implements OnInit {
         title: 'Test Period',
         type: 'string',
       },
+      unit: {
+        title: 'Unit',
+        type: 'string',
+      },
       statusDescription: {
         title: 'Status',
         type: 'string',

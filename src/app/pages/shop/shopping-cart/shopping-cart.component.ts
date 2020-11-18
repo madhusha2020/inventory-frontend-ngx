@@ -52,7 +52,9 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   onQtyChange(event) {
-    console.log('Shopping Cart onQtyChange ', event);
+    console.log('Shopping Cart onQtyChange (itemId) ', event);
+    this.orderItems = [];
+    this.orderItemsList = {};
 
     let updatedOrderItems: Array<Item> = [];
     this.orderedItems.forEach(item => {
@@ -64,11 +66,15 @@ export class ShoppingCartComponent implements OnInit {
       }
     });
     this.orderedItems = updatedOrderItems;
+    console.log('Ordered Items ', this.orderedItems);
     this.calculateSubTotal();
   }
 
   onRemoveFromCart(event) {
-    console.log(event);
+    console.log('Shopping Cart onRemoveFromCart ', event);
+    this.orderItems = [];
+    this.orderItemsList = {};
+
     this.shoppingCartService.deleteFromItemMap(event.id);
 
     let updatedOrderItems: Array<Item> = [];
@@ -78,11 +84,12 @@ export class ShoppingCartComponent implements OnInit {
       }
     });
     this.orderedItems = updatedOrderItems;
+    console.log('Ordered Items ', this.orderedItems);
     this.calculateSubTotal();
   }
 
   payNow() {
-    console.log(this.orderedItems);
+    console.log('Before Pay Ordered Items ', this.orderedItems);
     if (this.tokenService.isLoggedIn()) {
 
       this.customer.email = this.tokenService.getUserName();
@@ -119,18 +126,16 @@ export class ShoppingCartComponent implements OnInit {
       });
 
     } else {
-      Swal.fire('Login required', 'Please logged in or register to the system', 'warning').then(value => {
+      Swal.fire('Login required', 'Please logged in or register to continue', 'warning').then(value => {
         this.router.navigate(['/auth/login']);
       });
     }
   }
 
   private calculateSubTotal() {
-    console.log('Calculating sub total start ', this.subTotal);
     this.subTotal = 0;
     this.orderedItems.forEach(item => {
       this.subTotal = this.subTotal + item.lastprice * item.orderedQty;
     });
-    console.log('Calculating sub total end', this.subTotal);
   }
 }
