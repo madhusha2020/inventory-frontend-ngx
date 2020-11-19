@@ -1,5 +1,19 @@
 export class ServiceUtil {
 
+  public static getStatusDescription(status: number): string {
+    if (status == 1) {
+      return 'Active';
+    } else if (status == 3) {
+      return 'Rejected';
+    } else if (status == 5) {
+      return 'Pending';
+    } else if (status == 7) {
+      return 'Locked';
+    } else if (status == 10) {
+      return 'Suspend';
+    }
+  }
+
   public static getSystemUser(): string {
     return 'SYSTEM';
   }

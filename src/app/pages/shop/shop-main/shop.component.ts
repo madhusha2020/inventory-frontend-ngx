@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Item, ItemControllerService} from '../../../service/rest';
+import {ServiceUtil} from '../../../service/util/service-util';
 
 @Component({
   selector: 'ngx-shop',
@@ -26,11 +27,7 @@ export class ShopComponent implements OnInit {
     this.itemControllerService.getAllItemsUsingGET(this.offset, this.limit).subscribe(response => {
       console.log('Item Data :', response);
       response.itemList.forEach(item => {
-        if (item.status == 1) {
-          item.statusDescription = 'Active';
-        } else {
-          item.statusDescription = 'Inactive';
-        }
+        item.statusDescription = ServiceUtil.getStatusDescription(item.status);
         item.spriceValue = item.sprice.toLocaleString('en-US', {style: 'currency', currency: 'LKR'});
         item.lastpriceValue = item.lastprice.toLocaleString('en-US', {style: 'currency', currency: 'LKR'});
         item.inventories.forEach(inventory => {

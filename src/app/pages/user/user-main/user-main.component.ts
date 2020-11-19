@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {User, UserControllerService} from '../../../service/rest';
 import {LocalDataSource} from 'ng2-smart-table';
 import {NbSearchService} from '@nebular/theme';
+import {ServiceUtil} from '../../../service/util/service-util';
 
 @Component({
   selector: 'ngx-user-main',
@@ -52,11 +53,7 @@ export class UserMainComponent implements OnInit {
     this.userControllerService.getAllUsersUsingGET().subscribe(response => {
       console.log('User Data :', response);
       response.userList.forEach(user => {
-        if (user.status == 1) {
-          user.statusDescription = 'Active';
-        } else {
-          user.statusDescription = 'Inactive';
-        }
+        user.statusDescription = ServiceUtil.getStatusDescription(user.status);
         this.users.push(user);
       });
       this.source.load(this.users);

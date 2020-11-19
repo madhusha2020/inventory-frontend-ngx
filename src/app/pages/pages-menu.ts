@@ -188,8 +188,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'shopping-cart-outline',
     children: [
       {
+        data: 'INV-ORD-ALL',
+        title: 'All Orders',
+        link: '/pages/order/main-all',
+      },
+      {
         data: 'INV-ORD-VW',
-        title: 'Orders',
+        title: 'Your Orders',
         link: '/pages/order/main',
       },
     ]

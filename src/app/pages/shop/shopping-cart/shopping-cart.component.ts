@@ -20,6 +20,9 @@ import Swal from 'sweetalert2';
 })
 export class ShoppingCartComponent implements OnInit {
 
+  offset = 0;
+  limit = 100;
+
   subTotal: number;
   itemList: Array<Item> = [];
   orderedItems: Array<Item> = [];
@@ -37,7 +40,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.itemControllerService.getAllItemsUsingGET(0, 100).subscribe(response => {
+    this.itemControllerService.getAllItemsUsingGET(this.offset, this.limit).subscribe(response => {
       this.itemList = response.itemList;
       this.shoppingCartService.getItemMap().forEach((qty, itemId) => {
         this.itemList.forEach(item => {

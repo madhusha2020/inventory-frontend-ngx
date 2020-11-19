@@ -9,7 +9,7 @@ import {Component, Input} from '@angular/core';
         <ngx-header></ngx-header>
       </nb-layout-header>
 
-      <nb-sidebar [hidden]="enabledSideBard" class="menu-sidebar" tag="menu-sidebar" responsive>
+      <nb-sidebar [hidden]="disabledSideBard" class="menu-sidebar" tag="menu-sidebar" responsive>
         <ng-content select="nb-menu"></ng-content>
       </nb-sidebar>
 
@@ -25,5 +25,5 @@ import {Component, Input} from '@angular/core';
 })
 export class OneColumnLayoutComponent {
 
-  @Input() enabledSideBard: boolean;
+  @Input() disabledSideBard: boolean;
 }

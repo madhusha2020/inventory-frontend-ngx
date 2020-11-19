@@ -3,6 +3,7 @@ import {Employee, EmployeeControllerService} from '../../../service/rest';
 import {LocalDataSource} from 'ng2-smart-table';
 import {NbSearchService} from '@nebular/theme';
 import {Router} from '@angular/router';
+import {ServiceUtil} from '../../../service/util/service-util';
 
 @Component({
   selector: 'ngx-employee-main',
@@ -97,11 +98,7 @@ export class EmployeeMainComponent implements OnInit {
     this.employeeControllerService.getAllEmployeesUsingGET(this.offset, this.limit).subscribe(response => {
       console.log('Employee Data :', response);
       response.employees.forEach(employee => {
-        if (employee.status == 1) {
-          employee.statusDescription = 'Active';
-        } else {
-          employee.statusDescription = 'Inactive';
-        }
+        employee.statusDescription = ServiceUtil.getStatusDescription(employee.status);
         this.employees.push(employee);
       });
       this.source.load(this.employees);

@@ -8,8 +8,8 @@ import {TokenService} from '../service/auth/token.service';
   selector: 'ngx-pages',
   styleUrls: ['pages.component.scss'],
   template: `
-    <ngx-one-column-layout [enabledSideBard]="isLoggedIn">
-      <nb-menu [items]="authorizedMenu"></nb-menu>
+    <ngx-one-column-layout [disabledSideBard]="!isLoggedIn">
+      <nb-menu [items]="menu"></nb-menu>
       <router-outlet></router-outlet>
     </ngx-one-column-layout>
   `,
@@ -18,34 +18,35 @@ export class PagesComponent implements OnInit {
 
   isLoggedIn: boolean;
   menu = MENU_ITEMS;
-  authorizedMenu: Array<NbMenuItem> = [];
 
   constructor(private tokenService: TokenService) {
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = !this.tokenService.isLoggedIn();
-    if (!this.isLoggedIn) {
+    this.isLoggedIn = this.tokenService.isLoggedIn();
+    if (this.isLoggedIn) {
       this.menu.forEach(item => {
-        if (this.hasRole(item)) {
-          this.authorizedMenu.push(item);
+        this.hasRole(item);
+        if (item.children) {
+          item.children.forEach(children => {
+            this.hasRole(children);
+          });
         }
       });
     }
   }
 
-  hasRole(menuItem: NbMenuItem): boolean {
+  hasRole(menuItem: NbMenuItem): void {
 
     let authoritiesArray: Array<string> = menuItem.data.split(',');
-    let authorized = false;
+    menuItem.hidden = true;
 
     this.tokenService.getAuthorities().forEach((value, key) => {
       authoritiesArray.forEach((requestedRole, index) => {
         if (requestedRole == key) {
-          authorized = true;
+          menuItem.hidden = false;
         }
       });
     });
-    return authorized;
   }
 }

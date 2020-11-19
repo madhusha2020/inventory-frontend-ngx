@@ -3,6 +3,7 @@ import {Item, ItemControllerService} from '../../../service/rest';
 import {LocalDataSource} from 'ng2-smart-table';
 import {NbSearchService} from '@nebular/theme';
 import {Router} from '@angular/router';
+import {ServiceUtil} from '../../../service/util/service-util';
 
 @Component({
   selector: 'ngx-item-main',
@@ -85,11 +86,7 @@ export class ItemMainComponent implements OnInit {
     this.itemControllerService.getAllItemsUsingGET(this.offset, this.limit).subscribe(response => {
       console.log('Item Data :', response);
       response.itemList.forEach(item => {
-        if (item.status == 1) {
-          item.statusDescription = 'Active';
-        } else {
-          item.statusDescription = 'Inactive';
-        }
+        item.statusDescription = ServiceUtil.getStatusDescription(item.status);
         item.spriceValue = item.sprice.toLocaleString('en-US', {style: 'currency', currency: 'LKR'});
         item.lastpriceValue = item.lastprice.toLocaleString('en-US', {style: 'currency', currency: 'LKR'});
         this.items.push(item);

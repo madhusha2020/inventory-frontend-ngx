@@ -3,6 +3,7 @@ import {LocalDataSource} from 'ng2-smart-table';
 import {Customer, CustomerControllerService} from '../../../service/rest';
 import {NbSearchService} from '@nebular/theme';
 import {Router} from '@angular/router';
+import {ServiceUtil} from '../../../service/util/service-util';
 
 @Component({
   selector: 'ngx-customer-main',
@@ -53,7 +54,7 @@ export class CustomerMainComponent implements OnInit {
         type: 'string',
       },
       orderCount: {
-        title: '#Orders',
+        title: 'Orders',
         type: 'number',
         addable: false,
         editable: false,
@@ -87,11 +88,7 @@ export class CustomerMainComponent implements OnInit {
     this.customerControllerService.getAllCustomersUsingGET(this.offset, this.limit).subscribe(response => {
       console.log('Customer Data :', response);
       response.customers.forEach(customer => {
-        if (customer.status == 1) {
-          customer.statusDescription = 'Active';
-        } else {
-          customer.statusDescription = 'Inactive';
-        }
+        customer.statusDescription = ServiceUtil.getStatusDescription(customer.status);
         customer.orderCount = customer.orders.length;
         this.customers.push(customer);
       });

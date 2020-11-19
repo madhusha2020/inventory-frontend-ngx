@@ -11,6 +11,7 @@
  */
 
 
-export interface TransactionRequest { 
+export interface TransactionRequest {
     id?: number;
+    email?: string;
 }

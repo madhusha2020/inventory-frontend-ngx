@@ -1,26 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  OrderControllerService,
-  OrderList,
-  TransactionRequest
-} from '../../../service/rest';
+import {Component, OnInit} from '@angular/core';
+import {OrderControllerService, OrderList} from '../../../service/rest';
 import {LocalDataSource} from 'ng2-smart-table';
 import {NbSearchService} from '@nebular/theme';
 import {Router} from '@angular/router';
 import {ServiceUtil} from '../../../service/util/service-util';
-import {TokenService} from '../../../service/auth/token.service';
 
 @Component({
-  selector: 'ngx-order-main',
-  templateUrl: './order-main.component.html',
-  styleUrls: ['./order-main.component.scss']
+  selector: 'ngx-order-main-all',
+  templateUrl: './order-main-all.component.html',
+  styleUrls: ['./order-main-all.component.scss']
 })
-export class OrderMainComponent implements OnInit {
+export class OrderMainAllComponent implements OnInit {
 
   offset = 0;
   limit = 100;
 
-  transactionRequest: TransactionRequest = {};
   orderLists: Array<OrderList> = [];
 
   settings = {
@@ -62,7 +56,6 @@ export class OrderMainComponent implements OnInit {
 
   constructor(private orderControllerService: OrderControllerService,
               private searchService: NbSearchService,
-              private tokenService: TokenService,
               private router: Router) {
 
     this.searchService.onSearchSubmit()
@@ -78,12 +71,11 @@ export class OrderMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.transactionRequest.email = this.tokenService.getUserName();
-    this.fetchCustomerOrders();
+    this.fetchAllOrders();
   }
 
-  fetchCustomerOrders() {
-    this.orderControllerService.getOrdersByCustomerUsingPOST(this.transactionRequest).subscribe(response => {
+  fetchAllOrders() {
+    this.orderControllerService.getAllOrdersUsingGET().subscribe(response => {
       console.log('All Orders Data :', response);
       response.orders.forEach(order => {
         order.statusDescription = ServiceUtil.getStatusDescription(order.status);

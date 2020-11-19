@@ -14,17 +14,22 @@ import { OrderItems } from './orderItems';
 
 
 export interface Order { 
+    address?: string;
+    contact1?: string;
     createdby?: string;
     createddate?: Date;
     customer?: Customer;
     description?: string;
+    email?: string;
     id?: number;
     modifiedby?: string;
     modifieddate?: Date;
+    name?: string;
     orderItems?: Array<OrderItems>;
     responseCode?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;
+    type?: string;
     userId?: string;
 }

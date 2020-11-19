@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Role, RoleControllerService} from '../../../service/rest';
 import {LocalDataSource} from 'ng2-smart-table';
 import {NbSearchService} from '@nebular/theme';
+import {ServiceUtil} from '../../../service/util/service-util';
 
 @Component({
   selector: 'ngx-user-role-main',
@@ -52,11 +53,7 @@ export class UserRoleMainComponent implements OnInit {
     this.roleControllerService.getAllRolesUsingGET().subscribe(response => {
       console.log('Role Data :', response);
       response.roles.forEach(role => {
-        if (role.status == 1) {
-          role.statusDescription = 'Active';
-        } else {
-          role.statusDescription = 'Inactive';
-        }
+        role.statusDescription = ServiceUtil.getStatusDescription(role.status);
         role.name = role.name.replace('_', ' ').toUpperCase();
         this.roles.push(role);
       });

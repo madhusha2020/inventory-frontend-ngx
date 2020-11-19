@@ -5,6 +5,7 @@ import {OrderComponent} from './order.component';
 import {OrderMainComponent} from './order-main/order-main.component';
 import {OrderCreateComponent} from './order-create/order-create.component';
 import {OrderViewComponent} from './order-view/order-view.component';
+import {OrderMainAllComponent} from './order-main-all/order-main-all.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,12 @@ const routes: Routes = [
     data: {roles: ['INV-ORD']},
     component: OrderComponent,
     children: [
+      {
+        path: 'main-all',
+        data: {roles: ['INV-ORD-ALL']},
+        canActivate: [AuthGuardService],
+        component: OrderMainAllComponent,
+      },
       {
         path: 'main',
         data: {roles: ['INV-ORD-VW']},

@@ -221,7 +221,7 @@ export class CustomerViewComponent implements OnInit {
       });
 
     } else {
-      Swal.fire('Error', 'You cannot activte your own customer record', 'error');
+      Swal.fire('Error', 'You cannot activate your own customer record', 'error');
     }
   }
 
