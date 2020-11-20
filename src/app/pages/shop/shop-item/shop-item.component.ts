@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ShoppingCartService} from '../../../service/shopping-cart/shopping-cart.service';
 import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-shop-item',
@@ -39,7 +40,9 @@ export class ShopItemComponent implements OnInit {
       this.shoppingCartService.savedToItemMap(item.id, this.qty.value);
       this.router.navigate(['/pages/cart']);
     } else {
-      this.router.navigate(['/auth/login']);
+      Swal.fire('Login required', 'Please logged in or register to continue', 'warning').then(value => {
+        this.router.navigate(['/auth/login']);
+      });
     }
   }
 

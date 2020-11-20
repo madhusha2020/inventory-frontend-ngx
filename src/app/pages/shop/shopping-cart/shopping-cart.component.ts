@@ -93,6 +93,9 @@ export class ShoppingCartComponent implements OnInit {
 
   payNow() {
     console.log('Before Pay Ordered Items ', this.orderedItems);
+    this.orderItems = [];
+    this.orderItemsList = {};
+
     if (this.tokenService.isLoggedIn()) {
 
       this.customer.email = this.tokenService.getUserName();
