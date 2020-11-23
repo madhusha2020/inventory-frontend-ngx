@@ -19,6 +19,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs/Observable';
 
 import { InventoryItem } from '../model/inventoryItem';
+import { Item } from '../model/item';
 import { ItemList } from '../model/itemList';
 import { SearchFilter } from '../model/searchFilter';
 
@@ -171,19 +172,61 @@ export class ItemControllerService {
     }
 
     /**
-     * Save item
+     * Get item by id
+     * 
+     * @param itemId itemId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getItemByIdUsingGET(itemId: string, observe?: 'body', reportProgress?: boolean): Observable<Item>;
+    public getItemByIdUsingGET(itemId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Item>>;
+    public getItemByIdUsingGET(itemId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Item>>;
+    public getItemByIdUsingGET(itemId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (itemId === null || itemId === undefined) {
+            throw new Error('Required parameter itemId was null or undefined when calling getItemByIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Item>(`${this.basePath}/item/${encodeURIComponent(String(itemId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Save inventory item
      * 
      * @param inventoryItem inventoryItem
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public saveItemUsingPOST(inventoryItem: InventoryItem, observe?: 'body', reportProgress?: boolean): Observable<InventoryItem>;
-    public saveItemUsingPOST(inventoryItem: InventoryItem, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InventoryItem>>;
-    public saveItemUsingPOST(inventoryItem: InventoryItem, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InventoryItem>>;
-    public saveItemUsingPOST(inventoryItem: InventoryItem, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveInventoryItemUsingPOST(inventoryItem: InventoryItem, observe?: 'body', reportProgress?: boolean): Observable<InventoryItem>;
+    public saveInventoryItemUsingPOST(inventoryItem: InventoryItem, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InventoryItem>>;
+    public saveInventoryItemUsingPOST(inventoryItem: InventoryItem, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InventoryItem>>;
+    public saveInventoryItemUsingPOST(inventoryItem: InventoryItem, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (inventoryItem === null || inventoryItem === undefined) {
-            throw new Error('Required parameter inventoryItem was null or undefined when calling saveItemUsingPOST.');
+            throw new Error('Required parameter inventoryItem was null or undefined when calling saveInventoryItemUsingPOST.');
         }
 
         let headers = this.defaultHeaders;

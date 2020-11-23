@@ -132,7 +132,7 @@ export class ItemCreateComponent implements OnInit {
 
     console.log('InventoryItem : ', this.inventoryItem);
 
-    this.itemControllerService.saveItemUsingPOST(this.inventoryItem).subscribe(response => {
+    this.itemControllerService.saveInventoryItemUsingPOST(this.inventoryItem).subscribe(response => {
       console.log('Saved InventoryItem :', response);
       Swal.fire('Success', 'Item successfully created', 'success').then(value => {
         this.router.navigate(['/pages/item/main']);

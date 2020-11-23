@@ -9,9 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ProductOutbound } from './productOutbound';
 
 
-export interface TransactionRequest { 
-    email?: string;
-    id?: number;
+export interface ProductOutboundList { 
+    description?: string;
+    productOutboundList?: Array<ProductOutbound>;
+    responseCode?: string;
+    responseValues?: Array<string>;
 }

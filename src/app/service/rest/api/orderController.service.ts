@@ -62,17 +62,17 @@ export class OrderControllerService {
     /**
      * Approve customer order
      * 
-     * @param order order
+     * @param transactionRequest transactionRequest
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public approveOrderUsingPOST(order: Order, observe?: 'body', reportProgress?: boolean): Observable<Order>;
-    public approveOrderUsingPOST(order: Order, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
-    public approveOrderUsingPOST(order: Order, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
-    public approveOrderUsingPOST(order: Order, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public approveOrderUsingPOST(transactionRequest: TransactionRequest, observe?: 'body', reportProgress?: boolean): Observable<Order>;
+    public approveOrderUsingPOST(transactionRequest: TransactionRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
+    public approveOrderUsingPOST(transactionRequest: TransactionRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
+    public approveOrderUsingPOST(transactionRequest: TransactionRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (order === null || order === undefined) {
-            throw new Error('Required parameter order was null or undefined when calling approveOrderUsingPOST.');
+        if (transactionRequest === null || transactionRequest === undefined) {
+            throw new Error('Required parameter transactionRequest was null or undefined when calling approveOrderUsingPOST.');
         }
 
         let headers = this.defaultHeaders;
@@ -96,7 +96,7 @@ export class OrderControllerService {
         }
 
         return this.httpClient.post<Order>(`${this.basePath}/order/approve`,
-            order,
+            transactionRequest,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -234,10 +234,10 @@ export class OrderControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOrderByIdUsingGET(orderId: number, observe?: 'body', reportProgress?: boolean): Observable<Order>;
-    public getOrderByIdUsingGET(orderId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
-    public getOrderByIdUsingGET(orderId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
-    public getOrderByIdUsingGET(orderId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getOrderByIdUsingGET(orderId: string, observe?: 'body', reportProgress?: boolean): Observable<Order>;
+    public getOrderByIdUsingGET(orderId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
+    public getOrderByIdUsingGET(orderId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
+    public getOrderByIdUsingGET(orderId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (orderId === null || orderId === undefined) {
             throw new Error('Required parameter orderId was null or undefined when calling getOrderByIdUsingGET.');
@@ -354,6 +354,53 @@ export class OrderControllerService {
 
         return this.httpClient.post<OrderItemsList>(`${this.basePath}/order`,
             orderItemsList,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Reject customer order
+     * 
+     * @param transactionRequest transactionRequest
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public rejectOrderUsingPOST(transactionRequest: TransactionRequest, observe?: 'body', reportProgress?: boolean): Observable<Order>;
+    public rejectOrderUsingPOST(transactionRequest: TransactionRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
+    public rejectOrderUsingPOST(transactionRequest: TransactionRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
+    public rejectOrderUsingPOST(transactionRequest: TransactionRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (transactionRequest === null || transactionRequest === undefined) {
+            throw new Error('Required parameter transactionRequest was null or undefined when calling rejectOrderUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<Order>(`${this.basePath}/order/reject`,
+            transactionRequest,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

@@ -11,7 +11,7 @@
  */
 
 
-export interface TransactionRequest { 
-    email?: string;
-    id?: number;
+export interface ProductOutboundItemId { 
+    itemId?: number;
+    productOutboundId?: number;
 }

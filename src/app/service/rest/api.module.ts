@@ -9,6 +9,7 @@ import {RoleControllerService} from './api/roleController.service';
 import {UserControllerService} from './api/userController.service';
 import {EmployeeControllerService} from './api/employeeController.service';
 import {ImageUploadControllerService} from './api/imageUploadController.service';
+import {ProductOutboundControllerService} from './api/productOutboundController.service';
 
 @NgModule({
   imports:      [],
@@ -21,6 +22,7 @@ import {ImageUploadControllerService} from './api/imageUploadController.service'
     ImageUploadControllerService,
     ItemControllerService,
     OrderControllerService,
+    ProductOutboundControllerService,
     RoleControllerService,
     UserControllerService ]
 })
