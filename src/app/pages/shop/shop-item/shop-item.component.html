@@ -19,6 +19,7 @@
         <div class="col-md-12 d-flex justify-content-center">
           <app-image-upload-default
             [image]="item.photo" [showButton]="showUploadButton"
+            defaultImage="../../../../../assets/images/image-placeholder.png"
           ></app-image-upload-default>
         </div>
       </div>
@@ -30,10 +31,9 @@
       </div>
 
       <div *ngIf="item.lastprice < item.sprice" class="row" style="margin-top: 10px">
-        <div class="col-md-6" style="text-decoration: line-through">
-          <h3 class="text-success">{{item.sprice.toLocaleString('en-US', {style: 'currency', currency: 'LKR'})}}</h3>
-        </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
+          <h3 class="text-success"
+              style="text-decoration: line-through">{{item.sprice.toLocaleString('en-US', {style: 'currency', currency: 'LKR'})}}</h3>
           <h3 class="text-success"
               style="background-color: yellow; float: right">{{item.lastprice.toLocaleString('en-US', {
             style: 'currency',
@@ -49,17 +49,16 @@
       </div>
 
       <div class="row" style="margin-top: 5px">
-        <div class="col-md-4">
-          <button (click)="buyNow(item)" status="info" [disabled]="item.avalableQty == 0" nbButton>BUY NOW</button>
-        </div>
-        <div class="col-md-4">
+        <div class="col-md-12">
           <app-input-spinner-default
-            [field]="qty" placeholder="Quantity"
+            [field]="qty"
+            placeholder="Quantity" title="Quantity"
           ></app-input-spinner-default>
         </div>
-        <div class="col-md-4">
-          <button (click)="addToCart(item)" status="info" [disabled]="item.avalableQty == 0" nbButton style="float: right">ADD TO
-            CART
+        <div class="col-md-12">
+          <button (click)="buyNow(item)" [disabled]="item.avalableQty == 0" nbButton status="info">BUY NOW</button>
+          <button (click)="addToCart(item)" [disabled]="item.avalableQty == 0" nbButton status="info"
+                  style="float: right">ADD TO CART
           </button>
         </div>
       </div>

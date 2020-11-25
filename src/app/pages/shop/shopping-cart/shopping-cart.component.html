@@ -1,17 +1,29 @@
 <div>
   <nb-card>
-    <nb-card-header>
+    <nb-card-header  *ngIf="orderedItems.length == 0">
       <h5 class="text-info">Shopping Cart</h5>
+    </nb-card-header>
+    <nb-card-header *ngIf="orderedItems.length != 0">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="text-info">Shopping Cart : <span class="text-dark">{{subTotal.toLocaleString('en-US', {style: 'currency', currency: 'LKR'})}}</span></h5>
+        </div>
+        <div class="col-md-6">
+          <button style="float: right" nbButton status="info" (click)="orderNow()">ORDER NOW</button>
+        </div>
+      </div>
     </nb-card-header>
     <nb-card-body>
 
-      <div *ngIf="orderedItems.length != 0" class="row scroll">
-        <div *ngFor="let item of orderedItems" style="margin-left: 50px">
-          <ngx-cart-item
-            (onQtyChange)="onQtyChange($event)"
-            (onRemoveFromCart)="onRemoveFromCart($event)"
-            [item]="item"
-          ></ngx-cart-item>
+      <div *ngIf="itemArrayList.length != 0">
+        <div class="row col-md-12" *ngFor="let itemArrayListObject of itemArrayList">
+          <div class="col-md-3" *ngFor="let item of itemArrayListObject">
+            <ngx-cart-item
+              (onQtyChange)="onQtyChange($event)"
+              (onRemoveFromCart)="onRemoveFromCart($event)"
+              [item]="item"
+            ></ngx-cart-item>
+          </div>
         </div>
       </div>
       <div *ngIf="orderedItems.length == 0">
@@ -19,15 +31,7 @@
       </div>
 
     </nb-card-body>
-    <nb-card-footer *ngIf="orderedItems.length != 0">
-     <div class="row">
-       <h6 class="col-md-6 text-info">Sub Total: <span class="text-dark">{{subTotal.toLocaleString('en-US', {style: 'currency', currency: 'LKR'})}}</span></h6>
-       <div class="col-md-6">
-         <button style="float: right" nbButton status="info" (click)="payNow()">PAY NOW</button>
-       </div>
-     </div>
-    </nb-card-footer>
-    <nb-card-footer *ngIf="orderedItems.length == 0">
+    <nb-card-footer >
     </nb-card-footer>
   </nb-card>
 </div>

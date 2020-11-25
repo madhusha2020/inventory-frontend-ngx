@@ -3,6 +3,8 @@ export class ServiceUtil {
   public static getStatusDescription(status: number): string {
     if (status == 1) {
       return 'Active';
+    } else if (status == 2) {
+      return 'Awaiting';
     } else if (status == 3) {
       return 'Rejected';
     } else if (status == 5) {

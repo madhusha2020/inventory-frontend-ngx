@@ -27,6 +27,9 @@ export class ShoppingCartComponent implements OnInit {
   itemList: Array<Item> = [];
   orderedItems: Array<Item> = [];
 
+  itemArray: Array<Item> = [];
+  itemArrayList: Array<Array<Item>> = new Array<Array<Item>>();
+
   order: Order = {};
   customer: Customer = {};
   orderItems: Array<OrderItems> = [];
@@ -50,6 +53,7 @@ export class ShoppingCartComponent implements OnInit {
           }
         });
       });
+      this.mapOrderItems();
       this.calculateSubTotal();
     });
   }
@@ -70,6 +74,7 @@ export class ShoppingCartComponent implements OnInit {
     });
     this.orderedItems = updatedOrderItems;
     console.log('Ordered Items ', this.orderedItems);
+    this.mapOrderItems();
     this.calculateSubTotal();
   }
 
@@ -88,10 +93,11 @@ export class ShoppingCartComponent implements OnInit {
     });
     this.orderedItems = updatedOrderItems;
     console.log('Ordered Items ', this.orderedItems);
+    this.mapOrderItems();
     this.calculateSubTotal();
   }
 
-  payNow() {
+  orderNow() {
     console.log('Before Pay Ordered Items ', this.orderedItems);
     this.orderItems = [];
     this.orderItemsList = {};
@@ -114,7 +120,10 @@ export class ShoppingCartComponent implements OnInit {
 
       Swal.fire({
         title: 'Are you sure?',
-        text: 'Place order : {0}'.replace('{0}', this.subTotal.toLocaleString('en-US', {style: 'currency', currency: 'LKR'})),
+        text: 'Place order : {0}'.replace('{0}', this.subTotal.toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'LKR'
+        })),
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Yes',
@@ -138,10 +147,27 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
+  private mapOrderItems() {
+    console.log('Ordered Items ', this.orderedItems);
+    this.itemArray = [];
+    this.itemArrayList = [];
+
+    this.orderedItems.forEach(orderItem => {
+      this.itemArray.push(orderItem);
+      if (this.itemArray.length == 4) {
+        this.itemArrayList.push(this.itemArray);
+        this.itemArray = [];
+      }
+    });
+    this.itemArrayList.push(this.itemArray);
+    console.log('mapOrderItems ', this.itemArrayList);
+  }
+
   private calculateSubTotal() {
     this.subTotal = 0;
     this.orderedItems.forEach(item => {
       this.subTotal = this.subTotal + item.lastprice * item.orderedQty;
     });
+    console.log('calculateSubTotal ', this.subTotal);
   }
 }
