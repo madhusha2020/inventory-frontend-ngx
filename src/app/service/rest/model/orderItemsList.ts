@@ -9,15 +9,22 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ChemicalTest } from './chemicalTest';
 import { Order } from './order';
 import { OrderItems } from './orderItems';
+import { Sale } from './sale';
 
 
 export interface OrderItemsList { 
+    chemicalTest?: ChemicalTest;
     description?: string;
+    discount?: number;
     order?: Order;
     orderItems?: Array<OrderItems>;
+    paymentType?: string;
     responseCode?: string;
     responseValues?: Array<string>;
+    sale?: Sale;
+    total?: number;
     userId?: string;
 }

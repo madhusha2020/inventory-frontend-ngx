@@ -82,9 +82,15 @@
                       </nb-select>
                     </div>
 
-                    <app-input-default
-                      [field]="callingname" placeholder="Enter calling name"
-                      title="Calling Name"></app-input-default>
+                    <label class="form-label">Designation</label>
+                    <div class="form-group">
+                      <nb-select (selectedChange)="designationStateChange($event)" fullWidth placeholder="Select Designation"
+                                 selected="Maintenance Staff">
+                        <nb-option *ngFor="let item of designations" title="{{item}}" value="{{item}}">
+                          {{item}}
+                        </nb-option>
+                      </nb-select>
+                    </div>
 
                     <app-input-date-picker-max-except-today-default
                       [field]="dobirth" placeholder="Select date of birth"
@@ -117,6 +123,10 @@
                   </div>
                   <div class="col-md-1"></div>
                   <div class="col-md-5">
+
+                    <app-input-default
+                      [field]="callingname" placeholder="Enter calling name"
+                      title="Calling Name"></app-input-default>
 
                     <app-input-date-picker-max-default
                       [field]="dorecruite" placeholder="Select date of recruited"

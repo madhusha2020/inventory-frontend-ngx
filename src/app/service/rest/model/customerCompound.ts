@@ -12,7 +12,7 @@
 import { Order } from './order';
 
 
-export interface OrderType { 
+export interface CustomerCompound { 
     createdby?: string;
     createddate?: Date;
     description?: string;
@@ -20,7 +20,7 @@ export interface OrderType {
     modifiedby?: string;
     modifieddate?: Date;
     name?: string;
-    orderList?: Array<Order>;
+    order?: Order;
     responseCode?: string;
     responseValues?: Array<string>;
     status?: number;

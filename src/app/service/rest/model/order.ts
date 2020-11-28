@@ -10,21 +10,24 @@
  * Do not edit the class manually.
  */
 import { Customer } from './customer';
+import { CustomerCompound } from './customerCompound';
 import { OrderItems } from './orderItems';
-import { OrderType } from './orderType';
 import { Sale } from './sale';
 
 
 export interface Order { 
     address?: string;
+    amountWithDiscount?: number;
     code?: string;
     contact1?: string;
     createdby?: string;
     createddate?: Date;
     customer?: Customer;
+    customerCompound?: CustomerCompound;
     deliveryaddress?: string;
     deliverycost?: number;
     description?: string;
+    discount?: number;
     doordered?: string;
     dorequired?: string;
     dosold?: string;
@@ -34,7 +37,7 @@ export interface Order {
     modifieddate?: Date;
     name?: string;
     orderItems?: Array<OrderItems>;
-    orderType?: OrderType;
+    orderType?: string;
     responseCode?: string;
     responseValues?: Array<string>;
     sale?: Sale;

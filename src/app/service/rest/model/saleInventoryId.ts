@@ -11,8 +11,7 @@
  */
 
 
-export interface TransactionRequest { 
-    email?: string;
-    id?: number;
-    userId?: string;
+export interface SaleInventoryId { 
+    inventoryId?: number;
+    saleId?: number;
 }

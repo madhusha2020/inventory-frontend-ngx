@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { Item } from './item';
+import { SaleInventory } from './saleInventory';
 
 
 export interface Inventory { 
@@ -26,6 +27,7 @@ export interface Inventory {
     qty?: number;
     responseCode?: string;
     responseValues?: Array<string>;
+    saleInventoryList?: Array<SaleInventory>;
     status?: number;
     statusDescription?: string;
     userId?: string;

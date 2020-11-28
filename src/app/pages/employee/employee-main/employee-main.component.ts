@@ -37,6 +37,10 @@ export class EmployeeMainComponent implements OnInit {
         title: 'Gender',
         type: 'string',
       },
+      designation: {
+        title: 'Designation',
+        type: 'string',
+      },
       dobirth: {
         title: 'Date of Birth',
         type: 'string',

@@ -76,6 +76,10 @@ export class ItemCreateComponent implements OnInit {
     return this.itemForm.get('doexpire');
   }
 
+  get weightvolume() {
+    return this.itemForm.get('weightvolume');
+  }
+
   ngOnInit(): void {
     this.itemForm = this.formBuilder.group({
       code: [null, [Validators.required]],
@@ -90,6 +94,7 @@ export class ItemCreateComponent implements OnInit {
       rop: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
       unit: [ServiceUtil.getKgUnitType(), [Validators.required]],
       doexpire: [null, [Validators.required]],
+      weightvolume: [null, [Validators.required]],
     });
   }
 
@@ -118,6 +123,7 @@ export class ItemCreateComponent implements OnInit {
     this.item.testperiod = this.testperiod.value;
     this.item.rop = this.rop.value;
     this.item.unit = this.unit.value;
+    this.item.weightvolume = this.weightvolume.value;
     this.item.userId = this.tokenService.getUserName();
 
     this.inventory.code = this.code.value;

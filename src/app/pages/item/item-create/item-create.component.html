@@ -21,6 +21,11 @@
                     <app-input-textarea-default
                       [field]="description" placeholder="Enter description"
                       title="Description"></app-input-textarea-default>
+
+                    <app-input-date-picker-future-default
+                      [field]="doexpire" placeholder="Select expire date"
+                      title="Expire Date"
+                    ></app-input-date-picker-future-default>
                   </div>
 
                   <div class="col-md-5" style="margin-top: 40px">
@@ -65,11 +70,6 @@
                       [field]="testperiod" placeholder="Enter test periods"
                       title="Test Periods"></app-input-default>
 
-                    <app-input-date-picker-future-default
-                      [field]="doexpire" placeholder="Select expire date"
-                      title="Expire Date"
-                    ></app-input-date-picker-future-default>
-
                     <label class="form-label">Unit</label>
                     <div class="form-group">
                       <nb-select (selectedChange)="unitStateChange($event)" fullWidth placeholder="Select Unit"
@@ -79,6 +79,10 @@
                         </nb-option>
                       </nb-select>
                     </div>
+
+                    <app-input-default
+                      [field]="weightvolume" placeholder="Enter weight or volume"
+                      title="Weight / Volume"></app-input-default>
 
                   </div>
 

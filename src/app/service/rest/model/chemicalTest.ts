@@ -9,38 +9,29 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Inventory } from './inventory';
-import { OrderItems } from './orderItems';
-import { ProductOutboundItem } from './productOutboundItem';
+import { Customer } from './customer';
+import { CustomerPayment } from './customerPayment';
 
 
-export interface Item { 
-    avalableQty?: number;
+export interface ChemicalTest { 
+    address?: string;
     code?: string;
     createdby?: string;
     createddate?: Date;
-    dangerlevel?: string;
+    customer?: Customer;
+    customerPayment?: CustomerPayment;
     description?: string;
+    dodone?: string;
+    dorequested?: string;
+    dotested?: string;
     id?: number;
-    inventories?: Array<Inventory>;
-    lastprice?: number;
-    lastpriceValue?: string;
     modifiedby?: string;
     modifieddate?: Date;
-    name?: string;
-    orderItems?: Array<OrderItems>;
-    orderedQty?: number;
-    photo?: Array<string>;
-    productOutboundItems?: Array<ProductOutboundItem>;
+    price?: number;
     responseCode?: string;
     responseValues?: Array<string>;
-    rop?: number;
-    sprice?: number;
-    spriceValue?: string;
+    result?: string;
     status?: number;
     statusDescription?: string;
-    testperiod?: number;
-    unit?: string;
     userId?: string;
-    weightvolume?: string;
 }

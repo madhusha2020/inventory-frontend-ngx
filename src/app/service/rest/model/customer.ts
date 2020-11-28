@@ -9,11 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { ChemicalTest } from './chemicalTest';
 import { Order } from './order';
+import { Sale } from './sale';
 
 
 export interface Customer { 
     address?: string;
+    chemicalTests?: Array<ChemicalTest>;
     contact1?: string;
     contact2?: string;
     createdby?: string;
@@ -29,6 +32,7 @@ export interface Customer {
     orders?: Array<Order>;
     responseCode?: string;
     responseValues?: Array<string>;
+    sales?: Array<Sale>;
     status?: number;
     statusDescription?: string;
     type?: string;

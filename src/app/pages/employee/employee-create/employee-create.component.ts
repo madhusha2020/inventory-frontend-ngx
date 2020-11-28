@@ -24,6 +24,7 @@ export class EmployeeCreateComponent implements OnInit {
   nameTitleTypes = ServiceUtil.getNameTitlesTypes();
   genderTypes = ServiceUtil.getGenderTypes();
   civilStatusTypes = ServiceUtil.getCivilStatusTypes();
+  designations = ServiceUtil.getDesignations();
 
   constructor(private formBuilder: FormBuilder,
               private roleControllerService: RoleControllerService,
@@ -88,6 +89,10 @@ export class EmployeeCreateComponent implements OnInit {
     return this.employeeForm.get('civilstatus');
   }
 
+  get designation() {
+    return this.employeeForm.get('designation');
+  }
+
   ngOnInit(): void {
     this.employeeForm = this.formBuilder.group({
       code: [null, [Validators.required]],
@@ -104,6 +109,7 @@ export class EmployeeCreateComponent implements OnInit {
       dorecruite: [null, [Validators.required]],
       callingname: [null],
       civilstatus: [ServiceUtil.getSingleCivilStatusType(), [Validators.required]],
+      designation: [ServiceUtil.getMaintenanceStaffDesignation(), [Validators.required]],
     });
 
     this.fetchRoles();
@@ -129,6 +135,11 @@ export class EmployeeCreateComponent implements OnInit {
   civilStateChange(event) {
     console.log('Employee Civil Status : ', event);
     this.civilstatus.setValue(event);
+  }
+
+  designationStateChange(event) {
+    console.log('Employee Designation : ', event);
+    this.designation.setValue(event);
   }
 
   roleStateChange(event, role: Role) {
@@ -162,6 +173,7 @@ export class EmployeeCreateComponent implements OnInit {
     this.employee.dorecruite = this.dorecruite.value;
     this.employee.callingname = this.callingname.value;
     this.employee.civilstatus = this.civilstatus.value;
+    this.employee.designation = this.designation.value;
     this.employee.description = ServiceUtil.getCreateEmployeeDescription();
     this.employee.userId = this.tokenService.getUserName();
 

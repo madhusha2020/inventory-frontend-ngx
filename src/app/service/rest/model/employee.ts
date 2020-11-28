@@ -19,6 +19,7 @@ export interface Employee {
     createdby?: string;
     createddate?: Date;
     description?: string;
+    designation?: string;
     dobirth?: string;
     dorecruite?: string;
     gender?: string;

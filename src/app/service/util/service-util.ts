@@ -90,6 +90,20 @@ export class ServiceUtil {
     return civilStatusTypes;
   }
 
+  public static getMaintenanceStaffDesignation(): string {
+    return 'Maintenance Staff';
+  }
+
+  public static getDesignations(): Array<string> {
+    const designations: Array<string> = [];
+    designations.push('Maintenance Staff');
+    designations.push('Delivery Staff');
+    designations.push('Management Staff');
+    designations.push('Financial Staff');
+    console.debug('Designations: ', designations);
+    return designations;
+  }
+
   public static getLowDangerLevel(): string {
     return 'Low';
   }
