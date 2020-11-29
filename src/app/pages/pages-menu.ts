@@ -273,12 +273,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'checkmark-square-2-outline',
     children: [
       {
-        data: 'INV-PAY-VW',
+        data: 'INV-PAY-CUS-VW',
         title: 'Customer Payments',
         link: '/pages/payment/customer-main',
       },
       {
-        data: 'INV-PAY-VW',
+        data: 'INV-PAY-SUP-VW',
         title: 'Supplier Payments',
         link: '/pages/payment/supplier-main',
       },
