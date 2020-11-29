@@ -11,6 +11,7 @@ export class ShoppingCartService {
 
   clearCart(): void {
     localStorage.removeItem(Constant.CART);
+    localStorage.removeItem(Constant.AMOUNT);
   }
 
   savedToItemMap(itemId: number, qty: number): void {
@@ -40,6 +41,14 @@ export class ShoppingCartService {
 
   getItemMap(): Map<number, number> {
     return new Map(JSON.parse(localStorage.getItem(Constant.CART)));
+  }
+
+  setAmount(amount: number): void {
+    localStorage.setItem(Constant.AMOUNT, String(amount));
+  }
+
+  getAmount(): number {
+    return Number(localStorage.getItem(Constant.AMOUNT));
   }
 
   private setItemMap(itemMap: Map<number, number>): void {

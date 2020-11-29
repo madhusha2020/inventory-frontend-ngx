@@ -130,4 +130,8 @@ export class ServiceUtil {
     console.debug('Unit Types: ', unitTypes);
     return unitTypes;
   }
+
+  public static getOnlinePaymentType(): string {
+    return 'online';
+  }
 }

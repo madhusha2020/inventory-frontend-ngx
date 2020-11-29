@@ -12,6 +12,7 @@ import {
 import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
+import {ServiceUtil} from '../../../service/util/service-util';
 
 @Component({
   selector: 'ngx-shopping-cart',
@@ -116,6 +117,8 @@ export class ShoppingCartComponent implements OnInit {
       this.orderItemsList.order = this.order;
       this.orderItemsList.orderItems = this.orderItems;
       this.orderItemsList.userId = this.tokenService.getUserName();
+      this.orderItemsList.paymentType = ServiceUtil.getOnlinePaymentType();
+      this.shoppingCartService.setAmount(this.subTotal);
       console.log('Place order request ', this.orderItemsList);
 
       Swal.fire({
@@ -130,11 +133,7 @@ export class ShoppingCartComponent implements OnInit {
         cancelButtonText: 'No'
       }).then((result) => {
         if (result.value) {
-          this.orderControllerService.placeOrderUsingPOST(this.orderItemsList).subscribe(response => {
-            console.log('Place order response ', response);
-            this.shoppingCartService.clearCart();
-            this.router.navigate(['/pages/order/main']);
-          });
+          this.router.navigate(['/pages/shopping-cart-payment'], {state: {order: this.orderItemsList}});
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           // Canceled
         }

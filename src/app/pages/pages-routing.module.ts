@@ -9,6 +9,7 @@ import {AuthGuardService} from '../service/auth/auth-guard.service';
 import {UnauthorizedComponent} from './miscellaneous/unauthorized/unauthorized.component';
 import {ShopComponent} from './shop/shop-main/shop.component';
 import {ShoppingCartComponent} from './shop/shopping-cart/shopping-cart.component';
+import {ShoppingCartPaymentComponent} from './shop/shopping-cart-payment/shopping-cart-payment.component';
 
 const routes: Routes = [{
   path: '',
@@ -21,6 +22,10 @@ const routes: Routes = [{
     {
       path: 'cart',
       component: ShoppingCartComponent,
+    },
+    {
+      path: 'shopping-cart-payment',
+      component: ShoppingCartPaymentComponent,
     },
     {
       path: 'dashboard',

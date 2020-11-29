@@ -3,4 +3,5 @@ export class Constant {
   public static readonly USER_NAME = 'USER_NAME';
   public static readonly AUTHORITIES = 'AUTHORITIES';
   public static readonly CART = 'CART';
+  public static readonly AMOUNT = 'AMOUNT';
 }
