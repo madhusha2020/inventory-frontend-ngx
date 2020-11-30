@@ -77,7 +77,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         data: 'INV-TRS-VW',
-        title: 'Vehicles & Owners',
+        title: 'Transports',
         link: '/pages/transport/main',
       },
       {

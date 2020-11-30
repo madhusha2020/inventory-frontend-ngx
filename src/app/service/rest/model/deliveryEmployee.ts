@@ -9,30 +9,23 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Order } from './order';
-import { Sale } from './sale';
+import { Delivery } from './delivery';
+import { DeliveryEmployeeId } from './deliveryEmployeeId';
+import { Employee } from './employee';
 
 
-export interface Customer { 
-    address?: string;
-    contact1?: string;
-    contact2?: string;
+export interface DeliveryEmployee { 
     createdby?: string;
     createddate?: Date;
+    delivery?: Delivery;
+    deliveryEmployeeId?: DeliveryEmployeeId;
     description?: string;
-    email?: string;
-    fax?: string;
-    id?: number;
+    employee?: Employee;
     modifiedby?: string;
     modifieddate?: Date;
-    name?: string;
-    orderCount?: number;
-    orders?: Array<Order>;
     responseCode?: string;
     responseValues?: Array<string>;
-    sales?: Array<Sale>;
     status?: number;
     statusDescription?: string;
-    type?: string;
     userId?: string;
 }

@@ -10,6 +10,8 @@ import {UserControllerService} from './api/userController.service';
 import {EmployeeControllerService} from './api/employeeController.service';
 import {ImageUploadControllerService} from './api/imageUploadController.service';
 import {ProductOutboundControllerService} from './api/productOutboundController.service';
+import {DeliveryControllerService} from './api/deliveryController.service';
+import {SaleControllerService} from './api/saleController.service';
 
 @NgModule({
   imports:      [],
@@ -18,12 +20,14 @@ import {ProductOutboundControllerService} from './api/productOutboundController.
   providers: [
     AuthenticationControllerService,
     CustomerControllerService,
+    DeliveryControllerService,
     EmployeeControllerService,
     ImageUploadControllerService,
     ItemControllerService,
     OrderControllerService,
     ProductOutboundControllerService,
     RoleControllerService,
+    SaleControllerService,
     UserControllerService ]
 })
 export class ApiModule {

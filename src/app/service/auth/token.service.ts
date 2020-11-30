@@ -43,10 +43,13 @@ export class TokenService {
   }
 
   logout() {
-    localStorage.removeItem(Constant.USER_NAME);
-    localStorage.removeItem(Constant.TOKEN);
-    localStorage.removeItem(Constant.AUTHORITIES);
-    localStorage.removeItem(Constant.CART);
+    this.authenticationControllerService.logoutUsingPOST({userName: localStorage.getItem(Constant.USER_NAME)}).subscribe(response => {
+      console.log('Logout response :', response);
+      localStorage.removeItem(Constant.USER_NAME);
+      localStorage.removeItem(Constant.TOKEN);
+      localStorage.removeItem(Constant.AUTHORITIES);
+      localStorage.removeItem(Constant.CART);
+    });
   }
 
   isLoggedIn(): boolean {

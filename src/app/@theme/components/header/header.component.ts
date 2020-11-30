@@ -37,7 +37,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     },
   ];
   currentTheme = 'default';
-  userMenu = [{title: 'Log out'}];
+  userMenu = [{title: 'Shopping Cart'}, {title: 'Notifications'}, {title: 'Log out'}];
+  externalUserMenu = [{title: 'Shopping Cart'}, {title: 'Register'}, {title: 'Log in'}];
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private sidebarService: NbSidebarService,
@@ -71,7 +72,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe(themeName => this.currentTheme = themeName);
 
     this.menuService.onItemClick().subscribe((menu: NbMenuBag) => {
-      if (menu.item.title == 'Log out') {
+      if (menu.item.title == 'Shopping Cart') {
+        this.router.navigate(['/pages/cart']);
+        console.log('Shopping Cart clicked ', menu);
+      } else if (menu.item.title == 'Notifications') {
+        this.router.navigate(['/pages/notification/main']);
+        console.log('Notifications clicked ', menu);
+      } else if (menu.item.title == 'Register') {
+        this.router.navigate(['/auth/register']);
+        console.log('Logout clicked ', menu);
+      } else if (menu.item.title == 'Log in') {
+        this.router.navigate(['/auth/login']);
+        console.log('Logout clicked ', menu);
+      } else if (menu.item.title == 'Log out') {
         this.tokenService.logout();
         this.router.navigate(['/auth/login']);
         console.log('Logout clicked ', menu);
@@ -91,7 +104,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true, 'menu-sidebar');
     this.layoutService.changeLayoutSize();
-
     return false;
   }
 

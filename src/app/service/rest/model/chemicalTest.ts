@@ -9,7 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Customer } from './customer';
 import { CustomerPayment } from './customerPayment';
 
 
@@ -18,7 +17,6 @@ export interface ChemicalTest {
     code?: string;
     createdby?: string;
     createddate?: Date;
-    customer?: Customer;
     customerPayment?: CustomerPayment;
     description?: string;
     dodone?: string;

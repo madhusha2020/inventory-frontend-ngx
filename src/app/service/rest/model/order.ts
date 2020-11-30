@@ -17,7 +17,6 @@ import { Sale } from './sale';
 
 export interface Order { 
     address?: string;
-    amountWithDiscount?: number;
     code?: string;
     contact1?: string;
     createdby?: string;
@@ -27,7 +26,6 @@ export interface Order {
     deliveryaddress?: string;
     deliverycost?: number;
     description?: string;
-    discount?: number;
     doordered?: string;
     dorequired?: string;
     dosold?: string;

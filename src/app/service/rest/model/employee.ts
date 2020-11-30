@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { DeliveryEmployee } from './deliveryEmployee';
 
 
 export interface Employee { 
@@ -18,6 +19,7 @@ export interface Employee {
     code?: string;
     createdby?: string;
     createddate?: Date;
+    deliveryEmployeeList?: Array<DeliveryEmployee>;
     description?: string;
     designation?: string;
     dobirth?: string;

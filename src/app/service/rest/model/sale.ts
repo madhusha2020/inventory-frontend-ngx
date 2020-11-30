@@ -11,6 +11,7 @@
  */
 import { Customer } from './customer';
 import { CustomerPayment } from './customerPayment';
+import { Delivery } from './delivery';
 import { Order } from './order';
 import { SaleCustomCompound } from './saleCustomCompound';
 import { SaleInventory } from './saleInventory';
@@ -23,6 +24,7 @@ export interface Sale {
     customer?: Customer;
     customerPayment?: CustomerPayment;
     date?: string;
+    delivery?: Delivery;
     deliveryaddress?: string;
     deliverycost?: number;
     description?: string;
