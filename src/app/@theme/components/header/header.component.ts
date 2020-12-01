@@ -7,6 +7,7 @@ import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
 import {User} from '../../../service/rest';
 import {ShoppingCartService} from '../../../service/shopping-cart/shopping-cart.service';
+import {NotificationService} from '../../../service/notification/notification.service';
 
 @Component({
   selector: 'ngx-header',
@@ -48,6 +49,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private breakpointService: NbMediaBreakpointsService,
               private tokenService: TokenService,
               private shoppingCartService: ShoppingCartService,
+              private notificationService: NotificationService,
               private router: Router) {
   }
 

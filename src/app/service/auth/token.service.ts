@@ -49,6 +49,7 @@ export class TokenService {
       localStorage.removeItem(Constant.TOKEN);
       localStorage.removeItem(Constant.AUTHORITIES);
       localStorage.removeItem(Constant.CART);
+      localStorage.removeItem(Constant.ALERT_COUNT);
     });
   }
 

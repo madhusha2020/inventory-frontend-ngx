@@ -20,7 +20,7 @@
 <div class="header-container">
   <nb-actions *ngIf="isLoggedIn" size="small">
     <nb-action class="control-item" icon="shopping-cart-outline" [badgeText]="shoppingCartService.getItemCount()" badgePosition="top right" badgeStatus="danger" routerLink="/pages/cart"></nb-action>
-    <nb-action class="control-item" icon="bell-outline" [badgeText]="1" badgePosition="top right" badgeStatus="danger"  routerLink="/pages/notification/main"></nb-action>
+    <nb-action class="control-item" icon="bell-outline" [badgeText]="notificationService.getAlertCount()" badgePosition="top right" badgeStatus="danger"  routerLink="/pages/notification/main"></nb-action>
     <nb-action *nbIsGranted="['view', 'user']" class="user-action">
       <nb-user [name]="user?.userName"
                [nbContextMenu]="userMenu"
