@@ -18,6 +18,8 @@ export * from './item';
 export * from './itemList';
 export * from './module';
 export * from './moduleList';
+export * from './notification';
+export * from './notificationList';
 export * from './order';
 export * from './orderItemId';
 export * from './orderItems';

@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {AbstractControl, Validators} from '@angular/forms';
+import {AbstractControl} from '@angular/forms';
 import {Subscription} from 'rxjs';
 
 @Component({

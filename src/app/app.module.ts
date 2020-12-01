@@ -24,6 +24,7 @@ import {ApiModule, Configuration, ConfigurationParameters} from './service/rest'
 import {environment} from '../environments/environment';
 import {JwtInterceptor} from './interceptor/jwt.interceptor';
 import {ErrorInterceptor} from './interceptor/error.interceptor';
+import {NotificationModule} from './pages/notification/notification.module';
 
 export function apiConfiguration(): Configuration {
   const params: ConfigurationParameters = {
@@ -51,6 +52,7 @@ export function apiConfiguration(): Configuration {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    NotificationModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
