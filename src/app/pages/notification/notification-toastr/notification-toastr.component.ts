@@ -45,7 +45,6 @@ export class NotificationToastrComponent implements OnInit, OnDestroy {
     this.sub = Observable.interval(50000).subscribe((val) => {
       if (this.tokenService.isLoggedIn()) {
         this.makeNewNotificationToast();
-        this.makeAwaitingNotificationCount();
       }
     });
   }
@@ -55,14 +54,8 @@ export class NotificationToastrComponent implements OnInit, OnDestroy {
       console.log('New Notification response :', response);
       response.notificationList.forEach(notification => {
         this.showToast(this.status, notification.type, notification.message);
+        this.notificationService.setAlertCount(response.notificationList.length);
       });
-    });
-  }
-
-  makeAwaitingNotificationCount() {
-    this.notificationControllerService.getAwaitingNotificationsByUserUsingPOST({userId: this.tokenService.getUserName()}).subscribe(response => {
-      console.log('Awaiting Notification response :', response);
-      this.notificationService.setAlertCount(response.notificationList.length);
     });
   }
 

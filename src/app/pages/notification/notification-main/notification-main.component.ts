@@ -5,6 +5,7 @@ import {NbSearchService} from '@nebular/theme';
 import {Router} from '@angular/router';
 import {ServiceUtil} from '../../../service/util/service-util';
 import {TokenService} from '../../../service/auth/token.service';
+import {NotificationService} from '../../../service/notification/notification.service';
 
 @Component({
   selector: 'ngx-notification-main',
@@ -45,6 +46,7 @@ export class NotificationMainComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private notificationControllerService: NotificationControllerService,
+              private notificationService: NotificationService,
               private tokenService: TokenService,
               private searchService: NbSearchService,
               private router: Router) {
@@ -63,6 +65,7 @@ export class NotificationMainComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchNotifications();
+    this.notificationService.clearAlertCount();
   }
 
   fetchNotifications() {

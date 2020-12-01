@@ -133,7 +133,9 @@ export class ShoppingCartComponent implements OnInit {
         cancelButtonText: 'No'
       }).then((result) => {
         if (result.value) {
-          this.router.navigate(['/pages/shopping-cart-payment'], {state: {order: this.orderItemsList}});
+          this.orderControllerService.preOrderValidateUsingPOST(this.orderItemsList).subscribe(response => {
+            this.router.navigate(['/pages/shopping-cart-payment'], {state: {order: this.orderItemsList}});
+          });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           // Canceled
         }
