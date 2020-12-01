@@ -6,6 +6,8 @@ import {NotificationComponent} from './notification.component';
 import { NotificationMainComponent } from './notification-main/notification-main.component';
 import { NotificationViewComponent } from './notification-view/notification-view.component';
 import { NotificationToastrComponent } from './notification-toastr/notification-toastr.component';
+import {NbButtonModule, NbCardModule, NbSearchModule, NbTooltipModule} from '@nebular/theme';
+import {Ng2SmartTableModule} from 'ng2-smart-table';
 
 
 @NgModule({
@@ -14,9 +16,14 @@ import { NotificationToastrComponent } from './notification-toastr/notification-
     NotificationMainComponent,
     NotificationToastrComponent
   ],
-    imports: [
-        CommonModule,
-        NotificationRoutingModule
-    ]
+  imports: [
+    CommonModule,
+    NotificationRoutingModule,
+    NbCardModule,
+    NbSearchModule,
+    Ng2SmartTableModule,
+    NbButtonModule,
+    NbTooltipModule
+  ]
 })
 export class NotificationModule { }
