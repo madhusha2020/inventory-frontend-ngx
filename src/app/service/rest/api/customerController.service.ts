@@ -18,8 +18,10 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
+import { Customer } from '../model/customer';
 import { CustomerList } from '../model/customerList';
 import { SearchFilter } from '../model/searchFilter';
+import { TransactionRequest } from '../model/transactionRequest';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -56,6 +58,53 @@ export class CustomerControllerService {
         return false;
     }
 
+
+    /**
+     * Customer activate
+     * 
+     * @param transactionRequest transactionRequest
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public activateCustomerUsingPUT(transactionRequest: TransactionRequest, observe?: 'body', reportProgress?: boolean): Observable<Customer>;
+    public activateCustomerUsingPUT(transactionRequest: TransactionRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Customer>>;
+    public activateCustomerUsingPUT(transactionRequest: TransactionRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Customer>>;
+    public activateCustomerUsingPUT(transactionRequest: TransactionRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (transactionRequest === null || transactionRequest === undefined) {
+            throw new Error('Required parameter transactionRequest was null or undefined when calling activateCustomerUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<Customer>(`${this.basePath}/customer/activate`,
+            transactionRequest,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
 
     /**
      * View a list of available active customers
@@ -227,6 +276,53 @@ export class CustomerControllerService {
             searchFilter,
             {
                 params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Customer suspend
+     * 
+     * @param transactionRequest transactionRequest
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public suspendCustomerUsingPUT(transactionRequest: TransactionRequest, observe?: 'body', reportProgress?: boolean): Observable<Customer>;
+    public suspendCustomerUsingPUT(transactionRequest: TransactionRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Customer>>;
+    public suspendCustomerUsingPUT(transactionRequest: TransactionRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Customer>>;
+    public suspendCustomerUsingPUT(transactionRequest: TransactionRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (transactionRequest === null || transactionRequest === undefined) {
+            throw new Error('Required parameter transactionRequest was null or undefined when calling suspendCustomerUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<Customer>(`${this.basePath}/customer/suspend`,
+            transactionRequest,
+            {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

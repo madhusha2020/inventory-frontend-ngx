@@ -1,6 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Customer, CustomerUser, Role, RoleControllerService, User, UserControllerService} from '../../../service/rest';
+import {
+  Customer,
+  CustomerControllerService,
+  CustomerUser,
+  Role,
+  RoleControllerService,
+  User,
+  UserControllerService
+} from '../../../service/rest';
 import Swal from 'sweetalert2';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ServiceUtil} from '../../../service/util/service-util';
@@ -33,6 +41,7 @@ export class CustomerViewComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private roleControllerService: RoleControllerService,
               private userControllerService: UserControllerService,
+              private customerControllerService: CustomerControllerService,
               private tokenService: TokenService,
               private route: ActivatedRoute,
               private router: Router) {
@@ -180,7 +189,7 @@ export class CustomerViewComponent implements OnInit {
   }
 
   suspend() {
-    console.log('Suspend customer :');
+    console.log('Suspend customer');
     if (this.customer.email != this.tokenService.getUserName()) {
       Swal.fire({
         title: 'Are you sure?',
@@ -191,7 +200,12 @@ export class CustomerViewComponent implements OnInit {
         cancelButtonText: 'No'
       }).then((result) => {
         if (result.value) {
-          // API
+          this.customerControllerService.suspendCustomerUsingPUT({id: this.customer.id, userId: this.tokenService.getUserName()}).subscribe(response => {
+            console.log('Suspend customer :', response);
+            Swal.fire('Success', 'Customer suspend successfully', 'success').then(ok => {
+              this.router.navigate(['/pages/customer/main']);
+            });
+          });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           // Canceled
         }
@@ -203,7 +217,7 @@ export class CustomerViewComponent implements OnInit {
   }
 
   activate() {
-    console.log('Activate customer :');
+    console.log('Activate customer');
     if (this.customer.email != this.tokenService.getUserName()) {
       Swal.fire({
         title: 'Are you sure?',
@@ -214,7 +228,12 @@ export class CustomerViewComponent implements OnInit {
         cancelButtonText: 'No'
       }).then((result) => {
         if (result.value) {
-          // API
+          this.customerControllerService.activateCustomerUsingPUT({id: this.customer.id, userId: this.tokenService.getUserName()}).subscribe(response => {
+            console.log('Activate customer :', response);
+            Swal.fire('Success', 'Customer activate successfully', 'success').then(ok => {
+              this.router.navigate(['/pages/customer/main']);
+            });
+          });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           // Canceled
         }
