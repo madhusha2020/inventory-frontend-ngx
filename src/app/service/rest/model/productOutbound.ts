@@ -19,6 +19,7 @@ export interface ProductOutbound {
     date?: Date;
     description?: string;
     id?: number;
+    itemCount?: number;
     modifiedby?: string;
     modifieddate?: Date;
     productOutboundItems?: Array<ProductOutboundItem>;

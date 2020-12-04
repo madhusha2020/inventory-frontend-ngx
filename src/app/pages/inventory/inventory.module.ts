@@ -11,6 +11,8 @@ import {InventoryViewComponent} from './inventory-view/inventory-view.component'
 import {InventoryInboundViewComponent} from './inventory-inbound-view/inventory-inbound-view.component';
 import {InventoryOutboundViewComponent} from './inventory-outbound-view/inventory-outbound-view.component';
 import {InventoryDisposalViewComponent} from './inventory-disposal-view/inventory-disposal-view.component';
+import {NbButtonModule, NbCardModule, NbSearchModule, NbTooltipModule} from '@nebular/theme';
+import {Ng2SmartTableModule} from 'ng2-smart-table';
 
 
 @NgModule({
@@ -26,7 +28,12 @@ import {InventoryDisposalViewComponent} from './inventory-disposal-view/inventor
     InventoryDisposalViewComponent],
   imports: [
     CommonModule,
-    InventoryRoutingModule
+    InventoryRoutingModule,
+    NbCardModule,
+    NbSearchModule,
+    Ng2SmartTableModule,
+    NbButtonModule,
+    NbTooltipModule
   ]
 })
 export class InventoryModule {

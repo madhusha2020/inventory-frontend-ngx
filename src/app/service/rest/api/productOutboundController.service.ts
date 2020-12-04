@@ -62,10 +62,10 @@ export class ProductOutboundControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public placeOrderUsingGET(observe?: 'body', reportProgress?: boolean): Observable<ProductOutboundList>;
-    public placeOrderUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductOutboundList>>;
-    public placeOrderUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductOutboundList>>;
-    public placeOrderUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAllProductOutboundsUsingGET(observe?: 'body', reportProgress?: boolean): Observable<ProductOutboundList>;
+    public getAllProductOutboundsUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductOutboundList>>;
+    public getAllProductOutboundsUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductOutboundList>>;
+    public getAllProductOutboundsUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 

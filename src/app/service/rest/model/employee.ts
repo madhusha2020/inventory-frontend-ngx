@@ -12,9 +12,8 @@
 import { DeliveryEmployee } from './deliveryEmployee';
 
 
-export interface Employee {
+export interface Employee { 
     address?: string;
-  email?: string;
     callingname?: string;
     civilstatus?: string;
     code?: string;
@@ -25,6 +24,7 @@ export interface Employee {
     designation?: string;
     dobirth?: string;
     dorecruite?: string;
+    email?: string;
     gender?: string;
     id?: number;
     land?: string;
