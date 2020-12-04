@@ -1,0 +1,26 @@
+<nb-card>
+  <nb-card-header class="text-success">
+    {{item.name}}
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="row">
+
+      <div class="col-md-2">
+        <div *ngIf=!retrievedImage>
+          <img [src]="defaultImage" style="width: 200px; height: 200px">
+        </div>
+        <div *ngIf=retrievedImage>
+          <img [src]="retrievedImage" style="width: 200px; height: 200px">
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <ng2-smart-table [settings]="settings" [source]="source">
+        </ng2-smart-table>
+      </div>
+
+    </div>
+  </nb-card-body>
+
+</nb-card>

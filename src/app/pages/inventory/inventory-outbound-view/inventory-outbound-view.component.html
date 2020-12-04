@@ -1,1 +1,9 @@
-<p>inventory-outbound-view works!</p>
+<div class="row">
+  <div *ngFor="let productOutboundItem of productOutBoundItems" class="col-md-12">
+    <app-list-item-view
+      [itemId]="productOutboundItem.productOutboundItemId.itemId"
+      [qty]="productOutboundItem.qty"
+      defaultImage="../../../../../assets/images/image-placeholder.png"
+    ></app-list-item-view>
+  </div>
+</div>

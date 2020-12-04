@@ -18,24 +18,28 @@ import {
   NbTooltipModule
 } from '@nebular/theme';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
+import { ListItemViewComponent } from './list-item-view/list-item-view.component';
 
 
 @NgModule({
-  declarations: [ItemComponent, ItemMainComponent, ItemCreateComponent, ItemDisposeComponent, ItemViewComponent],
-  imports: [
-    CommonModule,
-    ItemRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FormInputModule,
-    NbCardModule,
-    NbSearchModule,
-    Ng2SmartTableModule,
-    NbButtonModule,
-    NbTooltipModule,
-    NbStepperModule,
-    NbSelectModule
-  ]
+    declarations: [ItemComponent, ItemMainComponent, ItemCreateComponent, ItemDisposeComponent, ItemViewComponent, ListItemViewComponent],
+    exports: [
+        ListItemViewComponent
+    ],
+    imports: [
+        CommonModule,
+        ItemRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FormInputModule,
+        NbCardModule,
+        NbSearchModule,
+        Ng2SmartTableModule,
+        NbButtonModule,
+        NbTooltipModule,
+        NbStepperModule,
+        NbSelectModule
+    ]
 })
 export class ItemModule {
 }

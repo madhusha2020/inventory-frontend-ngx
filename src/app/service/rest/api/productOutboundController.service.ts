@@ -18,6 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
+import { ProductOutbound } from '../model/productOutbound';
 import { ProductOutboundList } from '../model/productOutboundList';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -84,6 +85,48 @@ export class ProductOutboundControllerService {
         ];
 
         return this.httpClient.get<ProductOutboundList>(`${this.basePath}/product-outbound`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get outbound product by id
+     * 
+     * @param productOutboundId productOutboundId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getProductOutboundByIdUsingGET(productOutboundId: string, observe?: 'body', reportProgress?: boolean): Observable<ProductOutbound>;
+    public getProductOutboundByIdUsingGET(productOutboundId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductOutbound>>;
+    public getProductOutboundByIdUsingGET(productOutboundId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductOutbound>>;
+    public getProductOutboundByIdUsingGET(productOutboundId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (productOutboundId === null || productOutboundId === undefined) {
+            throw new Error('Required parameter productOutboundId was null or undefined when calling getProductOutboundByIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<ProductOutbound>(`${this.basePath}/product-outbound/${encodeURIComponent(String(productOutboundId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
