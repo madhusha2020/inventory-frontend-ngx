@@ -1,9 +1,18 @@
-<div class="row">
-  <div *ngFor="let productOutboundItem of productOutBoundItems" class="col-md-12">
-    <app-list-item-view
-      [itemId]="productOutboundItem.productOutboundItemId.itemId"
-      [qty]="productOutboundItem.qty"
-      defaultImage="../../../../../assets/images/image-placeholder.png"
-    ></app-list-item-view>
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="text-info">Order Items List</h5>
+      </div>
+    </div>
+  </nb-card-header>
+  <div class="row">
+    <div *ngFor="let productOutboundItem of productOutBoundItems" class="col-md-12">
+      <app-list-item-view
+        [itemId]="productOutboundItem.productOutboundItemId.itemId"
+        [qty]="productOutboundItem.qty"
+        defaultImage="../../../../../assets/images/image-placeholder.png"
+      ></app-list-item-view>
+    </div>
   </div>
-</div>
+</nb-card>

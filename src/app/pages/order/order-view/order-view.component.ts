@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {OrderControllerService, OrderItems} from '../../../service/rest';
+import {ActivatedRoute} from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-order-view',
@@ -7,9 +10,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderViewComponent implements OnInit {
 
-  constructor() { }
+  orderId: string;
+  orderItems: Array<OrderItems> = [];
 
-  ngOnInit(): void {
+  constructor(private  orderControllerService: OrderControllerService,
+              private route: ActivatedRoute) {
   }
 
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+        if (params.id) {
+          this.orderId = params.id;
+          this.getOrder(params.id);
+        } else {
+          Swal.fire('Error', 'Order not found', 'error');
+        }
+      }
+    );
+  }
+
+  getOrder(id: string) {
+    this.orderControllerService.getOrderByIdUsingGET(id).subscribe(response => {
+      console.log('OrderItems response :', response);
+      this.orderItems = response.orderItems;
+    });
+  }
+
+  activate() {
+
+  }
+
+  suspend() {
+
+  }
 }

@@ -9,6 +9,8 @@ import { OrderViewComponent } from './order-view/order-view.component';
 import { OrderMainAllComponent } from './order-main-all/order-main-all.component';
 import {NbButtonModule, NbCardModule, NbSearchModule, NbTooltipModule} from '@nebular/theme';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
+import {ItemModule} from '../item/item.module';
+import {PermissionModule} from '../shared/permission/permission.module';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
     NbButtonModule,
     NbTooltipModule,
     Ng2SmartTableModule,
-    NbSearchModule
+    NbSearchModule,
+    ItemModule,
+    PermissionModule
   ]
 })
 export class OrderModule { }
