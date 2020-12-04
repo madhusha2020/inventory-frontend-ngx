@@ -15,11 +15,11 @@
                       title="Employee Code"></app-input-default>
 
                     <app-input-default
-                      [field]="userName" placeholder="Enter email"
+                      [field]="email" placeholder="Enter email"
                       title="Email"></app-input-default>
 
                     <app-input-generated-password-default
-                      [field]="password" [userName]="userName" placeholder="Generated password"
+                      [field]="password" [userName]="email" placeholder="Generated password"
                       prefix="employee"
                       title="Password"></app-input-generated-password-default>
 
@@ -150,7 +150,7 @@
                              [name]="role.name"
                              type="checkbox">
                       <span class="box search-check"
-                            style="margin-left: 10px">{{role.name.replace('_', ' ').toUpperCase()}}</span>
+                            style="margin-left: 10px">{{role.name.split('_').join(' ').toUpperCase()}}</span>
                     </label>
                   </div>
                 </div>

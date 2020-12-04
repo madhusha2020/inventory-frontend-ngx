@@ -54,7 +54,7 @@ export class UserRoleMainComponent implements OnInit {
       console.log('Role Data :', response);
       response.roles.forEach(role => {
         role.statusDescription = ServiceUtil.getStatusDescription(role.status);
-        role.name = role.name.replace('_', ' ').toUpperCase();
+        role.name = role.name.split('_').join(' ').toUpperCase();
         this.roles.push(role);
       });
       this.source.load(this.roles);

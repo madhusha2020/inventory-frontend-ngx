@@ -12,8 +12,9 @@
 import { DeliveryEmployee } from './deliveryEmployee';
 
 
-export interface Employee { 
+export interface Employee {
     address?: string;
+  email?: string;
     callingname?: string;
     civilstatus?: string;
     code?: string;

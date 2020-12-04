@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AbstractControl} from '@angular/forms';
 import {NbDateService} from '@nebular/theme';
 
@@ -14,6 +14,7 @@ export class InputDatePickerFutureDefaultComponent implements OnInit {
   @Input() placeholder: string;
   @Input() field: AbstractControl;
   @Input() disableProperty: string = null;
+  @Output() changeEvent = new EventEmitter<any>();
 
   minDate: Date;
   maxDate: Date;
@@ -26,4 +27,8 @@ export class InputDatePickerFutureDefaultComponent implements OnInit {
     this.maxDate = this.dateService.addDay(this.dateService.today(), +15000);
   }
 
+  dateChange(event) {
+    console.log('Date Changed :', event);
+    this.changeEvent.emit(this.dateService.format(event, 'yyyy-MM-dd'));
+  }
 }

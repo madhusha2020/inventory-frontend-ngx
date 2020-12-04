@@ -8,6 +8,9 @@ import {ImageUploadControllerService} from '../../../../service/rest';
 })
 export class ImageUploadDefaultComponent implements OnInit {
 
+  @Input() category: string;
+  @Input() id: string;
+
   @Input() image: string;
   @Input() defaultImage: string;
   @Input() showButton = true;
@@ -23,6 +26,11 @@ export class ImageUploadDefaultComponent implements OnInit {
   ngOnInit(): void {
     if (this.image) {
       this.retrievedImage = 'data:image/jpeg;base64,' + this.image;
+    } else if (this.category != null) {
+      this.imageUploadControllerService.getImageUsingGET(this.category, this.id).subscribe(response => {
+        console.log('Photo response :', response);
+        this.retrievedImage = 'data:image/jpeg;base64,' + response.photo;
+      });
     }
   }
 

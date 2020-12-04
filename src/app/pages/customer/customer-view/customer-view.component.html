@@ -26,7 +26,8 @@
             <div *ngIf="editMode">
               <label class="form-label">Type</label>
               <div class="form-group">
-                <nb-select (selectedChange)="typeStateChange($event)" fullWidth placeholder="Select Type">
+                <nb-select (selectedChange)="typeStateChange($event)" [selected]="customer.type" fullWidth
+                           placeholder="Select Type">
                   <nb-option *ngFor="let item of customerTypes" title="{{item}}" value="{{item}}">
                     {{item}}
                   </nb-option>
@@ -105,7 +106,7 @@
                        [name]="role.name"
                        type="checkbox">
                 <span class="box search-check"
-                      style="margin-left: 10px">{{role.name.replace('_', ' ').toUpperCase()}}</span>
+                      style="margin-left: 10px">{{role.name.split('_').join(' ').toUpperCase()}}</span>
               </label>
             </div>
           </div>
@@ -140,9 +141,10 @@
 
           <div class="row">
             <div class="col-md-12">
-              <span (click)="updateCustomerPassword()" style="float: right"><button [disabled]="!customerPasswordForm.valid"
-                                                                                    nbButton
-                                                                                    status="info">Change Password</button></span>
+              <span (click)="updateCustomerPassword()" style="float: right"><button
+                [disabled]="!customerPasswordForm.valid"
+                nbButton
+                status="info">Change Password</button></span>
             </div>
           </div>
 

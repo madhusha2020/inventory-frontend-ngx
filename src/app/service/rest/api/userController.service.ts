@@ -181,9 +181,9 @@ export class UserControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getEmployeeByIdUsingGET(id: string, observe?: 'body', reportProgress?: boolean): Observable<CustomerUser>;
-    public getEmployeeByIdUsingGET(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerUser>>;
-    public getEmployeeByIdUsingGET(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerUser>>;
+    public getEmployeeByIdUsingGET(id: string, observe?: 'body', reportProgress?: boolean): Observable<EmployeeUser>;
+    public getEmployeeByIdUsingGET(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<EmployeeUser>>;
+    public getEmployeeByIdUsingGET(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<EmployeeUser>>;
     public getEmployeeByIdUsingGET(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -206,7 +206,7 @@ export class UserControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<CustomerUser>(`${this.basePath}/user/employee/${encodeURIComponent(String(id))}`,
+        return this.httpClient.get<EmployeeUser>(`${this.basePath}/user/employee/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

@@ -11,7 +11,7 @@ import {
     NbCardModule,
     NbSearchModule,
     NbSelectModule,
-    NbStepperModule,
+    NbStepperModule, NbTabsetModule,
     NbTooltipModule
 } from '@nebular/theme';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
@@ -32,7 +32,8 @@ import {FormInputModule} from '../shared/form-inputs/form-input.module';
         ReactiveFormsModule,
         NbStepperModule,
         FormInputModule,
-        NbSelectModule
+        NbSelectModule,
+        NbTabsetModule
     ]
 })
 export class EmployeeModule { }

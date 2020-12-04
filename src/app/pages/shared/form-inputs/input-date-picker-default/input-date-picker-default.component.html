@@ -5,7 +5,7 @@
            class="form-control"
            fullWidth
            nbInput [nbDatepicker]="picker">
-    <nb-datepicker #picker></nb-datepicker>
+    <nb-datepicker (dateChange)="dateChange($event)" #picker></nb-datepicker>
   </div>
   <app-error-list [field]="field"></app-error-list>
 </div>

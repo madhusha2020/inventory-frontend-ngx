@@ -1,1 +1,287 @@
-<p>employee-view works!</p>
+<div class="row">
+  <div class="col-12">
+    <nb-card size="small">
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Employee Details">
+          <h3>{{title}} Employee Details</h3>
+
+          <div class="margin row">
+
+            <div class="col-md-5">
+              <app-input-default
+                [disableProperty]="true"
+                [field]="code" placeholder="Enter employee code"
+                title="Employee Code"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="true"
+                [field]="email" placeholder="Enter email"
+                title="Email"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="disabledProperty"
+                [field]="name" placeholder="Enter full name"
+                title="Full Name"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="disabledProperty"
+                [field]="nic" placeholder="Enter NIC"
+                title="NIC"></app-input-default>
+
+            </div>
+            <div class="col-md-5" style="margin-top: 40px">
+              <app-image-upload-default (changeEvent)="imageUploadEvent($event)"
+                                        [id]="employee.id"
+                                        [showButton]="editMode"
+                                        category="employee"
+                                        defaultImage="../../../../../assets/images/image-placeholder.png">
+              </app-image-upload-default>
+            </div>
+
+          </div>
+
+          <div class="row" style="margin-left: 0px">
+            <div class="col-md-6">
+              <button (click)="enableEditMode()" nbButton status="warning">Edit</button>
+              <span class="margin"><button (click)="disabledEditMode()"
+                                           [disabled]="!editMode"
+                                           nbButton>Cancel</button></span>
+            </div>
+            <div class="col-md-6">
+              <span (click)="updateEmployeeDetails()" *ngIf="editMode"
+                    style="float: right; margin-left: 10px"><button [disabled]="!employeeForm.valid" nbButton
+                                                                    status="info">Save</button></span>
+              <span style="float: right"><button (click)="suspend()" [hidden]="employee.status != 1"
+                                                 nbButton status="danger">Suspend</button></span>
+              <span style="float: right"><button (click)="activate()" [hidden]="employee.status == 1"
+                                                 nbButton status="success">Activate</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+        <nb-tab tabTitle="Other Details">
+          <h3>{{title}} Other Details</h3>
+
+          <div class="margin row" style="margin-left: 0px">
+
+            <div class="col-md-5">
+
+              <div *ngIf="!editMode">
+                <app-input-default
+                  [disableProperty]="disabledProperty"
+                  [field]="nametitle" placeholder="Select Type"
+                  title="Title"></app-input-default>
+              </div>
+
+              <div *ngIf="!editMode">
+                <app-input-default
+                  [disableProperty]="disabledProperty"
+                  [field]="gender" placeholder="Select Type"
+                  title="Gender"></app-input-default>
+              </div>
+
+              <div *ngIf="!editMode">
+                <app-input-default
+                  [disableProperty]="disabledProperty"
+                  [field]="civilstatus" placeholder="Select Type"
+                  title="Civil Status"></app-input-default>
+              </div>
+
+              <div *ngIf="editMode">
+                <label class="form-label">Title</label>
+                <div class="form-group">
+                  <nb-select (selectedChange)="nameTitleStateChange($event)" fullWidth placeholder="Select Type"
+                             [selected]="employee.nametitle">
+                    <nb-option *ngFor="let item of nameTitleTypes" title="{{item}}" value="{{item}}">
+                      {{item}}
+                    </nb-option>
+                  </nb-select>
+                </div>
+              </div>
+
+              <div *ngIf="editMode">
+                <label class="form-label">Gender</label>
+                <div class="form-group">
+                  <nb-select (selectedChange)="genderStateChange($event)" fullWidth placeholder="Select Type"
+                             [selected]="employee.gender">
+                    <nb-option *ngFor="let item of genderTypes" title="{{item}}" value="{{item}}">
+                      {{item}}
+                    </nb-option>
+                  </nb-select>
+                </div>
+              </div>
+
+              <div *ngIf="editMode">
+                <label class="form-label">Civil Status</label>
+                <div class="form-group">
+                  <nb-select (selectedChange)="civilStateChange($event)" fullWidth placeholder="Select Type"
+                             [selected]="employee.civilstatus">
+                    <nb-option *ngFor="let item of civilStatusTypes" title="{{item}}" value="{{item}}">
+                      {{item}}
+                    </nb-option>
+                  </nb-select>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+
+              <div *ngIf="!editMode">
+                <app-input-default
+                  [disableProperty]="disabledProperty"
+                  [field]="designation" placeholder="Select Designation"
+                  title="Designation"></app-input-default>
+              </div>
+
+              <div *ngIf="!editMode">
+                <app-input-default
+                  [disableProperty]="disabledProperty"
+                  [field]="dobirth" placeholder="Select date of birth"
+                  title="Date of birth"></app-input-default>
+              </div>
+
+              <div *ngIf="!editMode">
+                <app-input-default
+                  [disableProperty]="disabledProperty"
+                  [field]="dorecruite" placeholder="Select date of recruited"
+                  title="Date of recruited"></app-input-default>
+              </div>
+
+              <div *ngIf="editMode">
+                <label class="form-label">Designation</label>
+                <div class="form-group">
+                  <nb-select (selectedChange)="designationStateChange($event)" fullWidth
+                             placeholder="Select Designation"
+                             [selected]="employee.designation">
+                    <nb-option *ngFor="let item of designations" title="{{item}}" value="{{item}}">
+                      {{item}}
+                    </nb-option>
+                  </nb-select>
+                </div>
+              </div>
+
+              <div *ngIf="editMode">
+              <app-input-date-picker-max-except-today-default
+                [field]="dobirth" placeholder="Select date of birth"
+                (changeEvent)="dobChangeEvent($event)"
+                title="Date of birth"></app-input-date-picker-max-except-today-default>
+              </div>
+
+              <div *ngIf="editMode">
+                <app-input-date-picker-max-except-today-default
+                  [field]="dorecruite" placeholder="Select date of recruited"
+                  (changeEvent)="dorChangeEvent($event)"
+                  title="Date of recruited"></app-input-date-picker-max-except-today-default>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <span (click)="updateEmployeeDetails()" *ngIf="editMode"
+                    style="float: right"><button [disabled]="!employeeForm.valid" nbButton
+                                                 status="info">Save</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+        <nb-tab tabTitle="Contact Details">
+          <h3>{{title}} Contact Details</h3>
+
+          <div class="margin">
+
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="address" placeholder="Enter address"
+              title="Address"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="mobile" placeholder="Enter mobile no"
+              title="Mobile No"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="land" placeholder="Enter telephone no"
+              title="Telephone No"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="callingname" placeholder="Enter calling name"
+              title="Calling Name"></app-input-default>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <span (click)="updateEmployeeDetails()" *ngIf="editMode"
+                    style="float: right"><button [disabled]="!employeeForm.valid" nbButton
+                                                 status="info">Save</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+        <nb-tab tabTitle="Assigned Roles">
+          <h3>{{title}} Assigned Roles</h3>
+
+          <div class="row scroll">
+            <div *ngFor="let role of roles" class="col-md-12"
+                 style="margin-bottom: 0px; text-align: left;">
+              <label style="margin-left: 15px">
+                <input (change)="roleStateChange($event, role)"
+                       [checked]="assignedRoles.has(role.name)"
+                       [disabled]="!editMode"
+                       [id]="role.name"
+                       [name]="role.name"
+                       type="checkbox">
+                <span class="box search-check"
+                      style="margin-left: 10px">{{role.name.split('_').join(' ').toUpperCase()}}</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 15px">
+            <div class="col-md-12">
+              <span (click)="updateEmployeeDetails()" *ngIf="editMode"
+                    style="float: right"><button [disabled]="!employeeForm.valid" nbButton
+                                                 status="info">Save</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+        <nb-tab tabTitle="Change Password">
+          <h3>Change Password</h3>
+
+          <div class="margin">
+
+            <app-input-default
+              [field]="password" placeholder="Enter new password" title="New Password"
+              type="password"></app-input-default>
+
+            <app-input-comparator-default
+              [comparableField]="password" [field]="confirmPassword" placeholder="Enter confirm new password"
+              title="Confirm New Password" type="password"></app-input-comparator-default>
+
+            <app-input-default
+              [field]="oldPassword" placeholder="Enter old password" title="Old Password"
+              type="password"></app-input-default>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <span (click)="updateCustomerPassword()" style="float: right"><button
+                [disabled]="!employeePasswordForm.valid"
+                nbButton
+                status="info">Change Password</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </div>
+</div>

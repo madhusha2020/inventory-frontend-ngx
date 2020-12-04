@@ -33,8 +33,8 @@ export class EmployeeCreateComponent implements OnInit {
               private router: Router) {
   }
 
-  get userName() {
-    return this.employeeForm.get('userName');
+  get email() {
+    return this.employeeForm.get('email');
   }
 
   get password() {
@@ -96,7 +96,7 @@ export class EmployeeCreateComponent implements OnInit {
   ngOnInit(): void {
     this.employeeForm = this.formBuilder.group({
       code: [null, [Validators.required]],
-      userName: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+      email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [null, [Validators.required, Validators.minLength(8)]],
       nic: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(12)]],
       nametitle: [ServiceUtil.getMrTitleType(), [Validators.required]],
@@ -157,11 +157,12 @@ export class EmployeeCreateComponent implements OnInit {
   }
 
   submit() {
-    this.user.userName = this.userName.value;
+    this.user.userName = this.email.value;
     this.user.password = this.password.value;
     this.user.userId = this.tokenService.getUserName();
 
     this.employee.code = this.code.value;
+    this.employee.email = this.email.value;
     this.employee.name = this.name.value;
     this.employee.nametitle = this.nametitle.value;
     this.employee.gender = this.gender.value;

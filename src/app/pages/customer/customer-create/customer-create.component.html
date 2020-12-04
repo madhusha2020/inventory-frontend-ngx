@@ -71,7 +71,7 @@
                              [name]="role.name"
                              type="checkbox">
                       <span class="box search-check"
-                            style="margin-left: 10px">{{role.name.replace('_',' ').toUpperCase()}}</span>
+                            style="margin-left: 10px">{{role.name.split('_').join(' ').toUpperCase()}}</span>
                     </label>
                   </div>
                 </div>
