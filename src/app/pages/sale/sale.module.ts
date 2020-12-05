@@ -7,18 +7,20 @@ import { SaleMainComponent } from './sale-main/sale-main.component';
 import { SaleViewComponent } from './sale-view/sale-view.component';
 import {NbButtonModule, NbCardModule, NbSearchModule, NbTooltipModule} from '@nebular/theme';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
+import {ItemModule} from '../item/item.module';
 
 
 @NgModule({
   declarations: [SaleComponent, SaleMainComponent, SaleViewComponent],
-  imports: [
-    CommonModule,
-    SaleRoutingModule,
-    NbCardModule,
-    NbSearchModule,
-    Ng2SmartTableModule,
-    NbButtonModule,
-    NbTooltipModule
-  ]
+    imports: [
+        CommonModule,
+        SaleRoutingModule,
+        NbCardModule,
+        NbSearchModule,
+        Ng2SmartTableModule,
+        NbButtonModule,
+        NbTooltipModule,
+        ItemModule
+    ]
 })
 export class SaleModule { }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {OrderControllerService, OrderItems} from '../../../service/rest';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import Swal from 'sweetalert2';
 import {TokenService} from '../../../service/auth/token.service';
 
@@ -16,8 +16,7 @@ export class OrderViewComponent implements OnInit {
 
   constructor(private orderControllerService: OrderControllerService,
               private tokenService: TokenService,
-              private route: ActivatedRoute,
-              private router: Router) {
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
