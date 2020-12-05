@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {OrderControllerService, OrderItems} from '../../../service/rest';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
+import {TokenService} from '../../../service/auth/token.service';
 
 @Component({
   selector: 'ngx-order-view',
@@ -13,8 +14,10 @@ export class OrderViewComponent implements OnInit {
   orderId: string;
   orderItems: Array<OrderItems> = [];
 
-  constructor(private  orderControllerService: OrderControllerService,
-              private route: ActivatedRoute) {
+  constructor(private orderControllerService: OrderControllerService,
+              private tokenService: TokenService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -34,13 +37,5 @@ export class OrderViewComponent implements OnInit {
       console.log('OrderItems response :', response);
       this.orderItems = response.orderItems;
     });
-  }
-
-  activate() {
-
-  }
-
-  suspend() {
-
   }
 }

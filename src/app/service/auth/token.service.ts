@@ -15,6 +15,11 @@ export class TokenService {
   }
 
   login(user: User) {
+    localStorage.removeItem(Constant.USER_NAME);
+    localStorage.removeItem(Constant.TOKEN);
+    localStorage.removeItem(Constant.AUTHORITIES);
+    localStorage.removeItem(Constant.CART);
+    localStorage.removeItem(Constant.ALERT_COUNT);
     this.authenticationControllerService.loginUsingPOST(user).subscribe(response => {
         if (response && response.token) {
           this.saveTokenData(response);

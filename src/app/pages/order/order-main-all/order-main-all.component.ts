@@ -87,7 +87,7 @@ export class OrderMainAllComponent implements OnInit {
 
   onUserRowSelect(event): void {
     console.log(event);
-    this.router.navigate(['/pages/order/view'], {queryParams: {id: event.data.id}});
+    this.router.navigate(['/pages/order/main-view'], {queryParams: {id: event.data.id}});
   }
 
   resetFilter(): void {
