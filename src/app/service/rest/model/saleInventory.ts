@@ -14,7 +14,7 @@ import { Sale } from './sale';
 import { SaleInventoryId } from './saleInventoryId';
 
 
-export interface SaleInventory {
+export interface SaleInventory { 
     createdby?: string;
     createddate?: Date;
     description?: string;
@@ -30,5 +30,4 @@ export interface SaleInventory {
     statusDescription?: string;
     unitprice?: number;
     userId?: string;
-  itemId?: number;
 }

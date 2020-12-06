@@ -4,14 +4,14 @@
       <div class="col-md-6">
         <h5 class="text-info">Order Item List</h5>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" *ngIf="order.status == 5">
         <button style="float: right; margin-left: 10px" nbButton status="success" (click)="approve()">APPROVE</button>
         <button style="float: right" nbButton status="danger" (click)="suspend()">SUSPEND</button>
       </div>
     </div>
   </nb-card-header>
   <div class="row">
-    <div *ngFor="let orderItem of orderItems" class="col-md-12">
+    <div *ngFor="let orderItem of order.orderItems" class="col-md-12">
       <app-list-item-view
         [itemId]="orderItem.orderItemId.itemId"
         [qty]="orderItem.qty"

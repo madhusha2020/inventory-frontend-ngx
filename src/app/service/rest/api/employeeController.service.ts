@@ -219,6 +219,67 @@ export class EmployeeControllerService {
     }
 
     /**
+     * Get employee list by designation
+     * 
+     * @param designation designation
+     * @param offset The number of items to skip before starting to collect the result set.
+     * @param limit The numbers of items to return.
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getByEmployeeDesignationUsingGET(designation: string, offset: number, limit: number, observe?: 'body', reportProgress?: boolean): Observable<EmployeeList>;
+    public getByEmployeeDesignationUsingGET(designation: string, offset: number, limit: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<EmployeeList>>;
+    public getByEmployeeDesignationUsingGET(designation: string, offset: number, limit: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<EmployeeList>>;
+    public getByEmployeeDesignationUsingGET(designation: string, offset: number, limit: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (designation === null || designation === undefined) {
+            throw new Error('Required parameter designation was null or undefined when calling getByEmployeeDesignationUsingGET.');
+        }
+
+        if (offset === null || offset === undefined) {
+            throw new Error('Required parameter offset was null or undefined when calling getByEmployeeDesignationUsingGET.');
+        }
+
+        if (limit === null || limit === undefined) {
+            throw new Error('Required parameter limit was null or undefined when calling getByEmployeeDesignationUsingGET.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (offset !== undefined && offset !== null) {
+            queryParameters = queryParameters.set('offset', <any>offset);
+        }
+        if (limit !== undefined && limit !== null) {
+            queryParameters = queryParameters.set('limit', <any>limit);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<EmployeeList>(`${this.basePath}/employee/${encodeURIComponent(String(designation))}`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Search employees
      * 
      * @param searchFilter searchFilter

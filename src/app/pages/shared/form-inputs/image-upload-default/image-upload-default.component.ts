@@ -29,7 +29,9 @@ export class ImageUploadDefaultComponent implements OnInit {
     } else if (this.category != null) {
       this.imageUploadControllerService.getImageUsingGET(this.category, this.id).subscribe(response => {
         console.log('Photo response :', response);
-        this.retrievedImage = 'data:image/jpeg;base64,' + response.photo;
+        if (response.photo) {
+          this.retrievedImage = 'data:image/jpeg;base64,' + response.photo;
+        }
       });
     }
   }

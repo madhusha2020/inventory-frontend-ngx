@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {OrderControllerService, OrderItems} from '../../../service/rest';
+import {Order, OrderControllerService} from '../../../service/rest';
 import {TokenService} from '../../../service/auth/token.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 export class OrderMainViewComponent implements OnInit {
 
   orderId: string;
-  orderItems: Array<OrderItems> = [];
+  order: Order = {};
 
   constructor(private orderControllerService: OrderControllerService,
               private tokenService: TokenService,
@@ -35,7 +35,7 @@ export class OrderMainViewComponent implements OnInit {
   getOrder(id: string) {
     this.orderControllerService.getOrderByIdUsingGET(id).subscribe(response => {
       console.log('OrderItems response :', response);
-      this.orderItems = response.orderItems;
+      this.order = response;
     });
   }
 

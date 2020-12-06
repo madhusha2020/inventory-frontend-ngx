@@ -9,7 +9,6 @@
   <div class="row">
     <div *ngFor="let saleInventory of saleInventoryList" class="col-md-12">
       <app-list-item-view
-        [itemId]="saleInventory.itemId"
         [qty]="saleInventory.qty"
         defaultImage="../../../../../assets/images/image-placeholder.png"
       ></app-list-item-view>

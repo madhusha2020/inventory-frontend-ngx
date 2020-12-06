@@ -31,6 +31,10 @@ export class OrderMainComponent implements OnInit {
         title: 'Order#',
         type: 'number',
       },
+      doordered: {
+        title: 'Order Date',
+        type: 'string',
+      },
       name: {
         title: 'Customer Name',
         type: 'string',

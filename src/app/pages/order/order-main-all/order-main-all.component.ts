@@ -25,6 +25,14 @@ export class OrderMainAllComponent implements OnInit {
         title: 'Order#',
         type: 'number',
       },
+      doordered: {
+        title: 'Order Date',
+        type: 'string',
+      },
+      dosold: {
+        title: 'Sold Date',
+        type: 'string',
+      },
       name: {
         title: 'Customer Name',
         type: 'string',

@@ -16,7 +16,7 @@ export interface ProductOutbound {
     code?: string;
     createdby?: string;
     createddate?: Date;
-    date?: Date;
+    date?: string;
     description?: string;
     id?: number;
     itemCount?: number;
