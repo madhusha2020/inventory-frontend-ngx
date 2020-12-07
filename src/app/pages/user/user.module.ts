@@ -4,7 +4,13 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { UserMainComponent } from './user-main/user-main.component';
 import { UserComponent } from './user.component';
-import {NbButtonModule, NbCardModule, NbIconModule, NbSearchModule, NbStepperModule} from '@nebular/theme';
+import {
+    NbButtonModule,
+    NbCardModule,
+    NbIconModule,
+    NbSearchModule,
+    NbStepperModule, NbTabsetModule
+} from '@nebular/theme';
 import {DashboardModule} from '../dashboard/dashboard.module';
 import { UserRoleComponent } from './user-role/user-role.component';
 import {FormInputModule} from '../shared/form-inputs/form-input.module';
@@ -17,18 +23,19 @@ import { UserRoleViewComponent } from './user-role-view/user-role-view.component
 
 @NgModule({
   declarations: [UserMainComponent, UserComponent, UserRoleComponent, UserRoleMainComponent, UserViewComponent, UserRoleViewComponent],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    NbCardModule,
-    NbIconModule,
-    DashboardModule,
-    NbButtonModule,
-    NbStepperModule,
-    FormInputModule,
-    ReactiveFormsModule,
-    NbSearchModule,
-    Ng2SmartTableModule
-  ]
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        NbCardModule,
+        NbIconModule,
+        DashboardModule,
+        NbButtonModule,
+        NbStepperModule,
+        FormInputModule,
+        ReactiveFormsModule,
+        NbSearchModule,
+        Ng2SmartTableModule,
+        NbTabsetModule
+    ]
 })
 export class UserModule { }

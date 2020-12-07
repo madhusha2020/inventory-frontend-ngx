@@ -1,1 +1,65 @@
-<p>user-view works!</p>
+<div class="row">
+  <div class="col-12">
+    <nb-card size="small">
+      <nb-tabset fullWidth>
+
+        <nb-tab tabTitle="User Details">
+          <h3>User Details</h3>
+
+          <div class="margin">
+
+            <app-input-default
+              [disableProperty]="true"
+              [field]="username" placeholder="Enter user name"
+              title="User Name"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="true"
+              [field]="failedAttempts" placeholder="Enter failed Attempts"
+              title="Failed Attempts"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="true"
+              [field]="statusDescription" placeholder="Enter status description"
+              title="Status"></app-input-default>
+
+
+            <div class="row" style="margin-left: 0px">
+              <div class="col-md-12">
+                <button (click)="activate()" *ngIf="user.status == 10" nbButton status="success"
+                        style="float: right; margin-left: 10px">ACTIVATE
+                </button>
+                <button (click)="suspend()" *ngIf="user.status == 1" nbButton status="danger" style="float: right">SUSPEND
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </nb-tab>
+
+        <nb-tab tabTitle="Assigned Roles">
+          <h3>Assigned Roles</h3>
+
+          <div class="row scroll">
+            <div *ngFor="let role of roles" class="col-md-12"
+                 style="margin-bottom: 0px; text-align: left;">
+              <label style="margin-left: 15px">
+                <input (change)="roleStateChange($event, role)"
+                       [checked]="assignedRoles.has(role.name)"
+                       disabled="true"
+                       [id]="role.name"
+                       [name]="role.name"
+                       type="checkbox">
+                <span class="box search-check"
+                      style="margin-left: 10px">{{role.name.split('_').join(' ').toUpperCase()}}</span>
+              </label>
+            </div>
+          </div>
+
+        </nb-tab>
+
+      </nb-tabset>
+    </nb-card>
+  </div>
+</div>

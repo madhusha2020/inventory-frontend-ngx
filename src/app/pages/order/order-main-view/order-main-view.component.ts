@@ -50,7 +50,7 @@ export class OrderMainViewComponent implements OnInit {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
-        this.orderControllerService.approveOrderUsingPOST({
+        this.orderControllerService.approveOrderUsingPUT({
           id: Number(this.orderId),
           userId: this.tokenService.getUserName()
         }).subscribe(response => {
@@ -76,7 +76,7 @@ export class OrderMainViewComponent implements OnInit {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
-        this.orderControllerService.rejectOrderUsingPOST({
+        this.orderControllerService.rejectOrderUsingPUT({
           id: Number(this.orderId),
           userId: this.tokenService.getUserName()
         }).subscribe(response => {

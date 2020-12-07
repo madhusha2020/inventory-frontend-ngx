@@ -20,7 +20,10 @@ import { Observable }                                        from 'rxjs/Observab
 
 import { CustomerUser } from '../model/customerUser';
 import { EmployeeUser } from '../model/employeeUser';
+import { TransactionRequest } from '../model/transactionRequest';
+import { User } from '../model/user';
 import { UserList } from '../model/userList';
+import { UserWithUserRoles } from '../model/userWithUserRoles';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -57,6 +60,53 @@ export class UserControllerService {
         return false;
     }
 
+
+    /**
+     * Activate user
+     * 
+     * @param transactionRequest transactionRequest
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public activateUserUsingPUT(transactionRequest: TransactionRequest, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public activateUserUsingPUT(transactionRequest: TransactionRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public activateUserUsingPUT(transactionRequest: TransactionRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public activateUserUsingPUT(transactionRequest: TransactionRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (transactionRequest === null || transactionRequest === undefined) {
+            throw new Error('Required parameter transactionRequest was null or undefined when calling activateUserUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<User>(`${this.basePath}/user/activate`,
+            transactionRequest,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
 
     /**
      * Get all active users
@@ -217,6 +267,48 @@ export class UserControllerService {
     }
 
     /**
+     * Get user by user name
+     * 
+     * @param userName userName
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getUserByUserNameUsingGET(userName: string, observe?: 'body', reportProgress?: boolean): Observable<UserWithUserRoles>;
+    public getUserByUserNameUsingGET(userName: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserWithUserRoles>>;
+    public getUserByUserNameUsingGET(userName: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserWithUserRoles>>;
+    public getUserByUserNameUsingGET(userName: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (userName === null || userName === undefined) {
+            throw new Error('Required parameter userName was null or undefined when calling getUserByUserNameUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<UserWithUserRoles>(`${this.basePath}/user/${encodeURIComponent(String(userName))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Save customer
      * 
      * @param customerUser customerUser
@@ -311,6 +403,53 @@ export class UserControllerService {
     }
 
     /**
+     * Suspend user
+     * 
+     * @param transactionRequest transactionRequest
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public suspendUserUsingPUT(transactionRequest: TransactionRequest, observe?: 'body', reportProgress?: boolean): Observable<User>;
+    public suspendUserUsingPUT(transactionRequest: TransactionRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<User>>;
+    public suspendUserUsingPUT(transactionRequest: TransactionRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<User>>;
+    public suspendUserUsingPUT(transactionRequest: TransactionRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (transactionRequest === null || transactionRequest === undefined) {
+            throw new Error('Required parameter transactionRequest was null or undefined when calling suspendUserUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<User>(`${this.basePath}/user/suspend`,
+            transactionRequest,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Update customer
      * 
      * @param customerUser customerUser
@@ -395,6 +534,53 @@ export class UserControllerService {
 
         return this.httpClient.put<EmployeeUser>(`${this.basePath}/user/employee`,
             employeeUser,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update user
+     * 
+     * @param userWithUserRoles userWithUserRoles
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateUserUsingPUT(userWithUserRoles: UserWithUserRoles, observe?: 'body', reportProgress?: boolean): Observable<UserWithUserRoles>;
+    public updateUserUsingPUT(userWithUserRoles: UserWithUserRoles, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserWithUserRoles>>;
+    public updateUserUsingPUT(userWithUserRoles: UserWithUserRoles, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserWithUserRoles>>;
+    public updateUserUsingPUT(userWithUserRoles: UserWithUserRoles, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (userWithUserRoles === null || userWithUserRoles === undefined) {
+            throw new Error('Required parameter userWithUserRoles was null or undefined when calling updateUserUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<UserWithUserRoles>(`${this.basePath}/user`,
+            userWithUserRoles,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

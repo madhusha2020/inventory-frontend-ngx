@@ -3,6 +3,7 @@ import {User, UserControllerService} from '../../../service/rest';
 import {LocalDataSource} from 'ng2-smart-table';
 import {NbSearchService} from '@nebular/theme';
 import {ServiceUtil} from '../../../service/util/service-util';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-user-main',
@@ -31,7 +32,8 @@ export class UserMainComponent implements OnInit {
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private userControllerService: UserControllerService,
-              private searchService: NbSearchService) {
+              private searchService: NbSearchService,
+              private router: Router) {
 
     this.searchService.onSearchSubmit()
       .subscribe((data: any) => {
@@ -62,6 +64,7 @@ export class UserMainComponent implements OnInit {
 
   onUserRowSelect(event): void {
     console.log(event);
+    this.router.navigate(['/pages/user/view'], {queryParams: {id: event.data.userName}});
   }
 
   resetFilter(): void {

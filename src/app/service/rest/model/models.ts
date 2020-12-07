@@ -45,6 +45,7 @@ export * from './user';
 export * from './userList';
 export * from './userRole';
 export * from './userRoleId';
+export * from './userWithUserRoles';
 export * from './vehicle';
 export * from './vehicleFacility';
 export * from './vehicleType';
