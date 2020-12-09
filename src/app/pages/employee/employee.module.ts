@@ -17,6 +17,7 @@ import {
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormInputModule} from '../shared/form-inputs/form-input.module';
+import {PermissionModule} from '../shared/permission/permission.module';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {FormInputModule} from '../shared/form-inputs/form-input.module';
         NbStepperModule,
         FormInputModule,
         NbSelectModule,
-        NbTabsetModule
+        NbTabsetModule,
+        PermissionModule
     ]
 })
 export class EmployeeModule { }

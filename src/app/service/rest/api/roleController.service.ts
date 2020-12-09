@@ -170,6 +170,48 @@ export class RoleControllerService {
     }
 
     /**
+     * Get role by role name
+     * 
+     * @param roleName roleName
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getRoleByRoleNameUsingGET(roleName: string, observe?: 'body', reportProgress?: boolean): Observable<Role>;
+    public getRoleByRoleNameUsingGET(roleName: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Role>>;
+    public getRoleByRoleNameUsingGET(roleName: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Role>>;
+    public getRoleByRoleNameUsingGET(roleName: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (roleName === null || roleName === undefined) {
+            throw new Error('Required parameter roleName was null or undefined when calling getRoleByRoleNameUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Role>(`${this.basePath}/role/${encodeURIComponent(String(roleName))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Save role
      * 
      * @param role role
@@ -206,6 +248,53 @@ export class RoleControllerService {
         }
 
         return this.httpClient.post<Role>(`${this.basePath}/role`,
+            role,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update role
+     * 
+     * @param role role
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateUserRoleUsingPUT(role: Role, observe?: 'body', reportProgress?: boolean): Observable<Role>;
+    public updateUserRoleUsingPUT(role: Role, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Role>>;
+    public updateUserRoleUsingPUT(role: Role, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Role>>;
+    public updateUserRoleUsingPUT(role: Role, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (role === null || role === undefined) {
+            throw new Error('Required parameter role was null or undefined when calling updateUserRoleUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<Role>(`${this.basePath}/role`,
             role,
             {
                 withCredentials: this.configuration.withCredentials,

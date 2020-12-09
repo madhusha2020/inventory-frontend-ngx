@@ -19,6 +19,7 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {FormInputModule} from '../shared/form-inputs/form-input.module';
 import {CustomerCreateComponent} from './customer-create/customer-create.component';
 import {CustomerViewComponent} from './customer-view/customer-view.component';
+import {PermissionModule} from '../shared/permission/permission.module';
 
 @NgModule({
   declarations: [
@@ -26,28 +27,29 @@ import {CustomerViewComponent} from './customer-view/customer-view.component';
     CustomerComponent,
     CustomerCreateComponent,
     CustomerViewComponent],
-  imports: [
-    CommonModule,
-    CustomerRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ThemeModule,
-    NbTabsetModule,
-    NbRouteTabsetModule,
-    NbStepperModule,
-    NbCardModule,
-    NbButtonModule,
-    NbListModule,
-    NbAccordionModule,
-    NbUserModule,
-    Ng2SmartTableModule,
-    NbSearchModule,
-    NbSpinnerModule,
-    NbTooltipModule,
-    FormInputModule,
-    NbIconModule,
-    NbSelectModule,
-  ],
+    imports: [
+        CommonModule,
+        CustomerRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ThemeModule,
+        NbTabsetModule,
+        NbRouteTabsetModule,
+        NbStepperModule,
+        NbCardModule,
+        NbButtonModule,
+        NbListModule,
+        NbAccordionModule,
+        NbUserModule,
+        Ng2SmartTableModule,
+        NbSearchModule,
+        NbSpinnerModule,
+        NbTooltipModule,
+        FormInputModule,
+        NbIconModule,
+        NbSelectModule,
+        PermissionModule,
+    ],
 })
 export class CustomerModule {
 }
