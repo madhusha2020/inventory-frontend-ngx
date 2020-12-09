@@ -67,8 +67,8 @@
                   <div class="col-md-5">
 
                     <app-input-default
-                      [field]="testperiod" placeholder="Enter test periods"
-                      title="Test Periods"></app-input-default>
+                      [field]="testperiod" placeholder="Enter no of months"
+                      title="Test Periods (Months)"></app-input-default>
 
                     <label class="form-label">Unit</label>
                     <div class="form-group">
@@ -82,7 +82,7 @@
 
                     <app-input-default
                       [field]="weightvolume" placeholder="Enter weight or volume"
-                      title="Weight / Volume"></app-input-default>
+                      title="Unit Weight / Volume"></app-input-default>
 
                   </div>
 
@@ -95,10 +95,12 @@
                 <div class="margin">
 
                   <app-input-default
+                    [hidden]="true"
                     [field]="initqty" placeholder="Enter initial quantity"
                     title="Initial Quantity"></app-input-default>
 
                   <app-input-default
+                    [hidden]="true"
                     [field]="qty" placeholder="Enter available quantity"
                     title="Available Quantity"></app-input-default>
 
