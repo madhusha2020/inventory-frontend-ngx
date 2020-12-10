@@ -13,6 +13,7 @@ import {ProductOutboundControllerService} from './api/productOutboundController.
 import {DeliveryControllerService} from './api/deliveryController.service';
 import {SaleControllerService} from './api/saleController.service';
 import {NotificationControllerService} from './api/notificationController.service';
+import {DiscountControllerService} from './api/discountController.service';
 
 @NgModule({
   imports: [],
@@ -22,6 +23,7 @@ import {NotificationControllerService} from './api/notificationController.servic
     AuthenticationControllerService,
     CustomerControllerService,
     DeliveryControllerService,
+	  DiscountControllerService,
     EmployeeControllerService,
     ImageUploadControllerService,
     ItemControllerService,

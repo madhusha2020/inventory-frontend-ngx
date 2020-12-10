@@ -2,12 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {ShoppingCartService} from '../../../service/shopping-cart/shopping-cart.service';
 import {
   Customer,
+  DiscountControllerService,
   Item,
   ItemControllerService,
   Order,
   OrderControllerService,
   OrderItems,
-  OrderItemsList
+  OrderItemsList,
+  TransactionDetails
 } from '../../../service/rest';
 import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
@@ -35,10 +37,12 @@ export class ShoppingCartComponent implements OnInit {
   customer: Customer = {};
   orderItems: Array<OrderItems> = [];
   orderItemsList: OrderItemsList = {};
+  transactionDetails: TransactionDetails = {};
 
   constructor(private itemControllerService: ItemControllerService,
               private orderControllerService: OrderControllerService,
               private shoppingCartService: ShoppingCartService,
+              private discountControllerService: DiscountControllerService,
               private tokenService: TokenService,
               private router: Router) {
   }
@@ -121,24 +125,47 @@ export class ShoppingCartComponent implements OnInit {
       this.shoppingCartService.setAmount(this.subTotal);
       console.log('Place order request ', this.orderItemsList);
 
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'Place order : {0}'.replace('{0}', this.subTotal.toLocaleString('en-US', {
+      this.discountControllerService.getTransactionDetailsUsingPOST({
+        category: 'customer',
+        userName: this.customer.email,
+        total: this.subTotal
+      }).subscribe(response => {
+        this.transactionDetails = response;
+        console.log('Transaction Details :', this.transactionDetails);
+
+        let text = 'Order sub total : {0} <br> Discount : {1} <br> Order total : {2}'
+          .replace('{0}', response.total.toLocaleString('en-US', {
           style: 'currency',
           currency: 'LKR'
-        })),
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No'
-      }).then((result) => {
-        if (result.value) {
-          this.orderControllerService.preOrderValidateUsingPOST(this.orderItemsList).subscribe(response => {
-            this.router.navigate(['/pages/shopping-cart-payment'], {state: {order: this.orderItemsList}});
-          });
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          // Canceled
-        }
+        })).replace('{1}', response.discount.toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'LKR'
+        })).replace('{2}', response.totalWithDiscount.toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'LKR'
+        }));
+
+        Swal.fire({
+          title: 'Are you sure?',
+          // text: 'Place order : {0}'.replace('{0}', this.transactionDetails.totalWithDiscount.toLocaleString('en-US', {
+          //   style: 'currency',
+          //   currency: 'LKR'
+          // })),
+          html: text,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'No'
+        }).then((result) => {
+          if (result.value) {
+            this.orderControllerService.preOrderValidateUsingPOST(this.orderItemsList).subscribe(placeOrderResponse => {
+              this.router.navigate(['/pages/shopping-cart-payment'], {state: {order: this.orderItemsList}});
+            });
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            // Canceled
+          }
+        });
+
       });
 
     } else {

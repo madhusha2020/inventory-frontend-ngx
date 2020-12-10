@@ -29,6 +29,10 @@ export class OrderMainAllComponent implements OnInit {
         title: 'Order Date',
         type: 'string',
       },
+      saleId: {
+        title: 'Sale#',
+        type: 'number',
+      },
       dosold: {
         title: 'Sold Date',
         type: 'string',
@@ -87,6 +91,7 @@ export class OrderMainAllComponent implements OnInit {
       console.log('All Orders Data :', response);
       response.orders.forEach(order => {
         order.statusDescription = ServiceUtil.getStatusDescription(order.status);
+        order.saleId = order.sale.id;
         this.orderLists.push(order);
       });
       this.source.load(this.orderLists);
