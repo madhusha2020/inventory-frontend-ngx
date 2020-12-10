@@ -9,16 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Inventory } from './inventory';
 
 
-export interface TransactionDetails { 
-    category?: string;
+export interface InventoryList { 
     description?: string;
-    discount?: number;
+    inventoryList?: Array<Inventory>;
     responseCode?: string;
     responseValues?: Array<string>;
-    total?: number;
-    totalWithDiscount?: number;
-    type?: string;
-    userName?: string;
 }

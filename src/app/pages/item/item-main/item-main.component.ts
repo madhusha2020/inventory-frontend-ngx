@@ -83,7 +83,7 @@ export class ItemMainComponent implements OnInit {
   }
 
   fetchItems() {
-    this.itemControllerService.getAllItemsUsingGET(this.offset, this.limit).subscribe(response => {
+    this.itemControllerService.getAllItemsUsingGET1(this.offset, this.limit).subscribe(response => {
       console.log('Item Data :', response);
       response.itemList.forEach(item => {
         item.statusDescription = ServiceUtil.getStatusDescription(item.status);

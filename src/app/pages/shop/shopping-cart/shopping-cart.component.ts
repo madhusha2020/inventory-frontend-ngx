@@ -48,7 +48,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.itemControllerService.getAllItemsUsingGET(this.offset, this.limit).subscribe(response => {
+    this.itemControllerService.getAllItemsUsingGET1(this.offset, this.limit).subscribe(response => {
       this.itemList = response.itemList;
       this.shoppingCartService.getItemMap().forEach((qty, itemId) => {
         this.itemList.forEach(item => {

@@ -15,6 +15,7 @@ export * from './employeeUser';
 export * from './imageModel';
 export * from './inventory';
 export * from './inventoryItem';
+export * from './inventoryList';
 export * from './item';
 export * from './itemList';
 export * from './module';

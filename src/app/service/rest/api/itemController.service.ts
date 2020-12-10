@@ -123,17 +123,17 @@ export class ItemControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllItemsUsingGET(offset: number, limit: number, observe?: 'body', reportProgress?: boolean): Observable<ItemList>;
-    public getAllItemsUsingGET(offset: number, limit: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ItemList>>;
-    public getAllItemsUsingGET(offset: number, limit: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ItemList>>;
-    public getAllItemsUsingGET(offset: number, limit: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAllItemsUsingGET1(offset: number, limit: number, observe?: 'body', reportProgress?: boolean): Observable<ItemList>;
+    public getAllItemsUsingGET1(offset: number, limit: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ItemList>>;
+    public getAllItemsUsingGET1(offset: number, limit: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ItemList>>;
+    public getAllItemsUsingGET1(offset: number, limit: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (offset === null || offset === undefined) {
-            throw new Error('Required parameter offset was null or undefined when calling getAllItemsUsingGET.');
+            throw new Error('Required parameter offset was null or undefined when calling getAllItemsUsingGET1.');
         }
 
         if (limit === null || limit === undefined) {
-            throw new Error('Required parameter limit was null or undefined when calling getAllItemsUsingGET.');
+            throw new Error('Required parameter limit was null or undefined when calling getAllItemsUsingGET1.');
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
