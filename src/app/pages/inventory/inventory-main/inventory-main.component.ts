@@ -77,7 +77,7 @@ export class InventoryMainComponent implements OnInit {
   }
 
   fetchInventories() {
-    this.inventoryControllerService.getAllItemsUsingGET().subscribe(response => {
+    this.inventoryControllerService.getAllInventoryItemsUsingGET().subscribe(response => {
       console.log('Inventory Data :', response);
       response.inventoryList.forEach(inventory => {
         inventory.statusDescription = ServiceUtil.getStatusDescription(inventory.status);
