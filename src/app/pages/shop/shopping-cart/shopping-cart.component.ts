@@ -122,7 +122,6 @@ export class ShoppingCartComponent implements OnInit {
       this.orderItemsList.orderItems = this.orderItems;
       this.orderItemsList.userId = this.tokenService.getUserName();
       this.orderItemsList.paymentType = ServiceUtil.getOnlinePaymentType();
-      this.shoppingCartService.setAmount(this.subTotal);
       console.log('Place order request ', this.orderItemsList);
 
       this.discountControllerService.getTransactionDetailsUsingPOST({
@@ -144,6 +143,8 @@ export class ShoppingCartComponent implements OnInit {
           style: 'currency',
           currency: 'LKR'
         }));
+
+        this.shoppingCartService.setAmount(this.transactionDetails.totalWithDiscount);
 
         Swal.fire({
           title: 'Are you sure?',
