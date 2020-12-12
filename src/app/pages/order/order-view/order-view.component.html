@@ -1,18 +1,23 @@
-<nb-card>
-  <nb-card-header>
-    <div class="row">
-      <div class="col-md-12">
-        <h5 class="text-info">Order Item List</h5>
-      </div>
-    </div>
-  </nb-card-header>
-  <div class="row">
-    <div *ngFor="let orderItem of orderItems" class="col-md-12">
-      <app-list-item-view
-        [itemId]="orderItem.orderItemId.itemId"
-        [qty]="orderItem.qty"
-        defaultImage="../../../../../assets/images/image-placeholder.png"
-      ></app-list-item-view>
-    </div>
+<div class="row">
+  <div class="col-12">
+    <nb-card size="small">
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Order Items List">
+          <h3>Order Item List</h3>
+
+          <div class="row">
+            <div *ngFor="let orderItem of orderItems" class="col-md-12">
+              <app-list-item-view
+                [itemId]="orderItem.orderItemId.itemId"
+                [qty]="orderItem.qty"
+                defaultImage="../../../../../assets/images/image-placeholder.png"
+              ></app-list-item-view>
+            </div>
+          </div>
+
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
   </div>
-</nb-card>
+</div>
+

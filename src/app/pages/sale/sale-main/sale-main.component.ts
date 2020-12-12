@@ -99,7 +99,7 @@ export class SaleMainComponent implements OnInit {
 
   onUserRowSelect(event): void {
     console.log(event);
-    // this.router.navigate(['/pages/sale/view'], {queryParams: {id: event.data.id}});
+    this.router.navigate(['/pages/sale/view'], {queryParams: {id: event.data.id}});
   }
 
   resetFilter(): void {

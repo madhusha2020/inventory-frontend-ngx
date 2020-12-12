@@ -18,6 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
+import { Inventory } from '../model/inventory';
 import { InventoryList } from '../model/inventoryList';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -84,6 +85,48 @@ export class InventoryControllerService {
         ];
 
         return this.httpClient.get<InventoryList>(`${this.basePath}/inventory`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get inventory by id
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getInventoryByIdUsingGET(id: string, observe?: 'body', reportProgress?: boolean): Observable<Inventory>;
+    public getInventoryByIdUsingGET(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Inventory>>;
+    public getInventoryByIdUsingGET(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Inventory>>;
+    public getInventoryByIdUsingGET(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getInventoryByIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Inventory>(`${this.basePath}/inventory/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

@@ -5,7 +5,7 @@ import { SaleRoutingModule } from './sale-routing.module';
 import {SaleComponent} from './sale.component';
 import { SaleMainComponent } from './sale-main/sale-main.component';
 import { SaleViewComponent } from './sale-view/sale-view.component';
-import {NbButtonModule, NbCardModule, NbSearchModule, NbTooltipModule} from '@nebular/theme';
+import {NbButtonModule, NbCardModule, NbSearchModule, NbTabsetModule, NbTooltipModule} from '@nebular/theme';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {ItemModule} from '../item/item.module';
 
@@ -20,7 +20,8 @@ import {ItemModule} from '../item/item.module';
         Ng2SmartTableModule,
         NbButtonModule,
         NbTooltipModule,
-        ItemModule
+        ItemModule,
+        NbTabsetModule
     ]
 })
 export class SaleModule { }

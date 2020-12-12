@@ -1,18 +1,22 @@
-<nb-card>
-  <nb-card-header>
-    <div class="row">
-      <div class="col-md-12">
-        <h5 class="text-info">Outbound Items List</h5>
-      </div>
-    </div>
-  </nb-card-header>
-  <div class="row">
-    <div *ngFor="let productOutboundItem of productOutBoundItems" class="col-md-12">
-      <app-list-item-view
-        [itemId]="productOutboundItem.productOutboundItemId.itemId"
-        [qty]="productOutboundItem.qty"
-        defaultImage="../../../../../assets/images/image-placeholder.png"
-      ></app-list-item-view>
-    </div>
+<div class="row">
+  <div class="col-12">
+    <nb-card size="small">
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Outbound Items List">
+          <h3>Outbound Items List</h3>
+
+          <div class="row">
+            <div *ngFor="let productOutboundItem of productOutBoundItems" class="col-md-12">
+              <app-list-item-view
+                [itemId]="productOutboundItem.productOutboundItemId.itemId"
+                [qty]="productOutboundItem.qty"
+                defaultImage="../../../../../assets/images/image-placeholder.png"
+              ></app-list-item-view>
+            </div>
+          </div>
+
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
   </div>
-</nb-card>
+</div>
