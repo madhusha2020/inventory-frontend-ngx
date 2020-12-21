@@ -23,7 +23,11 @@ export interface Delivery {
     deliveryaddress?: string;
     deliverycontactname?: string;
     deliverycontactno?: string;
+    deliveryempcontactno?: string;
+    deliveryempname?: string;
     deliverynote?: string;
+    deliveryvehicleno?: string;
+    deliveryvehicletype?: string;
     description?: string;
     id?: number;
     modifiedby?: string;

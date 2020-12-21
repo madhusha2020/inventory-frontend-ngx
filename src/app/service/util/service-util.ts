@@ -94,6 +94,10 @@ export class ServiceUtil {
     return 'Maintenance Staff';
   }
 
+  public static getDeliveryDesignation(): string {
+    return 'Delivery Staff';
+  }
+
   public static getDesignations(): Array<string> {
     const designations: Array<string> = [];
     designations.push('Maintenance Staff');

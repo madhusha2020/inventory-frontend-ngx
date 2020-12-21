@@ -21,7 +21,7 @@ export class NotificationMainComponent implements OnInit {
     actions: false,
     columns: {
       id: {
-        title: '#Notification',
+        title: 'Notification#',
         type: 'number',
       },
       type: {

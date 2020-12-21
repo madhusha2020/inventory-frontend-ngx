@@ -26,4 +26,6 @@ export * from './saleController.service';
 import { SaleControllerService } from './saleController.service';
 export * from './userController.service';
 import { UserControllerService } from './userController.service';
-export const APIS = [AuthenticationControllerService, CustomerControllerService, DeliveryControllerService, DiscountControllerService, EmployeeControllerService, ImageUploadControllerService, InventoryControllerService, ItemControllerService, NotificationControllerService, OrderControllerService, ProductOutboundControllerService, RoleControllerService, SaleControllerService, UserControllerService];
+export * from './vehicleController.service';
+import { VehicleControllerService } from './vehicleController.service';
+export const APIS = [AuthenticationControllerService, CustomerControllerService, DeliveryControllerService, DiscountControllerService, EmployeeControllerService, ImageUploadControllerService, InventoryControllerService, ItemControllerService, NotificationControllerService, OrderControllerService, ProductOutboundControllerService, RoleControllerService, SaleControllerService, UserControllerService, VehicleControllerService];

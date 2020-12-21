@@ -22,7 +22,7 @@ export class InventoryOutboundMainComponent implements OnInit {
     actions: false,
     columns: {
       id: {
-        title: '#Outbound',
+        title: 'Outbound#',
         type: 'number',
       },
       date: {

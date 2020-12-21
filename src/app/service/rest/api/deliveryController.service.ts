@@ -18,6 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
+import { Delivery } from '../model/delivery';
 import { DeliveryList } from '../model/deliveryList';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -84,6 +85,95 @@ export class DeliveryControllerService {
         ];
 
         return this.httpClient.get<DeliveryList>(`${this.basePath}/delivery`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get delivery by id
+     * 
+     * @param deliveryId deliveryId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getDeliveryByIdUsingGET(deliveryId: string, observe?: 'body', reportProgress?: boolean): Observable<Delivery>;
+    public getDeliveryByIdUsingGET(deliveryId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Delivery>>;
+    public getDeliveryByIdUsingGET(deliveryId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Delivery>>;
+    public getDeliveryByIdUsingGET(deliveryId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (deliveryId === null || deliveryId === undefined) {
+            throw new Error('Required parameter deliveryId was null or undefined when calling getDeliveryByIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<Delivery>(`${this.basePath}/delivery/${encodeURIComponent(String(deliveryId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update delivery details
+     * 
+     * @param delivery delivery
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateDeliveryUsingPUT(delivery: Delivery, observe?: 'body', reportProgress?: boolean): Observable<Delivery>;
+    public updateDeliveryUsingPUT(delivery: Delivery, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Delivery>>;
+    public updateDeliveryUsingPUT(delivery: Delivery, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Delivery>>;
+    public updateDeliveryUsingPUT(delivery: Delivery, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (delivery === null || delivery === undefined) {
+            throw new Error('Required parameter delivery was null or undefined when calling updateDeliveryUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<Delivery>(`${this.basePath}/delivery`,
+            delivery,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

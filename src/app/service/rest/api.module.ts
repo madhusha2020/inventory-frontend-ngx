@@ -15,6 +15,7 @@ import {SaleControllerService} from './api/saleController.service';
 import {NotificationControllerService} from './api/notificationController.service';
 import {DiscountControllerService} from './api/discountController.service';
 import {InventoryControllerService} from './api/inventoryController.service';
+import {VehicleControllerService} from './api/vehicleController.service';
 
 @NgModule({
   imports: [],
@@ -35,6 +36,7 @@ import {InventoryControllerService} from './api/inventoryController.service';
     UserControllerService,
     NotificationControllerService,
     InventoryControllerService,
+    VehicleControllerService,
   ]
 })
 export class ApiModule {

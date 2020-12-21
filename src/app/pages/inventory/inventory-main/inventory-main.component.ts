@@ -24,7 +24,7 @@ export class InventoryMainComponent implements OnInit {
     actions: false,
     columns: {
       id: {
-        title: '#Inventroy',
+        title: 'Inventory#',
         type: 'number',
       },
       code: {

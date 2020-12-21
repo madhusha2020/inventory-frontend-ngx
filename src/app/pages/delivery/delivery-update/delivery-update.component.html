@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-12">
+    <nb-card size="small">
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Delivery Details">
+          <h3>Delivery Details</h3>
+
+          <div class="margin row">
+
+            <div class="col-md-6">
+              <app-input-default
+                [disableProperty]="true"
+                [field]="deliveryId" placeholder="Enter delivery no"
+                title="Delivery No"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="true"
+                [field]="deliveryAddress" placeholder="Enter delivery address"
+                title="Delivery address"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="true"
+                [field]="deliveryContact" placeholder="Enter delivery contact name"
+                title="Delivery contact Name"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="true"
+                [field]="deliveryContactName" placeholder="Enter delivery contact no"
+                title="Delivery contact No"></app-input-default>
+            </div>
+
+            <div class="col-md-6">
+              <app-input-autocomplete-default
+                category="employee"
+                [field]="employeeId" placeholder="Select delivery employee"
+                title="Delivery employee"></app-input-autocomplete-default>
+
+              <app-input-autocomplete-default
+                category="vehicle"
+                [field]="vehicleId" placeholder="Select delivery vehicle"
+                title="Delivery vehicle"></app-input-autocomplete-default>
+            </div>
+
+          </div>
+
+          <div class="row" style="margin-left: 0px">
+            <div class="col-md-12">
+              <span style="float: right"><button (click)="suspend()" [hidden]="vehicle.status != 1"
+                                                 nbButton status="danger">Suspend</button></span>
+              <span style="float: right"><button (click)="approve()" [hidden]="vehicle.status == 1"
+                                                 nbButton status="success">Approve</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </div>
+</div>

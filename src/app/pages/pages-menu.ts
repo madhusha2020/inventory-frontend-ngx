@@ -200,6 +200,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
+    data: 'INV-DEL',
+    title: 'Delivery',
+    icon: 'car-outline',
+    children: [
+      {
+        data: 'INV-DEL',
+        title: 'Deliveries',
+        link: '/pages/delivery/main',
+      },
+    ]
+  },
+  {
     data: 'INV-PO',
     title: 'Purchase Order',
     icon: 'file-add-outline',
