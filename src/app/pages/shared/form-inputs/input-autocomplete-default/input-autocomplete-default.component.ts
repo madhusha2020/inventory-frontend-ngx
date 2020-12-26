@@ -24,7 +24,6 @@ export class InputAutocompleteDefaultComponent implements OnInit {
   limit = 100;
 
   filteredControlOptions$: Observable<string[]>;
-  optionMap: Map<number, string>;
   options: Array<string> = [];
 
   constructor(private itemControllerService: ItemControllerService,
@@ -70,16 +69,6 @@ export class InputAutocompleteDefaultComponent implements OnInit {
         this.vehicleControllerService.getAllVehicleTypesUsingGET().subscribe(response => {
           console.log('Delivery vehicle type :', response);
           response.vehicleTypeList.forEach(value => {
-            this.options.push(value.id + ' - ' + value.name.toUpperCase());
-          });
-          this.set();
-        });
-        break;
-
-      case 'vehicleFacility':
-        this.vehicleControllerService.getAllVehicleFacilitiesUsingGET().subscribe(response => {
-          console.log('Delivery vehicle facility :', response);
-          response.vehicleFacilityList.forEach(value => {
             this.options.push(value.id + ' - ' + value.name.toUpperCase());
           });
           this.set();

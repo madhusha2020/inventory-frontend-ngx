@@ -1,0 +1,6 @@
+<label *ngIf="title" class="form-label">{{title}}</label>
+<div class="form-group">
+  <nb-select [placeholder]="placeholder" fullWidth multiple (selectedChange)="change($event)">
+    <nb-option *ngFor="let option of options" [value]="option">{{option}}</nb-option>
+  </nb-select>
+</div>

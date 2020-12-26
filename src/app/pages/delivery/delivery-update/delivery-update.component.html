@@ -29,25 +29,46 @@
                 title="Delivery contact No"></app-input-default>
             </div>
 
-            <div class="col-md-6">
-              <app-input-autocomplete-default
-                category="employee"
+            <div *ngIf="!editMode" class="col-md-6">
+              <app-input-default
+                [disableProperty]="true"
                 [field]="employeeId" placeholder="Select delivery employee"
+                title="Delivery employee"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="true"
+                [field]="vehicleId" placeholder="Select delivery vehicle"
+                title="Delivery vehicle"></app-input-default>
+            </div>
+
+            <div *ngIf="editMode" class="col-md-6">
+              <app-input-autocomplete-default
+                (changeEvent)="employeeStateChange($event)"
+                [field]="employeeId"
+                category="employee" placeholder="Select delivery employee"
                 title="Delivery employee"></app-input-autocomplete-default>
 
               <app-input-autocomplete-default
-                category="vehicle"
-                [field]="vehicleId" placeholder="Select delivery vehicle"
+                (changeEvent)="vehicleStateChange($event)"
+                [field]="vehicleId"
+                category="vehicle" placeholder="Select delivery vehicle"
                 title="Delivery vehicle"></app-input-autocomplete-default>
             </div>
 
           </div>
 
           <div class="row" style="margin-left: 0px">
-            <div class="col-md-12">
-              <span style="float: right"><button (click)="suspend()" [hidden]="vehicle.status != 1"
+            <div class="col-md-6">
+              <button (click)="enableEditMode()" nbButton status="warning">Edit</button>
+              <span class="margin"><button (click)="disabledEditMode()"
+                                           [disabled]="!editMode"
+                                           nbButton>Cancel</button></span>
+            </div>
+            <div class="col-md-6">
+              <span style="float: right"><button (click)="suspend()" [hidden]="delivery.status != 1"
                                                  nbButton status="danger">Suspend</button></span>
-              <span style="float: right"><button (click)="approve()" [hidden]="vehicle.status == 1"
+              <span style="float: right"><button (click)="approve()" [disabled]="!deliveryForm.valid || !editMode"
+                                                 [hidden]="delivery.status == 1"
                                                  nbButton status="success">Approve</button></span>
             </div>
           </div>

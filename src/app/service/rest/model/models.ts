@@ -5,8 +5,6 @@ export * from './customerList';
 export * from './customerPayment';
 export * from './customerUser';
 export * from './delivery';
-export * from './deliveryEmployee';
-export * from './deliveryEmployeeId';
 export * from './deliveryList';
 export * from './discount';
 export * from './employee';

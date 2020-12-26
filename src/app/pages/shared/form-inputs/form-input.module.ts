@@ -17,6 +17,7 @@ import { InputTextareaDefaultComponent } from './input-textarea-default/input-te
 import { InputSpinnerDefaultComponent } from './input-spinner-default/input-spinner-default.component';
 import {NgSpinBoxModule} from 'ng-spin-box';
 import { InputAutocompleteDefaultComponent } from './input-autocomplete-default/input-autocomplete-default.component';
+import { InputMultipleDefaultComponent } from './input-multiple-default/input-multiple-default.component';
 
 
 @NgModule({
@@ -32,22 +33,24 @@ import { InputAutocompleteDefaultComponent } from './input-autocomplete-default/
     InputDatePickerFutureDefaultComponent,
     InputTextareaDefaultComponent,
     InputSpinnerDefaultComponent,
-    InputAutocompleteDefaultComponent
+    InputAutocompleteDefaultComponent,
+    InputMultipleDefaultComponent
   ],
-  exports: [
-    InputDefaultComponent,
-    InputComparatorDefaultComponent,
-    InputGeneratedPasswordDefaultComponent,
-    ImageUploadDefaultComponent,
-    InputDatePickerDefaultComponent,
-    InputDatePickerMaxDefaultComponent,
-    InputDatePickerMaxExceptTodayDefaultComponent,
-    InputAmountDefaultComponent,
-    InputDatePickerFutureDefaultComponent,
-    InputTextareaDefaultComponent,
-    InputSpinnerDefaultComponent,
-    InputAutocompleteDefaultComponent
-  ],
+    exports: [
+        InputDefaultComponent,
+        InputComparatorDefaultComponent,
+        InputGeneratedPasswordDefaultComponent,
+        ImageUploadDefaultComponent,
+        InputDatePickerDefaultComponent,
+        InputDatePickerMaxDefaultComponent,
+        InputDatePickerMaxExceptTodayDefaultComponent,
+        InputAmountDefaultComponent,
+        InputDatePickerFutureDefaultComponent,
+        InputTextareaDefaultComponent,
+        InputSpinnerDefaultComponent,
+        InputAutocompleteDefaultComponent,
+        InputMultipleDefaultComponent
+    ],
     imports: [
         CommonModule,
         ReactiveFormsModule,

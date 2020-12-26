@@ -9,7 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { DeliveryEmployee } from './deliveryEmployee';
+import { Employee } from './employee';
 import { Sale } from './sale';
 import { Vehicle } from './vehicle';
 
@@ -19,7 +19,6 @@ export interface Delivery {
     createdby?: string;
     createddate?: Date;
     date?: string;
-    deliveryEmployeeList?: Array<DeliveryEmployee>;
     deliveryaddress?: string;
     deliverycontactname?: string;
     deliverycontactno?: string;
@@ -29,6 +28,8 @@ export interface Delivery {
     deliveryvehicleno?: string;
     deliveryvehicletype?: string;
     description?: string;
+    employee?: Employee;
+    employeeId?: number;
     id?: number;
     modifiedby?: string;
     modifieddate?: Date;
@@ -39,4 +40,5 @@ export interface Delivery {
     statusDescription?: string;
     userId?: string;
     vehicle?: Vehicle;
+    vehicleId?: number;
 }

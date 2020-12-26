@@ -29,6 +29,7 @@ export interface Vehicle {
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;
+    type?: string;
     userId?: string;
     vehicleFacilityList?: Array<VehicleVehicleFacility>;
     vehicleType?: VehicleType;

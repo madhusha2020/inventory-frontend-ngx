@@ -1,14 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {
-  Delivery,
-  DeliveryControllerService,
-  Vehicle,
-  VehicleControllerService,
-  VehicleFacility,
-  VehicleFacilityList,
-  VehicleType
-} from '../../../service/rest';
+import {Delivery, DeliveryControllerService, VehicleControllerService} from '../../../service/rest';
 import {TokenService} from '../../../service/auth/token.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
@@ -20,13 +12,9 @@ import Swal from 'sweetalert2';
 })
 export class DeliveryUpdateComponent implements OnInit {
 
+  editMode: boolean;
+  deliveryForm: FormGroup;
   delivery: Delivery = {};
-  vehicleForm: FormGroup;
-
-  vehicleFacilityList: VehicleFacilityList = {};
-  vehicle: Vehicle = {};
-  facilityList?: Array<VehicleFacility> = [];
-  vehicleType?: VehicleType = {};
 
   constructor(private formBuilder: FormBuilder,
               private deliveryControllerService: DeliveryControllerService,
@@ -37,30 +25,31 @@ export class DeliveryUpdateComponent implements OnInit {
   }
 
   get deliveryId() {
-    return this.vehicleForm.get('deliveryId');
+    return this.deliveryForm.get('deliveryId');
   }
 
   get deliveryAddress() {
-    return this.vehicleForm.get('deliveryAddress');
+    return this.deliveryForm.get('deliveryAddress');
   }
 
   get deliveryContact() {
-    return this.vehicleForm.get('deliveryContact');
+    return this.deliveryForm.get('deliveryContact');
   }
 
   get deliveryContactName() {
-    return this.vehicleForm.get('deliveryContactName');
+    return this.deliveryForm.get('deliveryContactName');
   }
 
   get employeeId() {
-    return this.vehicleForm.get('employeeId');
+    return this.deliveryForm.get('employeeId');
   }
 
   get vehicleId() {
-    return this.vehicleForm.get('vehicleId');
+    return this.deliveryForm.get('vehicleId');
   }
 
   ngOnInit(): void {
+    this.editMode = false;
     this.route.queryParams.subscribe(params => {
         if (params.id) {
           this.fetchDelivery(params.id);
@@ -70,7 +59,7 @@ export class DeliveryUpdateComponent implements OnInit {
       }
     );
 
-    this.vehicleForm = this.formBuilder.group({
+    this.deliveryForm = this.formBuilder.group({
       deliveryId: [null, [Validators.required]],
       deliveryAddress: [null, [Validators.required]],
       deliveryContact: [null, [Validators.required]],
@@ -78,6 +67,16 @@ export class DeliveryUpdateComponent implements OnInit {
       employeeId: [null, [Validators.required]],
       vehicleId: [null, [Validators.required]],
     });
+  }
+
+  enableEditMode() {
+    this.editMode = true;
+    this.employeeId.setValue(null);
+    this.vehicleId.setValue(null);
+  }
+
+  disabledEditMode() {
+    this.editMode = false;
   }
 
   fetchDelivery(id: string) {
@@ -97,11 +96,79 @@ export class DeliveryUpdateComponent implements OnInit {
     this.vehicleId.setValue(this.delivery.deliveryvehicleno);
   }
 
-  approve() {
+  employeeStateChange(event) {
+    console.log('Employee :', event);
+    this.delivery.employeeId = event;
+  }
+
+  vehicleStateChange(event) {
+    console.log('Vehicle :', event);
+    this.delivery.vehicleId = event;
+  }
+
+  updateDeliveryDetails() {
 
   }
 
-  suspend() {
+  approve() {
+    console.log('Approve Delivery');
+    this.delivery.userId = this.tokenService.getUserName();
 
+    if (this.delivery.employeeId == 0) {
+      Swal.fire('Error', 'Delivery employee not found', 'error');
+    }
+    if (this.delivery.vehicleId == 0) {
+      Swal.fire('Error', 'Delivery vehicle not found', 'error');
+    }
+    if (this.delivery.employeeId != 0 && this.delivery.vehicleId != 0) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Approve delivery : {0}'.replace('{0}', String(this.delivery.id)),
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.value) {
+          console.log('Delivery Request :', this.delivery);
+          this.deliveryControllerService.updateDeliveryUsingPUT(this.delivery).subscribe(response => {
+            console.log('Delivery Approved :', response);
+            Swal.fire('Success', 'Delivery approved successfully', 'success').then(ok => {
+              this.router.navigate(['/pages/delivery/main']);
+            });
+          });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          // Canceled
+        }
+      });
+    }
+  }
+
+  suspend() {
+    console.log('Suspend Delivery');
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Suspend delivery : {0}'.replace('{0}', String(this.delivery.id)),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        console.log('Delivery Request :', this.delivery);
+        this.deliveryControllerService.suspendDeliveryUsingPUT({
+          id: this.delivery.id,
+          userId: this.tokenService.getUserName()
+        }).subscribe(response => {
+          console.log('Delivery Suspended :', response);
+          Swal.fire('Success', 'Delivery suspend successfully', 'success').then(ok => {
+            this.router.navigate(['/pages/delivery/main']);
+          });
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Canceled
+      }
+    });
   }
 }
