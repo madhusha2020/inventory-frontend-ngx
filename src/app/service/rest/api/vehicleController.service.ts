@@ -19,6 +19,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs/Observable';
 
 import { FacilityList } from '../model/facilityList';
+import { TransactionRequest } from '../model/transactionRequest';
 import { Vehicle } from '../model/vehicle';
 import { VehicleFacility } from '../model/vehicleFacility';
 import { VehicleFacilityList } from '../model/vehicleFacilityList';
@@ -60,6 +61,53 @@ export class VehicleControllerService {
         return false;
     }
 
+
+    /**
+     * Activate vehicle
+     * 
+     * @param transactionRequest transactionRequest
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public activateVehicleUsingPUT(transactionRequest: TransactionRequest, observe?: 'body', reportProgress?: boolean): Observable<Vehicle>;
+    public activateVehicleUsingPUT(transactionRequest: TransactionRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Vehicle>>;
+    public activateVehicleUsingPUT(transactionRequest: TransactionRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Vehicle>>;
+    public activateVehicleUsingPUT(transactionRequest: TransactionRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (transactionRequest === null || transactionRequest === undefined) {
+            throw new Error('Required parameter transactionRequest was null or undefined when calling activateVehicleUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<Vehicle>(`${this.basePath}/vehicle/activate`,
+            transactionRequest,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
 
     /**
      * View a list of available vehicle facilities
@@ -341,6 +389,53 @@ export class VehicleControllerService {
 
         return this.httpClient.post<VehicleFacilityList>(`${this.basePath}/vehicle/vehicle`,
             vehicleFacilityList,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Suspend vehicle
+     * 
+     * @param transactionRequest transactionRequest
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public suspendVehicleUsingPUT(transactionRequest: TransactionRequest, observe?: 'body', reportProgress?: boolean): Observable<Vehicle>;
+    public suspendVehicleUsingPUT(transactionRequest: TransactionRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Vehicle>>;
+    public suspendVehicleUsingPUT(transactionRequest: TransactionRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Vehicle>>;
+    public suspendVehicleUsingPUT(transactionRequest: TransactionRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (transactionRequest === null || transactionRequest === undefined) {
+            throw new Error('Required parameter transactionRequest was null or undefined when calling suspendVehicleUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<Vehicle>(`${this.basePath}/vehicle/suspend`,
+            transactionRequest,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

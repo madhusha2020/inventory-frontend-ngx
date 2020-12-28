@@ -18,7 +18,7 @@ export interface Vehicle {
     brand?: string;
     createdby?: string;
     createddate?: Date;
-    delivery?: Delivery;
+    deliveryList?: Array<Delivery>;
     description?: string;
     id?: number;
     modal?: string;

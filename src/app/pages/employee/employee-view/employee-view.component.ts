@@ -363,7 +363,9 @@ export class EmployeeViewComponent implements OnInit {
       if (result.value) {
         this.userControllerService.updateEmployeeUsingPUT(this.employeeUser).subscribe(response => {
           console.log('Updated Employee :', response);
-          this.router.navigate(['/pages/employee/main']);
+          Swal.fire('Success', 'Employee successfully updated', 'success').then(value => {
+            this.router.navigate(['/pages/employee/main']);
+          });
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Canceled

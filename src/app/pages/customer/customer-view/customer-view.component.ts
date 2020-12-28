@@ -278,7 +278,9 @@ export class CustomerViewComponent implements OnInit {
       if (result.value) {
         this.userControllerService.updateCustomerUsingPUT(this.customerUser).subscribe(response => {
           console.log('Updated Customer :', response);
-          this.router.navigate(['/pages/customer/main']);
+          Swal.fire('Success', 'Customer successfully updated', 'success').then(value => {
+            this.router.navigate(['/pages/customer/main']);
+          });
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         // Canceled

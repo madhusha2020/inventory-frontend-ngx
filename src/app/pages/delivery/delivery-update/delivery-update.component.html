@@ -59,10 +59,10 @@
 
           <div class="row" style="margin-left: 0px">
             <div class="col-md-6">
-              <button (click)="enableEditMode()" nbButton status="warning">Edit</button>
-              <span class="margin"><button (click)="disabledEditMode()"
-                                           [disabled]="!editMode"
-                                           nbButton>Cancel</button></span>
+              <button (click)="enableEditMode()" *ngIf="delivery.status == 10" nbButton status="warning">Edit</button>
+              <span *ngIf="delivery.status == 10" class="margin"><button (click)="disabledEditMode()"
+                                                                         [disabled]="!editMode"
+                                                                         nbButton>Cancel</button></span>
             </div>
             <div class="col-md-6">
               <span style="float: right"><button (click)="suspend()" [hidden]="delivery.status != 1"
