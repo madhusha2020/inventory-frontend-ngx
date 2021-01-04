@@ -14,7 +14,7 @@ import { DisposalInventoryId } from './disposalInventoryId';
 import { Inventory } from './inventory';
 
 
-export interface DisposalInventory {
+export interface DisposalInventory { 
     createdby?: string;
     createddate?: Date;
     description?: string;

@@ -1,6 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DisposalControllerService} from '../../../service/rest';
+import {
+  Disposal,
+  DisposalControllerService,
+  DisposalInventory,
+  DisposalInventoryList,
+  Inventory
+} from '../../../service/rest';
 import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
 
@@ -12,6 +18,10 @@ import {Router} from '@angular/router';
 export class InventoryDisposalCreateComponent implements OnInit {
 
   disposalForm: FormGroup;
+  disposal: Disposal = {};
+  inventory: Inventory = {};
+  disposalInventoryList: DisposalInventoryList = {};
+  disposalInventories: Array<DisposalInventory> = [];
 
   constructor(private formBuilder: FormBuilder,
               private disposalControllerService: DisposalControllerService,
@@ -37,5 +47,24 @@ export class InventoryDisposalCreateComponent implements OnInit {
   disposalItemListStateChange(event) {
     console.log('Disposal Data :', this.disposalForm.value);
     console.log('Disposal Items List :', event);
+
+    this.disposalInventories = [];
+    this.disposalInventoryList.disposalInventoryList = [];
+
+    this.disposal = this.disposalForm.value;
+    this.disposal.userId = this.tokenService.getUserName();
+
+    event.forEach(item => {
+      this.inventory.id = item.itemId;
+      this.disposalInventories.push({inventory: this.inventory, qty: item.qty});
+    });
+    this.disposalInventoryList.disposal = this.disposal;
+    this.disposalInventoryList.disposalInventoryList = this.disposalInventories;
+
+    console.log('Disposal Inventory List request :', this.disposalInventoryList);
+
+    this.disposalControllerService.createDisposalProductUsingPOST(this.disposalInventoryList).subscribe(response => {
+      console.log('Disposal Inventory List response :', response);
+    });
   }
 }

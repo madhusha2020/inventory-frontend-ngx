@@ -20,6 +20,7 @@ import { Observable }                                        from 'rxjs/Observab
 
 import { DisposalInventoryList } from '../model/disposalInventoryList';
 import { DisposalList } from '../model/disposalList';
+import { TransactionRequest } from '../model/transactionRequest';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -56,6 +57,53 @@ export class DisposalControllerService {
         return false;
     }
 
+
+    /**
+     * Approve disposal product
+     * 
+     * @param transactionRequest transactionRequest
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public approveDisposeUsingPUT(transactionRequest: TransactionRequest, observe?: 'body', reportProgress?: boolean): Observable<DisposalInventoryList>;
+    public approveDisposeUsingPUT(transactionRequest: TransactionRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<DisposalInventoryList>>;
+    public approveDisposeUsingPUT(transactionRequest: TransactionRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<DisposalInventoryList>>;
+    public approveDisposeUsingPUT(transactionRequest: TransactionRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (transactionRequest === null || transactionRequest === undefined) {
+            throw new Error('Required parameter transactionRequest was null or undefined when calling approveDisposeUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<DisposalInventoryList>(`${this.basePath}/disposal/approve`,
+            transactionRequest,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
 
     /**
      * Save disposal product
@@ -142,19 +190,61 @@ export class DisposalControllerService {
     }
 
     /**
-     * Pre disposal validate
+     * Get disposal product by id
      * 
-     * @param disposalInventoryList disposalInventoryList
+     * @param disposalId disposalId
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public preDisposalValidateUsingPOST(disposalInventoryList: DisposalInventoryList, observe?: 'body', reportProgress?: boolean): Observable<DisposalInventoryList>;
-    public preDisposalValidateUsingPOST(disposalInventoryList: DisposalInventoryList, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<DisposalInventoryList>>;
-    public preDisposalValidateUsingPOST(disposalInventoryList: DisposalInventoryList, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<DisposalInventoryList>>;
-    public preDisposalValidateUsingPOST(disposalInventoryList: DisposalInventoryList, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getDisposalByIdUsingGET(disposalId: string, observe?: 'body', reportProgress?: boolean): Observable<DisposalInventoryList>;
+    public getDisposalByIdUsingGET(disposalId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<DisposalInventoryList>>;
+    public getDisposalByIdUsingGET(disposalId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<DisposalInventoryList>>;
+    public getDisposalByIdUsingGET(disposalId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (disposalInventoryList === null || disposalInventoryList === undefined) {
-            throw new Error('Required parameter disposalInventoryList was null or undefined when calling preDisposalValidateUsingPOST.');
+        if (disposalId === null || disposalId === undefined) {
+            throw new Error('Required parameter disposalId was null or undefined when calling getDisposalByIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<DisposalInventoryList>(`${this.basePath}/disposal/${encodeURIComponent(String(disposalId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Suspend disposal product
+     * 
+     * @param transactionRequest transactionRequest
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public suspendDisposeUsingPUT(transactionRequest: TransactionRequest, observe?: 'body', reportProgress?: boolean): Observable<DisposalInventoryList>;
+    public suspendDisposeUsingPUT(transactionRequest: TransactionRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<DisposalInventoryList>>;
+    public suspendDisposeUsingPUT(transactionRequest: TransactionRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<DisposalInventoryList>>;
+    public suspendDisposeUsingPUT(transactionRequest: TransactionRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (transactionRequest === null || transactionRequest === undefined) {
+            throw new Error('Required parameter transactionRequest was null or undefined when calling suspendDisposeUsingPUT.');
         }
 
         let headers = this.defaultHeaders;
@@ -177,8 +267,8 @@ export class DisposalControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<DisposalInventoryList>(`${this.basePath}/disposal/predisposal`,
-            disposalInventoryList,
+        return this.httpClient.put<DisposalInventoryList>(`${this.basePath}/disposal/suspend`,
+            transactionRequest,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

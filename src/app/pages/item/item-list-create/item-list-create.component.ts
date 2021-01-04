@@ -40,7 +40,7 @@ export class ItemListCreateComponent implements OnInit {
       confirmDelete: true,
     },
     columns: {
-      tableItemId: {
+      itemId: {
         title: 'Item#',
         type: 'number',
         editable: false,
@@ -106,16 +106,16 @@ export class ItemListCreateComponent implements OnInit {
     console.log('Edit', event);
     let updatedSelectedItemsArray: Array<CustomModel> = [];
 
-    this.selectedItemsArray.forEach(disposalInventory => {
-      if (disposalInventory.itemId == event.data.tableItemId) {
-        console.log('Match found in edit : ', disposalInventory);
+    this.selectedItemsArray.forEach(itemObject => {
+      if (itemObject.itemId == event.data.itemId) {
+        console.log('Match found in edit : ', itemObject);
         updatedSelectedItemsArray.push({
-          itemId: event.newData.tableItemId,
+          itemId: event.newData.itemId,
           itemName: event.data.itemName,
           qty: event.newData.qty
         });
       } else {
-        updatedSelectedItemsArray.push(disposalInventory);
+        updatedSelectedItemsArray.push(itemObject);
       }
     });
 
@@ -127,14 +127,14 @@ export class ItemListCreateComponent implements OnInit {
     console.log('Delete', event);
     let updatedSelectedItemsArray: Array<CustomModel> = [];
 
-    this.selectedItemsArray.forEach(disposalInventory => {
-      if (disposalInventory.itemId == event.data.tableItemId) {
-        console.log('Match found in delete : ', disposalInventory);
+    this.selectedItemsArray.forEach(itemObject => {
+      if (itemObject.itemId == event.data.itemId) {
+        console.log('Match found in delete : ', itemObject);
       } else {
-        updatedSelectedItemsArray.push(disposalInventory);
+        updatedSelectedItemsArray.push(itemObject);
       }
     });
-    this.selectedItemsMap.delete(event.data.tableItemId);
+    this.selectedItemsMap.delete(event.data.itemId);
 
     this.selectedItemsArray = updatedSelectedItemsArray;
     this.source.load(updatedSelectedItemsArray);
@@ -151,7 +151,6 @@ export class ItemListCreateComponent implements OnInit {
 }
 
 interface CustomModel {
-  mainId?: number;
   itemId?: number;
   itemName?: string;
   qty?: number;
