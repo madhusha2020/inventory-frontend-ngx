@@ -10,10 +10,12 @@ import {UserControllerService} from './api/userController.service';
 import {EmployeeControllerService} from './api/employeeController.service';
 import {ImageUploadControllerService} from './api/imageUploadController.service';
 import {ProductOutboundControllerService} from './api/productOutboundController.service';
+import { ProductInboundControllerService } from './api/productInboundController.service';
 import {DeliveryControllerService} from './api/deliveryController.service';
 import {SaleControllerService} from './api/saleController.service';
 import {NotificationControllerService} from './api/notificationController.service';
 import {DiscountControllerService} from './api/discountController.service';
+import { DisposalControllerService } from './api/disposalController.service';
 import {InventoryControllerService} from './api/inventoryController.service';
 import {VehicleControllerService} from './api/vehicleController.service';
 
@@ -26,11 +28,13 @@ import {VehicleControllerService} from './api/vehicleController.service';
     CustomerControllerService,
     DeliveryControllerService,
     DiscountControllerService,
+	DisposalControllerService,
     EmployeeControllerService,
     ImageUploadControllerService,
     ItemControllerService,
     OrderControllerService,
     ProductOutboundControllerService,
+	ProductInboundControllerService,
     RoleControllerService,
     SaleControllerService,
     UserControllerService,

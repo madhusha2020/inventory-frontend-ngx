@@ -10,27 +10,21 @@
  * Do not edit the class manually.
  */
 import { DisposalInventory } from './disposalInventory';
-import { Item } from './item';
-import { SaleInventory } from './saleInventory';
 
 
-export interface Inventory { 
+export interface Disposal { 
     code?: string;
     createdby?: string;
     createddate?: Date;
+    date?: string;
     description?: string;
     disposalInventoryList?: Array<DisposalInventory>;
-    disposedQty?: number;
-    doexpire?: string;
     id?: number;
-    initqty?: number;
-    item?: Item;
     modifiedby?: string;
     modifieddate?: Date;
-    qty?: number;
+    reason?: string;
     responseCode?: string;
     responseValues?: Array<string>;
-    saleInventoryList?: Array<SaleInventory>;
     status?: number;
     statusDescription?: string;
     userId?: string;

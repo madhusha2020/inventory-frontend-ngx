@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import Swal from 'sweetalert2';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-inventory-view',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventoryViewComponent implements OnInit {
 
-  constructor() { }
+  itemId: string;
 
-  ngOnInit(): void {
+  constructor(private route: ActivatedRoute,
+              private router: Router) {
   }
 
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+        if (params.id) {
+          this.itemId = params.id;
+        } else {
+          Swal.fire('Error', 'Inventory item not found', 'error');
+        }
+      }
+    );
+  }
 }

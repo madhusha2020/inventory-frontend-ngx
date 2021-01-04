@@ -158,10 +158,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Product Outbounds',
         link: '/pages/inventory/outbound-main',
       },
+    ]
+  },
+  {
+    data: 'INV-INV',
+    title: 'Disposal',
+    icon: 'sync-outline',
+    children: [
       {
         data: 'INV-INV-DIS-VW',
         title: 'Disposal Products',
         link: '/pages/inventory/disposal-main',
+      },
+      {
+        data: 'INV-INV-DIS-CR',
+        title: 'Create Disposal',
+        link: '/pages/inventory/disposal-create',
       },
     ]
   },

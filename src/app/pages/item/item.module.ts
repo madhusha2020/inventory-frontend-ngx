@@ -19,12 +19,14 @@ import {
 } from '@nebular/theme';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import { ListItemViewComponent } from './list-item-view/list-item-view.component';
+import { ItemListCreateComponent } from './item-list-create/item-list-create.component';
 
 
 @NgModule({
-    declarations: [ItemComponent, ItemMainComponent, ItemCreateComponent, ItemDisposeComponent, ItemViewComponent, ListItemViewComponent],
+    declarations: [ItemComponent, ItemMainComponent, ItemCreateComponent, ItemDisposeComponent, ItemViewComponent, ListItemViewComponent, ItemListCreateComponent],
     exports: [
-        ListItemViewComponent
+        ListItemViewComponent,
+        ItemListCreateComponent
     ],
     imports: [
         CommonModule,

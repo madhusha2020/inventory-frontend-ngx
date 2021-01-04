@@ -9,40 +9,23 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Inventory } from './inventory';
-import { OrderItems } from './orderItems';
 import { ProductInboundItem } from './productInboundItem';
-import { ProductOutboundItem } from './productOutboundItem';
 
 
-export interface Item { 
-    avalableQty?: number;
+export interface ProductInbound { 
     code?: string;
     createdby?: string;
     createddate?: Date;
-    dangerlevel?: string;
+    date?: string;
     description?: string;
     id?: number;
-    inventories?: Array<Inventory>;
-    lastprice?: number;
-    lastpriceValue?: string;
+    itemCount?: number;
     modifiedby?: string;
     modifieddate?: Date;
-    name?: string;
-    orderItems?: Array<OrderItems>;
-    orderedQty?: number;
-    photo?: Array<string>;
     productInboundItems?: Array<ProductInboundItem>;
-    productOutboundItems?: Array<ProductOutboundItem>;
     responseCode?: string;
     responseValues?: Array<string>;
-    rop?: number;
-    sprice?: number;
-    spriceValue?: string;
     status?: number;
     statusDescription?: string;
-    testperiod?: number;
-    unit?: string;
     userId?: string;
-    weightvolume?: string;
 }

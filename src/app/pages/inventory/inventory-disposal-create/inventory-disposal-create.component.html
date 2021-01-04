@@ -1,0 +1,42 @@
+<div class="steppers-container row">
+  <nb-card class="stepper-card" size="medium">
+    <nb-card-body>
+      <nb-stepper orientation="horizontal">
+        <nb-step label="Disposal details">
+
+          <form [formGroup]="disposalForm">
+            <h3>Disposal Details</h3>
+            <div class="margin row">
+
+              <div class="col-md-6">
+                <app-input-default
+                  [field]="reason" placeholder="Enter disposal reason"
+                  title="Disposal Reason"></app-input-default>
+              </div>
+
+              <div class="col-md-6">
+                <app-input-textarea-default
+                  [field]="description" placeholder="Enter description"
+                  title="Disposal Reason"></app-input-textarea-default>
+              </div>
+
+            </div>
+          </form>
+
+          <button disabled nbButton nbStepperNext>prev</button>
+          <button nbButton nbStepperNext>next</button>
+        </nb-step>
+        <nb-step label="Item details">
+          <h3>Item Details</h3>
+
+          <app-item-list-create
+            (changeEvent)="disposalItemListStateChange($event)"
+            [parentFormIsValid]="disposalForm.valid"
+          ></app-item-list-create>
+
+          <button nbButton nbStepperPrevious>prev</button>
+        </nb-step>
+      </nb-stepper>
+    </nb-card-body>
+  </nb-card>
+</div>

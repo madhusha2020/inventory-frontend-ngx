@@ -3,7 +3,14 @@ import {CommonModule} from '@angular/common';
 import {InputDefaultComponent} from './input-default/input-default.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormValidationModule} from '../form-validations/form-validation.module';
-import {NbAutocompleteModule, NbButtonModule, NbDatepickerModule, NbInputModule, NbSelectModule} from '@nebular/theme';
+import {
+  NbAutocompleteModule,
+  NbButtonModule,
+  NbCardModule,
+  NbDatepickerModule,
+  NbInputModule,
+  NbSelectModule
+} from '@nebular/theme';
 import {InputComparatorDefaultComponent} from './input-comparator-default/input-comparator-default.component';
 import {InputGeneratedPasswordDefaultComponent} from './input-generated-password-default/input-generated-password-default.component';
 import {ImageUploadDefaultComponent} from './image-upload-default/image-upload-default.component';
@@ -18,6 +25,7 @@ import { InputSpinnerDefaultComponent } from './input-spinner-default/input-spin
 import {NgSpinBoxModule} from 'ng-spin-box';
 import { InputAutocompleteDefaultComponent } from './input-autocomplete-default/input-autocomplete-default.component';
 import { InputMultipleDefaultComponent } from './input-multiple-default/input-multiple-default.component';
+import {Ng2SmartTableModule} from 'ng2-smart-table';
 
 
 @NgModule({
@@ -34,35 +42,37 @@ import { InputMultipleDefaultComponent } from './input-multiple-default/input-mu
     InputTextareaDefaultComponent,
     InputSpinnerDefaultComponent,
     InputAutocompleteDefaultComponent,
-    InputMultipleDefaultComponent
+    InputMultipleDefaultComponent,
   ],
-    exports: [
-        InputDefaultComponent,
-        InputComparatorDefaultComponent,
-        InputGeneratedPasswordDefaultComponent,
-        ImageUploadDefaultComponent,
-        InputDatePickerDefaultComponent,
-        InputDatePickerMaxDefaultComponent,
-        InputDatePickerMaxExceptTodayDefaultComponent,
-        InputAmountDefaultComponent,
-        InputDatePickerFutureDefaultComponent,
-        InputTextareaDefaultComponent,
-        InputSpinnerDefaultComponent,
-        InputAutocompleteDefaultComponent,
-        InputMultipleDefaultComponent
-    ],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        FormValidationModule,
-        NbInputModule,
-        NbSelectModule,
-        NbButtonModule,
-        NbDatepickerModule,
-        CurrencyMaskModule,
-        NgSpinBoxModule,
-        NbAutocompleteModule
-    ]
+  exports: [
+    InputDefaultComponent,
+    InputComparatorDefaultComponent,
+    InputGeneratedPasswordDefaultComponent,
+    ImageUploadDefaultComponent,
+    InputDatePickerDefaultComponent,
+    InputDatePickerMaxDefaultComponent,
+    InputDatePickerMaxExceptTodayDefaultComponent,
+    InputAmountDefaultComponent,
+    InputDatePickerFutureDefaultComponent,
+    InputTextareaDefaultComponent,
+    InputSpinnerDefaultComponent,
+    InputAutocompleteDefaultComponent,
+    InputMultipleDefaultComponent,
+  ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormValidationModule,
+    NbInputModule,
+    NbSelectModule,
+    NbButtonModule,
+    NbDatepickerModule,
+    CurrencyMaskModule,
+    NgSpinBoxModule,
+    NbAutocompleteModule,
+    Ng2SmartTableModule,
+    NbCardModule
+  ]
 })
 export class FormInputModule {
 }

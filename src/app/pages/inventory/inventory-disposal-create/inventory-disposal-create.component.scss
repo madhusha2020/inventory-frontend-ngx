@@ -3,7 +3,6 @@
 @include nb-install-component() {
 
   nb-card {
-    overflow: auto;
     height: 42.875rem;
     width: 100%;
   }
@@ -13,8 +12,17 @@
   }
 }
 
+:host ::ng-deep nb-stepper .step-content {
+  width: 100%;
+
+  button {
+    cursor: pointer;
+    margin: 0.5rem;
+  }
+}
+
 div.scroll {
-  height: 400px;
+  height: 300px;
   overflow-y: scroll;
 }
 
@@ -30,4 +38,9 @@ div.scroll {
 .form-label {
   margin-bottom: 5px;
   margin-top: 16px;
+}
+
+div.scroll {
+  height: 455px;
+  overflow-y: scroll;
 }

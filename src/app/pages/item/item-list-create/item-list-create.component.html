@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-5">
+    <app-input-autocomplete-default
+      (changeEvent)="itemStateChange($event)"
+      [field]="itemId"
+      category="item" placeholder="Select item"
+      title="Item"></app-input-autocomplete-default>
+  </div>
+  <div class="col-md-5">
+    <app-input-default
+      [field]="qty" placeholder="Enter quantity"
+      title="Quantity"></app-input-default>
+  </div>
+  <div class="col-md-2">
+    <span style="float: right"><button (click)="submit()" [disabled]="selectedItemsArray.length == 0 || !parentFormIsValid" nbButton status="success"
+                                       style="margin-top: 40px; float: right">
+      Submit
+    </button></span>
+    <span style="float: right"><button (click)="add()" [disabled]="!dummyForm.valid" nbButton status="info"
+                                       style="margin-top: 40px; float: right">
+      Add
+    </button></span>
+  </div>
+</div>
+
+<ng2-smart-table (createConfirm)="onCreateConfirm($event)" (editConfirm)="onSaveConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)"
+                 [settings]="settings"
+                 [source]="source">
+</ng2-smart-table>

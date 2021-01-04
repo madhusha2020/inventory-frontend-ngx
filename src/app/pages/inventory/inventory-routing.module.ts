@@ -10,6 +10,7 @@ import {InventoryViewComponent} from './inventory-view/inventory-view.component'
 import {InventoryInboundViewComponent} from './inventory-inbound-view/inventory-inbound-view.component';
 import {InventoryOutboundViewComponent} from './inventory-outbound-view/inventory-outbound-view.component';
 import {InventoryDisposalViewComponent} from './inventory-disposal-view/inventory-disposal-view.component';
+import {InventoryDisposalCreateComponent} from './inventory-disposal-create/inventory-disposal-create.component';
 
 const routes: Routes = [
   {
@@ -64,6 +65,12 @@ const routes: Routes = [
         data: {roles: ['INV-INV-DIS-VW']},
         canActivate: [AuthGuardService],
         component: InventoryDisposalViewComponent,
+      },
+      {
+        path: 'disposal-create',
+        data: {roles: ['INV-INV-DIS-CR']},
+        canActivate: [AuthGuardService],
+        component: InventoryDisposalCreateComponent,
       },
     ],
   },
