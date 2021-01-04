@@ -9,6 +9,7 @@ import {
 } from '../../../service/rest';
 import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-inventory-disposal-create',
@@ -19,7 +20,6 @@ export class InventoryDisposalCreateComponent implements OnInit {
 
   disposalForm: FormGroup;
   disposal: Disposal = {};
-  inventory: Inventory = {};
   disposalInventoryList: DisposalInventoryList = {};
   disposalInventories: Array<DisposalInventory> = [];
 
@@ -55,8 +55,7 @@ export class InventoryDisposalCreateComponent implements OnInit {
     this.disposal.userId = this.tokenService.getUserName();
 
     event.forEach(item => {
-      this.inventory.id = item.itemId;
-      this.disposalInventories.push({inventory: this.inventory, qty: item.qty});
+      this.disposalInventories.push({inventory: {id: item.itemId}, qty: item.qty});
     });
     this.disposalInventoryList.disposal = this.disposal;
     this.disposalInventoryList.disposalInventoryList = this.disposalInventories;
@@ -65,6 +64,9 @@ export class InventoryDisposalCreateComponent implements OnInit {
 
     this.disposalControllerService.createDisposalProductUsingPOST(this.disposalInventoryList).subscribe(response => {
       console.log('Disposal Inventory List response :', response);
+      Swal.fire('Success', 'Disposal successfully created', 'success').then(value => {
+        this.router.navigate(['/pages/inventory/disposal-main']);
+      });
     });
   }
 }
