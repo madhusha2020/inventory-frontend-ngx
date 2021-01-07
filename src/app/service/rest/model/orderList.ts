@@ -13,8 +13,8 @@ import { Order } from './order';
 
 
 export interface OrderList { 
-    description?: string;
     orders?: Array<Order>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
 }

@@ -13,8 +13,8 @@ import { User } from './user';
 
 
 export interface UserWithUserRoles { 
-    description?: string;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     roleNameList?: Array<string>;
     user?: User;

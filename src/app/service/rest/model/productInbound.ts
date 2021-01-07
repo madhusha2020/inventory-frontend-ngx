@@ -24,6 +24,7 @@ export interface ProductInbound {
     modifieddate?: Date;
     productInboundItems?: Array<ProductInboundItem>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

@@ -13,8 +13,8 @@ import { Vehicle } from './vehicle';
 
 
 export interface VehicleList { 
-    description?: string;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     vehicleList?: Array<Vehicle>;
 }

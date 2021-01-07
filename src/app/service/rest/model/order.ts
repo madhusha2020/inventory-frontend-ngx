@@ -37,6 +37,7 @@ export interface Order {
     orderItems?: Array<OrderItems>;
     orderType?: string;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     sale?: Sale;
     saleId?: number;

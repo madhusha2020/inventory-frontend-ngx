@@ -13,8 +13,8 @@ import { Disposal } from './disposal';
 
 
 export interface DisposalList { 
-    description?: string;
     disposalList?: Array<Disposal>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
 }

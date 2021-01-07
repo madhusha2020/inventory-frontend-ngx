@@ -13,8 +13,8 @@ import { ProductOutbound } from './productOutbound';
 
 
 export interface ProductOutboundList { 
-    description?: string;
     productOutboundList?: Array<ProductOutbound>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
 }

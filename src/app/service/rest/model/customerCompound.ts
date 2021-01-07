@@ -22,6 +22,7 @@ export interface CustomerCompound {
     name?: string;
     order?: Order;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

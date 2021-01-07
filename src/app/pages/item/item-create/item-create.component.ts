@@ -72,10 +72,6 @@ export class ItemCreateComponent implements OnInit {
     return this.itemForm.get('unit');
   }
 
-  get doexpire() {
-    return this.itemForm.get('doexpire');
-  }
-
   get weightvolume() {
     return this.itemForm.get('weightvolume');
   }
@@ -93,7 +89,6 @@ export class ItemCreateComponent implements OnInit {
       qty: [0, [Validators.required, Validators.pattern('^[0-9]*$')]],
       rop: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
       unit: [ServiceUtil.getKgUnitType(), [Validators.required]],
-      doexpire: [null, [Validators.required]],
       weightvolume: [null, [Validators.required]],
     });
   }
@@ -130,7 +125,6 @@ export class ItemCreateComponent implements OnInit {
     this.inventory.description = this.description.value;
     this.inventory.initqty = this.initqty.value;
     this.inventory.qty = this.qty.value;
-    this.inventory.doexpire = this.doexpire.value;
     this.inventory.userId = this.tokenService.getUserName();
 
     this.inventoryItem.item = this.item;

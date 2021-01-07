@@ -14,9 +14,9 @@ import { Item } from './item';
 
 
 export interface InventoryItem { 
-    description?: string;
     inventory?: Inventory;
     item?: Item;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
 }

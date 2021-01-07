@@ -34,6 +34,7 @@ export interface Delivery {
     modifiedby?: string;
     modifieddate?: Date;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     sale?: Sale;
     status?: number;

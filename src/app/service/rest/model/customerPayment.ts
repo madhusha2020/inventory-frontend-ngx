@@ -27,6 +27,7 @@ export interface CustomerPayment {
     paymenttype?: string;
     ref?: string;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     sale?: Sale;
     status?: number;

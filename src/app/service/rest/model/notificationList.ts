@@ -13,8 +13,8 @@ import { Notification } from './notification';
 
 
 export interface NotificationList { 
-    description?: string;
     notificationList?: Array<Notification>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
 }

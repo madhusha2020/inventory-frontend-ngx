@@ -12,10 +12,10 @@
 
 
 export interface ImageModel { 
-    description?: string;
     name?: string;
     photo?: Array<string>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     type?: string;
 }

@@ -29,6 +29,7 @@ export interface Customer {
     orderCount?: number;
     orders?: Array<Order>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     sales?: Array<Sale>;
     status?: number;

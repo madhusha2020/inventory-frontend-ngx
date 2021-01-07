@@ -14,7 +14,7 @@ import { Delivery } from './delivery';
 
 export interface DeliveryList { 
     deliveryList?: Array<Delivery>;
-    description?: string;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
 }

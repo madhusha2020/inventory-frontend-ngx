@@ -22,10 +22,16 @@
                       [field]="description" placeholder="Enter description"
                       title="Description"></app-input-textarea-default>
 
-                    <app-input-date-picker-future-default
-                      [field]="doexpire" placeholder="Select expire date"
-                      title="Expire Date"
-                    ></app-input-date-picker-future-default>
+                    <label class="form-label">Danger Level</label>
+                    <div class="form-group">
+                      <nb-select (selectedChange)="dangerLevelStateChange($event)" fullWidth placeholder="Select Level"
+                                 selected="Low">
+                        <nb-option *ngFor="let item of dangerLevels" title="{{item}}" value="{{item}}">
+                          {{item}}
+                        </nb-option>
+                      </nb-select>
+                    </div>
+
                   </div>
 
                   <div class="col-md-5" style="margin-top: 40px">
@@ -52,23 +58,13 @@
                       [field]="lastprice" placeholder="Enter last price"
                       title="Last Price"></app-input-amount-default>
 
-                    <label class="form-label">Danger Level</label>
-                    <div class="form-group">
-                      <nb-select (selectedChange)="dangerLevelStateChange($event)" fullWidth placeholder="Select Level"
-                                 selected="Low">
-                        <nb-option *ngFor="let item of dangerLevels" title="{{item}}" value="{{item}}">
-                          {{item}}
-                        </nb-option>
-                      </nb-select>
-                    </div>
+                    <app-input-default
+                      [field]="testperiod" placeholder="Enter no of months"
+                      title="Test Periods (Months)"></app-input-default>
 
                   </div>
                   <div class="col-md-1"></div>
                   <div class="col-md-5">
-
-                    <app-input-default
-                      [field]="testperiod" placeholder="Enter no of months"
-                      title="Test Periods (Months)"></app-input-default>
 
                     <label class="form-label">Unit</label>
                     <div class="form-group">
@@ -84,29 +80,11 @@
                       [field]="weightvolume" placeholder="Enter weight or volume"
                       title="Unit Weight / Volume"></app-input-default>
 
+                    <app-input-default
+                      [field]="rop" placeholder="Enter reorder quantity"
+                      title="Reorder Quantity"></app-input-default>
+
                   </div>
-
-                </div>
-                <button nbButton nbStepperPrevious>prev</button>
-                <button nbButton nbStepperNext>next</button>
-              </nb-step>
-              <nb-step label="Inventory details">
-                <h3>Inventory Details</h3>
-                <div class="margin">
-
-                  <app-input-default
-                    [hidden]="true"
-                    [field]="initqty" placeholder="Enter initial quantity"
-                    title="Initial Quantity"></app-input-default>
-
-                  <app-input-default
-                    [hidden]="true"
-                    [field]="qty" placeholder="Enter available quantity"
-                    title="Available Quantity"></app-input-default>
-
-                  <app-input-default
-                    [field]="rop" placeholder="Enter reorder quantity"
-                    title="Reorder Quantity"></app-input-default>
 
                 </div>
                 <button nbButton nbStepperPrevious>prev</button>

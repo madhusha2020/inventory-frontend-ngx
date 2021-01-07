@@ -29,6 +29,7 @@ export interface Inventory {
     modifieddate?: Date;
     qty?: number;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     saleInventoryList?: Array<SaleInventory>;
     status?: number;

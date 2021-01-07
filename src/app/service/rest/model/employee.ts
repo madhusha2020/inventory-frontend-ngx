@@ -36,6 +36,7 @@ export interface Employee {
     nic?: string;
     photo?: Array<string>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

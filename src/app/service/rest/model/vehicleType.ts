@@ -15,12 +15,12 @@ import { Vehicle } from './vehicle';
 export interface VehicleType { 
     createdby?: string;
     createddate?: Date;
-    description?: string;
     id?: number;
     modifiedby?: string;
     modifieddate?: Date;
     name?: string;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

@@ -15,12 +15,12 @@ export interface Discount {
     category?: string;
     createdby?: string;
     createddate?: Date;
-    description?: string;
     discount?: number;
     id?: number;
     modifiedby?: string;
     modifieddate?: Date;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

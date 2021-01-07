@@ -17,7 +17,6 @@ import { Inventory } from './inventory';
 export interface DisposalInventory { 
     createdby?: string;
     createddate?: Date;
-    description?: string;
     disposal?: Disposal;
     disposalInventoryId?: DisposalInventoryId;
     inventory?: Inventory;
@@ -25,6 +24,7 @@ export interface DisposalInventory {
     modifieddate?: Date;
     qty?: number;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

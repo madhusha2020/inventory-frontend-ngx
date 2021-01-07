@@ -19,7 +19,6 @@ export interface Privilege {
     createdby?: string;
     createddate?: Date;
     _delete?: string;
-    description?: string;
     getAll?: string;
     getBasic?: string;
     modifiedby?: string;
@@ -27,6 +26,7 @@ export interface Privilege {
     module?: Module;
     privilegeId?: PrivilegeId;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     role?: Role;
     status?: number;

@@ -4,7 +4,6 @@ import {AuthGuardService} from '../../service/auth/auth-guard.service';
 import {ItemComponent} from './item.component';
 import {ItemMainComponent} from './item-main/item-main.component';
 import {ItemCreateComponent} from './item-create/item-create.component';
-import {ItemDisposeComponent} from './item-dispose/item-dispose.component';
 import {ItemViewComponent} from './item-view/item-view.component';
 
 const routes: Routes = [
@@ -30,12 +29,6 @@ const routes: Routes = [
         data: {roles: ['INV-ITM-VW']},
         canActivate: [AuthGuardService],
         component: ItemViewComponent,
-      },
-      {
-        path: 'dispose',
-        data: {roles: ['INV-ITM-DIS']},
-        canActivate: [AuthGuardService],
-        component: ItemDisposeComponent,
       }
     ],
   },

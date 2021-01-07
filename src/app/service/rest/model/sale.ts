@@ -38,6 +38,7 @@ export interface Sale {
     name?: string;
     order?: Order;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     saleCustomCompound?: SaleCustomCompound;
     saleInventoryList?: Array<SaleInventory>;

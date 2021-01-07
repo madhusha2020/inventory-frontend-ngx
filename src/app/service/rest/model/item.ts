@@ -23,7 +23,7 @@ export interface Item {
     dangerlevel?: string;
     description?: string;
     id?: number;
-    inventories?: Array<Inventory>;
+    inventory?: Inventory;
     lastprice?: number;
     lastpriceValue?: string;
     modifiedby?: string;
@@ -35,6 +35,7 @@ export interface Item {
     productInboundItems?: Array<ProductInboundItem>;
     productOutboundItems?: Array<ProductOutboundItem>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     rop?: number;
     sprice?: number;

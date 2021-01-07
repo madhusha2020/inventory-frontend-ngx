@@ -22,6 +22,7 @@ export interface SaleCustomCompound {
     name?: string;
     price?: number;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     sale?: Sale;
     status?: number;

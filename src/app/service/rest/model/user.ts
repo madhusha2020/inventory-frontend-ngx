@@ -15,7 +15,6 @@ import { UserRole } from './userRole';
 export interface User { 
     createdby?: string;
     createddate?: Date;
-    description?: string;
     failedAttempts?: number;
     id?: string;
     modifiedby?: string;
@@ -23,6 +22,7 @@ export interface User {
     oldPassword?: string;
     password?: string;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

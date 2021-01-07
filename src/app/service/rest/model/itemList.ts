@@ -13,9 +13,9 @@ import { Item } from './item';
 
 
 export interface ItemList { 
-    description?: string;
     itemList?: Array<Item>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     totalPages?: number;
 }

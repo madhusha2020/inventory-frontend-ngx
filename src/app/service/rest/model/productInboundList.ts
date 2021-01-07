@@ -13,8 +13,8 @@ import { ProductInbound } from './productInbound';
 
 
 export interface ProductInboundList { 
-    description?: string;
     productInboundList?: Array<ProductInbound>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
 }

@@ -13,8 +13,8 @@ import { User } from './user';
 
 
 export interface UserList { 
-    description?: string;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     userList?: Array<User>;
 }

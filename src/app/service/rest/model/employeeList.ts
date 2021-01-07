@@ -13,9 +13,9 @@ import { Employee } from './employee';
 
 
 export interface EmployeeList { 
-    description?: string;
     employees?: Array<Employee>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     totalPages?: number;
 }

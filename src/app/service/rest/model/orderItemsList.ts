@@ -17,12 +17,12 @@ import { Sale } from './sale';
 
 export interface OrderItemsList { 
     chemicalTest?: ChemicalTest;
-    description?: string;
     discount?: number;
     order?: Order;
     orderItems?: Array<OrderItems>;
     paymentType?: string;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     sale?: Sale;
     total?: number;

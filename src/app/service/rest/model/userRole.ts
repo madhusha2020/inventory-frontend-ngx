@@ -17,10 +17,10 @@ import { UserRoleId } from './userRoleId';
 export interface UserRole { 
     createdby?: string;
     createddate?: Date;
-    description?: string;
     modifiedby?: string;
     modifieddate?: Date;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     role?: Role;
     status?: number;

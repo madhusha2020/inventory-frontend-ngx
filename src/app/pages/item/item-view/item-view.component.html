@@ -1,1 +1,148 @@
-<p>item-view works!</p>
+<div class="row">
+  <div class="col-12">
+    <nb-card size="small">
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Chemical Details">
+          <h3>{{title}} Chemical Details</h3>
+
+          <div class="margin row">
+
+            <div class="col-md-5">
+              <app-input-default
+                [disableProperty]="disabledProperty"
+                [field]="code" placeholder="Enter item code"
+                title="Item Code"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="disabledProperty"
+                [field]="name" placeholder="Enter chemical name"
+                title="Chemical Name"></app-input-default>
+
+              <app-input-textarea-default
+                [disableProperty]="disabledProperty"
+                [field]="description" placeholder="Enter description"
+                title="Description"></app-input-textarea-default>
+
+              <div *ngIf="!editMode">
+                <app-input-default
+                  [disableProperty]="disabledProperty"
+                  [field]="dangerlevel" placeholder="Select danger level"
+                  title="Danger level"></app-input-default>
+              </div>
+
+              <div *ngIf="editMode">
+                <label class="form-label">Danger Level</label>
+                <div class="form-group">
+                  <nb-select (selectedChange)="dangerLevelStateChange($event)" fullWidth placeholder="Select Level"
+                             selected="Low">
+                    <nb-option *ngFor="let item of dangerLevels" title="{{item}}" value="{{item}}">
+                      {{item}}
+                    </nb-option>
+                  </nb-select>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-md-5" style="margin-top: 40px">
+              <app-image-upload-default (changeEvent)="imageUploadEvent($event)"
+                                        [id]="itemId"
+                                        [showButton]="editMode"
+                                        category="item"
+                                        defaultImage="../../../../../assets/images/image-placeholder.png">
+              </app-image-upload-default>
+            </div>
+
+          </div>
+
+          <div class="row" style="margin-left: 0px">
+            <div class="col-md-6">
+              <button (click)="enableEditMode()" nbButton status="warning">Edit</button>
+              <span class="margin"><button (click)="disabledEditMode()"
+                                           [disabled]="!editMode"
+                                           nbButton>Cancel</button></span>
+            </div>
+            <div class="col-md-6">
+              <span (click)="updateItemDetails()" *ngIf="editMode"
+                    style="float: right; margin-left: 10px"><button nbButton
+                                                                    status="info">Save</button></span>
+              <span style="float: right"><button (click)="suspend()" [hidden]="item.status != 1"
+                                                 nbButton status="danger">Suspend</button></span>
+              <span style="float: right"><button (click)="activate()" [hidden]="item.status == 1"
+                                                 nbButton status="success">Activate</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+        <nb-tab tabTitle="Price Details">
+          <h3>{{title}} Price Details</h3>
+
+          <div class="margin row">
+
+            <div class="col-md-5">
+
+              <app-input-amount-default
+                [disableProperty]="disabledProperty"
+                [field]="sprice" placeholder="Enter price"
+                title="Price"></app-input-amount-default>
+
+              <app-input-amount-default
+                [disableProperty]="disabledProperty"
+                [field]="lastprice" placeholder="Enter last price"
+                title="Last Price"></app-input-amount-default>
+
+              <app-input-default
+                [disableProperty]="disabledProperty"
+                [field]="testperiod" placeholder="Enter no of months"
+                title="Test Periods (Months)"></app-input-default>
+
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
+
+              <div *ngIf="!editMode">
+                <app-input-default
+                  [disableProperty]="disabledProperty"
+                  [field]="unit" placeholder="Select unit"
+                  title="Unit"></app-input-default>
+              </div>
+
+              <div *ngIf="editMode">
+                <label class="form-label">Unit</label>
+                <div class="form-group">
+                  <nb-select (selectedChange)="unitStateChange($event)" fullWidth placeholder="Select Unit"
+                             selected="Kilogram">
+                    <nb-option *ngFor="let item of units" title="{{item}}" value="{{item}}">
+                      {{item}}
+                    </nb-option>
+                  </nb-select>
+                </div>
+              </div>
+
+              <app-input-default
+                [disableProperty]="disabledProperty"
+                [field]="weightvolume" placeholder="Enter weight or volume"
+                title="Unit Weight / Volume"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="disabledProperty"
+                [field]="rop" placeholder="Enter reorder quantity"
+                title="Reorder Quantity"></app-input-default>
+
+            </div>
+
+          </div>
+
+          <div class="row" style="margin-left: 0px">
+            <div class="col-md-12">
+              <span (click)="updateItemDetails()" *ngIf="editMode"
+                    style="float: right; margin-left: 10px"><button nbButton
+                                                                    status="info">Save</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </div>
+</div>

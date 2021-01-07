@@ -24,17 +24,13 @@ export class ShopComponent implements OnInit {
   }
 
   fetchItems() {
-    this.itemControllerService.getAllItemsUsingGET(this.offset, this.limit).subscribe(response => {
+    this.itemControllerService.getAllActiveItemsUsingGET(this.offset, this.limit).subscribe(response => {
       console.log('Item Data :', response);
       response.itemList.forEach(item => {
         item.statusDescription = ServiceUtil.getStatusDescription(item.status);
         item.spriceValue = item.sprice.toLocaleString('en-US', {style: 'currency', currency: 'LKR'});
         item.lastpriceValue = item.lastprice.toLocaleString('en-US', {style: 'currency', currency: 'LKR'});
-        item.inventories.forEach(inventory => {
-          if (inventory) {
-            item.avalableQty = inventory.qty;
-          }
-        });
+        item.avalableQty = item.inventory.qty;
 
         this.items.push(item);
         this.itemArray.push(item);

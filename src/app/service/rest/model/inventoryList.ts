@@ -13,8 +13,8 @@ import { Inventory } from './inventory';
 
 
 export interface InventoryList { 
-    description?: string;
     inventoryList?: Array<Inventory>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
 }

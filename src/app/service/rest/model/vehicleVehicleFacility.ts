@@ -17,10 +17,10 @@ import { VehicleVechileFacilityId } from './vehicleVechileFacilityId';
 export interface VehicleVehicleFacility { 
     createdby?: string;
     createddate?: Date;
-    description?: string;
     modifiedby?: string;
     modifieddate?: Date;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

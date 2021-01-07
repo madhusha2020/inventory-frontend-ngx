@@ -17,7 +17,6 @@ import { ProductInboundItemId } from './productInboundItemId';
 export interface ProductInboundItem { 
     createdby?: string;
     createddate?: Date;
-    description?: string;
     doexpire?: string;
     item?: Item;
     modifiedby?: string;
@@ -26,6 +25,7 @@ export interface ProductInboundItem {
     productInboundItemId?: ProductInboundItemId;
     qty?: number;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

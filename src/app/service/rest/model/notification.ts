@@ -14,7 +14,6 @@
 export interface Notification { 
     createdby?: string;
     createddate?: Date;
-    description?: string;
     dodelivered?: string;
     doreceived?: string;
     dosend?: string;
@@ -24,6 +23,7 @@ export interface Notification {
     modifiedby?: string;
     modifieddate?: Date;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

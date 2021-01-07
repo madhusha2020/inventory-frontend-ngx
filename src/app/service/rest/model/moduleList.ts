@@ -13,8 +13,8 @@ import { Module } from './module';
 
 
 export interface ModuleList { 
-    description?: string;
     modules?: Array<Module>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
 }

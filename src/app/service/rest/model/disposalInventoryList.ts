@@ -14,9 +14,9 @@ import { DisposalInventory } from './disposalInventory';
 
 
 export interface DisposalInventoryList { 
-    description?: string;
     disposal?: Disposal;
     disposalInventoryList?: Array<DisposalInventory>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
 }

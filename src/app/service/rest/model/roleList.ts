@@ -13,8 +13,8 @@ import { Role } from './role';
 
 
 export interface RoleList { 
-    description?: string;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     roles?: Array<Role>;
 }

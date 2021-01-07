@@ -26,6 +26,7 @@ export interface Vehicle {
     modifieddate?: Date;
     no?: string;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

@@ -27,6 +27,7 @@ export interface ChemicalTest {
     modifieddate?: Date;
     price?: number;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     result?: string;
     status?: number;

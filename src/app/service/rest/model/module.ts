@@ -17,7 +17,6 @@ export interface Module {
     createdby?: string;
     createddate?: Date;
     _delete?: string;
-    description?: string;
     getAll?: string;
     getBasic?: string;
     id?: number;
@@ -27,6 +26,7 @@ export interface Module {
     permissionDescription?: string;
     privileges?: Array<Privilege>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

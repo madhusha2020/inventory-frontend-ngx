@@ -17,7 +17,6 @@ import { OrderItemId } from './orderItemId';
 export interface OrderItems { 
     createdby?: string;
     createddate?: Date;
-    description?: string;
     item?: Item;
     modifiedby?: string;
     modifieddate?: Date;
@@ -25,6 +24,7 @@ export interface OrderItems {
     orderItemId?: OrderItemId;
     qty?: number;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

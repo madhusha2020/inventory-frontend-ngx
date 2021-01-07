@@ -15,8 +15,8 @@ import { VehicleType } from './vehicleType';
 
 
 export interface VehicleFacilityList { 
-    description?: string;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     vehicle?: Vehicle;
     vehicleFacilityList?: Array<VehicleFacility>;

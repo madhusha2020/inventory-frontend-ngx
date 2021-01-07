@@ -24,6 +24,7 @@ export interface Disposal {
     modifieddate?: Date;
     reason?: string;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

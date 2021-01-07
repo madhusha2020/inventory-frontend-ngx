@@ -13,9 +13,9 @@
 
 export interface TransactionDetails { 
     category?: string;
-    description?: string;
     discount?: number;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     total?: number;
     totalWithDiscount?: number;

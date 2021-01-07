@@ -16,12 +16,12 @@ import { UserRole } from './userRole';
 export interface Role { 
     createdby?: string;
     createddate?: Date;
-    description?: string;
     modifiedby?: string;
     modifieddate?: Date;
     name?: string;
     privileges?: Array<Privilege>;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     status?: number;
     statusDescription?: string;

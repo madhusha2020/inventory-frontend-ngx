@@ -14,9 +14,9 @@ import { User } from './user';
 
 
 export interface EmployeeUser { 
-    description?: string;
     employee?: Employee;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     roleNameList?: Array<string>;
     user?: User;

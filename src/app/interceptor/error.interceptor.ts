@@ -17,7 +17,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       if (err.status >= 400) {
         console.log('intercepted an error');
         console.log(err);
-        switch (err.error.description) {
+        switch (err.error.responseDescription) {
           case 'Invalid Request':
             let errors = '<div><p>';
             err.error.responseValues.forEach(errorObject => {
@@ -28,7 +28,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             Swal.fire('Oops...', errors, 'error');
             break;
           default:
-            Swal.fire('Oops...', err.error.description, 'error');
+            Swal.fire('Oops...', err.error.responseDescription, 'error');
         }
       }
       const error = err.error.message || err.statusText;

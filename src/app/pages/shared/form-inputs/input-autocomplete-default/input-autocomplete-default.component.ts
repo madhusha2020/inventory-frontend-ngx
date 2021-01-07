@@ -36,7 +36,7 @@ export class InputAutocompleteDefaultComponent implements OnInit {
     switch (this.category) {
 
       case 'item':
-        this.itemControllerService.getAllItemsUsingGET(this.offset, this.limit).subscribe(response => {
+        this.itemControllerService.getAllActiveItemsUsingGET(this.offset, this.limit).subscribe(response => {
           console.log('Items :', response);
           response.itemList.forEach(value => {
             this.options.push(value.id + ' - ' + value.name.toUpperCase());
@@ -56,7 +56,7 @@ export class InputAutocompleteDefaultComponent implements OnInit {
         break;
 
       case 'vehicle':
-        this.vehicleControllerService.getAllVehiclesUsingGET().subscribe(response => {
+        this.vehicleControllerService.getAllActiveVehiclesUsingGET().subscribe(response => {
           console.log('Delivery vehicle :', response);
           response.vehicleList.forEach(value => {
             this.options.push(value.id + ' - ' + value.no.toUpperCase());
@@ -66,7 +66,7 @@ export class InputAutocompleteDefaultComponent implements OnInit {
         break;
 
       case 'vehicleType':
-        this.vehicleControllerService.getAllVehicleTypesUsingGET().subscribe(response => {
+        this.vehicleControllerService.getAllActiveVehicleTypesUsingGET().subscribe(response => {
           console.log('Delivery vehicle type :', response);
           response.vehicleTypeList.forEach(value => {
             this.options.push(value.id + ' - ' + value.name.toUpperCase());

@@ -17,12 +17,12 @@ import { SaleInventoryId } from './saleInventoryId';
 export interface SaleInventory { 
     createdby?: string;
     createddate?: Date;
-    description?: string;
     inventory?: Inventory;
     modifiedby?: string;
     modifieddate?: Date;
     qty?: number;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     sale?: Sale;
     saleInventoryId?: SaleInventoryId;

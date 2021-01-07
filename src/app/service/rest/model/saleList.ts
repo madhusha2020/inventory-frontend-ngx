@@ -13,8 +13,8 @@ import { Sale } from './sale';
 
 
 export interface SaleList { 
-    description?: string;
     responseCode?: string;
+    responseDescription?: string;
     responseValues?: Array<string>;
     saleList?: Array<Sale>;
 }
