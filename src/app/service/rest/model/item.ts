@@ -13,6 +13,8 @@ import { Inventory } from './inventory';
 import { OrderItems } from './orderItems';
 import { ProductInboundItem } from './productInboundItem';
 import { ProductOutboundItem } from './productOutboundItem';
+import { PurchaseItems } from './purchaseItems';
+import { PurchaseOrderItems } from './purchaseOrderItems';
 
 
 export interface Item { 
@@ -34,6 +36,8 @@ export interface Item {
     photo?: Array<string>;
     productInboundItems?: Array<ProductInboundItem>;
     productOutboundItems?: Array<ProductOutboundItem>;
+    purchaseItems?: Array<PurchaseItems>;
+    purchaseOrderItems?: Array<PurchaseOrderItems>;
     responseCode?: string;
     responseDescription?: string;
     responseValues?: Array<string>;

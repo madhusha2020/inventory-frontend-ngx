@@ -9,35 +9,28 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { DisposalInventory } from './disposalInventory';
-import { Item } from './item';
-import { SaleInventory } from './saleInventory';
-import { SupplierRefundInventory } from './supplierRefundInventory';
+import { Supplier } from './supplier';
+import { SupplierReplaceInventory } from './supplierReplaceInventory';
 import { SupplierReturnInventory } from './supplierReturnInventory';
 
 
-export interface Inventory { 
+export interface SupplierReturn { 
     code?: string;
     createdby?: string;
     createddate?: Date;
-    description?: string;
-    disposalInventoryList?: Array<DisposalInventory>;
-    disposedQty?: number;
-    doexpire?: string;
+    dorecived?: string;
+    doreturned?: string;
     id?: number;
-    initqty?: number;
-    item?: Item;
     modifiedby?: string;
     modifieddate?: Date;
-    qty?: number;
+    reason?: string;
     responseCode?: string;
     responseDescription?: string;
     responseValues?: Array<string>;
-    saleInventoryList?: Array<SaleInventory>;
     status?: number;
     statusDescription?: string;
-    supplierRefundInventories?: Array<SupplierRefundInventory>;
-    supplierReplaceInventories?: Array<SupplierReturnInventory>;
+    supplier?: Supplier;
+    supplierReplaceInventories?: Array<SupplierReplaceInventory>;
     supplierReturnInventories?: Array<SupplierReturnInventory>;
     userId?: string;
 }

@@ -20,6 +20,7 @@ import { Observable }                                        from 'rxjs/Observab
 
 import { CustomerUser } from '../model/customerUser';
 import { EmployeeUser } from '../model/employeeUser';
+import { SupplierUser } from '../model/supplierUser';
 import { TransactionRequest } from '../model/transactionRequest';
 import { User } from '../model/user';
 import { UserList } from '../model/userList';
@@ -267,6 +268,48 @@ export class UserControllerService {
     }
 
     /**
+     * Get supplier by id
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getSupplierByIdUsingGET(id: string, observe?: 'body', reportProgress?: boolean): Observable<SupplierUser>;
+    public getSupplierByIdUsingGET(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SupplierUser>>;
+    public getSupplierByIdUsingGET(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SupplierUser>>;
+    public getSupplierByIdUsingGET(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getSupplierByIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<SupplierUser>(`${this.basePath}/user/supplier/${encodeURIComponent(String(id))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get user by user name
      * 
      * @param userName userName
@@ -393,6 +436,53 @@ export class UserControllerService {
 
         return this.httpClient.post<EmployeeUser>(`${this.basePath}/user/employee`,
             employeeUser,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Save supplier
+     * 
+     * @param supplierUser supplierUser
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public saveSupplierUsingPOST(supplierUser: SupplierUser, observe?: 'body', reportProgress?: boolean): Observable<SupplierUser>;
+    public saveSupplierUsingPOST(supplierUser: SupplierUser, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SupplierUser>>;
+    public saveSupplierUsingPOST(supplierUser: SupplierUser, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SupplierUser>>;
+    public saveSupplierUsingPOST(supplierUser: SupplierUser, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (supplierUser === null || supplierUser === undefined) {
+            throw new Error('Required parameter supplierUser was null or undefined when calling saveSupplierUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<SupplierUser>(`${this.basePath}/user/supplier`,
+            supplierUser,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -534,6 +624,53 @@ export class UserControllerService {
 
         return this.httpClient.put<EmployeeUser>(`${this.basePath}/user/employee`,
             employeeUser,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update supplier
+     * 
+     * @param supplierUser supplierUser
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateSupplierUsingPUT(supplierUser: SupplierUser, observe?: 'body', reportProgress?: boolean): Observable<SupplierUser>;
+    public updateSupplierUsingPUT(supplierUser: SupplierUser, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SupplierUser>>;
+    public updateSupplierUsingPUT(supplierUser: SupplierUser, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SupplierUser>>;
+    public updateSupplierUsingPUT(supplierUser: SupplierUser, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (supplierUser === null || supplierUser === undefined) {
+            throw new Error('Required parameter supplierUser was null or undefined when calling updateSupplierUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<SupplierUser>(`${this.basePath}/user/supplier`,
+            supplierUser,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

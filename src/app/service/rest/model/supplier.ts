@@ -9,14 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Complain } from './complain';
-import { Order } from './order';
-import { Sale } from './sale';
+import { Purchase } from './purchase';
+import { PurchaseOrder } from './purchaseOrder';
+import { SupplierReturn } from './supplierReturn';
 
 
-export interface Customer { 
+export interface Supplier { 
     address?: string;
-    complainList?: Array<Complain>;
+    code?: string;
     contact1?: string;
     contact2?: string;
     createdby?: string;
@@ -28,14 +28,14 @@ export interface Customer {
     modifiedby?: string;
     modifieddate?: Date;
     name?: string;
-    orderCount?: number;
-    orders?: Array<Order>;
+    purchaseList?: Array<Purchase>;
+    purchaseOrderList?: Array<PurchaseOrder>;
     responseCode?: string;
     responseDescription?: string;
     responseValues?: Array<string>;
-    sales?: Array<Sale>;
     status?: number;
     statusDescription?: string;
+    supplierReturns?: Array<SupplierReturn>;
     type?: string;
     userId?: string;
 }

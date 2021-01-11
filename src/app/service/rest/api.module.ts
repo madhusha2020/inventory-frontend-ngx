@@ -18,6 +18,10 @@ import {DiscountControllerService} from './api/discountController.service';
 import { DisposalControllerService } from './api/disposalController.service';
 import {InventoryControllerService} from './api/inventoryController.service';
 import {VehicleControllerService} from './api/vehicleController.service';
+import { SupplierControllerService } from './api/supplierController.service';
+import { SupplierPaymentControllerService } from './api/supplierPaymentController.service';
+import { CustomerPaymentControllerService } from './api/customerPaymentController.service';
+import { ChemicalTestControllerService } from './api/chemicalTestController.service';
 
 @NgModule({
   imports: [],
@@ -41,6 +45,10 @@ import {VehicleControllerService} from './api/vehicleController.service';
     NotificationControllerService,
     InventoryControllerService,
     VehicleControllerService,
+	ChemicalTestControllerService,
+	CustomerPaymentControllerService,
+	SupplierControllerService,
+	SupplierPaymentControllerService,	
   ]
 })
 export class ApiModule {
