@@ -320,14 +320,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         data: 'INV-TEST-VW',
-        title: 'Sample Tests',
+        title: 'Chemical Tests',
         link: '/pages/test/main',
       },
-      {
-        data: 'INV-TEST-CR',
-        title: 'Create Test',
-        link: '/pages/test/create',
-      },
+      // {
+      //   data: 'INV-TEST-CR',
+      //   title: 'Create Test',
+      //   link: '/pages/test/create',
+      // },
     ],
   },
   {
