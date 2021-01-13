@@ -1,1 +1,161 @@
-<p>supplier-view works!</p>
+<div class="row">
+  <div class="col-12">
+    <nb-card size="small">
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Supplier Details">
+          <h3>{{title}} Supplier Details</h3>
+
+          <div class="margin">
+
+            <app-input-default
+              [disableProperty]="true"
+              [field]="code" placeholder="Enter supplier code"
+              title="Supplier Code"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="true"
+              [field]="email" placeholder="Enter email"
+              title="Email"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="name" placeholder="Enter full name"
+              title="Full Name"></app-input-default>
+
+            <div *ngIf="!editMode">
+              <app-input-default
+                [disableProperty]="disabledProperty"
+                [field]="type" placeholder="Select Type"
+                title="Type"></app-input-default>
+            </div>
+
+            <div *ngIf="editMode">
+              <label class="form-label">Type</label>
+              <div class="form-group">
+                <nb-select (selectedChange)="typeStateChange($event)" [selected]="supplier.type" fullWidth
+                           placeholder="Select Type">
+                  <nb-option *ngFor="let item of supplierTypes" title="{{item}}" value="{{item}}">
+                    {{item}}
+                  </nb-option>
+                </nb-select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row" style="margin-left: 0px">
+            <div class="col-md-6">
+              <button (click)="enableEditMode()" nbButton status="warning">Edit</button>
+              <span class="margin"><button (click)="disabledEditMode()"
+                                           [disabled]="!editMode"
+                                           nbButton>Cancel</button></span>
+            </div>
+            <div class="col-md-6">
+              <span (click)="updateSupplierDetails()" *ngIf="editMode"
+                    style="float: right; margin-left: 10px"><button [disabled]="!supplierForm.valid" nbButton
+                                                                    status="info">Save</button></span>
+              <span style="float: right"><button (click)="suspend()" [hidden]="supplier.status != 1"
+                                                 nbButton status="danger">Suspend</button></span>
+              <span style="float: right"><button (click)="activate()" [hidden]="supplier.status == 1"
+                                                 nbButton status="success">Activate</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+        <nb-tab tabTitle="Contact Details">
+          <h3>{{title}} Contact Details</h3>
+
+          <div class="margin">
+
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="address" placeholder="Enter address"
+              title="Address"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="contact1" placeholder="Enter mobile no"
+              title="Mobile No"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="contact2" placeholder="Enter telephone no"
+              title="Telephone No"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="disabledProperty"
+              [field]="fax" placeholder="Enter fax no"
+              title="Fax No"></app-input-default>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <span (click)="updateSupplierDetails()" *ngIf="editMode"
+                    style="float: right"><button [disabled]="!supplierForm.valid" nbButton
+                                                 status="info">Save</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+        <nb-tab [hasPermissionHide]="'INV-ROL-CR'" tabTitle="Assigned Roles">
+          <h3>{{title}} Assigned Roles</h3>
+
+          <div class="row scroll">
+            <div *ngFor="let role of roles" class="col-md-12"
+                 style="margin-bottom: 0px; text-align: left;">
+              <label style="margin-left: 15px">
+                <input (change)="roleStateChange($event, role)"
+                       [checked]="assignedRoles.has(role.name)"
+                       [disabled]="!editMode"
+                       [id]="role.name"
+                       [name]="role.name"
+                       type="checkbox">
+                <span class="box search-check"
+                      style="margin-left: 10px">{{role.name.split('_').join(' ').toUpperCase()}}</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 15px">
+            <div class="col-md-12">
+              <span (click)="updateSupplierDetails()" *ngIf="editMode"
+                    style="float: right"><button [disabled]="!supplierForm.valid" nbButton
+                                                 status="info">Save</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+        <nb-tab tabTitle="Change Password">
+          <h3>Change Password</h3>
+
+          <div class="margin">
+
+            <app-input-default
+              [field]="password" placeholder="Enter new password" title="New Password"
+              type="password"></app-input-default>
+
+            <app-input-comparator-default
+              [comparableField]="password" [field]="confirmPassword" placeholder="Enter confirm new password"
+              title="Confirm New Password" type="password"></app-input-comparator-default>
+
+            <app-input-default
+              [field]="oldPassword" placeholder="Enter old password" title="Old Password"
+              type="password"></app-input-default>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <span (click)="updateSupplierPassword()" style="float: right"><button
+                [disabled]="!supplierPasswordForm.valid"
+                nbButton
+                status="info">Change Password</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </div>
+</div>

@@ -257,7 +257,7 @@ export class EmployeeViewComponent implements OnInit {
     this.updateEmployee();
   }
 
-  updateCustomerPassword() {
+  updateEmployeePassword() {
     this.user.password = this.password.value;
     this.user.oldPassword = this.oldPassword.value;
     this.updateEmployee();
@@ -339,7 +339,7 @@ export class EmployeeViewComponent implements OnInit {
     this.employee.address = this.address.value;
     this.employee.mobile = this.mobile.value;
     this.employee.land = this.land.value;
-    this.employee.description = ServiceUtil.getUpdateEmployeedescription();
+    this.employee.description = ServiceUtil.getUpdateEmployeeDescription();
     this.employee.userId = this.tokenService.getUserName();
 
     this.employeeUser.roleNameList = new Array<string>();

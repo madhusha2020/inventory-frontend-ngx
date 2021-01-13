@@ -48,7 +48,7 @@ export class ServiceUtil {
     return 'Created employee of the system';
   }
 
-  public static getUpdateEmployeedescription(): string {
+  public static getUpdateEmployeeDescription(): string {
     return 'Updated employee of the system';
   }
 
@@ -137,5 +137,25 @@ export class ServiceUtil {
 
   public static getOnlinePaymentType(): string {
     return 'online';
+  }
+
+  public static getCreateSupplierDescription(): string {
+    return 'Created supplier of the system';
+  }
+
+  public static getUpdateSupplierDescription(): string {
+    return 'Updated supplier of the system';
+  }
+
+  public static getExternalSupplierType(): string {
+    return 'External';
+  }
+
+  public static getSupplierTypes(): Array<string> {
+    const supplierTypes: Array<string> = [];
+    supplierTypes.push('External');
+    supplierTypes.push('Regular');
+    console.debug('Supplier Types: ', supplierTypes);
+    return supplierTypes;
   }
 }

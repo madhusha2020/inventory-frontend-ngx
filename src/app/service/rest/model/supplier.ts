@@ -14,7 +14,7 @@ import { PurchaseOrder } from './purchaseOrder';
 import { SupplierReturn } from './supplierReturn';
 
 
-export interface Supplier { 
+export interface Supplier {
     address?: string;
     code?: string;
     contact1?: string;
@@ -30,6 +30,7 @@ export interface Supplier {
     name?: string;
     purchaseList?: Array<Purchase>;
     purchaseOrderList?: Array<PurchaseOrder>;
+    purchaseOrderCount?: number;
     responseCode?: string;
     responseDescription?: string;
     responseValues?: Array<string>;
