@@ -18,6 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
+import { CustomerPayment } from '../model/customerPayment';
 import { CustomerPaymentList } from '../model/customerPaymentList';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -84,6 +85,48 @@ export class CustomerPaymentControllerService {
         ];
 
         return this.httpClient.get<CustomerPaymentList>(`${this.basePath}/customer-payment`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get customer payment by id
+     * 
+     * @param paymentId paymentId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getCustomerPaymentByIdUsingGET(paymentId: string, observe?: 'body', reportProgress?: boolean): Observable<CustomerPayment>;
+    public getCustomerPaymentByIdUsingGET(paymentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerPayment>>;
+    public getCustomerPaymentByIdUsingGET(paymentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerPayment>>;
+    public getCustomerPaymentByIdUsingGET(paymentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (paymentId === null || paymentId === undefined) {
+            throw new Error('Required parameter paymentId was null or undefined when calling getCustomerPaymentByIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<CustomerPayment>(`${this.basePath}/customer-payment/${encodeURIComponent(String(paymentId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

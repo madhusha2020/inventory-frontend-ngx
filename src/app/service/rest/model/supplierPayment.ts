@@ -26,6 +26,7 @@ export interface SupplierPayment {
     id?: number;
     modifiedby?: string;
     modifieddate?: Date;
+    paymentTotal?: string;
     paymenttype?: string;
     purchase?: Purchase;
     ref?: string;

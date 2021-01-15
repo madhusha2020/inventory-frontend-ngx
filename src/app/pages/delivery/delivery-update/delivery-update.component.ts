@@ -106,10 +106,6 @@ export class DeliveryUpdateComponent implements OnInit {
     this.delivery.vehicleId = event;
   }
 
-  updateDeliveryDetails() {
-
-  }
-
   approve() {
     console.log('Approve Delivery');
     this.delivery.userId = this.tokenService.getUserName();

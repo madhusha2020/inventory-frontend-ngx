@@ -24,6 +24,7 @@ import {ItemModule} from '../item/item.module';
 import { InventoryDisposalCreateComponent } from './inventory-disposal-create/inventory-disposal-create.component';
 import {FormInputModule} from '../shared/form-inputs/form-input.module';
 import {ReactiveFormsModule} from '@angular/forms';
+import {PermissionModule} from '../shared/permission/permission.module';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import {ReactiveFormsModule} from '@angular/forms';
         NbTabsetModule,
         FormInputModule,
         ReactiveFormsModule,
-        NbStepperModule
+        NbStepperModule,
+        PermissionModule
     ]
 })
 export class InventoryModule {

@@ -1,1 +1,82 @@
-<p>chemical-test-view works!</p>
+<div class="row">
+  <div class="col-12">
+    <nb-card size="small">
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Chemical Test Details">
+          <h3>{{title}} Chemical Test Details</h3>
+
+          <div class="margin row">
+
+            <div class="col-md-6">
+              <app-input-default
+                [disableProperty]="true"
+                [field]="id" placeholder="Enter test id"
+                title="Test Id"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="true"
+                [field]="saleId" placeholder="Enter sale id"
+                title="Sale Id"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="true"
+                [field]="dorequested" placeholder="Enter date of requested"
+                title="Date of requested"></app-input-default>
+            </div>
+
+            <div class="col-md-6">
+              <div *ngIf="!editMode">
+                <app-input-default
+                  [disableProperty]="disabledProperty"
+                  [field]="dotested" placeholder="Enter date of tested"
+                  title="Date of tested"></app-input-default>
+              </div>
+
+              <div *ngIf="editMode">
+                <app-input-date-picker-max-except-today-default
+                  (changeEvent)="dotestedChange($event)" [field]="dotested"
+                  placeholder="Select date of tested"
+                  title="Date of tested"></app-input-date-picker-max-except-today-default>
+              </div>
+
+              <div *ngIf="!editMode">
+                <app-input-default
+                  [disableProperty]="disabledProperty"
+                  [field]="dodone" placeholder="Enter date of done"
+                  title="Date of done"></app-input-default>
+              </div>
+
+              <div *ngIf="editMode">
+                <app-input-date-picker-max-except-today-default
+                  (changeEvent)="dodoneChange($event)" [field]="dodone"
+                  placeholder="Select date of done"
+                  title="Date of done"></app-input-date-picker-max-except-today-default>
+              </div>
+
+              <app-input-default
+                [disableProperty]="disabledProperty"
+                [field]="result" placeholder="Enter result"
+                title="Result"></app-input-default>
+            </div>
+
+          </div>
+
+          <div class="row" style="margin-left: 0px">
+            <div class="col-md-6">
+              <button (click)="enableEditMode()" nbButton status="warning">Edit</button>
+              <span class="margin"><button (click)="disabledEditMode()"
+                                           [disabled]="!editMode"
+                                           nbButton>Cancel</button></span>
+            </div>
+            <div class="col-md-6">
+              <span (click)="updateTestDetails()" *ngIf="editMode"
+                    style="float: right; margin-left: 10px"><button [disabled]="!chemicalTestForm.valid" nbButton
+                                                                    status="info">Save</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </div>
+</div>

@@ -37,7 +37,6 @@ export interface Inventory {
     status?: number;
     statusDescription?: string;
     supplierRefundInventories?: Array<SupplierRefundInventory>;
-    supplierReplaceInventories?: Array<SupplierReturnInventory>;
     supplierReturnInventories?: Array<SupplierReturnInventory>;
     userId?: string;
 }

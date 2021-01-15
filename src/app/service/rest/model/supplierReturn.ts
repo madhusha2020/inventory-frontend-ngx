@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 import { Supplier } from './supplier';
-import { SupplierReplaceInventory } from './supplierReplaceInventory';
 import { SupplierReturnInventory } from './supplierReturnInventory';
 
 
@@ -30,7 +29,6 @@ export interface SupplierReturn {
     status?: number;
     statusDescription?: string;
     supplier?: Supplier;
-    supplierReplaceInventories?: Array<SupplierReplaceInventory>;
     supplierReturnInventories?: Array<SupplierReturnInventory>;
     userId?: string;
 }

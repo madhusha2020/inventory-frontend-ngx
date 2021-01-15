@@ -7,6 +7,8 @@ import {PaymentSupplierMainComponent} from './payment-supplier-main/payment-supp
 import {PaymentCustomerMainComponent} from './payment-customer-main/payment-customer-main.component';
 import {PaymentCustomerViewComponent} from './payment-customer-view/payment-customer-view.component';
 import {PaymentSupplierViewComponent} from './payment-supplier-view/payment-supplier-view.component';
+import {NbButtonModule, NbCardModule, NbSearchModule, NbTooltipModule} from '@nebular/theme';
+import {Ng2SmartTableModule} from 'ng2-smart-table';
 
 
 @NgModule({
@@ -18,7 +20,12 @@ import {PaymentSupplierViewComponent} from './payment-supplier-view/payment-supp
     PaymentSupplierViewComponent],
   imports: [
     CommonModule,
-    PaymentRoutingModule
+    PaymentRoutingModule,
+    NbCardModule,
+    NbSearchModule,
+    Ng2SmartTableModule,
+    NbButtonModule,
+    NbTooltipModule
   ]
 })
 export class PaymentModule {

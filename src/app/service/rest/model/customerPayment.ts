@@ -24,12 +24,14 @@ export interface CustomerPayment {
     id?: number;
     modifiedby?: string;
     modifieddate?: Date;
+    paymentTotal?: string;
     paymenttype?: string;
     ref?: string;
     responseCode?: string;
     responseDescription?: string;
     responseValues?: Array<string>;
     sale?: Sale;
+    saleId?: number;
     status?: number;
     statusDescription?: string;
     userId?: string;

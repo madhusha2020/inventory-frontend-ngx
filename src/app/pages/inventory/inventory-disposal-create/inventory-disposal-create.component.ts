@@ -1,12 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {
-  Disposal,
-  DisposalControllerService,
-  DisposalInventory,
-  DisposalInventoryList,
-  Inventory
-} from '../../../service/rest';
+import {Disposal, DisposalControllerService, DisposalInventory, DisposalInventoryList} from '../../../service/rest';
 import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
@@ -62,11 +56,25 @@ export class InventoryDisposalCreateComponent implements OnInit {
 
     console.log('Disposal Inventory List request :', this.disposalInventoryList);
 
-    this.disposalControllerService.createDisposalProductUsingPOST(this.disposalInventoryList).subscribe(response => {
-      console.log('Disposal Inventory List response :', response);
-      Swal.fire('Success', 'Disposal successfully created', 'success').then(value => {
-        this.router.navigate(['/pages/inventory/disposal-main']);
-      });
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Dispose items',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        console.log('Disposal Request :', this.disposalInventoryList);
+        this.disposalControllerService.createDisposalProductUsingPOST(this.disposalInventoryList).subscribe(response => {
+          console.log('Disposal Inventory List response :', response);
+          Swal.fire('Success', 'Disposal successfully created', 'success').then(value => {
+            this.router.navigate(['/pages/inventory/disposal-main']);
+          });
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Canceled
+      }
     });
   }
 }

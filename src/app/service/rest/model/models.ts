@@ -66,8 +66,6 @@ export * from './supplierPaymentList';
 export * from './supplierRefund';
 export * from './supplierRefundInventory';
 export * from './supplierRefundInventoryId';
-export * from './supplierReplaceInventory';
-export * from './supplierReplaceInventoryId';
 export * from './supplierReturn';
 export * from './supplierReturnInventory';
 export * from './supplierReturnInventoryId';

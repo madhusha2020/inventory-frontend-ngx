@@ -18,6 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
+import { ChemicalTest } from '../model/chemicalTest';
 import { ChemicalTestList } from '../model/chemicalTestList';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -84,6 +85,95 @@ export class ChemicalTestControllerService {
         ];
 
         return this.httpClient.get<ChemicalTestList>(`${this.basePath}/chemical-test`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get chemical test by id
+     * 
+     * @param testId testId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getChemicalTestByIdUsingGET(testId: string, observe?: 'body', reportProgress?: boolean): Observable<ChemicalTest>;
+    public getChemicalTestByIdUsingGET(testId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ChemicalTest>>;
+    public getChemicalTestByIdUsingGET(testId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ChemicalTest>>;
+    public getChemicalTestByIdUsingGET(testId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (testId === null || testId === undefined) {
+            throw new Error('Required parameter testId was null or undefined when calling getChemicalTestByIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.get<ChemicalTest>(`${this.basePath}/chemical-test/${encodeURIComponent(String(testId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update chemical test
+     * 
+     * @param chemicalTest chemicalTest
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateChemicalTestUsingPUT(chemicalTest: ChemicalTest, observe?: 'body', reportProgress?: boolean): Observable<ChemicalTest>;
+    public updateChemicalTestUsingPUT(chemicalTest: ChemicalTest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ChemicalTest>>;
+    public updateChemicalTestUsingPUT(chemicalTest: ChemicalTest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ChemicalTest>>;
+    public updateChemicalTestUsingPUT(chemicalTest: ChemicalTest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (chemicalTest === null || chemicalTest === undefined) {
+            throw new Error('Required parameter chemicalTest was null or undefined when calling updateChemicalTestUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<ChemicalTest>(`${this.basePath}/chemical-test`,
+            chemicalTest,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
