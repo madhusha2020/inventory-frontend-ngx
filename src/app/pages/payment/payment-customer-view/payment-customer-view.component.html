@@ -1,1 +1,41 @@
-<p>payment-customer-view works!</p>
+<div class="row">
+  <div class="col-12">
+    <nb-card size="small">
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Payment Details">
+          <h3>Payment Details</h3>
+
+          <div class="margin">
+
+            <app-input-default
+              [disableProperty]="true"
+              [field]="id" placeholder="Enter Payment id"
+              title="Payment Id"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="true"
+              [field]="saleId" placeholder="Enter sale id"
+              title="Sale Id"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="true"
+              [field]="date" placeholder="Enter payment date"
+              title="Payment Date"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="true"
+              [field]="amount" placeholder="Enter amount"
+              title="Amount"></app-input-default>
+
+            <app-input-default
+              [disableProperty]="true"
+              [field]="ref" placeholder="Enter reference "
+              title="Reference"></app-input-default>
+
+          </div>
+
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </div>
+</div>
