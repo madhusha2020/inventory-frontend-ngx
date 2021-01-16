@@ -229,14 +229,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'file-add-outline',
     children: [
       {
-        data: 'INV-PO-VW',
-        title: 'Purchase Orders',
-        link: '/pages/purchase-order/main',
-      },
-      {
         data: 'INV-PO-CR',
         title: 'Create Purchase Order',
         link: '/pages/purchase-order/create',
+      },
+      {
+        data: 'INV-PO-ALL',
+        title: 'All Purchase Orders',
+        link: '/pages/purchase-order/main-all',
+      },
+      {
+        data: 'INV-PO-VW',
+        title: 'Your Purchase Orders',
+        link: '/pages/purchase-order/main',
       },
     ]
   },

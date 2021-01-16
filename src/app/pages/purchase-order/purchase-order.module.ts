@@ -18,10 +18,12 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormInputModule} from '../shared/form-inputs/form-input.module';
 import {ItemModule} from '../item/item.module';
+import { PurchaseOrderMailAllComponent } from './purchase-order-mail-all/purchase-order-mail-all.component';
+import { PurchaseOrderMailViewComponent } from './purchase-order-mail-view/purchase-order-mail-view.component';
 
 
 @NgModule({
-  declarations: [PurchaseOrderComponent, PurchaseOrderCreateComponent, PurchaseOrderMainComponent, PurchaseOrderViewComponent],
+  declarations: [PurchaseOrderComponent, PurchaseOrderCreateComponent, PurchaseOrderMainComponent, PurchaseOrderViewComponent, PurchaseOrderMailAllComponent, PurchaseOrderMailViewComponent],
   imports: [
     CommonModule,
     PurchaseOrderRoutingModule,

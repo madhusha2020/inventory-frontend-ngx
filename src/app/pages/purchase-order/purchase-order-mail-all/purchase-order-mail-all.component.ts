@@ -1,17 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {PurchaseOrder, PurchaseOrderControllerService} from '../../../service/rest';
 import {LocalDataSource} from 'ng2-smart-table';
 import {NbSearchService} from '@nebular/theme';
 import {Router} from '@angular/router';
 import {ServiceUtil} from '../../../service/util/service-util';
-import {TokenService} from '../../../service/auth/token.service';
 
 @Component({
-  selector: 'ngx-purchase-order-main',
-  templateUrl: './purchase-order-main.component.html',
-  styleUrls: ['./purchase-order-main.component.scss']
+  selector: 'ngx-purchase-order-mail-all',
+  templateUrl: './purchase-order-mail-all.component.html',
+  styleUrls: ['./purchase-order-mail-all.component.scss']
 })
-export class PurchaseOrderMainComponent implements OnInit {
+export class PurchaseOrderMailAllComponent implements OnInit {
 
   offset = 0;
   limit = 100;
@@ -65,7 +64,6 @@ export class PurchaseOrderMainComponent implements OnInit {
 
   constructor(private purchaseOrderControllerService: PurchaseOrderControllerService,
               private searchService: NbSearchService,
-              private tokenService: TokenService,
               private router: Router) {
 
     this.searchService.onSearchSubmit()
@@ -81,12 +79,12 @@ export class PurchaseOrderMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchPurchaseOrders();
+    this.fetchAllPurchaseOrders();
   }
 
-  fetchPurchaseOrders() {
-    this.purchaseOrderControllerService.getOrdersBySupplierUsingPOST({userId: this.tokenService.getUserName()}).subscribe(response => {
-      console.log('Purchase Orders Data :', response);
+  fetchAllPurchaseOrders() {
+    this.purchaseOrderControllerService.getAllPurchaseOrdersUsingGET().subscribe(response => {
+      console.log('All Purchase Orders Data :', response);
       response.purchaseOrders.forEach(order => {
         order.statusDescription = ServiceUtil.getStatusDescription(order.status);
         this.orderLists.push(order);
@@ -97,10 +95,11 @@ export class PurchaseOrderMainComponent implements OnInit {
 
   onUserRowSelect(event): void {
     console.log(event);
-    this.router.navigate(['/pages/purchase-order/view'], {queryParams: {id: event.data.id}});
+    this.router.navigate(['/pages/purchase-order/main-view'], {queryParams: {id: event.data.id}});
   }
 
   resetFilter(): void {
     this.source.setFilter([]);
   }
 }
+
