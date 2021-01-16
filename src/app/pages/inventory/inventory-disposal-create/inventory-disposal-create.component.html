@@ -2,22 +2,22 @@
   <nb-card class="stepper-card" size="medium">
     <nb-card-body>
       <nb-stepper orientation="horizontal">
-        <nb-step label="Disposal details">
+        <nb-step label="Create disposal">
 
           <form [formGroup]="disposalForm">
-            <h3>Disposal Details</h3>
+            <h3>Create Disposal</h3>
             <div class="margin row">
 
               <div class="col-md-6">
                 <app-input-default
                   [field]="reason" placeholder="Enter disposal reason"
-                  title="Disposal Reason"></app-input-default>
+                  title="Disposal reason"></app-input-default>
               </div>
 
               <div class="col-md-6">
                 <app-input-textarea-default
                   [field]="description" placeholder="Enter description"
-                  title="Disposal Description"></app-input-textarea-default>
+                  title="Disposal description"></app-input-textarea-default>
               </div>
 
             </div>

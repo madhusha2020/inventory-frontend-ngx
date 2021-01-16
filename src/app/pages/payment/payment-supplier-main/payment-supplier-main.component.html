@@ -1,1 +1,18 @@
-<p>payment-supplier-main works!</p>
+<nb-card>
+  <nb-card-header>
+    Supplier Payments
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="row" style="margin-bottom: 15px; margin-left: 0px;">
+      <nb-search nbTooltip="Search" nbTooltipPlacement="left" nbTooltipStatus="basic"
+                 tag="rotate-layout"
+                 type="rotate-layout"></nb-search>
+      <span style="margin-left: 10px;"><button (click)="resetFilter()" nbButton nbTooltip="Clear your search filter"
+                                               nbTooltipPlacement="right" nbTooltipStatus="basic" status="basic">Clear Search</button></span>
+    </div>
+    <ng2-smart-table (userRowSelect)="onUserRowSelect($event)" [settings]="settings"
+                     [source]="source">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

@@ -2,7 +2,12 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AbstractControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import {EmployeeControllerService, ItemControllerService, VehicleControllerService} from '../../../../service/rest';
+import {
+  EmployeeControllerService,
+  ItemControllerService,
+  SupplierControllerService,
+  VehicleControllerService
+} from '../../../../service/rest';
 import {ServiceUtil} from '../../../../service/util/service-util';
 
 @Component({
@@ -28,7 +33,8 @@ export class InputAutocompleteDefaultComponent implements OnInit {
 
   constructor(private itemControllerService: ItemControllerService,
               private vehicleControllerService: VehicleControllerService,
-              private employeeControllerService: EmployeeControllerService) {
+              private employeeControllerService: EmployeeControllerService,
+              private supplierControllerService: SupplierControllerService) {
   }
 
   ngOnInit() {
@@ -49,6 +55,16 @@ export class InputAutocompleteDefaultComponent implements OnInit {
         this.employeeControllerService.getByEmployeeDesignationUsingGET(ServiceUtil.getDeliveryDesignation(), this.offset, this.limit).subscribe(response => {
           console.log('Delivery employees :', response);
           response.employees.forEach(value => {
+            this.options.push(value.id + ' - ' + value.name.toUpperCase());
+          });
+          this.set();
+        });
+        break;
+
+      case 'supplier':
+        this.supplierControllerService.getAllActiveSuppliersUsingGET().subscribe(response => {
+          console.log('Suppliers :', response);
+          response.supplierList.forEach(value => {
             this.options.push(value.id + ' - ' + value.name.toUpperCase());
           });
           this.set();

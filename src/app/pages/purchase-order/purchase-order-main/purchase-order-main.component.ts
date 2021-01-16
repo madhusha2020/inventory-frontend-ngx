@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {OrderControllerService, OrderList} from '../../../service/rest';
+import {Component, OnInit} from '@angular/core';
+import {PurchaseOrder, PurchaseOrderControllerService} from '../../../service/rest';
 import {LocalDataSource} from 'ng2-smart-table';
 import {NbSearchService} from '@nebular/theme';
 import {Router} from '@angular/router';
@@ -15,46 +15,42 @@ export class PurchaseOrderMainComponent implements OnInit {
   offset = 0;
   limit = 100;
 
-  orderLists: Array<OrderList> = [];
+  orderLists: Array<PurchaseOrder> = [];
 
   settings = {
     hideSubHeader: true,
     actions: false,
     columns: {
       id: {
-        title: 'Order#',
+        title: 'Purchase Order#',
         type: 'number',
+      },
+      code: {
+        title: 'Code',
+        type: 'string',
+      },
+      description: {
+        title: 'Description',
+        type: 'string',
       },
       doordered: {
         title: 'Order Date',
         type: 'string',
       },
-      saleId: {
-        title: 'Sale#',
-        type: 'number',
-      },
-      dosold: {
-        title: 'Sold Date',
+      dorequired: {
+        title: 'Required Date',
         type: 'string',
       },
-      name: {
-        title: 'Customer Name',
+      doreceived: {
+        title: 'Received Date',
         type: 'string',
       },
-      address: {
-        title: 'Address',
+      supplierName: {
+        title: 'Supplier Name',
         type: 'string',
       },
-      contact1: {
-        title: 'Contact',
-        type: 'string',
-      },
-      email: {
-        title: 'E-mail',
-        type: 'string',
-      },
-      type: {
-        title: 'Type',
+      supplierType: {
+        title: 'Supplier Type',
         type: 'string',
       },
       statusDescription: {
@@ -66,7 +62,7 @@ export class PurchaseOrderMainComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private orderControllerService: OrderControllerService,
+  constructor(private purchaseOrderControllerService: PurchaseOrderControllerService,
               private searchService: NbSearchService,
               private router: Router) {
 
@@ -83,15 +79,14 @@ export class PurchaseOrderMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchAllOrders();
+    this.fetchAllPurchaseOrders();
   }
 
-  fetchAllOrders() {
-    this.orderControllerService.getAllOrdersUsingGET().subscribe(response => {
-      console.log('All Orders Data :', response);
-      response.orders.forEach(order => {
+  fetchAllPurchaseOrders() {
+    this.purchaseOrderControllerService.getAllPurchaseOrdersUsingGET().subscribe(response => {
+      console.log('All Purchase Orders Data :', response);
+      response.purchaseOrders.forEach(order => {
         order.statusDescription = ServiceUtil.getStatusDescription(order.status);
-        order.saleId = order.sale.id;
         this.orderLists.push(order);
       });
       this.source.load(this.orderLists);
@@ -100,7 +95,7 @@ export class PurchaseOrderMainComponent implements OnInit {
 
   onUserRowSelect(event): void {
     console.log(event);
-    this.router.navigate(['/pages/order/main-view'], {queryParams: {id: event.data.id}});
+    this.router.navigate(['/pages/purchase-order/view'], {queryParams: {id: event.data.id}});
   }
 
   resetFilter(): void {

@@ -63,10 +63,10 @@ export class SupplierPaymentControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllCustomerPaymentsUsingGET1(observe?: 'body', reportProgress?: boolean): Observable<SupplierPaymentList>;
-    public getAllCustomerPaymentsUsingGET1(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SupplierPaymentList>>;
-    public getAllCustomerPaymentsUsingGET1(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SupplierPaymentList>>;
-    public getAllCustomerPaymentsUsingGET1(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAllSupplierPaymentsUsingGET(observe?: 'body', reportProgress?: boolean): Observable<SupplierPaymentList>;
+    public getAllSupplierPaymentsUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SupplierPaymentList>>;
+    public getAllSupplierPaymentsUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SupplierPaymentList>>;
+    public getAllSupplierPaymentsUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -101,13 +101,13 @@ export class SupplierPaymentControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getCustomerPaymentByIdUsingGET1(paymentId: string, observe?: 'body', reportProgress?: boolean): Observable<SupplierPayment>;
-    public getCustomerPaymentByIdUsingGET1(paymentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SupplierPayment>>;
-    public getCustomerPaymentByIdUsingGET1(paymentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SupplierPayment>>;
-    public getCustomerPaymentByIdUsingGET1(paymentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getSupplierPaymentByIdUsingGET(paymentId: string, observe?: 'body', reportProgress?: boolean): Observable<SupplierPayment>;
+    public getSupplierPaymentByIdUsingGET(paymentId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SupplierPayment>>;
+    public getSupplierPaymentByIdUsingGET(paymentId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SupplierPayment>>;
+    public getSupplierPaymentByIdUsingGET(paymentId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (paymentId === null || paymentId === undefined) {
-            throw new Error('Required parameter paymentId was null or undefined when calling getCustomerPaymentByIdUsingGET1.');
+            throw new Error('Required parameter paymentId was null or undefined when calling getSupplierPaymentByIdUsingGET.');
         }
 
         let headers = this.defaultHeaders;

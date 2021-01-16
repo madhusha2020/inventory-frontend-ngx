@@ -10,18 +10,19 @@ import {UserControllerService} from './api/userController.service';
 import {EmployeeControllerService} from './api/employeeController.service';
 import {ImageUploadControllerService} from './api/imageUploadController.service';
 import {ProductOutboundControllerService} from './api/productOutboundController.service';
-import { ProductInboundControllerService } from './api/productInboundController.service';
+import {ProductInboundControllerService} from './api/productInboundController.service';
 import {DeliveryControllerService} from './api/deliveryController.service';
 import {SaleControllerService} from './api/saleController.service';
 import {NotificationControllerService} from './api/notificationController.service';
 import {DiscountControllerService} from './api/discountController.service';
-import { DisposalControllerService } from './api/disposalController.service';
+import {DisposalControllerService} from './api/disposalController.service';
 import {InventoryControllerService} from './api/inventoryController.service';
 import {VehicleControllerService} from './api/vehicleController.service';
-import { SupplierControllerService } from './api/supplierController.service';
-import { SupplierPaymentControllerService } from './api/supplierPaymentController.service';
-import { CustomerPaymentControllerService } from './api/customerPaymentController.service';
-import { ChemicalTestControllerService } from './api/chemicalTestController.service';
+import {SupplierControllerService} from './api/supplierController.service';
+import {SupplierPaymentControllerService} from './api/supplierPaymentController.service';
+import {CustomerPaymentControllerService} from './api/customerPaymentController.service';
+import {ChemicalTestControllerService} from './api/chemicalTestController.service';
+import {PurchaseOrderControllerService} from './api/purchaseOrderController.service';
 
 @NgModule({
   imports: [],
@@ -32,23 +33,24 @@ import { ChemicalTestControllerService } from './api/chemicalTestController.serv
     CustomerControllerService,
     DeliveryControllerService,
     DiscountControllerService,
-	DisposalControllerService,
+    DisposalControllerService,
     EmployeeControllerService,
     ImageUploadControllerService,
     ItemControllerService,
     OrderControllerService,
     ProductOutboundControllerService,
-	ProductInboundControllerService,
+    ProductInboundControllerService,
     RoleControllerService,
     SaleControllerService,
     UserControllerService,
     NotificationControllerService,
     InventoryControllerService,
     VehicleControllerService,
-	ChemicalTestControllerService,
-	CustomerPaymentControllerService,
-	SupplierControllerService,
-	SupplierPaymentControllerService,	
+    ChemicalTestControllerService,
+    CustomerPaymentControllerService,
+    SupplierControllerService,
+    SupplierPaymentControllerService,
+    PurchaseOrderControllerService,
   ]
 })
 export class ApiModule {

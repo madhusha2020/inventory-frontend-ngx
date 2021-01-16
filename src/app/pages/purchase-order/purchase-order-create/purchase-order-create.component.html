@@ -1,1 +1,81 @@
-<p>purchase-order-create works!</p>
+<div class="steppers-container row">
+  <nb-card class="stepper-card" size="medium">
+    <nb-card-body>
+      <form [formGroup]="poForm">
+        <nb-stepper orientation="horizontal">
+          <nb-step label="Purchase order">
+
+            <h3>Create Purchase Order</h3>
+            <div class="margin row">
+
+              <div class="col-md-6">
+                <app-input-default
+                  [field]="code" placeholder="Enter purchase order code"
+                  title="Purchase order code"></app-input-default>
+
+                <app-input-textarea-default
+                  [field]="description" placeholder="Enter purchase order description"
+                  title="Purchase order description"></app-input-textarea-default>
+              </div>
+
+              <div class="col-md-6">
+                <app-input-autocomplete-default
+                  (changeEvent)="supplierStateChange($event)"
+                  [field]="supplierId"
+                  category="supplier" placeholder="Select supplier"
+                  title="Supplier"></app-input-autocomplete-default>
+
+                <app-input-date-picker-future-default
+                  [field]="dorequired" placeholder="Select date of required"
+                  title="Date of required"></app-input-date-picker-future-default>
+              </div>
+
+            </div>
+
+            <button disabled nbButton nbStepperNext>prev</button>
+            <button nbButton nbStepperNext>next</button>
+          </nb-step>
+          <nb-step label="Cheque details">
+
+            <h3>Cheque Details</h3>
+            <div class="margin row">
+
+              <div class="col-md-6">
+                <app-input-default
+                  [field]="chequeno" placeholder="Enter cheque no"
+                  title="Cheque no"></app-input-default>
+
+                <app-input-default
+                  [field]="chequebank" placeholder="Enter cheque bank"
+                  title="Cheque bank"></app-input-default>
+              </div>
+              <div class="col-md-6">
+                <app-input-default
+                  [field]="chequebranch" placeholder="Enter cheque branch"
+                  title="Cheque branch"></app-input-default>
+
+                <app-input-date-picker-future-default
+                  [field]="chequedate" placeholder="Select cheque date"
+                  title="Cheque date"></app-input-date-picker-future-default>
+              </div>
+
+            </div>
+
+            <button disabled nbButton nbStepperNext>prev</button>
+            <button nbButton nbStepperNext>next</button>
+          </nb-step>
+          <nb-step label="Item details">
+            <h3>Item Details</h3>
+
+            <app-item-list-create
+              (changeEvent)="poItemListStateChange($event)"
+              [parentFormIsValid]="poForm.valid"
+            ></app-item-list-create>
+
+            <button nbButton nbStepperPrevious>prev</button>
+          </nb-step>
+        </nb-stepper>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>

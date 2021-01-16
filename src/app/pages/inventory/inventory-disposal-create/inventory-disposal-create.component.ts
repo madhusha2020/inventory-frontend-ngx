@@ -58,7 +58,7 @@ export class InventoryDisposalCreateComponent implements OnInit {
 
     Swal.fire({
       title: 'Are you sure?',
-      text: 'Dispose items',
+      text: 'Create Disposal',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes',

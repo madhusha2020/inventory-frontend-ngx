@@ -34,7 +34,7 @@
 
               <div *ngIf="editMode">
                 <app-input-date-picker-max-except-today-default
-                  (changeEvent)="dotestedChange($event)" [field]="dotested"
+                  [field]="dotested"
                   placeholder="Select date of tested"
                   title="Date of tested"></app-input-date-picker-max-except-today-default>
               </div>
@@ -48,7 +48,7 @@
 
               <div *ngIf="editMode">
                 <app-input-date-picker-max-except-today-default
-                  (changeEvent)="dodoneChange($event)" [field]="dodone"
+                  [field]="dodone"
                   placeholder="Select date of done"
                   title="Date of done"></app-input-date-picker-max-except-today-default>
               </div>

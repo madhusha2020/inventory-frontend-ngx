@@ -29,6 +29,7 @@ export interface SupplierPayment {
     paymentTotal?: string;
     paymenttype?: string;
     purchase?: Purchase;
+    purchaseOrderId?: number;
     ref?: string;
     responseCode?: string;
     responseDescription?: string;

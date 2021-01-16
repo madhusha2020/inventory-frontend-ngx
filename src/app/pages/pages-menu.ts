@@ -235,7 +235,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       {
         data: 'INV-PO-CR',
-        title: 'Place Purchase Order',
+        title: 'Create Purchase Order',
         link: '/pages/purchase-order/create',
       },
     ]
