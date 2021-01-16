@@ -85,7 +85,7 @@ export class PurchaseOrderMainComponent implements OnInit {
   }
 
   fetchPurchaseOrders() {
-    this.purchaseOrderControllerService.getOrdersBySupplierUsingPOST({userId: this.tokenService.getUserName()}).subscribe(response => {
+    this.purchaseOrderControllerService.getOrdersBySupplierUsingPOST({email: this.tokenService.getUserName()}).subscribe(response => {
       console.log('Purchase Orders Data :', response);
       response.purchaseOrders.forEach(order => {
         order.statusDescription = ServiceUtil.getStatusDescription(order.status);
