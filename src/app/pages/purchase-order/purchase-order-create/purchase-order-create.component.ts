@@ -127,7 +127,7 @@ export class PurchaseOrderCreateComponent implements OnInit {
         this.purchaseOrderControllerService.placePurchaseOrderUsingPOST(this.purchaseOrderItemsList).subscribe(response => {
           console.log('Purchase Order List response :', response);
           Swal.fire('Success', 'Purchase Order successfully created', 'success').then(value => {
-            this.router.navigate(['/pages/purchase-order/main']);
+            this.router.navigate(['/pages/purchase-order/main-all']);
           });
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
