@@ -1,1 +1,29 @@
-<p>purchase-order-view works!</p>
+<div class="row">
+  <div class="col-12">
+    <nb-card size="small">
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Purchase Order Items List">
+          <div class="row">
+            <div class="col-md-6">
+              <h3>Purchase Order Item List</h3>
+            </div>
+            <div class="col-md-6" *ngIf="purchaseOrder.status == 5">
+              <button style="float: right; margin-left: 10px" nbButton status="success" (click)="approve()">APPROVE</button>
+              <button style="float: right" nbButton status="danger" (click)="suspend()">SUSPEND</button>
+            </div>
+          </div>
+          <div class="row">
+            <div *ngFor="let orderItem of purchaseOrder.purchaseOrderItems" class="col-md-12">
+              <app-list-item-view
+                [itemId]="orderItem.purchaseOrderItemId.itemId"
+                [qty]="orderItem.qty"
+                defaultImage="../../../../../assets/images/image-placeholder.png"
+              ></app-list-item-view>
+            </div>
+          </div>
+
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </div>
+</div>
