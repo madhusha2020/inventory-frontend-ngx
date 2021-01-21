@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-8">
+    <app-input-date-picker-future-default
+      [field]="expireDate" placeholder="Select expire date" title="Expire date"
+    ></app-input-date-picker-future-default>
+  </div>
+  <div class="col-md-4">
+    <span style="float: right"><button (click)="submit()"
+                                       [disabled]="selectedItemsArray.length == 0 || !parentFormIsValid" nbButton
+                                       status="success"
+                                       style="margin-top: 20px; float: right">
+      Submit
+    </button></span>
+  </div>
+</div>
+
+<ng2-smart-table (createConfirm)="onCreateConfirm($event)" (deleteConfirm)="onDeleteConfirm($event)"
+                 (editConfirm)="onSaveConfirm($event)"
+                 [settings]="settings"
+                 [source]="source">
+</ng2-smart-table>

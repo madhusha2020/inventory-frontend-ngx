@@ -4,20 +4,18 @@
       <div class="row">
         <div class="col-lg-12">
           <nb-stepper orientation="horizontal">
-            <div *ngIf="purchase.status != 5">
-              <nb-step label="Item Details">
-                <h3>Item Details</h3>
+            <nb-step label="Item Details">
+              <h3>Item Details</h3>
 
-                <app-item-list-edit
-                  (changeEvent)="purchaseItemListStateChange($event)"
-                  [parentFormIsValid]="purchaseForm.valid"
-                  [purchaseId]="purchaseId"
-                ></app-item-list-edit>
+              <app-item-list-edit
+                (changeEvent)="purchaseItemListStateChange($event)"
+                [parentFormIsValid]="purchaseForm.valid"
+                [purchaseId]="purchaseId"
+              ></app-item-list-edit>
 
-                <button disabled nbButton nbStepperPrevious>prev</button>
-                <button nbButton nbStepperNext>next</button>
-              </nb-step>
-            </div>
+              <button disabled nbButton nbStepperPrevious>prev</button>
+              <button nbButton nbStepperNext>next</button>
+            </nb-step>
             <nb-step label="Purchase Details">
               <h3>{{title}} Purchase Details</h3>
               <form [formGroup]="purchaseForm">
@@ -55,7 +53,7 @@
                 </div>
               </form>
 
-              <button [hidden]="purchase.status != 5" nbButton nbStepperPrevious>prev</button>
+              <button nbButton nbStepperPrevious>prev</button>
             </nb-step>
           </nb-stepper>
         </div>
