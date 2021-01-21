@@ -41,7 +41,7 @@ export class PurchaseOrderMailAllComponent implements OnInit {
         title: 'Required Date',
         type: 'string',
       },
-      doreceived: {
+      dorecived: {
         title: 'Received Date',
         type: 'string',
       },
@@ -102,4 +102,3 @@ export class PurchaseOrderMailAllComponent implements OnInit {
     this.source.setFilter([]);
   }
 }
-

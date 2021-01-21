@@ -14,7 +14,7 @@ import { PurchaseOrderItems } from './purchaseOrderItems';
 import { Supplier } from './supplier';
 
 
-export interface PurchaseOrder {
+export interface PurchaseOrder { 
     code?: string;
     createdby?: string;
     createddate?: Date;
@@ -34,7 +34,7 @@ export interface PurchaseOrder {
     statusDescription?: string;
     supplier?: Supplier;
     supplierId?: number;
-    userId?: string;
     supplierName?: string;
     supplierType?: string;
+    userId?: string;
 }

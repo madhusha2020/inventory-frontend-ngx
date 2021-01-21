@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 export class DeliveryUpdateComponent implements OnInit {
 
   editMode: boolean;
+  title: string;
+
   deliveryForm: FormGroup;
   delivery: Delivery = {};
 
@@ -73,10 +75,12 @@ export class DeliveryUpdateComponent implements OnInit {
     this.editMode = true;
     this.employeeId.setValue(null);
     this.vehicleId.setValue(null);
+    this.title = 'Edit';
   }
 
   disabledEditMode() {
     this.editMode = false;
+    this.title = null;
   }
 
   fetchDelivery(id: string) {

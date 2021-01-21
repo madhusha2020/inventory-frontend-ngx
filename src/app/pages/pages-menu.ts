@@ -255,11 +255,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'GRNs',
         link: '/pages/grn/main',
       },
-      {
-        data: 'INV-GRN-CR',
-        title: 'Create GRN',
-        link: '/pages/grn/create',
-      },
+      // {
+      //   data: 'INV-GRN-CR',
+      //   title: 'Create GRN',
+      //   link: '/pages/grn/create',
+      // },
     ]
   },
   {
@@ -272,11 +272,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Supplier Returns',
         link: '/pages/grn/return',
       },
-      {
-        data: 'INV-GRN-RET-CR',
-        title: 'Create Return',
-        link: '/pages/grn/create-return',
-      },
+      // {
+      //   data: 'INV-GRN-RET-CR',
+      //   title: 'Create Return',
+      //   link: '/pages/grn/create-return',
+      // },
     ]
   },
   {
@@ -289,11 +289,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Supplier Refunds',
         link: '/pages/grn/refund',
       },
-      {
-        data: 'INV-GRN-REF-CR',
-        title: 'Create Refund',
-        link: '/pages/grn/create-refund',
-      },
+      // {
+      //   data: 'INV-GRN-REF-CR',
+      //   title: 'Create Refund',
+      //   link: '/pages/grn/create-refund',
+      // },
     ]
   },
   {

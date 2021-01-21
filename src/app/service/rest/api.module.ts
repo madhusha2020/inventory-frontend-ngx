@@ -23,6 +23,7 @@ import {SupplierPaymentControllerService} from './api/supplierPaymentController.
 import {CustomerPaymentControllerService} from './api/customerPaymentController.service';
 import {ChemicalTestControllerService} from './api/chemicalTestController.service';
 import {PurchaseOrderControllerService} from './api/purchaseOrderController.service';
+import {PurchaseControllerService} from './api/purchaseController.service';
 
 @NgModule({
   imports: [],
@@ -51,6 +52,7 @@ import {PurchaseOrderControllerService} from './api/purchaseOrderController.serv
     SupplierControllerService,
     SupplierPaymentControllerService,
     PurchaseOrderControllerService,
+	PurchaseControllerService,
   ]
 })
 export class ApiModule {

@@ -26,6 +26,10 @@ import {NgSpinBoxModule} from 'ng-spin-box';
 import { InputAutocompleteDefaultComponent } from './input-autocomplete-default/input-autocomplete-default.component';
 import { InputMultipleDefaultComponent } from './input-multiple-default/input-multiple-default.component';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
+import {
+  SmartTableDatepickerComponent,
+  SmartTableDatepickerRenderComponent
+} from './smart-table-datepicker/smart-table-datepicker.component';
 
 
 @NgModule({
@@ -43,6 +47,8 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
     InputSpinnerDefaultComponent,
     InputAutocompleteDefaultComponent,
     InputMultipleDefaultComponent,
+    SmartTableDatepickerComponent,
+    SmartTableDatepickerRenderComponent,
   ],
   exports: [
     InputDefaultComponent,
@@ -58,6 +64,7 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
     InputSpinnerDefaultComponent,
     InputAutocompleteDefaultComponent,
     InputMultipleDefaultComponent,
+    SmartTableDatepickerRenderComponent,
   ],
   imports: [
     CommonModule,

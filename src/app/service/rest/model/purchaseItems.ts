@@ -14,7 +14,9 @@ import { Purchase } from './purchase';
 import { PurchaseItemId } from './purchaseItemId';
 
 
-export interface PurchaseItems { 
+export interface PurchaseItems {
+    acceptedqty?: number;
+    rejectedqty?: number;
     createdby?: string;
     createddate?: Date;
     doexpire?: string;
@@ -31,4 +33,6 @@ export interface PurchaseItems {
     statusDescription?: string;
     unitprice?: number;
     userId?: string;
+    itemName?: string;
+    itemId?: number;
 }

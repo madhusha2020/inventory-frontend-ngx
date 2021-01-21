@@ -19,13 +19,15 @@ import {
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import { ListItemViewComponent } from './list-item-view/list-item-view.component';
 import { ItemListCreateComponent } from './item-list-create/item-list-create.component';
+import { ItemListEditComponent } from './item-list-edit/item-list-edit.component';
 
 
 @NgModule({
-    declarations: [ItemComponent, ItemMainComponent, ItemCreateComponent, ItemViewComponent, ListItemViewComponent, ItemListCreateComponent],
+    declarations: [ItemComponent, ItemMainComponent, ItemCreateComponent, ItemViewComponent, ListItemViewComponent, ItemListCreateComponent, ItemListEditComponent],
     exports: [
         ListItemViewComponent,
-        ItemListCreateComponent
+        ItemListCreateComponent,
+        ItemListEditComponent
     ],
   imports: [
     CommonModule,

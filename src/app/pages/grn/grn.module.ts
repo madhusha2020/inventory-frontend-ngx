@@ -12,6 +12,18 @@ import {GrnRefundComponent} from './grn-refund/grn-refund.component';
 import {GrnViewComponent} from './grn-view/grn-view.component';
 import {GrnRefundViewComponent} from './grn-refund-view/grn-refund-view.component';
 import {GrnReturnViewComponent} from './grn-return-view/grn-return-view.component';
+import {
+    NbButtonModule,
+    NbCardModule,
+    NbSearchModule,
+    NbStepperModule,
+    NbTabsetModule,
+    NbTooltipModule
+} from '@nebular/theme';
+import {Ng2SmartTableModule} from 'ng2-smart-table';
+import {FormInputModule} from '../shared/form-inputs/form-input.module';
+import {ItemModule} from '../item/item.module';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -26,10 +38,20 @@ import {GrnReturnViewComponent} from './grn-return-view/grn-return-view.componen
     GrnViewComponent,
     GrnRefundViewComponent,
     GrnReturnViewComponent],
-  imports: [
-    CommonModule,
-    GrnRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        GrnRoutingModule,
+        NbCardModule,
+        NbSearchModule,
+        Ng2SmartTableModule,
+        NbButtonModule,
+        NbTooltipModule,
+        NbTabsetModule,
+        FormInputModule,
+        ItemModule,
+        ReactiveFormsModule,
+        NbStepperModule
+    ]
 })
 export class GrnModule {
 }

@@ -47,6 +47,8 @@ export * from './productOutboundList';
 export * from './purchase';
 export * from './purchaseItemId';
 export * from './purchaseItems';
+export * from './purchaseItemsList';
+export * from './purchaseList';
 export * from './purchaseOrder';
 export * from './purchaseOrderItemId';
 export * from './purchaseOrderItems';
