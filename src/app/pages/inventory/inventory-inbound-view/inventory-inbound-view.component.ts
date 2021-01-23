@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ProductInboundControllerService, ProductInboundItem} from '../../../service/rest';
+import {ActivatedRoute} from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-inventory-inbound-view',
@@ -7,9 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventoryInboundViewComponent implements OnInit {
 
-  constructor() { }
+  productInboundId: string;
+  productInboundItems: Array<ProductInboundItem> = [];
 
-  ngOnInit(): void {
+  constructor(private  productInboundControllerService: ProductInboundControllerService,
+              private route: ActivatedRoute) {
   }
 
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+        if (params.id) {
+          this.productInboundId = params.id;
+          this.getProductInbound(params.id);
+        } else {
+          Swal.fire('Error', 'Product Inbound not found', 'error');
+        }
+      }
+    );
+  }
+
+  getProductInbound(id: string) {
+    this.productInboundControllerService.getProductInboundByIdUsingGET(id).subscribe(response => {
+      console.log('ProductItems response :', response);
+      this.productInboundItems = response.productInboundItems;
+    });
+  }
 }

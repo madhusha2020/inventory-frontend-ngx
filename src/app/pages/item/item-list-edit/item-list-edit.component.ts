@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
 import Swal from 'sweetalert2';
-import {PurchaseControllerService} from '../../../service/rest';
+import {Purchase, PurchaseControllerService} from '../../../service/rest';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NbDateService} from '@nebular/theme';
 
@@ -17,6 +17,7 @@ export class ItemListEditComponent implements OnInit {
   @Output() changeEvent = new EventEmitter<any>();
 
   dummyForm: FormGroup;
+  purchase: Purchase = {};
   selectedItemsArray: Array<CustomModel> = [];
   selectedItemsMap: Map<number, number> = new Map<number, number>();
 
@@ -93,6 +94,7 @@ export class ItemListEditComponent implements OnInit {
     console.log('purchaseId :', this.purchaseId);
     this.purchaseControllerService.getPurchaseByIdUsingGET(String(this.purchaseId)).subscribe(response => {
       console.log('Purchase Data :', response);
+      this.purchase = response;
       response.purchaseItems.forEach(purchaseItem => {
         this.selectedItemsArray.push({
           itemId: purchaseItem.purchaseItemId.itemId,
@@ -163,12 +165,16 @@ export class ItemListEditComponent implements OnInit {
 
   submit() {
     console.log('Item Array :', this.selectedItemsArray);
-    this.selectedItemsArray.forEach(updatedItemDetails => {
-      if (!updatedItemDetails.acceptedQty || !updatedItemDetails.rejectedQty) {
-        Swal.fire('Warning', 'Please update all item details', 'warning');
-      }
-    });
-    this.changeEvent.emit(this.selectedItemsArray);
+    if (this.purchase.status != 5) {
+      Swal.fire('Warning', 'This GRN is already completed', 'warning');
+    } else {
+      this.selectedItemsArray.forEach(updatedItemDetails => {
+        if (!updatedItemDetails.acceptedQty || !updatedItemDetails.rejectedQty) {
+          Swal.fire('Warning', 'Please update all item details', 'warning');
+        }
+      });
+      this.changeEvent.emit(this.selectedItemsArray);
+    }
   }
 }
 
