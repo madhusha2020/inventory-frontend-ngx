@@ -9,9 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Complain } from './complain';
 
 
-export interface ProductInboundItemId { 
-    itemId?: number;
-    productInboundId?: number;
+export interface ComplainList { 
+    complainList?: Array<Complain>;
+    responseCode?: string;
+    responseDescription?: string;
+    responseValues?: Array<string>;
 }

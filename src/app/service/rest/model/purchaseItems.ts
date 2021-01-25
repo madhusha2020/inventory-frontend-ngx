@@ -14,18 +14,20 @@ import { Purchase } from './purchase';
 import { PurchaseItemId } from './purchaseItemId';
 
 
-export interface PurchaseItems {
+export interface PurchaseItems { 
     acceptedqty?: number;
-    rejectedqty?: number;
     createdby?: string;
     createddate?: Date;
     doexpire?: string;
     item?: Item;
+    itemId?: number;
+    itemName?: string;
     modifiedby?: string;
     modifieddate?: Date;
     purchase?: Purchase;
     purchaseItemId?: PurchaseItemId;
     qty?: number;
+    rejectedqty?: number;
     responseCode?: string;
     responseDescription?: string;
     responseValues?: Array<string>;
@@ -33,6 +35,4 @@ export interface PurchaseItems {
     statusDescription?: string;
     unitprice?: number;
     userId?: string;
-    itemName?: string;
-    itemId?: number;
 }

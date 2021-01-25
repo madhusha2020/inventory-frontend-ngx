@@ -9,9 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { SupplierRefund } from './supplierRefund';
 
 
-export interface ProductInboundItemId { 
-    itemId?: number;
-    productInboundId?: number;
+export interface SupplierRefundList { 
+    responseCode?: string;
+    responseDescription?: string;
+    responseValues?: Array<string>;
+    supplierRefunds?: Array<SupplierRefund>;
 }

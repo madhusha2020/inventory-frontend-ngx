@@ -18,16 +18,15 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
-import { Purchase } from '../model/purchase';
-import { PurchaseItemsList } from '../model/purchaseItemsList';
-import { PurchaseList } from '../model/purchaseList';
+import { SupplierRefund } from '../model/supplierRefund';
+import { SupplierRefundList } from '../model/supplierRefundList';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
-export class PurchaseControllerService {
+export class SupplierRefundControllerService {
 
     protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
@@ -59,15 +58,15 @@ export class PurchaseControllerService {
 
 
     /**
-     * View a list of available purchases
+     * View a list of available supplier refunds
      * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllPurchasesUsingGET(observe?: 'body', reportProgress?: boolean): Observable<PurchaseList>;
-    public getAllPurchasesUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PurchaseList>>;
-    public getAllPurchasesUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PurchaseList>>;
-    public getAllPurchasesUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAllSupplierRefundsUsingGET(observe?: 'body', reportProgress?: boolean): Observable<SupplierRefundList>;
+    public getAllSupplierRefundsUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SupplierRefundList>>;
+    public getAllSupplierRefundsUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SupplierRefundList>>;
+    public getAllSupplierRefundsUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -85,7 +84,7 @@ export class PurchaseControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<PurchaseList>(`${this.basePath}/purchase`,
+        return this.httpClient.get<SupplierRefundList>(`${this.basePath}/supplier-refund`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -96,19 +95,19 @@ export class PurchaseControllerService {
     }
 
     /**
-     * Get purchase by id
+     * Get supplier refund by id
      * 
-     * @param purchaseId purchaseId
+     * @param supplierRefundId supplierRefundId
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getPurchaseByIdUsingGET(purchaseId: string, observe?: 'body', reportProgress?: boolean): Observable<Purchase>;
-    public getPurchaseByIdUsingGET(purchaseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Purchase>>;
-    public getPurchaseByIdUsingGET(purchaseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Purchase>>;
-    public getPurchaseByIdUsingGET(purchaseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getSupplierRefundByIdUsingGET(supplierRefundId: string, observe?: 'body', reportProgress?: boolean): Observable<SupplierRefund>;
+    public getSupplierRefundByIdUsingGET(supplierRefundId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SupplierRefund>>;
+    public getSupplierRefundByIdUsingGET(supplierRefundId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SupplierRefund>>;
+    public getSupplierRefundByIdUsingGET(supplierRefundId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (purchaseId === null || purchaseId === undefined) {
-            throw new Error('Required parameter purchaseId was null or undefined when calling getPurchaseByIdUsingGET.');
+        if (supplierRefundId === null || supplierRefundId === undefined) {
+            throw new Error('Required parameter supplierRefundId was null or undefined when calling getSupplierRefundByIdUsingGET.');
         }
 
         let headers = this.defaultHeaders;
@@ -127,7 +126,7 @@ export class PurchaseControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<Purchase>(`${this.basePath}/purchase/${encodeURIComponent(String(purchaseId))}`,
+        return this.httpClient.get<SupplierRefund>(`${this.basePath}/supplier-refund/${encodeURIComponent(String(supplierRefundId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -138,19 +137,19 @@ export class PurchaseControllerService {
     }
 
     /**
-     * Update purchase
+     * Update supplier refund
      * 
-     * @param purchaseItemsList purchaseItemsList
+     * @param supplierRefund supplierRefund
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updatePurchaseUsingPUT(purchaseItemsList: PurchaseItemsList, observe?: 'body', reportProgress?: boolean): Observable<PurchaseItemsList>;
-    public updatePurchaseUsingPUT(purchaseItemsList: PurchaseItemsList, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PurchaseItemsList>>;
-    public updatePurchaseUsingPUT(purchaseItemsList: PurchaseItemsList, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PurchaseItemsList>>;
-    public updatePurchaseUsingPUT(purchaseItemsList: PurchaseItemsList, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateSupplierRefundUsingPUT(supplierRefund: SupplierRefund, observe?: 'body', reportProgress?: boolean): Observable<SupplierRefund>;
+    public updateSupplierRefundUsingPUT(supplierRefund: SupplierRefund, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SupplierRefund>>;
+    public updateSupplierRefundUsingPUT(supplierRefund: SupplierRefund, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SupplierRefund>>;
+    public updateSupplierRefundUsingPUT(supplierRefund: SupplierRefund, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (purchaseItemsList === null || purchaseItemsList === undefined) {
-            throw new Error('Required parameter purchaseItemsList was null or undefined when calling updatePurchaseUsingPUT.');
+        if (supplierRefund === null || supplierRefund === undefined) {
+            throw new Error('Required parameter supplierRefund was null or undefined when calling updateSupplierRefundUsingPUT.');
         }
 
         let headers = this.defaultHeaders;
@@ -173,8 +172,8 @@ export class PurchaseControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.put<PurchaseItemsList>(`${this.basePath}/purchase`,
-            purchaseItemsList,
+        return this.httpClient.put<SupplierRefund>(`${this.basePath}/supplier-refund`,
+            supplierRefund,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

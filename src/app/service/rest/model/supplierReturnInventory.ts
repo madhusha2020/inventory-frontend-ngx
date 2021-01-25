@@ -18,6 +18,7 @@ export interface SupplierReturnInventory {
     createdby?: string;
     createddate?: Date;
     inventory?: Inventory;
+    itemId?: number;
     modifiedby?: string;
     modifieddate?: Date;
     qty?: number;

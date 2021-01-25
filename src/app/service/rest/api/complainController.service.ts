@@ -18,16 +18,15 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs/Observable';
 
-import { Purchase } from '../model/purchase';
-import { PurchaseItemsList } from '../model/purchaseItemsList';
-import { PurchaseList } from '../model/purchaseList';
+import { Complain } from '../model/complain';
+import { ComplainList } from '../model/complainList';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
-export class PurchaseControllerService {
+export class ComplainControllerService {
 
     protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
@@ -59,15 +58,15 @@ export class PurchaseControllerService {
 
 
     /**
-     * View a list of available purchases
+     * View a list of available complains
      * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllPurchasesUsingGET(observe?: 'body', reportProgress?: boolean): Observable<PurchaseList>;
-    public getAllPurchasesUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PurchaseList>>;
-    public getAllPurchasesUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PurchaseList>>;
-    public getAllPurchasesUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAllComplainsUsingGET(observe?: 'body', reportProgress?: boolean): Observable<ComplainList>;
+    public getAllComplainsUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ComplainList>>;
+    public getAllComplainsUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ComplainList>>;
+    public getAllComplainsUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -85,7 +84,7 @@ export class PurchaseControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<PurchaseList>(`${this.basePath}/purchase`,
+        return this.httpClient.get<ComplainList>(`${this.basePath}/complain`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -96,19 +95,19 @@ export class PurchaseControllerService {
     }
 
     /**
-     * Get purchase by id
+     * Get complain by id
      * 
-     * @param purchaseId purchaseId
+     * @param complainId complainId
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getPurchaseByIdUsingGET(purchaseId: string, observe?: 'body', reportProgress?: boolean): Observable<Purchase>;
-    public getPurchaseByIdUsingGET(purchaseId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Purchase>>;
-    public getPurchaseByIdUsingGET(purchaseId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Purchase>>;
-    public getPurchaseByIdUsingGET(purchaseId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getComplainByIdUsingGET(complainId: string, observe?: 'body', reportProgress?: boolean): Observable<Complain>;
+    public getComplainByIdUsingGET(complainId: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Complain>>;
+    public getComplainByIdUsingGET(complainId: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Complain>>;
+    public getComplainByIdUsingGET(complainId: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (purchaseId === null || purchaseId === undefined) {
-            throw new Error('Required parameter purchaseId was null or undefined when calling getPurchaseByIdUsingGET.');
+        if (complainId === null || complainId === undefined) {
+            throw new Error('Required parameter complainId was null or undefined when calling getComplainByIdUsingGET.');
         }
 
         let headers = this.defaultHeaders;
@@ -127,7 +126,7 @@ export class PurchaseControllerService {
             'application/json'
         ];
 
-        return this.httpClient.get<Purchase>(`${this.basePath}/purchase/${encodeURIComponent(String(purchaseId))}`,
+        return this.httpClient.get<Complain>(`${this.basePath}/complain/${encodeURIComponent(String(complainId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -138,19 +137,19 @@ export class PurchaseControllerService {
     }
 
     /**
-     * Update purchase
+     * Save complain
      * 
-     * @param purchaseItemsList purchaseItemsList
+     * @param complain complain
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updatePurchaseUsingPUT(purchaseItemsList: PurchaseItemsList, observe?: 'body', reportProgress?: boolean): Observable<PurchaseItemsList>;
-    public updatePurchaseUsingPUT(purchaseItemsList: PurchaseItemsList, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PurchaseItemsList>>;
-    public updatePurchaseUsingPUT(purchaseItemsList: PurchaseItemsList, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PurchaseItemsList>>;
-    public updatePurchaseUsingPUT(purchaseItemsList: PurchaseItemsList, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveComplainUsingPOST(complain: Complain, observe?: 'body', reportProgress?: boolean): Observable<Complain>;
+    public saveComplainUsingPOST(complain: Complain, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Complain>>;
+    public saveComplainUsingPOST(complain: Complain, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Complain>>;
+    public saveComplainUsingPOST(complain: Complain, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (purchaseItemsList === null || purchaseItemsList === undefined) {
-            throw new Error('Required parameter purchaseItemsList was null or undefined when calling updatePurchaseUsingPUT.');
+        if (complain === null || complain === undefined) {
+            throw new Error('Required parameter complain was null or undefined when calling saveComplainUsingPOST.');
         }
 
         let headers = this.defaultHeaders;
@@ -173,8 +172,55 @@ export class PurchaseControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.put<PurchaseItemsList>(`${this.basePath}/purchase`,
-            purchaseItemsList,
+        return this.httpClient.post<Complain>(`${this.basePath}/complain`,
+            complain,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update complain
+     * 
+     * @param complain complain
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateComplainUsingPUT(complain: Complain, observe?: 'body', reportProgress?: boolean): Observable<Complain>;
+    public updateComplainUsingPUT(complain: Complain, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Complain>>;
+    public updateComplainUsingPUT(complain: Complain, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Complain>>;
+    public updateComplainUsingPUT(complain: Complain, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (complain === null || complain === undefined) {
+            throw new Error('Required parameter complain was null or undefined when calling updateComplainUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<Complain>(`${this.basePath}/complain`,
+            complain,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

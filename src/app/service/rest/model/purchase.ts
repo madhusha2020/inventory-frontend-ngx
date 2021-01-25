@@ -15,7 +15,7 @@ import { Supplier } from './supplier';
 import { SupplierPayment } from './supplierPayment';
 
 
-export interface Purchase {
+export interface Purchase { 
     code?: string;
     createdby?: string;
     createddate?: Date;
@@ -26,6 +26,8 @@ export interface Purchase {
     modifieddate?: Date;
     purchaseItems?: Array<PurchaseItems>;
     purchaseOrder?: PurchaseOrder;
+    purchaseOrderId?: number;
+    purchaseTotal?: string;
     responseCode?: string;
     responseDescription?: string;
     responseValues?: Array<string>;
@@ -35,6 +37,4 @@ export interface Purchase {
     supplierPayment?: SupplierPayment;
     total?: number;
     userId?: string;
-    purchaseTotal?: string;
-    purchaseOrderId?: number;
 }

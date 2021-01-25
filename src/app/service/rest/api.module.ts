@@ -2,6 +2,7 @@ import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {Configuration} from './configuration';
 import {HttpClient} from '@angular/common/http';
 import {CustomerControllerService} from './api/customerController.service';
+import { ComplainControllerService } from './api/complainController.service';
 import {ItemControllerService} from './api/itemController.service';
 import {OrderControllerService} from './api/orderController.service';
 import {AuthenticationControllerService} from './api/authenticationController.service';
@@ -24,35 +25,40 @@ import {CustomerPaymentControllerService} from './api/customerPaymentController.
 import {ChemicalTestControllerService} from './api/chemicalTestController.service';
 import {PurchaseOrderControllerService} from './api/purchaseOrderController.service';
 import {PurchaseControllerService} from './api/purchaseController.service';
+import { SupplierRefundControllerService } from './api/supplierRefundController.service';
+import { SupplierReturnControllerService } from './api/supplierReturnController.service';
 
 @NgModule({
   imports: [],
   declarations: [],
   exports: [],
   providers: [
-    AuthenticationControllerService,
+	AuthenticationControllerService,
+    ChemicalTestControllerService,
+    ComplainControllerService,
     CustomerControllerService,
+    CustomerPaymentControllerService,
     DeliveryControllerService,
     DiscountControllerService,
     DisposalControllerService,
     EmployeeControllerService,
     ImageUploadControllerService,
+    InventoryControllerService,
     ItemControllerService,
+    NotificationControllerService,
     OrderControllerService,
-    ProductOutboundControllerService,
     ProductInboundControllerService,
+    ProductOutboundControllerService,
+    PurchaseControllerService,
+    PurchaseOrderControllerService,
     RoleControllerService,
     SaleControllerService,
-    UserControllerService,
-    NotificationControllerService,
-    InventoryControllerService,
-    VehicleControllerService,
-    ChemicalTestControllerService,
-    CustomerPaymentControllerService,
     SupplierControllerService,
     SupplierPaymentControllerService,
-    PurchaseOrderControllerService,
-	PurchaseControllerService,
+    SupplierRefundControllerService,
+    SupplierReturnControllerService,
+    UserControllerService,
+    VehicleControllerService
   ]
 })
 export class ApiModule {

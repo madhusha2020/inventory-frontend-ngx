@@ -120,7 +120,7 @@ export class GrnViewComponent implements OnInit {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
-        this.purchaseControllerService.savePurchaseUsingPUT({purchase: this.purchase}).subscribe(response => {
+        this.purchaseControllerService.updatePurchaseUsingPUT({purchase: this.purchase}).subscribe(response => {
           console.log('Update purchase response :', response);
           Swal.fire('Success', 'Purchase successfully updated', 'success').then(value => {
             this.router.navigate(['/pages/grn/main']);
