@@ -1,0 +1,33 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+
+  nb-card {
+    overflow: auto;
+    height: 42.875rem;
+    width: 100%;
+  }
+
+  nb-select {
+    margin-left: -5px;
+  }
+}
+
+div.scroll {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.margin {
+  margin-left: 10px;
+}
+
+.form-group {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.form-label {
+  margin-bottom: 5px;
+  margin-top: 16px;
+}

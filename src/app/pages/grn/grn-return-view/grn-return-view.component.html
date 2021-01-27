@@ -1,1 +1,85 @@
-<p>grn-return-view works!</p>
+<div class="row">
+  <div class="col-12">
+    <nb-card size="small">
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Return Details">
+          <h3>{{title}} Return Details</h3>
+
+          <div class="margin row">
+
+            <div class="col-md-6">
+
+              <app-input-default
+                [disableProperty]="true"
+                [field]="returnId" placeholder="Enter return no"
+                title="Return No"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="true"
+                [field]="code" placeholder="Enter code"
+                title="Code"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="disabledProperty"
+                [field]="reason" placeholder="Enter return reason"
+                title="Return reason"></app-input-default>
+
+            </div>
+            <div class="col-md-6">
+
+              <app-input-default
+                [disableProperty]="true"
+                [field]="dorecived" placeholder="Enter received date"
+                title="Received Date"></app-input-default>
+
+              <div *ngIf="!editMode">
+                <app-input-default
+                  [disableProperty]="true"
+                  [field]="doreturned" placeholder="Enter returned date"
+                  title="Returned Date"></app-input-default>
+              </div>
+
+              <div *ngIf="editMode">
+                <app-input-date-picker-max-except-today-default
+                  [field]="doreturned" placeholder="Select date of returned"
+                  (changeEvent)="dateChangeEvent($event)"
+                  title="Returned Date"></app-input-date-picker-max-except-today-default>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="row" style="margin-left: 0px">
+            <div class="col-md-6">
+              <button (click)="enableEditMode()" nbButton status="warning">Edit</button>
+              <span class="margin"><button (click)="disabledEditMode()"
+                                           [disabled]="!editMode"
+                                           nbButton>Cancel</button></span>
+            </div>
+            <div class="col-md-6">
+              <span (click)="submit()" *ngIf="editMode"
+                    style="float: right; margin-left: 10px"><button [disabled]="!returnForm.valid" nbButton
+                                                                    status="info">Save</button></span>
+            </div>
+          </div>
+
+        </nb-tab>
+        <nb-tab tabTitle="Return Item Details">
+          <h3>Return Item Details</h3>
+
+          <div class="row">
+            <div *ngFor="let supplierReturnInventory of supplierReturnItems" class="col-md-12">
+              <app-list-item-view
+                [itemId]="supplierReturnInventory.supplierReturnInventoryId.inventoryId"
+                [qty]="supplierReturnInventory.qty"
+                defaultImage="../../../../../assets/images/image-placeholder.png"
+              ></app-list-item-view>
+            </div>
+          </div>
+
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </div>
+</div>

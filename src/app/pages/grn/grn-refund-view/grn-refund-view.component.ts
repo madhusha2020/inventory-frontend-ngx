@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  ProductOutboundControllerService,
+  ProductOutboundItem,
+  SupplierRefundControllerService, SupplierRefundInventory
+} from '../../../service/rest';
+import {ActivatedRoute} from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-grn-refund-view',
@@ -7,9 +14,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GrnRefundViewComponent implements OnInit {
 
-  constructor() { }
+  supplierRefundId: string;
+  supplierRefundItems: Array<SupplierRefundInventory> = [];
 
-  ngOnInit(): void {
+  constructor(private  supplierRefundControllerService: SupplierRefundControllerService,
+              private route: ActivatedRoute) {
   }
 
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+        if (params.id) {
+          this.supplierRefundId = params.id;
+          this.getRefund(params.id);
+        } else {
+          Swal.fire('Error', 'Refund not found', 'error');
+        }
+      }
+    );
+  }
+
+  getRefund(id: string) {
+    this.supplierRefundControllerService.getSupplierRefundByIdUsingGET(id).subscribe(response => {
+      console.log('Refund response :', response);
+      this.supplierRefundItems = response.supplierRefundInventories;
+    });
+  }
 }
+

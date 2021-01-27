@@ -42,7 +42,7 @@ export class NotificationToastrComponent implements OnInit, OnDestroy {
   }
 
   notificationThread() {
-    this.sub = Observable.interval(50000).subscribe((val) => {
+    this.sub = Observable.interval(3000).subscribe((val) => {
       if (this.tokenService.isLoggedIn()) {
         this.makeNewNotificationToast();
       }
