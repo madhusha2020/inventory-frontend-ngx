@@ -55,6 +55,8 @@ export * from './purchaseOrderItemId';
 export * from './purchaseOrderItems';
 export * from './purchaseOrderItemsList';
 export * from './purchaseOrderList';
+export * from './reportRequest';
+export * from './reportResponse';
 export * from './responseEntity';
 export * from './role';
 export * from './roleList';

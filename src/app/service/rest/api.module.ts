@@ -27,6 +27,7 @@ import {PurchaseOrderControllerService} from './api/purchaseOrderController.serv
 import {PurchaseControllerService} from './api/purchaseController.service';
 import { SupplierRefundControllerService } from './api/supplierRefundController.service';
 import { SupplierReturnControllerService } from './api/supplierReturnController.service';
+import { ReportControllerService } from './api/reportController.service';
 
 @NgModule({
   imports: [],
@@ -58,7 +59,8 @@ import { SupplierReturnControllerService } from './api/supplierReturnController.
     SupplierRefundControllerService,
     SupplierReturnControllerService,
     UserControllerService,
-    VehicleControllerService
+    VehicleControllerService,
+	ReportControllerService
   ]
 })
 export class ApiModule {
