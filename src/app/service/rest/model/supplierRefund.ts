@@ -12,7 +12,7 @@
 import { SupplierRefundInventory } from './supplierRefundInventory';
 
 
-export interface SupplierRefund { 
+export interface SupplierRefund {
     amount?: number;
     chequebank?: string;
     chequebranch?: string;
@@ -28,7 +28,7 @@ export interface SupplierRefund {
     modifieddate?: Date;
     paymenttype?: string;
     reason?: string;
-    refundItemCount?: string;
+    refundItemCount?: number;
     refundTotal?: string;
     responseCode?: string;
     responseDescription?: string;
