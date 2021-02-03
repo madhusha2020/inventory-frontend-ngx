@@ -34,8 +34,8 @@
               ></app-input-date-picker-default>
             </div>
             <div class="col-md-4">
-              <span style="float: right; margin-left: 10px;"><button (click)="downloadCSV()" nbButton status="info" style="margin-top: 40px">Download CSV</button></span>
-              <span style="float: right"><button (click)="generate()" nbButton status="info" style="margin-top: 40px">Generate</button></span>
+              <span style="float: right; margin-left: 10px;"><button (click)="downloadCSV()" [disabled]="!reportForm.valid" nbButton status="info" style="margin-top: 40px">Download CSV</button></span>
+              <span style="float: right"><button (click)="generate()" [disabled]="!reportForm.valid" nbButton status="info" style="margin-top: 40px">Generate</button></span>
             </div>
           </div>
 
