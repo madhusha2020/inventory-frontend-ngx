@@ -15,7 +15,7 @@ const routes: Routes = [
         data: {roles: ['INV-RPT-SLE']},
         canActivate: [AuthGuardService],
         component: SalesReportComponent,
-      },
+      }
     ],
   },
 ];

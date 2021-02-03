@@ -3,6 +3,7 @@ import {AbstractControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {
+  CustomerControllerService,
   EmployeeControllerService,
   ItemControllerService,
   SupplierControllerService,
@@ -31,7 +32,8 @@ export class InputAutocompleteDefaultComponent implements OnInit {
   filteredControlOptions$: Observable<string[]>;
   options: Array<string> = [];
 
-  constructor(private itemControllerService: ItemControllerService,
+  constructor(private customerControllerService: CustomerControllerService,
+              private itemControllerService: ItemControllerService,
               private vehicleControllerService: VehicleControllerService,
               private employeeControllerService: EmployeeControllerService,
               private supplierControllerService: SupplierControllerService) {
@@ -40,6 +42,16 @@ export class InputAutocompleteDefaultComponent implements OnInit {
   ngOnInit() {
 
     switch (this.category) {
+
+      case 'customer':
+        this.customerControllerService.getAllActiveCustomersUsingGET(this.offset, this.limit).subscribe(response => {
+          console.log('Customers :', response);
+          response.customers.forEach(value => {
+            this.options.push(value.id + ' - ' + value.name.toUpperCase());
+          });
+          this.set();
+        });
+        break;
 
       case 'item':
         this.itemControllerService.getAllActiveItemsUsingGET(this.offset, this.limit).subscribe(response => {

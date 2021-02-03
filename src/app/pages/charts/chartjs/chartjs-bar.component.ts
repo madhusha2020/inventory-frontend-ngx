@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import {Component, Input, OnDestroy} from '@angular/core';
 import { NbThemeService, NbColorHelper } from '@nebular/theme';
 
 @Component({
@@ -8,7 +8,8 @@ import { NbThemeService, NbColorHelper } from '@nebular/theme';
   `,
 })
 export class ChartjsBarComponent implements OnDestroy {
-  data: any;
+
+  @Input() data: any;
   options: any;
   themeSubscription: any;
 
