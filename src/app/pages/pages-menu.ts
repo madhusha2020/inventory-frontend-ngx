@@ -393,333 +393,381 @@ export const MENU_ITEMS: NbMenuItem[] = [
       } ,
     ],
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  {
+    data: 'INV-RPT',
+    title: 'Purchase Order Reports',
+    icon: 'file-text-outline',
+    children: [
+      {
+        data: 'INV-RPT-SLE',
+        title: 'Purchase Orders Report',
+        link: '/pages/report/purchase-order-report',
+      } ,
+    ],
+  },
+  {
+    data: 'INV-RPT',
+    title: 'Purchase Reports',
+    icon: 'file-text-outline',
+    children: [
+      {
+        data: 'INV-RPT-SLE',
+        title: 'Purchases Report',
+        link: '/pages/report/purchase-report',
+      } ,
+    ],
+  },
+  {
+    data: 'INV-RPT',
+    title: 'Payment Reports',
+    icon: 'file-text-outline',
+    children: [
+      {
+        data: 'INV-RPT-SLE',
+        title: 'Customer Payments Report',
+        link: '/pages/report/customer-payment-report',
+      } ,
+      {
+        data: 'INV-RPT-SLE',
+        title: 'Supplier Payments Report',
+        link: '/pages/report/supplier-payment-report',
+      } ,
+    ],
+  },
+  {
+    data: 'INV-RPT',
+    title: 'Supplier Reports',
+    icon: 'file-text-outline',
+    children: [
+      {
+        data: 'INV-RPT-SLE',
+        title: 'Supplier Returns Report',
+        link: '/pages/report/supplier-return-report',
+      } ,
+      {
+        data: 'INV-RPT-SLE',
+        title: 'Supplier Refunds Report',
+        link: '/pages/report/supplier-refund-report',
+      } ,
+    ],
+  },
+  {
+    data: 'INV-RPT',
+    title: 'Delivery Reports',
+    icon: 'file-text-outline',
+    children: [
+      {
+        data: 'INV-RPT-SLE',
+        title: 'Deliveries Report',
+        link: '/pages/report/delivery-report',
+      } ,
+    ],
+  },
+  {
+    data: 'INV-RPT',
+    title: 'Disposal Reports',
+    icon: 'file-text-outline',
+    children: [
+      {
+        data: 'INV-RPT-SLE',
+        title: 'Disposals Report',
+        link: '/pages/report/disposal-report',
+      } ,
+    ],
+  },
   {
     data: 'INV',
-    title: 'FEATURES',
+    title: 'END',
     group: true,
   },
-  {
-    data: 'INV',
-    title: 'IoT Dashboard',
-    icon: 'shopping-cart-outline',
-    link: '/pages/iot-dashboard',
-  },
-  {
-    data: 'INV',
-    title: 'Layout',
-    icon: 'layout-outline',
-    children: [
-      {
-        data: 'INV',
-        title: 'Stepper',
-        link: '/pages/layout/stepper',
-      },
-      {
-        data: 'INV',
-        title: 'List',
-        link: '/pages/layout/list',
-      },
-      {
-        data: 'INV',
-        title: 'Infinite List',
-        link: '/pages/layout/infinite-list',
-      },
-      {
-        data: 'INV',
-        title: 'Accordion',
-        link: '/pages/layout/accordion',
-      },
-      {
-        data: 'INV',
-        title: 'Tabs',
-        pathMatch: 'prefix',
-        link: '/pages/layout/tabs',
-      },
-    ],
-  },
-  {
-    data: 'INV',
-    title: 'Forms',
-    icon: 'edit-2-outline',
-    children: [
-      {
-        data: 'INV',
-        title: 'Form Inputs',
-        link: '/pages/forms/inputs',
-      },
-      {
-        data: 'INV',
-        title: 'Form Layouts',
-        link: '/pages/forms/layouts',
-      },
-      {
-        data: 'INV',
-        title: 'Buttons',
-        link: '/pages/forms/buttons',
-      },
-      {
-        data: 'INV',
-        title: 'Datepicker',
-        link: '/pages/forms/datepicker',
-      },
-    ],
-  },
-  {
-    data: 'INV',
-    title: 'UI Features',
-    icon: 'keypad-outline',
-    link: '/pages/ui-features',
-    children: [
-      {
-        data: 'INV',
-        title: 'Grid',
-        link: '/pages/ui-features/grid',
-      },
-      {
-        data: 'INV',
-        title: 'Icons',
-        link: '/pages/ui-features/icons',
-      },
-      {
-        data: 'INV',
-        title: 'Typography',
-        link: '/pages/ui-features/typography',
-      },
-      {
-        data: 'INV',
-        title: 'Animated Searches',
-        link: '/pages/ui-features/search-fields',
-      },
-    ],
-  },
-  {
-    data: 'INV',
-    title: 'Modal & Overlays',
-    icon: 'browser-outline',
-    children: [
-      {
-        data: 'INV',
-        title: 'Dialog',
-        link: '/pages/modal-overlays/dialog',
-      },
-      {
-        data: 'INV',
-        title: 'Window',
-        link: '/pages/modal-overlays/window',
-      },
-      {
-        data: 'INV',
-        title: 'Popover',
-        link: '/pages/modal-overlays/popover',
-      },
-      {
-        data: 'INV',
-        title: 'Toastr',
-        link: '/pages/modal-overlays/toastr',
-      },
-      {
-        data: 'INV',
-        title: 'Tooltip',
-        link: '/pages/modal-overlays/tooltip',
-      },
-    ],
-  },
-  {
-    data: 'INV',
-    title: 'Extra Components',
-    icon: 'message-circle-outline',
-    children: [
-      {
-        data: 'INV',
-        title: 'Calendar',
-        link: '/pages/extra-components/calendar',
-      },
-      {
-        data: 'INV',
-        title: 'Progress Bar',
-        link: '/pages/extra-components/progress-bar',
-      },
-      {
-        data: 'INV',
-        title: 'Spinner',
-        link: '/pages/extra-components/spinner',
-      },
-      {
-        data: 'INV',
-        title: 'Alert',
-        link: '/pages/extra-components/alert',
-      },
-      {
-        data: 'INV',
-        title: 'Calendar Kit',
-        link: '/pages/extra-components/calendar-kit',
-      },
-      {
-        data: 'INV',
-        title: 'Chat',
-        link: '/pages/extra-components/chat',
-      },
-    ],
-  },
-  {
-    data: 'INV',
-    title: 'Maps',
-    icon: 'map-outline',
-    children: [
-      {
-        data: 'INV',
-        title: 'Google Maps',
-        link: '/pages/maps/gmaps',
-      },
-      {
-        data: 'INV',
-        title: 'Leaflet Maps',
-        link: '/pages/maps/leaflet',
-      },
-      {
-        data: 'INV',
-        title: 'Bubble Maps',
-        link: '/pages/maps/bubble',
-      },
-      {
-        data: 'INV',
-        title: 'Search Maps',
-        link: '/pages/maps/searchmap',
-      },
-    ],
-  },
-  {
-    data: 'INV',
-    title: 'Charts',
-    icon: 'pie-chart-outline',
-    children: [
-      {
-        data: 'INV',
-        title: 'Echarts',
-        link: '/pages/charts/echarts',
-      },
-      {
-        data: 'INV',
-        title: 'Charts.js',
-        link: '/pages/charts/chartjs',
-      },
-      {
-        data: 'INV',
-        title: 'D3',
-        link: '/pages/charts/d3',
-      },
-    ],
-  },
-  {
-    data: 'INV',
-    title: 'Editors',
-    icon: 'text-outline',
-    children: [
-      {
-        data: 'INV',
-        title: 'TinyMCE',
-        link: '/pages/editors/tinymce',
-      },
-      {
-        data: 'INV',
-        title: 'CKEditor',
-        link: '/pages/editors/ckeditor',
-      },
-    ],
-  },
-  {
-    data: 'INV',
-    title: 'Tables & Data',
-    icon: 'grid-outline',
-    children: [
-      {
-        data: 'INV',
-        title: 'Smart Table',
-        link: '/pages/tables/smart-table',
-      },
-      {
-        data: 'INV',
-        title: 'Tree Grid',
-        link: '/pages/tables/tree-grid',
-      },
-    ],
-  },
-  {
-    data: 'INV',
-    title: 'Miscellaneous',
-    icon: 'shuffle-2-outline',
-    children: [
-      {
-        data: 'INV',
-        title: '404',
-        link: '/pages/miscellaneous/404',
-      },
-    ],
-  },
-  {
-    data: 'INV',
-    title: 'Auth',
-    icon: 'lock-outline',
-    children: [
-      {
-        data: 'INV',
-        title: 'Login',
-        link: '/auth/login',
-      },
-      {
-        data: 'INV',
-        title: 'Register',
-        link: '/auth/register',
-      },
-      {
-        data: 'INV',
-        title: 'Request Password',
-        link: '/auth/request-password',
-      },
-      {
-        data: 'INV',
-        title: 'Reset Password',
-        link: '/auth/reset-password',
-      },
-    ],
-  },
+  // {
+  //   data: 'INV',
+  //   title: 'FEATURES',
+  //   group: true,
+  // },
+  // {
+  //   data: 'INV',
+  //   title: 'IoT Dashboard',
+  //   icon: 'shopping-cart-outline',
+  //   link: '/pages/iot-dashboard',
+  // },
+  // {
+  //   data: 'INV',
+  //   title: 'Layout',
+  //   icon: 'layout-outline',
+  //   children: [
+  //     {
+  //       data: 'INV',
+  //       title: 'Stepper',
+  //       link: '/pages/layout/stepper',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'List',
+  //       link: '/pages/layout/list',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Infinite List',
+  //       link: '/pages/layout/infinite-list',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Accordion',
+  //       link: '/pages/layout/accordion',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Tabs',
+  //       pathMatch: 'prefix',
+  //       link: '/pages/layout/tabs',
+  //     },
+  //   ],
+  // },
+  // {
+  //   data: 'INV',
+  //   title: 'Forms',
+  //   icon: 'edit-2-outline',
+  //   children: [
+  //     {
+  //       data: 'INV',
+  //       title: 'Form Inputs',
+  //       link: '/pages/forms/inputs',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Form Layouts',
+  //       link: '/pages/forms/layouts',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Buttons',
+  //       link: '/pages/forms/buttons',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Datepicker',
+  //       link: '/pages/forms/datepicker',
+  //     },
+  //   ],
+  // },
+  // {
+  //   data: 'INV',
+  //   title: 'UI Features',
+  //   icon: 'keypad-outline',
+  //   link: '/pages/ui-features',
+  //   children: [
+  //     {
+  //       data: 'INV',
+  //       title: 'Grid',
+  //       link: '/pages/ui-features/grid',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Icons',
+  //       link: '/pages/ui-features/icons',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Typography',
+  //       link: '/pages/ui-features/typography',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Animated Searches',
+  //       link: '/pages/ui-features/search-fields',
+  //     },
+  //   ],
+  // },
+  // {
+  //   data: 'INV',
+  //   title: 'Modal & Overlays',
+  //   icon: 'browser-outline',
+  //   children: [
+  //     {
+  //       data: 'INV',
+  //       title: 'Dialog',
+  //       link: '/pages/modal-overlays/dialog',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Window',
+  //       link: '/pages/modal-overlays/window',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Popover',
+  //       link: '/pages/modal-overlays/popover',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Toastr',
+  //       link: '/pages/modal-overlays/toastr',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Tooltip',
+  //       link: '/pages/modal-overlays/tooltip',
+  //     },
+  //   ],
+  // },
+  // {
+  //   data: 'INV',
+  //   title: 'Extra Components',
+  //   icon: 'message-circle-outline',
+  //   children: [
+  //     {
+  //       data: 'INV',
+  //       title: 'Calendar',
+  //       link: '/pages/extra-components/calendar',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Progress Bar',
+  //       link: '/pages/extra-components/progress-bar',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Spinner',
+  //       link: '/pages/extra-components/spinner',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Alert',
+  //       link: '/pages/extra-components/alert',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Calendar Kit',
+  //       link: '/pages/extra-components/calendar-kit',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Chat',
+  //       link: '/pages/extra-components/chat',
+  //     },
+  //   ],
+  // },
+  // {
+  //   data: 'INV',
+  //   title: 'Maps',
+  //   icon: 'map-outline',
+  //   children: [
+  //     {
+  //       data: 'INV',
+  //       title: 'Google Maps',
+  //       link: '/pages/maps/gmaps',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Leaflet Maps',
+  //       link: '/pages/maps/leaflet',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Bubble Maps',
+  //       link: '/pages/maps/bubble',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Search Maps',
+  //       link: '/pages/maps/searchmap',
+  //     },
+  //   ],
+  // },
+  // {
+  //   data: 'INV',
+  //   title: 'Charts',
+  //   icon: 'pie-chart-outline',
+  //   children: [
+  //     {
+  //       data: 'INV',
+  //       title: 'Echarts',
+  //       link: '/pages/charts/echarts',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Charts.js',
+  //       link: '/pages/charts/chartjs',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'D3',
+  //       link: '/pages/charts/d3',
+  //     },
+  //   ],
+  // },
+  // {
+  //   data: 'INV',
+  //   title: 'Editors',
+  //   icon: 'text-outline',
+  //   children: [
+  //     {
+  //       data: 'INV',
+  //       title: 'TinyMCE',
+  //       link: '/pages/editors/tinymce',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'CKEditor',
+  //       link: '/pages/editors/ckeditor',
+  //     },
+  //   ],
+  // },
+  // {
+  //   data: 'INV',
+  //   title: 'Tables & Data',
+  //   icon: 'grid-outline',
+  //   children: [
+  //     {
+  //       data: 'INV',
+  //       title: 'Smart Table',
+  //       link: '/pages/tables/smart-table',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Tree Grid',
+  //       link: '/pages/tables/tree-grid',
+  //     },
+  //   ],
+  // },
+  // {
+  //   data: 'INV',
+  //   title: 'Miscellaneous',
+  //   icon: 'shuffle-2-outline',
+  //   children: [
+  //     {
+  //       data: 'INV',
+  //       title: '404',
+  //       link: '/pages/miscellaneous/404',
+  //     },
+  //   ],
+  // },
+  // {
+  //   data: 'INV',
+  //   title: 'Auth',
+  //   icon: 'lock-outline',
+  //   children: [
+  //     {
+  //       data: 'INV',
+  //       title: 'Login',
+  //       link: '/auth/login',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Register',
+  //       link: '/auth/register',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Request Password',
+  //       link: '/auth/request-password',
+  //     },
+  //     {
+  //       data: 'INV',
+  //       title: 'Reset Password',
+  //       link: '/auth/reset-password',
+  //     },
+  //   ],
+  // },
 ];

@@ -18,7 +18,7 @@ export class TokenService {
     localStorage.removeItem(Constant.USER_NAME);
     localStorage.removeItem(Constant.TOKEN);
     localStorage.removeItem(Constant.AUTHORITIES);
-    localStorage.removeItem(Constant.CART);
+    // localStorage.removeItem(Constant.CART);
     localStorage.removeItem(Constant.ALERT_COUNT);
     this.authenticationControllerService.loginUsingPOST(user).subscribe(response => {
         if (response && response.token) {
@@ -83,6 +83,6 @@ export class TokenService {
     localStorage.setItem(Constant.USER_NAME, response.userName);
     localStorage.setItem(Constant.AUTHORITIES, decodedToken.authorities);
 
-    this.router.navigate(['/pages/dashboard']);
+    this.router.navigate(['/pages/shop']);
   }
 }
