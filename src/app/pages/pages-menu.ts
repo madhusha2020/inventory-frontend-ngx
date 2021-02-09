@@ -389,7 +389,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         data: 'INV-RPT-SLE',
         title: 'Orders Report',
-        link: '/pages/report/order-report',
+        link: '/pages/report/orders-report',
       } ,
     ],
   },
@@ -401,7 +401,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         data: 'INV-RPT-SLE',
         title: 'Purchase Orders Report',
-        link: '/pages/report/purchase-order-report',
+        link: '/pages/report/purchase-orders-report',
       } ,
     ],
   },
@@ -413,7 +413,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         data: 'INV-RPT-SLE',
         title: 'Purchases Report',
-        link: '/pages/report/purchase-report',
+        link: '/pages/report/purchases-report',
       } ,
     ],
   },
@@ -425,12 +425,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         data: 'INV-RPT-SLE',
         title: 'Customer Payments Report',
-        link: '/pages/report/customer-payment-report',
+        link: '/pages/report/customer-payments-report',
       } ,
       {
         data: 'INV-RPT-SLE',
         title: 'Supplier Payments Report',
-        link: '/pages/report/supplier-payment-report',
+        link: '/pages/report/supplier-payments-report',
       } ,
     ],
   },
@@ -442,12 +442,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         data: 'INV-RPT-SLE',
         title: 'Supplier Returns Report',
-        link: '/pages/report/supplier-return-report',
+        link: '/pages/report/supplier-returns-report',
       } ,
       {
         data: 'INV-RPT-SLE',
         title: 'Supplier Refunds Report',
-        link: '/pages/report/supplier-refund-report',
+        link: '/pages/report/supplier-refunds-report',
       } ,
     ],
   },
@@ -459,7 +459,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         data: 'INV-RPT-SLE',
         title: 'Deliveries Report',
-        link: '/pages/report/delivery-report',
+        link: '/pages/report/deliveries-report',
       } ,
     ],
   },
@@ -471,7 +471,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         data: 'INV-RPT-SLE',
         title: 'Disposals Report',
-        link: '/pages/report/disposal-report',
+        link: '/pages/report/disposals-report',
       } ,
     ],
   },

@@ -58,53 +58,6 @@ export class ReportControllerService {
 
 
     /**
-     * Supplier payment report by customer
-     * 
-     * @param reportRequest reportRequest
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public customerPaymentReportByCustomerUsingPOST(reportRequest: ReportRequest, observe?: 'body', reportProgress?: boolean): Observable<ReportResponse>;
-    public customerPaymentReportByCustomerUsingPOST(reportRequest: ReportRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportResponse>>;
-    public customerPaymentReportByCustomerUsingPOST(reportRequest: ReportRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportResponse>>;
-    public customerPaymentReportByCustomerUsingPOST(reportRequest: ReportRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (reportRequest === null || reportRequest === undefined) {
-            throw new Error('Required parameter reportRequest was null or undefined when calling customerPaymentReportByCustomerUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<ReportResponse>(`${this.basePath}/report/customer-payment/customer`,
-            reportRequest,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Customer payment report
      * 
      * @param reportRequest reportRequest
@@ -187,101 +140,7 @@ export class ReportControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<ReportResponse>(`${this.basePath}/report/delivery/employee`,
-            reportRequest,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Delivery report by vehicle
-     * 
-     * @param reportRequest reportRequest
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public deliveryReportByVehicleUsingPOST(reportRequest: ReportRequest, observe?: 'body', reportProgress?: boolean): Observable<ReportResponse>;
-    public deliveryReportByVehicleUsingPOST(reportRequest: ReportRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportResponse>>;
-    public deliveryReportByVehicleUsingPOST(reportRequest: ReportRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportResponse>>;
-    public deliveryReportByVehicleUsingPOST(reportRequest: ReportRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (reportRequest === null || reportRequest === undefined) {
-            throw new Error('Required parameter reportRequest was null or undefined when calling deliveryReportByVehicleUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<ReportResponse>(`${this.basePath}/report/delivery/vehicle`,
-            reportRequest,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Disposal report by item
-     * 
-     * @param reportRequest reportRequest
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public disposalReportByItemUsingPOST(reportRequest: ReportRequest, observe?: 'body', reportProgress?: boolean): Observable<ReportResponse>;
-    public disposalReportByItemUsingPOST(reportRequest: ReportRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportResponse>>;
-    public disposalReportByItemUsingPOST(reportRequest: ReportRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportResponse>>;
-    public disposalReportByItemUsingPOST(reportRequest: ReportRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (reportRequest === null || reportRequest === undefined) {
-            throw new Error('Required parameter reportRequest was null or undefined when calling disposalReportByItemUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<ReportResponse>(`${this.basePath}/report/disposal/item`,
+        return this.httpClient.post<ReportResponse>(`${this.basePath}/report/delivery`,
             reportRequest,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -340,53 +199,6 @@ export class ReportControllerService {
     }
 
     /**
-     * Order report by customer
-     * 
-     * @param reportRequest reportRequest
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public orderReportByCustomerUsingPOST(reportRequest: ReportRequest, observe?: 'body', reportProgress?: boolean): Observable<ReportResponse>;
-    public orderReportByCustomerUsingPOST(reportRequest: ReportRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportResponse>>;
-    public orderReportByCustomerUsingPOST(reportRequest: ReportRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportResponse>>;
-    public orderReportByCustomerUsingPOST(reportRequest: ReportRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (reportRequest === null || reportRequest === undefined) {
-            throw new Error('Required parameter reportRequest was null or undefined when calling orderReportByCustomerUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<ReportResponse>(`${this.basePath}/report/order/customer`,
-            reportRequest,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Order report
      * 
      * @param reportRequest reportRequest
@@ -423,53 +235,6 @@ export class ReportControllerService {
         }
 
         return this.httpClient.post<ReportResponse>(`${this.basePath}/report/order`,
-            reportRequest,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Purchase order report by supplier
-     * 
-     * @param reportRequest reportRequest
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public purchaseOrderReportBySupplierUsingPOST(reportRequest: ReportRequest, observe?: 'body', reportProgress?: boolean): Observable<ReportResponse>;
-    public purchaseOrderReportBySupplierUsingPOST(reportRequest: ReportRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportResponse>>;
-    public purchaseOrderReportBySupplierUsingPOST(reportRequest: ReportRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportResponse>>;
-    public purchaseOrderReportBySupplierUsingPOST(reportRequest: ReportRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (reportRequest === null || reportRequest === undefined) {
-            throw new Error('Required parameter reportRequest was null or undefined when calling purchaseOrderReportBySupplierUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<ReportResponse>(`${this.basePath}/report/purchase-order/supplier`,
             reportRequest,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -528,100 +293,6 @@ export class ReportControllerService {
     }
 
     /**
-     * Purchase report by item
-     * 
-     * @param reportRequest reportRequest
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public purchaseReportByItemUsingPOST(reportRequest: ReportRequest, observe?: 'body', reportProgress?: boolean): Observable<ReportResponse>;
-    public purchaseReportByItemUsingPOST(reportRequest: ReportRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportResponse>>;
-    public purchaseReportByItemUsingPOST(reportRequest: ReportRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportResponse>>;
-    public purchaseReportByItemUsingPOST(reportRequest: ReportRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (reportRequest === null || reportRequest === undefined) {
-            throw new Error('Required parameter reportRequest was null or undefined when calling purchaseReportByItemUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<ReportResponse>(`${this.basePath}/report/purchase/item`,
-            reportRequest,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Purchase report by supplier
-     * 
-     * @param reportRequest reportRequest
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public purchaseReportBySupplierUsingPOST(reportRequest: ReportRequest, observe?: 'body', reportProgress?: boolean): Observable<ReportResponse>;
-    public purchaseReportBySupplierUsingPOST(reportRequest: ReportRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportResponse>>;
-    public purchaseReportBySupplierUsingPOST(reportRequest: ReportRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportResponse>>;
-    public purchaseReportBySupplierUsingPOST(reportRequest: ReportRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (reportRequest === null || reportRequest === undefined) {
-            throw new Error('Required parameter reportRequest was null or undefined when calling purchaseReportBySupplierUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<ReportResponse>(`${this.basePath}/report/purchase/supplier`,
-            reportRequest,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Purchase report
      * 
      * @param reportRequest reportRequest
@@ -658,100 +329,6 @@ export class ReportControllerService {
         }
 
         return this.httpClient.post<ReportResponse>(`${this.basePath}/report/purchase`,
-            reportRequest,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Sales report by customer
-     * 
-     * @param reportRequest reportRequest
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public salesReportByCustomerUsingPOST(reportRequest: ReportRequest, observe?: 'body', reportProgress?: boolean): Observable<ReportResponse>;
-    public salesReportByCustomerUsingPOST(reportRequest: ReportRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportResponse>>;
-    public salesReportByCustomerUsingPOST(reportRequest: ReportRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportResponse>>;
-    public salesReportByCustomerUsingPOST(reportRequest: ReportRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (reportRequest === null || reportRequest === undefined) {
-            throw new Error('Required parameter reportRequest was null or undefined when calling salesReportByCustomerUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<ReportResponse>(`${this.basePath}/report/sale/customer`,
-            reportRequest,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Sales report by item
-     * 
-     * @param reportRequest reportRequest
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public salesReportByItemUsingPOST(reportRequest: ReportRequest, observe?: 'body', reportProgress?: boolean): Observable<ReportResponse>;
-    public salesReportByItemUsingPOST(reportRequest: ReportRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportResponse>>;
-    public salesReportByItemUsingPOST(reportRequest: ReportRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportResponse>>;
-    public salesReportByItemUsingPOST(reportRequest: ReportRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (reportRequest === null || reportRequest === undefined) {
-            throw new Error('Required parameter reportRequest was null or undefined when calling salesReportByItemUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<ReportResponse>(`${this.basePath}/report/sale/item`,
             reportRequest,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -810,53 +387,6 @@ export class ReportControllerService {
     }
 
     /**
-     * Supplier payment report by supplier
-     * 
-     * @param reportRequest reportRequest
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public supplierPaymentReportBySupplierUsingPOST(reportRequest: ReportRequest, observe?: 'body', reportProgress?: boolean): Observable<ReportResponse>;
-    public supplierPaymentReportBySupplierUsingPOST(reportRequest: ReportRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportResponse>>;
-    public supplierPaymentReportBySupplierUsingPOST(reportRequest: ReportRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportResponse>>;
-    public supplierPaymentReportBySupplierUsingPOST(reportRequest: ReportRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (reportRequest === null || reportRequest === undefined) {
-            throw new Error('Required parameter reportRequest was null or undefined when calling supplierPaymentReportBySupplierUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<ReportResponse>(`${this.basePath}/report/supplier-payment/supplier`,
-            reportRequest,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Supplier payment report
      * 
      * @param reportRequest reportRequest
@@ -904,53 +434,6 @@ export class ReportControllerService {
     }
 
     /**
-     * Supplier refund report by item
-     * 
-     * @param reportRequest reportRequest
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public supplierRefundReportByItemUsingPOST(reportRequest: ReportRequest, observe?: 'body', reportProgress?: boolean): Observable<ReportResponse>;
-    public supplierRefundReportByItemUsingPOST(reportRequest: ReportRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportResponse>>;
-    public supplierRefundReportByItemUsingPOST(reportRequest: ReportRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportResponse>>;
-    public supplierRefundReportByItemUsingPOST(reportRequest: ReportRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (reportRequest === null || reportRequest === undefined) {
-            throw new Error('Required parameter reportRequest was null or undefined when calling supplierRefundReportByItemUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<ReportResponse>(`${this.basePath}/report/supplier-refund/item`,
-            reportRequest,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * Supplier refund report
      * 
      * @param reportRequest reportRequest
@@ -987,53 +470,6 @@ export class ReportControllerService {
         }
 
         return this.httpClient.post<ReportResponse>(`${this.basePath}/report/supplier-refund`,
-            reportRequest,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Supplier return report by supplier
-     * 
-     * @param reportRequest reportRequest
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public supplierReturnReportBySupplierUsingPOST(reportRequest: ReportRequest, observe?: 'body', reportProgress?: boolean): Observable<ReportResponse>;
-    public supplierReturnReportBySupplierUsingPOST(reportRequest: ReportRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportResponse>>;
-    public supplierReturnReportBySupplierUsingPOST(reportRequest: ReportRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportResponse>>;
-    public supplierReturnReportBySupplierUsingPOST(reportRequest: ReportRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (reportRequest === null || reportRequest === undefined) {
-            throw new Error('Required parameter reportRequest was null or undefined when calling supplierReturnReportBySupplierUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<ReportResponse>(`${this.basePath}/report/supplier-return/supplier`,
             reportRequest,
             {
                 withCredentials: this.configuration.withCredentials,
