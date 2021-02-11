@@ -1,0 +1,98 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  ngx-chartjs-pie,
+  ngx-chartjs-bar,
+  ngx-chartjs-line,
+  ngx-chartjs-multiple-xaxis,
+  ngx-chartjs-bar-horizontal,
+  ngx-chartjs-radar {
+    display: block;
+    height: nb-theme(card-height-medium);
+    width: 100%;
+
+    ::ng-deep chart {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  nb-card {
+    overflow: auto;
+    height: 42.875rem;
+    width: 100%;
+  }
+
+  nb-select {
+    margin-left: -5px;
+  }
+}
+
+div.scroll {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.margin {
+  margin-left: 10px;
+}
+
+.form-group {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.form-label {
+  margin-bottom: 5px;
+  margin-top: 16px;
+}
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  ngx-chartjs-pie,
+  ngx-chartjs-bar,
+  ngx-chartjs-line,
+  ngx-chartjs-multiple-xaxis,
+  ngx-chartjs-bar-horizontal,
+  ngx-chartjs-radar {
+    display: block;
+    height: nb-theme(card-height-medium);
+    width: 100%;
+
+    ::ng-deep chart {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  nb-card {
+    overflow: auto;
+    height: 42.875rem;
+    width: 100%;
+  }
+
+  nb-select {
+    margin-left: -5px;
+  }
+}
+
+div.scroll {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.margin {
+  margin-left: 10px;
+}
+
+.form-group {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.form-label {
+  margin-bottom: 5px;
+  margin-top: 16px;
+}
