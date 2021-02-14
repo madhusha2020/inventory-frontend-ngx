@@ -1,1 +1,41 @@
-<p>purchase-orders-report works!</p>
+<div class="row">
+  <div class="col-12">
+    <nb-card size="small">
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="Purchase Order Details">
+
+          <div class="row">
+            <div class="col-md-4">
+              <app-input-autocomplete-default
+                (changeEvent)="supplierStateChange($event)"
+                [field]="supplierId"
+                category="supplier" placeholder="Select supplier"
+                title="Supplier (Optional)"></app-input-autocomplete-default>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <app-input-date-picker-default
+                [field]="fromDate" placeholder="Select from date"
+                title="From date"
+              ></app-input-date-picker-default>
+            </div>
+            <div class="col-md-4">
+              <app-input-date-picker-default
+                [field]="toDate" placeholder="Select to date"
+                title="To date"
+              ></app-input-date-picker-default>
+            </div>
+            <div class="col-md-4">
+              <span style="float: right; margin-left: 10px;"><button (click)="downloadCSV()" [disabled]="!reportForm.valid" nbButton status="info" style="margin-top: 40px">Download CSV</button></span>
+              <span style="float: right"><button (click)="generate()" [disabled]="!reportForm.valid" nbButton status="info" style="margin-top: 40px">Generate</button></span>
+            </div>
+          </div>
+
+          <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </div>
+</div>

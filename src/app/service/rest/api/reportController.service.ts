@@ -105,19 +105,19 @@ export class ReportControllerService {
     }
 
     /**
-     * Delivery report by employee
+     * Delivery report
      * 
      * @param reportRequest reportRequest
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deliveryReportByEmployeeUsingPOST(reportRequest: ReportRequest, observe?: 'body', reportProgress?: boolean): Observable<ReportResponse>;
-    public deliveryReportByEmployeeUsingPOST(reportRequest: ReportRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportResponse>>;
-    public deliveryReportByEmployeeUsingPOST(reportRequest: ReportRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportResponse>>;
-    public deliveryReportByEmployeeUsingPOST(reportRequest: ReportRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deliveryReportUsingPOST(reportRequest: ReportRequest, observe?: 'body', reportProgress?: boolean): Observable<ReportResponse>;
+    public deliveryReportUsingPOST(reportRequest: ReportRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ReportResponse>>;
+    public deliveryReportUsingPOST(reportRequest: ReportRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ReportResponse>>;
+    public deliveryReportUsingPOST(reportRequest: ReportRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (reportRequest === null || reportRequest === undefined) {
-            throw new Error('Required parameter reportRequest was null or undefined when calling deliveryReportByEmployeeUsingPOST.');
+            throw new Error('Required parameter reportRequest was null or undefined when calling deliveryReportUsingPOST.');
         }
 
         let headers = this.defaultHeaders;
