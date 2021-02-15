@@ -1,1 +1,32 @@
-<p>complain-create works!</p>
+<div class="steppers-container row">
+  <nb-card class="stepper-card" size="medium">
+    <nb-card-body>
+      <div class="row">
+        <div class="col-lg-12">
+          <form (ngSubmit)="submit()" [formGroup]="complainForm">
+            <h3>Complain Details</h3>
+            <div class="margin">
+
+              <app-input-default
+                [field]="code" placeholder="Enter code"
+                title="Code"></app-input-default>
+
+              <app-input-default
+                [field]="description" placeholder="Enter description"
+                title="Description"></app-input-default>
+
+              <app-input-default
+                [field]="title" placeholder="Enter title"
+                title="Title"></app-input-default>
+
+              <button [disabled]="!complainForm.valid" nbButton status="success" style="float: right">
+                submit
+              </button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

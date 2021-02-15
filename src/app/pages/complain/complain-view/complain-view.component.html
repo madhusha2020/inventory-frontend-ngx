@@ -1,1 +1,50 @@
-<p>complain-view works!</p>
+<div class="steppers-container row">
+  <nb-card class="stepper-card" size="medium">
+    <nb-card-body>
+      <div class="row">
+        <div class="col-lg-12">
+          <form [formGroup]="complainForm">
+            <h3>{{title}} Complain Details</h3>
+            <div class="margin">
+
+              <app-input-default
+                [disableProperty]="true"
+                [field]="code" placeholder="Enter code"
+                title="Code"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="true"
+                [field]="description" placeholder="Enter description"
+                title="Description"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="true"
+                [field]="complainTitle" placeholder="Enter title"
+                title="Title"></app-input-default>
+
+              <app-input-default
+                [disableProperty]="disabledProperty"
+                [field]="response" placeholder="Enter response"
+                title="Response"></app-input-default>
+
+              <div class="row" style="margin-left: 0px">
+                <div class="col-md-6">
+                  <button (click)="enableEditMode()" nbButton status="warning">Edit</button>
+                  <span class="margin"><button (click)="disabledEditMode()"
+                                               [disabled]="!editMode"
+                                               nbButton>Cancel</button></span>
+                </div>
+                <div class="col-md-6">
+              <span (click)="updateComplainDetails()" *ngIf="editMode"
+                    style="float: right; margin-left: 10px"><button [disabled]="!complainForm.valid" nbButton
+                                                                    status="info">Save</button></span>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
