@@ -25,6 +25,7 @@ import { TransactionRequest } from '../model/transactionRequest';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
+import {DesignationList} from '../model/designationList';
 
 
 @Injectable()
@@ -58,10 +59,46 @@ export class EmployeeControllerService {
         return false;
     }
 
+  /**
+   * View a list of available designations
+   *
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param reportProgress flag to report request and response progress.
+   */
+  public getAllDesignationsUsingGET(observe?: 'body', reportProgress?: boolean): Observable<DesignationList>;
+  public getAllDesignationsUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<DesignationList>>;
+  public getAllDesignationsUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<DesignationList>>;
+  public getAllDesignationsUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+    let headers = this.defaultHeaders;
+
+    // to determine the Accept header
+    let httpHeaderAccepts: string[] = [
+      'application/json'
+    ];
+    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    if (httpHeaderAcceptSelected != undefined) {
+      headers = headers.set('Accept', httpHeaderAcceptSelected);
+    }
+
+    // to determine the Content-Type header
+    const consumes: string[] = [
+      'application/json'
+    ];
+
+    return this.httpClient.get<DesignationList>(`${this.basePath}/employee/designations`,
+      {
+        withCredentials: this.configuration.withCredentials,
+        headers: headers,
+        observe: observe,
+        reportProgress: reportProgress
+      }
+    );
+  }
 
     /**
      * Employee activate
-     * 
+     *
      * @param transactionRequest transactionRequest
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -108,7 +145,7 @@ export class EmployeeControllerService {
 
     /**
      * View a list of available active employees
-     * 
+     *
      * @param offset The number of items to skip before starting to collect the result set.
      * @param limit The numbers of items to return.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -164,7 +201,7 @@ export class EmployeeControllerService {
 
     /**
      * View a list of available employees
-     * 
+     *
      * @param offset The number of items to skip before starting to collect the result set.
      * @param limit The numbers of items to return.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -220,7 +257,7 @@ export class EmployeeControllerService {
 
     /**
      * Get employee list by designation
-     * 
+     *
      * @param designation designation
      * @param offset The number of items to skip before starting to collect the result set.
      * @param limit The numbers of items to return.
@@ -281,7 +318,7 @@ export class EmployeeControllerService {
 
     /**
      * Search employees
-     * 
+     *
      * @param searchFilter searchFilter
      * @param offset The number of items to skip before starting to collect the result set.
      * @param limit The numbers of items to return.
@@ -347,7 +384,7 @@ export class EmployeeControllerService {
 
     /**
      * Employee suspend
-     * 
+     *
      * @param transactionRequest transactionRequest
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

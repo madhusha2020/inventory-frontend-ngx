@@ -147,14 +147,14 @@ export class ServiceUtil {
     return 'Updated supplier of the system';
   }
 
-  public static getExternalSupplierType(): string {
-    return 'External';
+  public static getLocalSupplierType(): string {
+    return 'Local';
   }
 
   public static getSupplierTypes(): Array<string> {
     const supplierTypes: Array<string> = [];
-    supplierTypes.push('External');
-    supplierTypes.push('Regular');
+    supplierTypes.push('Local');
+    supplierTypes.push('Foreign');
     console.debug('Supplier Types: ', supplierTypes);
     return supplierTypes;
   }

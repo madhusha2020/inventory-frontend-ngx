@@ -111,7 +111,7 @@ export class SupplierViewComponent implements OnInit {
       contact1: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
       contact2: [null, [Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
       fax: [null, [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
-      type: [ServiceUtil.getExternalSupplierType(), [Validators.required]],
+      type: [ServiceUtil.getLocalSupplierType(), [Validators.required]],
     });
 
     this.supplierPasswordForm = this.formBuilder.group({

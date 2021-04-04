@@ -1,10 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Employee, EmployeeUser, Role, RoleControllerService, User, UserControllerService} from '../../../service/rest';
+import {
+  Employee,
+  EmployeeControllerService,
+  EmployeeUser,
+  Role,
+  RoleControllerService,
+  User,
+  UserControllerService
+} from '../../../service/rest';
 import {ServiceUtil} from '../../../service/util/service-util';
 import {TokenService} from '../../../service/auth/token.service';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
+import {Designation} from '../../../service/rest/model/designation';
 
 @Component({
   selector: 'ngx-employee-create',
@@ -19,14 +28,15 @@ export class EmployeeCreateComponent implements OnInit {
   employee: Employee = {};
 
   roles: Array<Role> = [];
+  designations: Array<Designation> = [];
   assignedRoles: Map<string, Role> = new Map<string, Role>();
 
   nameTitleTypes = ServiceUtil.getNameTitlesTypes();
   genderTypes = ServiceUtil.getGenderTypes();
   civilStatusTypes = ServiceUtil.getCivilStatusTypes();
-  designations = ServiceUtil.getDesignations();
 
   constructor(private formBuilder: FormBuilder,
+              private employeeControllerService: EmployeeControllerService,
               private roleControllerService: RoleControllerService,
               private userControllerService: UserControllerService,
               private tokenService: TokenService,
@@ -112,7 +122,15 @@ export class EmployeeCreateComponent implements OnInit {
       designation: [ServiceUtil.getMaintenanceStaffDesignation(), [Validators.required]],
     });
 
+    this.fetchDesignations();
     this.fetchRoles();
+  }
+
+  fetchDesignations() {
+    this.employeeControllerService.getAllDesignationsUsingGET().subscribe(response => {
+      console.log('Designations :', response);
+      this.designations = response.designations;
+    });
   }
 
   fetchRoles() {
