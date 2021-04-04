@@ -86,8 +86,8 @@
                     <div class="form-group">
                       <nb-select (selectedChange)="designationStateChange($event)" fullWidth placeholder="Select Designation"
                                  selected="Maintenance Staff">
-                        <nb-option *ngFor="let item of designations" title="{{item}}" value="{{item}}">
-                          {{item}}
+                        <nb-option *ngFor="let item of designations" title="{{item.name}}" value="{{item.name}}">
+                          {{item.name}}
                         </nb-option>
                       </nb-select>
                     </div>
