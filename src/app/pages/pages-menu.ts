@@ -161,7 +161,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ]
   },
   {
-    data: 'INV-INV',
+    data: 'INV-INV-DIS-VW',
     title: 'Disposal',
     icon: 'sync-outline',
     children: [
