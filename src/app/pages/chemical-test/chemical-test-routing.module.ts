@@ -9,7 +9,7 @@ import {ChemicalTestViewComponent} from './chemical-test-view/chemical-test-view
 const routes: Routes = [
   {
     path: '',
-    data: {roles: ['INV-TEST']},
+    data: {roles: ['INV-TEST,INV-TEST-CUS']},
     component: ChemicalTestComponent,
     children: [
       {
@@ -19,8 +19,8 @@ const routes: Routes = [
         component: ChemicalTestMainComponent,
       },
       {
-        path: 'create',
-        data: {roles: ['INV-TEST-CR']},
+        path: 'public',
+        data: {roles: ['INV-TEST-CUS']},
         canActivate: [AuthGuardService],
         component: ChemicalTestCreateComponent,
       },

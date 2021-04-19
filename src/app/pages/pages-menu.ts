@@ -324,15 +324,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'shuffle-2-outline',
     children: [
       {
+        data: 'INV-TEST-CUS',
+        title: 'Public Chemical Tests',
+        link: '/pages/test/public',
+      },
+      {
         data: 'INV-TEST-VW',
         title: 'Chemical Tests',
         link: '/pages/test/main',
       },
-      // {
-      //   data: 'INV-TEST-CR',
-      //   title: 'Create Test',
-      //   link: '/pages/test/create',
-      // },
     ],
   },
   {
