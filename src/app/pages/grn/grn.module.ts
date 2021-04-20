@@ -24,6 +24,7 @@ import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {FormInputModule} from '../shared/form-inputs/form-input.module';
 import {ItemModule} from '../item/item.module';
 import {ReactiveFormsModule} from '@angular/forms';
+import {PermissionModule} from '../shared/permission/permission.module';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import {ReactiveFormsModule} from '@angular/forms';
         FormInputModule,
         ItemModule,
         ReactiveFormsModule,
-        NbStepperModule
+        NbStepperModule,
+        PermissionModule
     ]
 })
 export class GrnModule {
