@@ -5,6 +5,7 @@ import {LocalDataSource} from 'ng2-smart-table';
 import {ServiceUtil} from '../../../service/util/service-util';
 import {Angular5Csv} from 'angular5-csv/dist/Angular5-csv';
 import Swal from 'sweetalert2';
+import {NbColorHelper} from '@nebular/theme';
 
 @Component({
   selector: 'ngx-purchases-report',
@@ -19,6 +20,8 @@ export class PurchasesReportComponent implements OnInit {
   supplierID = 0;
   itemID = 0;
   purchaseList: Array<Purchase> = [];
+  data: any;
+  dataMap: Map<string, number> = new Map<string, number>();
 
   settings = {
     hideSubHeader: true,
@@ -114,8 +117,24 @@ export class PurchasesReportComponent implements OnInit {
         purchase.purchaseOrderId = purchase.purchaseOrder.id;
         purchase.statusDescription = ServiceUtil.getStatusDescription(purchase.status);
         this.purchaseList.push(purchase);
+
+        if (this.dataMap.has(purchase.date)) {
+          this.dataMap.set(purchase.date, Number(purchase.total) + this.dataMap.get(purchase.date));
+        } else {
+          this.dataMap.set(purchase.date, Number(purchase.total));
+        }
       });
+      console.log('Data map :', this.dataMap);
       this.source.load(this.purchaseList);
+      this.data = {
+        labels: Array.from(this.dataMap.keys()),
+        datasets: [
+          {
+            data: Array.from(this.dataMap.values()),
+            label: 'Amount',
+            backgroundColor: NbColorHelper.hexToRgbA('#8f9bb3', 0.8),
+          }],
+      };
     });
   }
 

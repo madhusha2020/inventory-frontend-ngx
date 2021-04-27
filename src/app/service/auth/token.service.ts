@@ -15,11 +15,11 @@ export class TokenService {
   }
 
   login(user: User) {
-    localStorage.removeItem(Constant.USER_NAME);
-    localStorage.removeItem(Constant.TOKEN);
-    localStorage.removeItem(Constant.AUTHORITIES);
-    // localStorage.removeItem(Constant.CART);
-    localStorage.removeItem(Constant.ALERT_COUNT);
+    sessionStorage.removeItem(Constant.USER_NAME);
+    sessionStorage.removeItem(Constant.TOKEN);
+    sessionStorage.removeItem(Constant.AUTHORITIES);
+    // sessionStorage.removeItem(Constant.CART);
+    sessionStorage.removeItem(Constant.ALERT_COUNT);
     this.authenticationControllerService.loginUsingPOST(user).subscribe(response => {
         if (response && response.token) {
           this.saveTokenData(response);
@@ -39,7 +39,7 @@ export class TokenService {
 
   getAuthorities(): Map<string, number> {
     let authorities: Map<string, number> = new Map<string, number>();
-    let authoritiesArray: Array<string> = localStorage.getItem(Constant.AUTHORITIES)
+    let authoritiesArray: Array<string> = sessionStorage.getItem(Constant.AUTHORITIES)
       .split(',');
     authoritiesArray.forEach((element, index) => {
       authorities.set(element, index);
@@ -48,26 +48,26 @@ export class TokenService {
   }
 
   logout() {
-    this.authenticationControllerService.logoutUsingPOST({userName: localStorage.getItem(Constant.USER_NAME)}).subscribe(response => {
+    this.authenticationControllerService.logoutUsingPOST({userName: sessionStorage.getItem(Constant.USER_NAME)}).subscribe(response => {
       console.log('Logout response :', response);
-      localStorage.removeItem(Constant.USER_NAME);
-      localStorage.removeItem(Constant.TOKEN);
-      localStorage.removeItem(Constant.AUTHORITIES);
-      localStorage.removeItem(Constant.CART);
-      localStorage.removeItem(Constant.ALERT_COUNT);
+      sessionStorage.removeItem(Constant.USER_NAME);
+      sessionStorage.removeItem(Constant.TOKEN);
+      sessionStorage.removeItem(Constant.AUTHORITIES);
+      sessionStorage.removeItem(Constant.CART);
+      sessionStorage.removeItem(Constant.ALERT_COUNT);
     });
   }
 
   isLoggedIn(): boolean {
-    return localStorage.getItem(Constant.TOKEN) ? true : false;
+    return sessionStorage.getItem(Constant.TOKEN) ? true : false;
   }
 
   getUserName(): string {
-    return localStorage.getItem(Constant.USER_NAME);
+    return sessionStorage.getItem(Constant.USER_NAME);
   }
 
   getToken(): string {
-    return localStorage.getItem(Constant.TOKEN);
+    return sessionStorage.getItem(Constant.TOKEN);
   }
 
   private saveTokenData(response) {
@@ -79,9 +79,9 @@ export class TokenService {
     console.log('Response Decoded Token : ', decodedToken);
     console.log('Response Decoded Token Authorities : ', decodedToken.authorities);
 
-    localStorage.setItem(Constant.TOKEN, response.token);
-    localStorage.setItem(Constant.USER_NAME, response.userName);
-    localStorage.setItem(Constant.AUTHORITIES, decodedToken.authorities);
+    sessionStorage.setItem(Constant.TOKEN, response.token);
+    sessionStorage.setItem(Constant.USER_NAME, response.userName);
+    sessionStorage.setItem(Constant.AUTHORITIES, decodedToken.authorities);
 
     this.router.navigate(['/pages/shop']);
   }

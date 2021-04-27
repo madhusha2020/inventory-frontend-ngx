@@ -42,6 +42,12 @@
           <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
 
         </nb-tab>
+
+        <nb-tab tabTitle="Sale Chart">
+          <div style="max-height: 30rem; max-width: 50rem; margin: 1rem auto;">
+            <chart type="bar" [data]="data"></chart>
+          </div>
+        </nb-tab>
       </nb-tabset>
     </nb-card>
   </div>

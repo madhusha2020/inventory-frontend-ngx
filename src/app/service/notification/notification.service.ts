@@ -10,14 +10,14 @@ export class NotificationService {
   }
 
   clearAlertCount(): void {
-    localStorage.removeItem(Constant.ALERT_COUNT);
+    sessionStorage.removeItem(Constant.ALERT_COUNT);
   }
 
   setAlertCount(count: number): void {
-      localStorage.setItem(Constant.ALERT_COUNT, String(count));
+      sessionStorage.setItem(Constant.ALERT_COUNT, String(count));
   }
 
   getAlertCount(): number {
-    return Number(localStorage.getItem(Constant.ALERT_COUNT));
+    return Number(sessionStorage.getItem(Constant.ALERT_COUNT));
   }
 }

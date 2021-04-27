@@ -383,6 +383,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     data: 'INV-RPT',
+    title: 'Purchase Reports',
+    icon: 'file-text-outline',
+    children: [
+      {
+        data: 'INV-RPT-SLE',
+        title: 'Purchases Report',
+        link: '/pages/report/purchases-report',
+      } ,
+    ],
+  },
+  {
+    data: 'INV-RPT',
     title: 'Order Reports',
     icon: 'file-text-outline',
     children: [
@@ -402,18 +414,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         data: 'INV-RPT-SLE',
         title: 'Purchase Orders Report',
         link: '/pages/report/purchase-orders-report',
-      } ,
-    ],
-  },
-  {
-    data: 'INV-RPT',
-    title: 'Purchase Reports',
-    icon: 'file-text-outline',
-    children: [
-      {
-        data: 'INV-RPT-SLE',
-        title: 'Purchases Report',
-        link: '/pages/report/purchases-report',
       } ,
     ],
   },

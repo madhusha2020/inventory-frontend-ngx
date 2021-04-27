@@ -10,8 +10,8 @@ export class ShoppingCartService {
   }
 
   clearCart(): void {
-    localStorage.removeItem(Constant.CART);
-    localStorage.removeItem(Constant.AMOUNT);
+    sessionStorage.removeItem(Constant.CART);
+    sessionStorage.removeItem(Constant.AMOUNT);
   }
 
   savedToItemMap(itemId: number, qty: number): void {
@@ -40,18 +40,18 @@ export class ShoppingCartService {
   }
 
   getItemMap(): Map<number, number> {
-    return new Map(JSON.parse(localStorage.getItem(Constant.CART)));
+    return new Map(JSON.parse(sessionStorage.getItem(Constant.CART)));
   }
 
   setAmount(amount: number): void {
-    localStorage.setItem(Constant.AMOUNT, String(amount));
+    sessionStorage.setItem(Constant.AMOUNT, String(amount));
   }
 
   getAmount(): number {
-    return Number(localStorage.getItem(Constant.AMOUNT));
+    return Number(sessionStorage.getItem(Constant.AMOUNT));
   }
 
   private setItemMap(itemMap: Map<number, number>): void {
-    localStorage.setItem(Constant.CART, JSON.stringify(Array.from(itemMap.entries())));
+    sessionStorage.setItem(Constant.CART, JSON.stringify(Array.from(itemMap.entries())));
   }
 }

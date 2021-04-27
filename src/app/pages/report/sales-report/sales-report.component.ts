@@ -5,6 +5,7 @@ import {LocalDataSource} from 'ng2-smart-table';
 import {Angular5Csv} from 'angular5-csv/dist/Angular5-csv';
 import Swal from 'sweetalert2';
 import {ServiceUtil} from '../../../service/util/service-util';
+import {NbColorHelper} from '@nebular/theme';
 
 @Component({
   selector: 'ngx-sales-report',
@@ -19,6 +20,8 @@ export class SalesReportComponent implements OnInit {
   customerID = 0;
   itemID = 0;
   saleList: Array<Sale> = [];
+  data: any;
+  dataMap: Map<string, number> = new Map<string, number>();
 
   settings = {
     hideSubHeader: true,
@@ -122,8 +125,24 @@ export class SalesReportComponent implements OnInit {
         sale.totalValue = sale.total.toLocaleString('en-US', {style: 'currency', currency: 'LKR'});
         sale.discountValue = sale.discount.toLocaleString('en-US', {style: 'currency', currency: 'LKR'});
         this.saleList.push(sale);
+
+        if (this.dataMap.has(sale.date)) {
+          this.dataMap.set(sale.date, Number(sale.total) + this.dataMap.get(sale.date));
+        } else {
+          this.dataMap.set(sale.date, Number(sale.total));
+        }
       });
+      console.log('Data map :', this.dataMap);
       this.source.load(this.saleList);
+      this.data = {
+        labels: Array.from(this.dataMap.keys()),
+        datasets: [
+          {
+            data: Array.from(this.dataMap.values()),
+            label: 'Amount',
+            backgroundColor: NbColorHelper.hexToRgbA('#8f9bb3', 0.8),
+          }],
+      };
     });
   }
 

@@ -16,19 +16,21 @@ import {SupplierReturnsReportComponent} from './supplier-returns-report/supplier
 import {SupplierRefundsReportComponent} from './supplier-refunds-report/supplier-refunds-report.component';
 import {DeliveriesReportComponent} from './deliveries-report/deliveries-report.component';
 import {DisposalsReportComponent} from './disposals-report/disposals-report.component';
+import {ChartModule} from 'angular2-chartjs';
 
 
 @NgModule({
   declarations: [ReportComponent, SalesReportComponent, OrdersReportComponent, PurchaseOrdersReportComponent, PurchasesReportComponent, CustomerPaymentsReportComponent, SupplierPaymentsReportComponent, SupplierReturnsReportComponent, SupplierRefundsReportComponent, DeliveriesReportComponent, DisposalsReportComponent],
-  imports: [
-    CommonModule,
-    ReportRoutingModule,
-    NbCardModule,
-    NbTabsetModule,
-    FormInputModule,
-    NbButtonModule,
-    Ng2SmartTableModule
-  ]
+    imports: [
+        CommonModule,
+        ReportRoutingModule,
+        NbCardModule,
+        NbTabsetModule,
+        FormInputModule,
+        NbButtonModule,
+        Ng2SmartTableModule,
+        ChartModule
+    ]
 })
 export class ReportModule {
 }
