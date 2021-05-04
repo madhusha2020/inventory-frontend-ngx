@@ -1,19 +1,79 @@
 <div class="row">
-  <div class="col-xxl-5">
-    <div class="row">
-      <div class="col-md-6">
-        <ngx-profit-card></ngx-profit-card>
-      </div>
-      <div class="col-md-6">
-        <ngx-earning-card></ngx-earning-card>
-      </div>
-    </div>
-
-    <ngx-traffic-reveal-card></ngx-traffic-reveal-card>
+  <div class="col-md-4">
+    <nb-flip-card>
+      <nb-card-front>
+        <nb-card status="warning">
+          <nb-card-header>Calendar</nb-card-header>
+          <nb-card-body>
+            <nb-calendar [(date)]="date">
+            </nb-calendar>
+          </nb-card-body>
+        </nb-card>
+      </nb-card-front>
+      <nb-card-back>
+        <nb-card status="danger">
+          <nb-card-header>Calendar</nb-card-header>
+          <nb-card-body>
+            <nb-calendar [(date)]="date">
+            </nb-calendar>
+          </nb-card-body>
+        </nb-card>
+      </nb-card-back>
+    </nb-flip-card>
   </div>
 
-  <div class="col-xxl-7">
-    <ngx-ecommerce-charts></ngx-ecommerce-charts>
+  <div class="col-md-4">
+    <nb-flip-card>
+      <nb-card-front>
+        <nb-card status="success">
+          <nb-card-header>Shop Sales</nb-card-header>
+          <nb-card-body>
+            Sales for the last 7 Days
+            <div>
+              <chart type="bar" [data]="saleData"></chart>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </nb-card-front>
+      <nb-card-back>
+        <nb-card status="danger">
+          <nb-card-header>Shop Sales</nb-card-header>
+          <nb-card-body>
+            Sales for the last 7 Days
+            <div>
+              <chart type="bar" [data]="saleData"></chart>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </nb-card-back>
+    </nb-flip-card>
+  </div>
+
+  <div class="col-md-4">
+    <nb-flip-card>
+      <nb-card-front>
+        <nb-card status="info">
+          <nb-card-header>Shop Purchase</nb-card-header>
+          <nb-card-body>
+            Purchase for the last 7 Days
+            <div>
+              <chart type="bar" [data]="purchaseData"></chart>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </nb-card-front>
+      <nb-card-back>
+        <nb-card status="danger">
+          <nb-card-header>Shop Purchase Orders</nb-card-header>
+          <nb-card-body>
+            Purchase for the last 7 Days
+            <div>
+              <chart type="bar" [data]="purchaseData"></chart>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </nb-card-back>
+    </nb-flip-card>
   </div>
 </div>
 

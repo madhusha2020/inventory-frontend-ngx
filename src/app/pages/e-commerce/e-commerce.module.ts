@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import {
-  NbButtonModule,
-  NbCardModule,
-  NbProgressBarModule,
-  NbTabsetModule,
-  NbUserModule,
-  NbIconModule,
-  NbSelectModule,
-  NbListModule,
+    NbButtonModule,
+    NbCardModule,
+    NbProgressBarModule,
+    NbTabsetModule,
+    NbUserModule,
+    NbIconModule,
+    NbSelectModule,
+    NbListModule, NbCalendarModule,
 } from '@nebular/theme';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -57,21 +57,22 @@ import { EarningCardFrontComponent } from './earning-card/front-side/earning-car
 import { EarningLiveUpdateChartComponent } from './earning-card/front-side/earning-live-update-chart.component';
 
 @NgModule({
-  imports: [
-    ThemeModule,
-    NbCardModule,
-    NbUserModule,
-    NbButtonModule,
-    NbIconModule,
-    NbTabsetModule,
-    NbSelectModule,
-    NbListModule,
-    ChartModule,
-    NbProgressBarModule,
-    NgxEchartsModule,
-    NgxChartsModule,
-    LeafletModule,
-  ],
+    imports: [
+        ThemeModule,
+        NbCardModule,
+        NbUserModule,
+        NbButtonModule,
+        NbIconModule,
+        NbTabsetModule,
+        NbSelectModule,
+        NbListModule,
+        ChartModule,
+        NbProgressBarModule,
+        NgxEchartsModule,
+        NgxChartsModule,
+        LeafletModule,
+        NbCalendarModule,
+    ],
   declarations: [
     ECommerceComponent,
     StatsCardFrontComponent,

@@ -68,9 +68,9 @@ export class CustomerCreateComponent implements OnInit {
       password: [null, [Validators.required, Validators.minLength(8)]],
       type: [ServiceUtil.getExternalCustomerType(), [Validators.required]],
       address: [null, [Validators.required]],
-      contact1: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
-      contact2: [null, [Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
-      fax: [null, [Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
+      contact1: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(13), Validators.pattern('^((\\+91?)|(\\+94?)|0)?[0-9]{10}$')]],
+      contact2: [null, [Validators.minLength(10), Validators.maxLength(13), Validators.pattern('^((\\+91?)|(\\+94?)|0)?[0-9]{10}$')]],
+      fax: [null, [Validators.minLength(10), Validators.maxLength(13), Validators.pattern('^((\\+91?)|(\\+94?)|0)?[0-9]{10}$')]],
     });
 
     this.fetchRoles();
