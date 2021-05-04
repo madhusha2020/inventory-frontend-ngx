@@ -55,24 +55,26 @@ import { EarningCardBackComponent } from './earning-card/back-side/earning-card-
 import { EarningPieChartComponent } from './earning-card/back-side/earning-pie-chart.component';
 import { EarningCardFrontComponent } from './earning-card/front-side/earning-card-front.component';
 import { EarningLiveUpdateChartComponent } from './earning-card/front-side/earning-live-update-chart.component';
+import {PermissionModule} from '../shared/permission/permission.module';
 
 @NgModule({
-    imports: [
-        ThemeModule,
-        NbCardModule,
-        NbUserModule,
-        NbButtonModule,
-        NbIconModule,
-        NbTabsetModule,
-        NbSelectModule,
-        NbListModule,
-        ChartModule,
-        NbProgressBarModule,
-        NgxEchartsModule,
-        NgxChartsModule,
-        LeafletModule,
-        NbCalendarModule,
-    ],
+  imports: [
+    ThemeModule,
+    NbCardModule,
+    NbUserModule,
+    NbButtonModule,
+    NbIconModule,
+    NbTabsetModule,
+    NbSelectModule,
+    NbListModule,
+    ChartModule,
+    NbProgressBarModule,
+    NgxEchartsModule,
+    NgxChartsModule,
+    LeafletModule,
+    NbCalendarModule,
+    PermissionModule,
+  ],
   declarations: [
     ECommerceComponent,
     StatsCardFrontComponent,
